@@ -16,8 +16,8 @@
     <form th:action="@{/signup1}" method="POST" id="signup">
       <h1>SIGN UP</h1>
 
-      <div th:if="${param.error}" class="error">
-        <h3>Invalid inputs</h3>
+      <div th:if="${userNotCreated}" class="error">
+        <h4 th:text="${userNotCreated}"></h4>
       </div>
 
       <label for="username"></label>

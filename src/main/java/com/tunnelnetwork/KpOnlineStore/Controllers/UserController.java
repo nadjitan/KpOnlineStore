@@ -4,9 +4,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
 public class UserController {
@@ -18,7 +21,7 @@ public class UserController {
   private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
 
   public UserController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
-      this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
   }
 
   // @PostMapping("/login1")
@@ -27,8 +30,21 @@ public class UserController {
   // }
 
   @PostMapping("/signup1")
-  public String signup1(@RequestParam("username") String username, @RequestParam("password") String password) {
+  public ModelAndView signup1(@RequestParam("username") String username, @RequestParam("password") String password, RedirectAttributes ra) {
+
+    if (username == "" || password == "") {
+      ra.addFlashAttribute("userNotCreated", "Please fill out form.");
+      return new ModelAndView("redirect:/signup");
+    }
+
+    try {
       inMemoryUserDetailsManager.createUser(User.withUsername(username).password(passwordEncoder().encode(password)).roles("USER").build());
-      return username + " Created!";
+    } catch (Exception e) {
+      ra.addFlashAttribute("userNotCreated", "Invalid inputs or user is already created. Please try again.");
+      return new ModelAndView("redirect:/signup");
+    }
+
+    ra.addFlashAttribute("userCreated", "User have been successfully created you may now login.");
+    return new ModelAndView("redirect:/login");
   }
 }
