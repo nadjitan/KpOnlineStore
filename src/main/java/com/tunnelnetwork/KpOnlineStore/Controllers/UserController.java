@@ -28,8 +28,8 @@ public class UserController {
   //     return inMemoryUserDetailsManager.userExists(username);
   // }
 
-  @PostMapping("/signup1")
-  public ModelAndView signup1(@RequestParam("username") String username, @RequestParam("password") String password, RedirectAttributes ra) {
+  @PostMapping("/signup")
+  public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password, RedirectAttributes ra) {
 
     if (username == "" || password == "") {
       ra.addFlashAttribute("userNotCreated", "Please fill out form.");

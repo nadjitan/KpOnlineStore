@@ -2,6 +2,7 @@ package com.tunnelnetwork.KpOnlineStore;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -34,18 +35,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   protected void configure(HttpSecurity http) throws Exception {
     http
       .authorizeRequests()
-      .antMatchers(
-        "/signup",
-        "/signup1",
-        "/js/**",
-        "/css/**",
-        "/img/**").permitAll()
-      .anyRequest().authenticated()
-      .and()
-      .formLogin()
-        .loginPage("/login")
-        .permitAll()
-      .and()
-      .logout().permitAll();
-  }
+        .antMatchers(
+          "/js/**",
+          "/css/**",
+          "/img/**").permitAll()
+        .antMatchers(HttpMethod.POST, "/signup").permitAll()
+        .antMatchers(HttpMethod.POST, "/saveProduct").permitAll()
+        .antMatchers(HttpMethod.GET, "/signup").permitAll()
+        .antMatchers(HttpMethod.GET, "/getAllProducts").permitAll()
+        .antMatchers(HttpMethod.GET, "/products/list").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+          .loginPage("/login").permitAll()
+          .and()
+          .logout().permitAll();
+    }
 }

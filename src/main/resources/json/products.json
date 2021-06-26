@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Ceiling Light",
+    "category": "Light",
+    "price": 20
+  },
+  {
+    "name": "Postcard",
+    "category": "Cards",
+    "price": 10
+  }
+]
