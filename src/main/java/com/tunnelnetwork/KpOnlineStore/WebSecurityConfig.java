@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
   @Bean
 	public InMemoryUserDetailsManager getInMemoryUserDetailsManager() {
-			return new InMemoryUserDetailsManager();
+    return new InMemoryUserDetailsManager();
 	}
 
   // @Override
@@ -36,14 +36,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     http
       .authorizeRequests()
         .antMatchers(
+          "/cart/**",
+          "/products/**",
           "/js/**",
           "/css/**",
           "/img/**").permitAll()
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
-        .antMatchers(HttpMethod.POST, "/saveProduct").permitAll()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
-        .antMatchers(HttpMethod.GET, "/getAllProducts").permitAll()
-        .antMatchers(HttpMethod.GET, "/products/list").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()

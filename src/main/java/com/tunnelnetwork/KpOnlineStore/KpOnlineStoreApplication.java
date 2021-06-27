@@ -34,7 +34,7 @@ public class KpOnlineStoreApplication {
 
 			try {
 				List<Product> products = mapper.readValue(inputStream,typeReference);
-				productService.save(products);
+				// ProductService.save(products);
 
 				System.out.println("Products Saved!");
 			} catch (IOException e){

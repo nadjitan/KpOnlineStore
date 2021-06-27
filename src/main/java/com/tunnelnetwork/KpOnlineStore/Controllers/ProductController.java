@@ -19,6 +19,6 @@ public class ProductController {
 
   @GetMapping("/list")
   public Iterable<Product> list() {
-      return productService.list();
+      return productService.getAllProducts();
   }
 }

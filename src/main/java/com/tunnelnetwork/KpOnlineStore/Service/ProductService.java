@@ -1,30 +1,18 @@
 package com.tunnelnetwork.KpOnlineStore.Service;
 
-import java.util.List;
+import org.springframework.validation.annotation.Validated;
 
-import com.tunnelnetwork.KpOnlineStore.DAO.ProductRepository;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 
-import org.springframework.stereotype.Service;
+@Validated
+public interface ProductService {
 
-@Service
-public class ProductService {
-  
-  private final ProductRepository productRepository;
+    @NotNull Iterable<Product> getAllProducts();
 
-  public ProductService(ProductRepository productRepository) {
-    this.productRepository = productRepository;
-  }
+    Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
 
-  public Iterable<Product> list() {
-    return productRepository.findAll();
-  }
-
-  public Product save(Product product) {
-    return productRepository.save(product);
-  }
-
-  public void save(List<Product> products) {
-    productRepository.saveAll(products);
-  }
+    Product save(Product product);
 }
