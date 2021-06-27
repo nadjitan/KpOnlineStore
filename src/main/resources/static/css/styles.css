@@ -18,6 +18,22 @@ body,
   place-items: center;
 }
 
+#home {
+  width: 100%;
+}
+
+#home > #store {
+  display: flex;
+  background-color: aqua;
+  width: 70%;
+}
+
+#store > .product {
+  display: grid;
+  place-items: center;
+  width: 200px;
+}
+
 #login > input,
 #signup > input {
   margin-bottom: 1.2em;

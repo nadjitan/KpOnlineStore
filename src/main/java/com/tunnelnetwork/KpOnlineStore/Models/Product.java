@@ -1,5 +1,6 @@
 package com.tunnelnetwork.KpOnlineStore.Models;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

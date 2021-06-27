@@ -2,6 +2,8 @@ package com.tunnelnetwork.KpOnlineStore.Service;
 
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -14,5 +16,5 @@ public interface ProductService {
 
     Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
 
-    Product save(Product product);
+    List<Product> save(List<Product> product);
 }
