@@ -1,41 +1,62 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@RestController
-public class UserController {
+@Controller
+public class AuthController {
 
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
-  private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+  @Autowired
+  private InMemoryUserDetailsManager inMemoryUserDetailsManager;
 
-  public UserController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
-    this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+  // Make sure /login & /signup are only accessed by users without accounts
+  @GetMapping("/login")
+  public String showLoginPage() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      return "login";
+    }
+
+    return "redirect:/";
   }
+  @GetMapping("/signup")
+  public String showSignupPage() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-  // @PostMapping("/login1")
-  // public boolean userExists(@RequestParam("username") String username ) {
-  //     return inMemoryUserDetailsManager.userExists(username);
-  // }
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      return "signup";
+    }
+
+    return "redirect:/";
+  }
 
   @PostMapping("/signup")
   public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password, RedirectAttributes ra) {
 
+    // When user fails to fill up form
     if (username == "" || password == "") {
       ra.addFlashAttribute("userNotCreated", "Please fill out form.");
       return new ModelAndView("redirect:/signup");
     }
 
+    // Create user and catch on creation failure
     try {
       inMemoryUserDetailsManager.createUser(User.withUsername(username).password(passwordEncoder().encode(password)).roles("USER").build());
     } catch (Exception e) {
@@ -43,6 +64,7 @@ public class UserController {
       return new ModelAndView("redirect:/signup");
     }
 
+    // Only runs once there are no failures catched
     ra.addFlashAttribute("userCreated", "User have been successfully created you may now login.");
     return new ModelAndView("redirect:/login");
   }

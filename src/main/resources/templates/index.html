@@ -15,7 +15,13 @@
           <h3 class="product-name" th:text="${product.name}"></h3>
           <p class="product-category" th:text="${product.category}"></p>
           <p class="product-price" th:text="${'₱ ' + product.price}"></p>
-          <input type="button" value="Add to cart" />
+          <button type="submit" name="addProduct">Add to cart</button>
+        </div>
+      </div>
+
+      <div id="cart">
+        <div class="product" th:each="product : ${cart.cartProducts}">
+          <p th:text="${product.name} + ' ' + ${product.price"></p>
         </div>
       </div>
     </div>

@@ -22,13 +22,18 @@ body,
   width: 100%;
 }
 
-#home > #store {
+#home > #store,
+#home > #cart {
   display: flex;
   background-color: aqua;
   width: 70%;
 }
 
-#store > .product {
+#cart {
+  background-color: brown;
+}
+
+#store > .product #cart > .product {
   display: grid;
   place-items: center;
   width: 200px;

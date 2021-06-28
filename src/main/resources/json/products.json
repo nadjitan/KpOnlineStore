@@ -1,11 +1,17 @@
 [
   {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
     "name": "Ceiling Light",
+    "description": "A very bright light.",
     "category": "Light",
     "price": 20
   },
   {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
     "name": "Postcard",
+    "description": "A fine print of your favorite K-POP idol.",
     "category": "Cards",
     "price": 10
   }

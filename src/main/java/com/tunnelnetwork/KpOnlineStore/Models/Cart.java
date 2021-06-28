@@ -1,14 +1,16 @@
 package com.tunnelnetwork.KpOnlineStore.Models;
 
 import java.beans.Transient;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,13 +28,23 @@ import lombok.Setter;
 public class Cart {
   
   @Id
-  @GeneratedValue( strategy = GenerationType.AUTO )
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_generator")
+  @SequenceGenerator(name="cart_generator", sequenceName = "cart_seq")
+  @Column(name = "id", updatable = false, nullable = false)   
   private long id;
 
   @Getter
   @Setter
-  @JsonFormat(pattern = "dd/MM/yyyy") 
-  private LocalDate dateCreated;
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
+  private LocalDateTime createdAt;
+  @Getter
+  @Setter
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
+  private LocalDateTime updatedAt;
+
+  @Getter
+  @Setter
+  private String cartOwner;
 
   @Getter
   @Setter

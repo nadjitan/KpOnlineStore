@@ -16,11 +16,21 @@ public class CartServiceImpl implements CartService {
   private CartRepository cartRepository;
 
   @Override
+  public Iterable<Cart> getAllCarts() {
+    return cartRepository.findAll();
+  }
+
+  @Override
   public Cart getCart(long id) {
     return cartRepository
       .findById(id)
-      .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+      .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
   }
+
+  @Override
+  public Cart findCartOwner(String username) {
+    return cartRepository.findByCartOwner(username);
+}
 
   @Override
   public Cart save(Cart cart) {
