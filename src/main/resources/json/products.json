@@ -5,7 +5,25 @@
     "name": "Ceiling Light",
     "description": "A very bright light.",
     "category": "Light",
-    "price": 20
+    "price": 20,
+    "status": "available",
+    "image": "/img/img1.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   },
   {
     "createdAt": "2021-06-28 10:44:32",
@@ -13,6 +31,24 @@
     "name": "Postcard",
     "description": "A fine print of your favorite K-POP idol.",
     "category": "Cards",
-    "price": 10
+    "price": 10,
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   }
 ]

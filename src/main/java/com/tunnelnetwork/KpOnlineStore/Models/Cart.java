@@ -2,6 +2,7 @@ package com.tunnelnetwork.KpOnlineStore.Models;
 
 import java.beans.Transient;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -50,7 +51,7 @@ public class Cart {
   @Setter
   @Valid
   @Embedded
-  private List<Product> cartProducts;
+  private List<Product> cartProducts = new ArrayList<Product>();
 
   @Transient
   public Double getTotalOrderPrice() {

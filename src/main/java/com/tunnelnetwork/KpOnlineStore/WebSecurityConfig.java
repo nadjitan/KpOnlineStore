@@ -42,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
           "/css/**",
           "/img/**").permitAll()
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
+        .antMatchers(HttpMethod.POST, "/addproduct").permitAll()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .anyRequest().authenticated()
         .and()
