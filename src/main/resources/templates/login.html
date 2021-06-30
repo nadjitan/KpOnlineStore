@@ -5,17 +5,13 @@
     <form th:action="@{/login}" method="POST" id="login">
       <h1>LOGIN</h1>
 
-      <div th:if="${param.error}" class="error">
-        <h4>Invalid credentails</h4>
-      </div>
+      <p th:if="${param.error}" class="error">Invalid credentials</p>
 
-      <div th:if="${param.logout}" class="success">
-        <h4>You have successfully logged out!</h4>
-      </div>
+      <p th:if="${param.logout}" class="success">
+        You have successfully logged out!
+      </p>
 
-      <div th:if="${userCreated}" class="success">
-        <h4 th:text="${userCreated}"></h4>
-      </div>
+      <p th:if="${userCreated}" th:text="${userCreated}" class="success"></p>
 
       <label for="username"></label>
       <input

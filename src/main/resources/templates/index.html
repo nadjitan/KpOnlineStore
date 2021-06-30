@@ -15,7 +15,12 @@
           <h3 class="product-name" th:text="${product.name}"></h3>
           <p class="product-category" th:text="${product.category}"></p>
           <p class="product-price" th:text="${'₱ ' + product.price}"></p>
-          <button type="submit" name="addProduct">Add to cart</button>
+
+          <form th:action="@{/addproduct}" method="POST">
+            <button type="submit" name="add" th:value="${product.id}">
+              Add to cart
+            </button>
+          </form>
         </div>
       </div>
 

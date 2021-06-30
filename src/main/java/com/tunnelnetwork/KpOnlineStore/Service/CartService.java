@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
+import com.tunnelnetwork.KpOnlineStore.Models.Product;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -18,4 +19,8 @@ public interface CartService {
     Cart findCartOwner(@NotNull(message = "The user details cannot be null.") @Valid String username);
 
     Cart save(Cart cart);
+
+    Cart getCartOfUser();
+
+    void addToCart(@NotNull(message = "The product cannot be null.") @Valid Product product);
 }
