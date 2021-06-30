@@ -6,10 +6,24 @@
     "description": "A very bright light.",
     "category": "Light",
     "price": 20,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-
+    "status": "available",
+    "image": "/img/img1.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   },
   {
     "createdAt": "2021-06-28 10:44:32",
@@ -18,119 +32,232 @@
     "description": "A fine print of your favorite K-POP idol.",
     "category": "Cards",
     "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   },
   {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Small poster",
-    "description": "A Small 11 x 17 poster of your favorite K-POP idol.",
-    "category": "Poster",
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Photocard",
+    "description": "A photocard of your favorite K-POP idol.",
+    "category": "Cards",
     "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   },
   {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Medium poster",
-    "description": "A Medium 18 x 24 poster of your favorite K-POP idol.",
-    "category": "Poster",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Large poster",
-    "description": "A Large 27 x 39 poster of your favorite K-POP idol.",
-    "category": "Poster",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Jacket",
-    "description": "A Jacket of your favorite K-POP idol.",
-    "category": "Wearables",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " T-shirt",
-    "description": "A T-shirt of your favorite K-POP idol.",
-    "category": "Wearables",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Album",
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Album",
     "description": "An album of your favorite K-POP idol.",
     "category": "Album",
     "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   },
   {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Photobook",
-    "description": "A collection of photos of your favorite K-POP idol.",
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Jacket",
+    "description": "A Jacket of your favorite K-POP idol.",
+    "category": "Wearables",
+    "price": 10,
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "T-shirt",
+    "description": "A T-shirt of your favorite K-POP idol.",
+    "category": "Wearables",
+    "price": 10,
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Small poster",
+    "description": "A small 11 x 17 poster of your favorite K-POP idol.",
+    "category": "Poster",
+    "price": 10,
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Medium poster",
+    "description": "A medium 18 x 24 poster of your favorite K-POP idol.",
+    "category": "Poster",
+    "price": 10,
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Large poster",
+    "description": "A large 24 x 36 poster of your favorite K-POP idol.",
+    "category": "Poster",
+    "price": 10,
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "name": "Photobook",
+    "description": "A Photobook of your favorite K-POP idol.",
     "category": "Photobook",
     "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Photocard",
-    "description": "A photo of your favorite K-POP idol.",
-    "category": "Cards",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Dolls",
-    "description": "A doll of your favorite K-POP idol.",
-    "category": "Toys",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
-  },
-  {
-    "createdAt": "2021-06-30 11:27:12",
-    "updatedAt": "2021-06-30 11:27:12",
-    "name": " Tags",
-    "description": "A Tag of your favorite K-POP idol.",
-    "category": "Tags",
-    "price": 10,
-    "image": "*",
-    "rating": "*",
-    "comment": []
+    "status": "available",
+    "image": "/img/img2.png",
+    "rating": 5,
+    "tags": ["tag1", "tag2"],
+    "comments": [
+      {
+        "userId": 1,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "userId": 2,
+        "userComment": "Test",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
   }
 
 ]
