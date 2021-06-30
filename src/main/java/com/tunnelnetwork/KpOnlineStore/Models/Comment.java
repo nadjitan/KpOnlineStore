@@ -34,7 +34,7 @@ public class Comment {
   private long id;
 
   private long userId;
-  private String comment;
+  private String userComment;
 
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdAt;

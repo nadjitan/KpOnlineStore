@@ -1,6 +1,7 @@
 package com.tunnelnetwork.KpOnlineStore.Models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,11 +41,13 @@ public class Product {
   private String description;
   private String category;
   private double price;
+  private String status;
   private String image;
   private Integer rating;
+  private String[] tags;
 
   @Embedded
-  private List<Comment> comments;
+  private List<Comment> userComments;
 
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdAt;

@@ -1,7 +1,5 @@
 package com.tunnelnetwork.KpOnlineStore.Service;
 
-import java.util.List;
-
 import com.tunnelnetwork.KpOnlineStore.DAO.CartRepository;
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
