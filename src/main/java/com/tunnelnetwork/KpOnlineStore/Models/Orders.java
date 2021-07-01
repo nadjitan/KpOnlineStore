@@ -1,6 +1,5 @@
 package com.tunnelnetwork.KpOnlineStore.Models;
 
-import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,43 +23,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Cart {
+public class Orders {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_generator")
-  @SequenceGenerator(name="cart_generator", sequenceName = "cart_seq")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_generator")
+  @SequenceGenerator(name="orders_generator", sequenceName = "orders_seq")
   @Column(name = "id", updatable = false, nullable = false)   
   private long id;
 
-  private String cartOwner;
-
+  private String ordersOwner;
   @Embedded
   @ElementCollection
-  private List<Product> cartProducts = new ArrayList<Product>();
-  
-  @Embedded
-  @ElementCollection
-  private List<Voucher> vouchers = new ArrayList<Voucher>();
+  private List<Receipt> receipts = new ArrayList<Receipt>();
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime createdAt;
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime updatedAt;
-
-  @Transient
-  public Double getTotalOrderPrice() {
-    double sum = 0D;
-    List<Product> cartProducts = getCartProducts();
-
-    for (Product product : cartProducts) {
-      sum += (product.getPrice() * product.getQuantity());
-    }
-
-    return sum;
-  }
-
-  @Transient
-  public int getNumberOfProducts() {
-    return this.cartProducts.size();
-  }
 }
+

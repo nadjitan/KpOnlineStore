@@ -28,8 +28,6 @@ public class CommentDeserializer extends JsonDeserializer<List<Comment>> {
         result.add(objectCodec.treeToValue(listOrObjectNode, Comment.class));
       }
 
-      // System.out.println(result);
-
       return result;
   }
 }

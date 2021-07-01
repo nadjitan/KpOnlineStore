@@ -35,6 +35,11 @@ body,
   width: 200px;
 }
 
+#voucher {
+  display: grid;
+  place-items: center;
+}
+
 #store > .product {
   background-color: aqua;
 }

@@ -51,9 +51,10 @@ public class CartServiceImpl implements CartService {
   }
 
   @Override
-  public Cart addToCart(Product product) {
+  public Cart addToCart(Product product, Integer productQuantity) {
     Cart cart = getCartOfUser();
     List<Product> currProducts = new ArrayList<Product>();
+    product.setQuantity(productQuantity);
     
     if (cart.getCartProducts() == null) {
       currProducts.add(product);

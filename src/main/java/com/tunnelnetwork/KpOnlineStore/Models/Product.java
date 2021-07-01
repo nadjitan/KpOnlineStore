@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -42,6 +43,9 @@ public class Product {
   private String image;
   private Integer rating;
   private String[] tags;
+
+  @Lob
+  private Integer quantity;
 
   @Embedded
   @JsonDeserialize(using = CommentDeserializer.class)
