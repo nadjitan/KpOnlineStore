@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-  <head th:replace="common"> </head>
+  <head th:replace="../fragments/common"> </head>
 
   <body>
     <form th:action="@{/signup}" method="POST" id="signup">
       <h1>SIGN UP</h1>
 
-      <p th:if="${userNotCreated}" class="error" th:text="${userNotCreated}"></p>
+      <p
+        th:if="${userNotCreated}"
+        class="error"
+        th:text="${userNotCreated}"
+      ></p>
 
       <label for="username"></label>
       <input

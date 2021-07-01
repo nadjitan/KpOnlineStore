@@ -16,11 +16,11 @@ public interface CartService {
 
     Cart getCart(@Min(value = 1L, message = "Invalid product ID.") long id);
 
-    Cart findCartOwner(@NotNull(message = "The user details cannot be null.") @Valid String username);
-
     Cart save(Cart cart);
+
+    boolean isProductInCart(long id);
 
     Cart getCartOfUser();
 
-    void addToCart(@NotNull(message = "The product cannot be null.") @Valid Product product);
+    Cart addToCart(@NotNull(message = "The product cannot be null.") @Valid Product product);
 }

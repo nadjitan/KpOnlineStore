@@ -25,12 +25,7 @@ body,
 #home > #store,
 #home > #cart {
   display: flex;
-  background-color: aqua;
   width: 70%;
-}
-
-#cart {
-  background-color: brown;
 }
 
 #store > .product,
@@ -38,6 +33,18 @@ body,
   display: grid;
   place-items: center;
   width: 200px;
+}
+
+#store > .product {
+  background-color: aqua;
+}
+
+#cart > .product {
+  background-color: brown;
+}
+#cart > .cart-total {
+  place-self: center;
+  margin-left: auto;
 }
 
 #login > input,

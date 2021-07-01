@@ -1,5 +1,8 @@
 package com.tunnelnetwork.KpOnlineStore.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tunnelnetwork.KpOnlineStore.DAO.CartRepository;
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
@@ -30,16 +33,6 @@ public class CartServiceImpl implements CartService {
       .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
   }
 
-  @Override
-  public Cart findCartOwner(String username) {
-    return cartRepository.findByCartOwner(username);
-}
-
-  @Override
-  public Cart save(Cart cart) {
-    return cartRepository.save(cart);
-  }
-
   /**
    * Get cart of currently logged in user
    * 
@@ -49,20 +42,44 @@ public class CartServiceImpl implements CartService {
   public Cart getCartOfUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    return findCartOwner(authentication.getName());
+    return cartRepository.findByCartOwner(authentication.getName());
   }
 
   @Override
-  public void addToCart(Product product) {
-    try {
-      Cart cart = getCartOfUser();
-      cart.getCartProducts().add(product);
+  public Cart save(Cart cart) {
+    return cartRepository.saveAndFlush(cart);
+  }
 
-      cartRepository.save(cart);
+  @Override
+  public Cart addToCart(Product product) {
+    Cart cart = getCartOfUser();
+    List<Product> currProducts = new ArrayList<Product>();
+    
+    if (cart.getCartProducts() == null) {
+      currProducts.add(product);
+    } else {
+      for (Product cartProduct : cart.getCartProducts()) {
+        currProducts.add(cartProduct);
+      }
 
-      System.out.println("Product added to user's cart!");
-    } catch (Exception e) {
-      System.out.println("Product not added to user's cart:" + e);
+      currProducts.add(product);
     }
+    
+    cart.setCartProducts(currProducts);
+
+    return cartRepository.saveAndFlush(cart);
+  }
+
+  @Override
+  public boolean isProductInCart(long id) {
+    Cart cart = getCartOfUser();
+
+    for (Product cartProduct : cart.getCartProducts()) {
+      if (cartProduct.getId() == id) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

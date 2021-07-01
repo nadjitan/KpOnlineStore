@@ -1,0 +1,10 @@
+<div id="cart">
+  <div class="product" th:each="product : ${cart.cartProducts}">
+    <h3 class="product-name" th:text="${product.productName}"></h3>
+    <p class="product-category" th:text="${product.category}"></p>
+    <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+  </div>
+  <div th:if="${!cart.cartProducts.empty}" class="cart-total">
+    <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
+  </div>
+</div>

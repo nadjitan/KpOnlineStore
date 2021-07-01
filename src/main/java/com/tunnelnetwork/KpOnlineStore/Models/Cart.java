@@ -6,21 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,23 +32,15 @@ public class Cart {
   @Column(name = "id", updatable = false, nullable = false)   
   private long id;
 
-  @Getter
-  @Setter
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime createdAt;
-  @Getter
-  @Setter
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime updatedAt;
 
-  @Getter
-  @Setter
   private String cartOwner;
 
-  @Getter
-  @Setter
-  @Valid
   @Embedded
+  @ElementCollection
   private List<Product> cartProducts = new ArrayList<Product>();
 
   @Transient
