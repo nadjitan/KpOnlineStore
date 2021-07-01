@@ -22,7 +22,7 @@ class KpOnlineStoreApplicationTests {
 			+ "  \"price\": 20\n" 
 			+ "}", Product.class);
 
-		assertEquals("Ceiling Light", product.getName());
+		assertEquals("Ceiling Light", product.getProductName());
 		assertEquals("Light", product.getCategory());
 		assertEquals(20, product.getPrice());
 	}

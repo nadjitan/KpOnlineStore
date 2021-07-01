@@ -13,12 +13,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CommonController {
@@ -37,9 +36,7 @@ public class CommonController {
     model.addAttribute("products", productService.getAllProducts());
 
     // Get cart but if there is none create new cart for new user
-    if (cartService.getCartOfUser() != null) {
-      model.addAttribute("cart", cartService.getCartOfUser());
-    } else {
+    if (cartService.getCartOfUser() == null) {
       Cart cart = new Cart();
       cart.setCartOwner(authentication.getName());
       cart.setCreatedAt(LocalDateTime.now());
@@ -47,6 +44,9 @@ public class CommonController {
 
       cartService.save(cart);
 
+      model.addAttribute("cart", cartService.getCartOfUser());
+      
+    } else {
       model.addAttribute("cart", cartService.getCartOfUser());
     }
      
@@ -56,11 +56,12 @@ public class CommonController {
   // Shopping cart buttons logic
   @RequestMapping(value = "/addproduct", method=RequestMethod.POST)
   @ResponseBody
-  public String addProduct(@RequestParam("add") String id) {
-    long productId = Integer.valueOf(id);
-    cartService.addToCart(productService.getProduct(productId));
-    
-    return "user cart: " + cartService.getCartOfUser();
+  public ModelAndView addProduct(@RequestParam("add") long id) {
+    if (!cartService.isProductInCart(id)) {
+      cartService.addToCart(productService.getProduct(id));
+    }
+  
+    return new ModelAndView("redirect:/");
   }
   @RequestMapping(value=" ", params={"removeProduct"})
   public String removeProduct(HttpServletRequest req){
