@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -14,19 +15,16 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.tunnelnetwork.KpOnlineStore.CommentDeserializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Data
 @Entity
 public class Product {
@@ -37,7 +35,7 @@ public class Product {
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
   
-  private String name;
+  private String productName;
   private String description;
   private String category;
   private double price;
@@ -47,7 +45,8 @@ public class Product {
   private String[] tags;
 
   @Embedded
-  private List<Comment> userComments;
+  @JsonDeserialize(using = CommentDeserializer.class)
+  private List<Comment> comments = new ArrayList<Comment>();
 
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdAt;

@@ -43,6 +43,12 @@ public class KpOnlineStoreApplication {
 				List<Product> products = mapper.readValue(inputStream,typeReference);
 				productService.save(products);
 
+				for (Product product : products) {
+					System.out.println("-----------------------");
+					System.out.println(product.getComments());
+					System.out.println("-----------------------");
+				}
+
 				System.out.println("Products Saved!");
 			} catch (IOException e){
 				System.out.println("Unable to save products: " + e.getMessage());
