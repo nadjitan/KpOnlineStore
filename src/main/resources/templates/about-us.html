@@ -11,10 +11,8 @@
       <form th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout" class="submit" />
       </form>
-
-      <a th:href="@{/store}" style="margin-top: 20px">GO TO STORE</a>
     </div>
 
-    <footer th:replace="../fragments/footer"></footer>
+    <div th:replace="../fragments/footer.html"></div>
   </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="../fragments/header"></head>
+
+  <body>
+    <div id="home">
+      <p>
+        Hello [[${#httpServletRequest.remoteUser}]]!
+        <a th:href="@{/profile}">PROFILE</a>
+      </p>
+      <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" class="submit" />
+      </form>
+
+      <div id="store">
+        <div th:if="${products.empty}">No products available</div>
+        <div class="product" th:each="product : ${products}">
+          <a th:href="@{|/product/${product.id}|}">
+            <h3 class="product-name" th:text="${product.productName}"></h3>
+            <p class="product-category" th:text="${product.category}"></p>
+            <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+          </a>
+        </div>
+      </div>
+
+      <button>
+        <a
+          th:href="@{/cart/home}"
+          th:text="${'GO TO CART ('+ cart.getNumberOfProducts() + ')'}"
+        ></a>
+      </button>
+    </div>
+
+    <footer th:replace="../fragments/footer"></footer>
+  </body>
+</html>

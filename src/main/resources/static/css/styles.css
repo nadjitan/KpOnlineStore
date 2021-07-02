@@ -18,6 +18,11 @@ body,
   place-items: center;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 #home {
   width: 100%;
 }
@@ -33,7 +38,10 @@ body,
 #cart > .product {
   display: grid;
   place-items: center;
+  cursor: pointer;
   width: 200px;
+  margin: 0px 2px;
+  border: 0.8px solid black;
 }
 
 #voucher {

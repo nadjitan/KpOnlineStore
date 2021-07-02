@@ -36,7 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     http
       .authorizeRequests()
         .antMatchers(
+          "/store/**",
+          "/profile/**",
           "/cart/**",
+          "/checkout/**",
           "/products/**",
           "/js/**",
           "/css/**",
@@ -44,7 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
         .antMatchers(HttpMethod.POST, "/addproduct").permitAll()
         .antMatchers(HttpMethod.POST, "/removeProduct").permitAll()
-        .antMatchers(HttpMethod.POST, "/proceed-checkout").permitAll()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .anyRequest().authenticated()
         .and()

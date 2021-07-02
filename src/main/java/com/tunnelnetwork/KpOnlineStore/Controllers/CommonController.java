@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,26 +34,60 @@ public class CommonController {
   @Autowired
   private VoucherService voucherService;
 
-  @RequestMapping("/")
+  @GetMapping("/store")
   public String products(Model model) {
+    if (!isThereLoggedInUser()) {
+      return "redirect:/";
+    }
+
     // Get products from database/json file
     model.addAttribute("products", productService.getAllProducts());
-
+    // Cart for user
     createCartAndVoucher(model);
      
-    return "index";
+    return "store";
   }
+  @GetMapping("/profile")
+  public String profilePage(Model model) {
+    if (!isThereLoggedInUser()) {
+      return "redirect:/";
+    }
+    
+    return "profile";
+  }
+  @GetMapping("/product/{id}")
+  public String productPage(Model model, @PathVariable("id") long id) {
+    if (!isThereLoggedInUser()) {
+      return "redirect:/";
+    }
 
+    model.addAttribute("product", productService.getProduct(id));
+    return "product-details";
+  }
   @GetMapping("/cart/home")
-  public String cartHome(Model model) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+  public String cartHomePage(Model model) {
+    if (!isThereLoggedInUser()) {
       return "redirect:/";
     }
     
     createCartAndVoucher(model);
     return "cart";
+  }
+  @GetMapping("/checkout")
+  public String checkoutPage(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (!isThereLoggedInUser()) {
+      return "redirect:/";
+    }
+    
+    Voucher voucher = voucherService.getVoucherByName(authentication.getName());
+    double cartTotalPrice = cartService.getCartOfUser().getTotalOrderPrice();
+    voucher.setCartTotalPrice(cartTotalPrice);
+    
+    model.addAttribute("voucher", voucher);
+    model.addAttribute("cart", cartService.getCartOfUser());
+    return "checkout";
   }
 
   // Shopping cart buttons logic
@@ -63,7 +98,7 @@ public class CommonController {
       cartService.addToCart(productService.getProduct(id), productQuantity);
     }
 
-    return new ModelAndView("redirect:/");
+    return new ModelAndView("redirect:/store");
   }
   @RequestMapping(value="/removeProduct", method=RequestMethod.POST)
   @ResponseBody
@@ -109,5 +144,15 @@ public class CommonController {
       model.addAttribute("voucher", voucher);
       model.addAttribute("cart", cartService.getCartOfUser());
     }
+  }
+
+  public boolean isThereLoggedInUser() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      return false;
+    }
+
+    return true;
   }
 }

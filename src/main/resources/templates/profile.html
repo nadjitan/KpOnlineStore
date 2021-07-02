@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="../fragments/header"></head>
+
+  <style>
+    /* Ayos ba Jeremy? */
+    /*         - Nadji */
+    #orders-title {
+      place-self: start;
+    }
+
+    #orders-table {
+      width: 60%;
+      display: grid;
+      place-items: center;
+    }
+
+    section[class*="orders-"]:first-of-type {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    section[class*="orders-"] {
+      padding: 0px 20px;
+      width: 100%;
+      display: grid;
+      align-items: center;
+      grid-gap: 1rem;
+      grid-template-columns: repeat(5, 0.5fr);
+    }
+  </style>
+
+  <body>
+    <div id="home">
+      <p>
+        Hello [[${#httpServletRequest.remoteUser}]]!
+        <a th:href="@{/profile}">PROFILE</a>
+      </p>
+      <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" class="submit" />
+      </form>
+
+      <div id="orders-table">
+        <h2 id="orders-title">ORDER HISTORY</h2>
+        <section class="orders-header">
+          <h4>REF NO.</h4>
+          <h4>DATE</h4>
+          <h4>PRICE</h4>
+          <h4>STATUS</h4>
+          <h4>DETAILS</h4>
+        </section>
+        <section class="orders-row">
+          <p>1</p>
+          <p>2021-07-01 13:46:45</p>
+          <p>₱ 53,333.28</p>
+          <p>pending</p>
+          <img src="#" alt="eye-icon" />
+        </section>
+      </div>
+    </div>
+
+    <div th:replace="../fragments/footer.html"></div>
+  </body>
+</html>

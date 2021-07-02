@@ -4,11 +4,15 @@
 
   <body>
     <div id="home">
-      <p>Hello [[${#httpServletRequest.remoteUser}]]!</p>
+      <p>
+        Hello [[${#httpServletRequest.remoteUser}]]!
+        <a th:href="@{/profile}">PROFILE</a>
+      </p>
       <form th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout" class="submit" />
       </form>
 
+      <div th:if="${cart.cartProducts.empty}">No items in your cart.</div>
       <div id="cart">
         <div class="product" th:each="product : ${cart.cartProducts}">
           <h3 class="product-name" th:text="${product.productName}"></h3>
@@ -31,9 +35,7 @@
           <p
             th:text="${'Discounted Total: ₱ ' + voucher.getDiscountedPrice()}"
           ></p>
-          <form th:action="@{/proceed-checkout}" method="post">
-            <button>PROCEED TO CHECKOUT</button>
-          </form>
+          <a th:href="@{/checkout}">PROCEED TO CHECKOUT</a>
         </div>
       </div>
 
@@ -46,7 +48,9 @@
         ></p>
       </div>
 
-      <a th:href="@{/}">BACK TO STORE</a>
+      <button>
+        <a th:href="@{/store}">BACK TO STORE</a>
+      </button>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
