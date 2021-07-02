@@ -7,9 +7,14 @@
       class="product-quantity"
       th:text="${'Quantity: ' + product.quantity}"
     ></p>
+    <button>REMOVE</button>
   </div>
   <div th:if="${!cart.cartProducts.empty}" class="cart-total">
+    <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
     <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
     <p th:text="${'Discounted Total: ₱ ' + voucher.getDiscountedPrice()}"></p>
+    <form th:action="@{/proceed-checkout}" method="post">
+      <button>PROCEED TO CHECKOUT</button>
+    </form>
   </div>
 </div>

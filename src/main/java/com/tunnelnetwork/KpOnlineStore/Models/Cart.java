@@ -61,6 +61,14 @@ public class Cart {
 
   @Transient
   public int getNumberOfProducts() {
-    return this.cartProducts.size();
+    int count = 0;
+    
+    List<Product> cartProducts = getCartProducts();
+
+    for (Product product : cartProducts) {
+      count += (1 * product.getQuantity());
+    }
+
+    return count;
   }
 }

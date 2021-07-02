@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="../fragments/header"></head>
+
+  <body>
+    <div id="home">
+      <p>Hello [[${#httpServletRequest.remoteUser}]]!</p>
+      <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" class="submit" />
+      </form>
+
+      <div id="cart">
+        <div class="product" th:each="product : ${cart.cartProducts}">
+          <h3 class="product-name" th:text="${product.productName}"></h3>
+          <p class="product-category" th:text="${product.category}"></p>
+          <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+          <p
+            class="product-quantity"
+            th:text="${'Quantity: ' + product.quantity}"
+          ></p>
+
+          <form th:action="@{/removeProduct}" method="post">
+            <button type="submit" name="productId" th:value="${product.id}">
+              REMOVE
+            </button>
+          </form>
+        </div>
+        <div th:if="${!cart.cartProducts.empty}" class="cart-total">
+          <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
+          <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
+          <p
+            th:text="${'Discounted Total: ₱ ' + voucher.getDiscountedPrice()}"
+          ></p>
+          <form th:action="@{/proceed-checkout}" method="post">
+            <button>PROCEED TO CHECKOUT</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="voucher">
+        <h3 th:text="${voucher.voucherName}"></h3>
+        <p th:text="${voucher.description}"></p>
+        <p th:text="${voucher.discount + '%'}"></p>
+        <p
+          th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}"
+        ></p>
+      </div>
+
+      <a th:href="@{/}">BACK TO STORE</a>
+    </div>
+
+    <div th:replace="../fragments/footer.html"></div>
+  </body>
+</html>

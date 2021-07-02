@@ -26,6 +26,7 @@ body,
 #home > #cart {
   display: flex;
   width: 70%;
+  overflow: auto;
 }
 
 #store > .product,
@@ -38,6 +39,7 @@ body,
 #voucher {
   display: grid;
   place-items: center;
+  background-color: cadetblue;
 }
 
 #store > .product {

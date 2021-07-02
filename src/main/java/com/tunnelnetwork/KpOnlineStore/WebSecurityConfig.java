@@ -43,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
           "/img/**").permitAll()
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
         .antMatchers(HttpMethod.POST, "/addproduct").permitAll()
+        .antMatchers(HttpMethod.POST, "/removeProduct").permitAll()
+        .antMatchers(HttpMethod.POST, "/proceed-checkout").permitAll()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .anyRequest().authenticated()
         .and()

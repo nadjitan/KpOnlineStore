@@ -83,4 +83,18 @@ public class CartServiceImpl implements CartService {
 
     return false;
   }
+
+  @Override
+  public void removeProduct(long id) {
+    Cart cart = getCartOfUser();
+
+    for (Product cartProduct : cart.getCartProducts()) {
+      if (cartProduct.getId() == id) {
+        cart.getCartProducts().remove(cartProduct);
+        cartRepository.saveAndFlush(cart);
+
+        break;
+      }
+    }
+  }
 }

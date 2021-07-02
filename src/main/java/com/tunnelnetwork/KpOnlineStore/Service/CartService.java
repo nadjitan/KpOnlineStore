@@ -23,4 +23,6 @@ public interface CartService {
     Cart getCartOfUser();
 
     Cart addToCart(@NotNull(message = "The product cannot be null.") @Valid Product product, @Valid Integer productQuantity);
+
+    void removeProduct(@Min(value = 1L, message = "The id cannot be null.") long id);
 }
