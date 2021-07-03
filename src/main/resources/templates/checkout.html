@@ -61,13 +61,17 @@
       width: 100%;
       justify-content: space-between;
     }
+    #summary > div:nth-of-type(2) {
+      border-bottom: 1px solid black;
+      margin-bottom: 5px;
+    }
   </style>
 
   <body>
     <div id="home">
       <p>Hello [[${#httpServletRequest.remoteUser}]]! <button><a th:href="@{/profile}">PROFILE</a></button></p>
       <form th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout" class="submit" />
+        <button type="submit" class="submit">Logout</button>
       </form>
 
       <form action="">
@@ -147,15 +151,21 @@
           </div>
           <div>
             <div>VOUCHER DISCOUNT</div>
-            <div th:text="${'-' + voucher.discount + '%'}"></div>
+            <div th:each="voucher : ${cart.vouchers}">
+              <div th:text="${'-' + voucher.discount + '%'}"></div>
+            </div>
+          </div>
+          <div>
+            <div>TOTAL COST: </div>
+            <div th:text="${'₱ ' + cart.getDiscountedPrice()}"></div>
           </div>
         </div>
-
-        <div>
-          <button><a th:href="@{/cart/home}">GO BACK</a></button>
-          <button type="submit">CONFIRM PURCHASE</button>
-        </div>
       </form>
+
+      <form th:action="@{/checkout}" method="post">
+        <button type="submit">CONFIRM PURCHASE</button>
+      </form>
+      <button><a th:href="@{/cart/home}">GO BACK</a></button>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>

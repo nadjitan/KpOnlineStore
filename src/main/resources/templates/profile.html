@@ -15,18 +15,28 @@
       place-items: center;
     }
 
-    section[class*="orders-"]:first-of-type {
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-
     section[class*="orders-"] {
       padding: 0px 20px;
       width: 100%;
       display: grid;
       align-items: center;
       grid-gap: 1rem;
-      grid-template-columns: repeat(5, 0.5fr);
+      grid-template-columns: repeat(6, 0.5fr);
+    }
+
+    section[class*="orders-"] > p,
+    section[class*="orders-"] > h4 {
+      min-width: 90%;
+      overflow-wrap: break-word;
+    }
+
+    section.orders-header {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    section.orders-row {
+      font-size: 0.8rem;
     }
   </style>
 
@@ -39,6 +49,9 @@
       <form th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout" class="submit" />
       </form>
+      <button>
+        <a th:href="@{/store}" style="margin-top: 20px">GO TO STORE</a>
+      </button>
 
       <div id="orders-table">
         <h2 id="orders-title">ORDER HISTORY</h2>
@@ -46,17 +59,25 @@
           <h4>REF NO.</h4>
           <h4>DATE</h4>
           <h4>PRICE</h4>
+          <h4>VOUCHER</h4>
           <h4>STATUS</h4>
           <h4>DETAILS</h4>
         </section>
-        <section class="orders-row">
-          <p>1</p>
-          <p>2021-07-01 13:46:45</p>
-          <p>₱ 53,333.28</p>
+        <section class="orders-row" th:each="receipt : ${receiptList}">
+          <p th:text="${receipt.id}"></p>
+          <p
+            th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"
+          ></p>
+          <p th:text="${'₱ ' + receipt.getTotalOrderPrice()}"></p>
+          <div th:each="voucher : ${receipt.voucherList}">
+            <p th:text="${voucher.voucherName}"></p>
+          </div>
+          <p th:if="${receipt.voucherList.empty}">No voucher used</p>
           <p>pending</p>
-          <img src="#" alt="eye-icon" />
+          <img src="#" alt="eye-icon.png" />
         </section>
       </div>
+      <div th:if="${receiptList.empty}">You have no orders</div>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>

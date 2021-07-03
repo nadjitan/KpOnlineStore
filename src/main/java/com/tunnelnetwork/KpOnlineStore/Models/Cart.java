@@ -60,6 +60,19 @@ public class Cart {
   }
 
   @Transient
+  public double getDiscountedPrice() {
+    double s = 0;
+    double finalPrice = getTotalOrderPrice();
+
+    for (Voucher voucher : vouchers) {
+      s = 100 - voucher.getDiscount(); 
+      finalPrice = (s * finalPrice) / 100;
+    }
+
+    return finalPrice;
+  }
+
+  @Transient
   public int getNumberOfProducts() {
     int count = 0;
     

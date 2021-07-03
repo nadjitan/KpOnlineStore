@@ -1,8 +1,6 @@
 package com.tunnelnetwork.KpOnlineStore.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.VoucherRepository;
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
@@ -31,8 +29,8 @@ public class VoucherServiceImpl implements VoucherService {
   }
 
   @Override
-  public Voucher getVoucherByName(@NotNull(message = "The username cannot be null.") @Valid String username) {
-    return voucherRepository.findByVoucherOwner(username);
+  public Voucher getVoucherByName(String name) {
+    return voucherRepository.findByVoucherName(name);
   }
   
 }

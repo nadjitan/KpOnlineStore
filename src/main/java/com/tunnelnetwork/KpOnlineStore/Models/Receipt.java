@@ -1,17 +1,20 @@
 package com.tunnelnetwork.KpOnlineStore.Models;
 
+import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,7 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -35,12 +37,42 @@ public class Receipt {
 
   private String receiptOwner;
 
-  @ElementCollection
-  private List<Integer> quantityList;
   @Embedded
   @ElementCollection
-  private List<Product> products = new ArrayList<Product>();
+  private List<Voucher> voucherList = new ArrayList<Voucher>();
+  
+  @ManyToMany
+  @JoinTable(name="tbl_product",
+  joinColumns=@JoinColumn(name="receiptId"),
+  inverseJoinColumns=@JoinColumn(name="productId")
+  )
+  private List<Product> productList = new ArrayList<Product>();
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime createdAt;
+
+  @Transient
+  public int getNumberOfProducts() {
+    int count = 0;
+    
+    List<Product> products = getProductList();
+
+    for (Product product : products) {
+      count += (1 * product.getQuantity());
+    }
+
+    return count;
+  }
+
+  @Transient
+  public Double getTotalOrderPrice() {
+    double sum = 0D;
+    List<Product> products = getProductList();
+
+    for (Product product : products) {
+      sum += (product.getPrice() * product.getQuantity());
+    }
+
+    return sum;
+  }
 }

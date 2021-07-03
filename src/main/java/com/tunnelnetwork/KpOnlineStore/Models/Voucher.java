@@ -2,8 +2,11 @@ package com.tunnelnetwork.KpOnlineStore.Models;
 
 import java.beans.Transient;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,12 +35,12 @@ public class Voucher {
   private long id;
 
   private String voucherName;
-  private String voucherOwner;
+  @ElementCollection
+  private List<String> userList = new ArrayList<String>();
   private String description;
 
   @Digits(integer=5, fraction=2)
-  private double discount;
-  private double cartTotalPrice;
+  private int discount;
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime createdAt;
@@ -46,14 +49,18 @@ public class Voucher {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime expiryDate;
 
-  public int getDiscount() {
-    return (int) discount;
+  @Transient
+  public boolean isUserInList(String username) {
+    return userList.contains(username);
   }
 
   @Transient
-  public double getDiscountedPrice() {
-    double s = 100 - this.discount; 
+  public void addUserInList(String username) {
+    userList.add(username);
+  }
 
-    return (s * this.cartTotalPrice) / 100;
+  @Transient
+  public void removeUserInList(String username) {
+    userList.remove(username);
   }
 }

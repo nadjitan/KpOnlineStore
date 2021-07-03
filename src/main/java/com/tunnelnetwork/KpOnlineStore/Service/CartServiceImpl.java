@@ -7,6 +7,7 @@ import com.tunnelnetwork.KpOnlineStore.DAO.CartRepository;
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
+import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -96,5 +97,17 @@ public class CartServiceImpl implements CartService {
         break;
       }
     }
+  }
+  
+  @Override
+  public void removeProductsAndVouchers(String username) {
+    Cart cart = getCartOfUser();
+    List<Product> productList = new ArrayList<Product>();
+    List<Voucher> voucherList = new ArrayList<Voucher>();
+
+    cart.setCartProducts(productList);
+    cart.setVouchers(voucherList);
+
+    cartRepository.saveAndFlush(cart);
   }
 }

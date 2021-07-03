@@ -1,11 +1,16 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
+import com.tunnelnetwork.KpOnlineStore.Models.Product;
+import com.tunnelnetwork.KpOnlineStore.Models.Receipt;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 import com.tunnelnetwork.KpOnlineStore.Service.CartService;
 import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
+import com.tunnelnetwork.KpOnlineStore.Service.ReceiptService;
 import com.tunnelnetwork.KpOnlineStore.Service.VoucherService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +39,9 @@ public class CommonController {
   @Autowired
   private VoucherService voucherService;
 
+  @Autowired
+  private ReceiptService receiptService;
+
   @GetMapping("/store")
   public String products(Model model) {
     if (!isThereLoggedInUser()) {
@@ -52,6 +60,11 @@ public class CommonController {
     if (!isThereLoggedInUser()) {
       return "redirect:/";
     }
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    Iterable<Receipt> receiptOfUser = receiptService.getReceiptsByName(authentication.getName());
+
+    model.addAttribute("receiptList", receiptOfUser);
     
     return "profile";
   }
@@ -66,26 +79,19 @@ public class CommonController {
   }
   @GetMapping("/cart/home")
   public String cartHomePage(Model model) {
-    if (!isThereLoggedInUser()) {
+    if (!isThereLoggedInUser() || cartService.getCartOfUser() == null) {
       return "redirect:/";
     }
-    
-    createCartAndVoucher(model);
+
+    model.addAttribute("cart", cartService.getCartOfUser());
     return "cart";
   }
   @GetMapping("/checkout")
   public String checkoutPage(Model model) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-    if (!isThereLoggedInUser()) {
+    if (!isThereLoggedInUser() && cartService.getCartOfUser() == null) {
       return "redirect:/";
     }
-    
-    Voucher voucher = voucherService.getVoucherByName(authentication.getName());
-    double cartTotalPrice = cartService.getCartOfUser().getTotalOrderPrice();
-    voucher.setCartTotalPrice(cartTotalPrice);
-    
-    model.addAttribute("voucher", voucher);
+
     model.addAttribute("cart", cartService.getCartOfUser());
     return "checkout";
   }
@@ -109,6 +115,34 @@ public class CommonController {
 
     return new ModelAndView("redirect:/cart/home");
   }
+  @RequestMapping(value="/checkout", method=RequestMethod.POST)
+  public ModelAndView goCheckout() {
+    Cart cart = cartService.getCartOfUser();
+    Receipt receipt = new Receipt();
+
+    List<Product> productList = cart.getCartProducts();
+    List<Voucher> voucherList = cart.getVouchers();
+    List<Product> newProductList = new ArrayList<Product>();
+    List<Voucher> newVoucherList = new ArrayList<Voucher>();
+
+    for (Product product : productList) {
+      newProductList.add(product);
+    }
+    for (Voucher voucher : voucherList) {
+      newVoucherList.add(voucher);
+    }
+
+    receipt.setCreatedAt(LocalDateTime.now());
+    receipt.setReceiptOwner(cart.getCartOwner());
+    receipt.setProductList(newProductList);
+    receipt.setVoucherList(newVoucherList);
+
+    receiptService.save(receipt);
+
+    cartService.removeProductsAndVouchers(cart.getCartOwner());
+    
+    return new ModelAndView("redirect:/profile");
+  }
 
   public void createCartAndVoucher(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -117,32 +151,36 @@ public class CommonController {
     if (cartService.getCartOfUser() == null) {
       Voucher voucher = new Voucher();
       voucher.setVoucherName("New user discount");
-      voucher.setVoucherOwner(authentication.getName());
+      voucher.addUserInList(authentication.getName());
       voucher.setDescription("20% off on any purchase.");
       voucher.setDiscount(20);
-      voucher.setCartTotalPrice(0);
       voucher.setCreatedAt(LocalDateTime.now());
       voucher.setExpiryDate(LocalDateTime.now());
 
       Cart cart = new Cart();
       cart.setCartOwner(authentication.getName());
+      List<Voucher> cartVouchers = new ArrayList<Voucher>();
+      cartVouchers.add(voucher);
+      cart.setVouchers(cartVouchers);
       cart.setCreatedAt(LocalDateTime.now());
       cart.setUpdatedAt(LocalDateTime.now());
-      cart.getVouchers().add(voucher);
 
       voucherService.save(voucher);
       cartService.save(cart);
 
       model.addAttribute("cart", cartService.getCartOfUser());
-      model.addAttribute("voucher", voucherService.getVoucherByName(authentication.getName()));
       
     } else {
-      Voucher voucher = voucherService.getVoucherByName(authentication.getName());
-      double cartTotalPrice = cartService.getCartOfUser().getTotalOrderPrice();
-      voucher.setCartTotalPrice(cartTotalPrice);
+      Cart cart = cartService.getCartOfUser();
+      Voucher voucher = voucherService.getVoucherByName("New user discount");
+
+      if (voucher.isUserInList(authentication.getName())) {
+        List<Voucher> cartVouchers = new ArrayList<Voucher>();
+        cartVouchers.add(voucher);
+        cart.setVouchers(cartVouchers);
+      }
       
-      model.addAttribute("voucher", voucher);
-      model.addAttribute("cart", cartService.getCartOfUser());
+      model.addAttribute("cart", cart);
     }
   }
 

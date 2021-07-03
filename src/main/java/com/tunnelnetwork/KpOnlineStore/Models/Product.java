@@ -32,7 +32,6 @@ public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_generator")
   @SequenceGenerator(name="product_generator", sequenceName = "product_seq")
-  @Column(name = "id", updatable = false, nullable = false)
   private long id;
   
   private String productName;

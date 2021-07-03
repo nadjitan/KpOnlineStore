@@ -13,7 +13,7 @@ public interface VoucherService {
   
   Voucher getVoucher(@Min(value = 1L, message = "Invalid product ID.") long id);
   
-  Voucher getVoucherByName(@NotNull(message = "The username cannot be null.") @Valid String username);
+  Voucher getVoucherByName(@NotNull(message = "The username cannot be null.") @Valid String name);
 
   Voucher save(@NotNull(message = "The voucher cannot be null.") @Valid Voucher voucher);
 }
