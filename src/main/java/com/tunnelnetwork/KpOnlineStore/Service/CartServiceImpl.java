@@ -100,12 +100,20 @@ public class CartServiceImpl implements CartService {
   }
   
   @Override
-  public void removeProductsAndVouchers(String username) {
+  public void removeProducts(String username) {
     Cart cart = getCartOfUser();
     List<Product> productList = new ArrayList<Product>();
-    List<Voucher> voucherList = new ArrayList<Voucher>();
 
     cart.setCartProducts(productList);
+
+    cartRepository.saveAndFlush(cart);
+  }
+
+  @Override
+  public void removeVouchers(String username) {
+    Cart cart = getCartOfUser();
+    List<Voucher> voucherList = new ArrayList<Voucher>();
+
     cart.setVouchers(voucherList);
 
     cartRepository.saveAndFlush(cart);

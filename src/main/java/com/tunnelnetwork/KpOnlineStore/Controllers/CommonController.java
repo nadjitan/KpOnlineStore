@@ -3,6 +3,7 @@ package com.tunnelnetwork.KpOnlineStore.Controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
@@ -92,12 +93,21 @@ public class CommonController {
     return "cart";
   }
   @GetMapping("/checkout")
-  public String checkoutPage(Model model) {
+  public String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
     if (!isThereLoggedInUser() && cartService.getCartOfUser() == null) {
       return "redirect:/";
     }
 
-    model.addAttribute("cart", cartService.getCartOfUser());
+    Cart cart = cartService.getCartOfUser();
+    if (check.isPresent()) {
+      cart.setUseVoucher(1);
+    } else {
+      cart.setUseVoucher(0);
+    }
+
+    cartService.save(cart);
+
+    model.addAttribute("cart", cart);
     return "checkout";
   }
 
@@ -148,26 +158,32 @@ public class CommonController {
     Cart cart = cartService.getCartOfUser();
     Receipt receipt = new Receipt();
 
-    List<Product> productList = cart.getCartProducts();
-    List<Voucher> voucherList = cart.getVouchers();
-    List<Product> newProductList = new ArrayList<Product>();
-    List<Voucher> newVoucherList = new ArrayList<Voucher>();
+    List<Product> cartProductList = cart.getCartProducts();
+    List<Product> receiptProductList = new ArrayList<Product>();
 
-    for (Product product : productList) {
-      newProductList.add(product);
+    for (Product product : cartProductList) {
+      receiptProductList.add(product);
     }
-    for (Voucher voucher : voucherList) {
-      newVoucherList.add(voucher);
-    }
-
+    
     receipt.setCreatedAt(LocalDateTime.now());
     receipt.setReceiptOwner(cart.getCartOwner());
-    receipt.setProductList(newProductList);
-    receipt.setVoucherList(newVoucherList);
+    receipt.setProductList(receiptProductList);
+    
 
+    if (cart.getUseVoucher() == 1) {
+      List<Voucher> cartVoucherList = cart.getVouchers();
+      List<Voucher> receiptVoucherList = new ArrayList<Voucher>();
+
+      for (Voucher voucher : cartVoucherList) {
+        receiptVoucherList.add(voucher);
+      }
+
+      cartService.removeVouchers(cart.getCartOwner());
+      receipt.setVoucherList(receiptVoucherList);
+    }
+
+    cartService.removeProducts(cart.getCartOwner());
     receiptService.save(receipt);
-
-    cartService.removeProductsAndVouchers(cart.getCartOwner());
     
     return new ModelAndView("redirect:/profile");
   }

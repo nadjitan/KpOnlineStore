@@ -26,5 +26,7 @@ public interface CartService {
 
     void removeProduct(@Min(value = 1L, message = "The id cannot be null.") long id);
 
-    void removeProductsAndVouchers(@NotNull(message = "The username cannot be null.") @Valid String username);
+    void removeProducts(@NotNull(message = "The username cannot be null.") @Valid String username);
+
+    void removeVouchers(@NotNull(message = "The username cannot be null.") @Valid String username);
 }

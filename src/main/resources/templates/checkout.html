@@ -149,7 +149,7 @@
             <div>QUANTITY</div>
             <div th:text="${cart.getNumberOfProducts()}"></div>
           </div>
-          <div>
+          <div th:if="${cart.useVoucher == 1}">
             <div>VOUCHER DISCOUNT</div>
             <div th:each="voucher : ${cart.vouchers}">
               <div th:text="${'-' + voucher.discount + '%'}"></div>
@@ -157,7 +157,8 @@
           </div>
           <div>
             <div>TOTAL COST: </div>
-            <div th:text="${'₱ ' + cart.getDiscountedPrice()}"></div>
+            <div th:if="${cart.useVoucher == 1}" th:text="${'₱ ' + cart.getDiscountedPrice()}"></div>
+            <div th:if="${cart.useVoucher == 0}" th:text="${'₱ ' + cart.getTotalOrderPrice()}"></div>
           </div>
         </div>
       </form>

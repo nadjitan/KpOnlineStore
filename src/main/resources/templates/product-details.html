@@ -3,6 +3,10 @@
   <head th:replace="../fragments/header"> </head>
 
   <style>
+    #product-details {
+      background-color: brown;
+    }
+
     #comments {
       height: max-content;
       width: 50%;
@@ -13,6 +17,7 @@
       width: 100%;
       background-color: aquamarine;
       padding: 20px 0px;
+      border: 1px solid black;
     }
 
     #comments > .comment > p {
@@ -39,9 +44,12 @@
         <input type="submit" value="Logout" class="submit" />
       </form>
 
-      <h3 class="product-name" th:text="${product.productName}"></h3>
-      <p class="product-category" th:text="${product.category}"></p>
-      <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+      <div id="product-details">
+        <img src="#" alt="product-img.png" />
+        <h3 class="product-name" th:text="${product.productName}"></h3>
+        <p class="product-category" th:text="${product.category}"></p>
+        <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+      </div>
 
       <form th:action="@{/addProduct}" method="post">
         <input
@@ -82,7 +90,9 @@
             style="resize: none"
           ></textarea>
         </section>
-        <button name="productId" type="submit" th:value="${product.id}">SUBMIT</button>
+        <button name="productId" type="submit" th:value="${product.id}">
+          SUBMIT
+        </button>
       </form>
 
       <button><a th:href="@{/store}">GO BACK</a></button>
