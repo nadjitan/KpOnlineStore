@@ -1,30 +1,44 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
-import javax.validation.constraints.NotNull;
-
-import com.tunnelnetwork.KpOnlineStore.Models.Cart;
-import com.tunnelnetwork.KpOnlineStore.Service.CartService;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
-@RequestMapping("/cart")
-public class CartController {
-  
-  @Autowired
-  private CartService cartService;
+@Controller
+public class CartController extends CommonController{
 
-  @GetMapping("/{id}")
-  public Cart findCart(@PathVariable("id") long id) {
-    return cartService.getCart(id);
+  @GetMapping("/cart/home")
+  public String cartHomePage(Model model) {
+    if (!isThereLoggedInUser() || cartService.getCartOfUser() == null) {
+      return "redirect:/";
+    }
+
+    model.addAttribute("cart", cartService.getCartOfUser());
+    return "cart";
   }
 
-  @GetMapping("/all")
-  public @NotNull Iterable<Cart> list() {
-    return cartService.getAllCarts();
+  // Shopping cart buttons logic
+  @RequestMapping(value = "/addProduct", method=RequestMethod.POST)
+  @ResponseBody
+  public ModelAndView addProduct(@RequestParam("productId") long id, @RequestParam("productQuantity") Integer productQuantity) {
+    if (!cartService.isProductInCart(id)) {
+      cartService.addToCart(productService.getProduct(id), productQuantity);
+    }
+
+    return new ModelAndView("redirect:/store");
+  }
+  @RequestMapping(value="/removeProduct", method=RequestMethod.POST)
+  @ResponseBody
+  public ModelAndView removeProduct(@RequestParam("productId") long id){
+    if (cartService.isProductInCart(id)) {
+      cartService.removeProduct(id);
+    }
+
+    return new ModelAndView("redirect:/cart/home");
   }
 }
