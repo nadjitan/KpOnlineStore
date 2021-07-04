@@ -20,7 +20,7 @@ public class ReceiptServiceImpl implements ReceiptService {
   public Receipt getReceipt(long id) {
     return receiptRepository
       .findById(id)
-      .orElseThrow(() -> new ResourceNotFoundException("Voucher not found"));
+      .orElseThrow(() -> new ResourceNotFoundException("Receipt not found"));
   }
 
   @Override

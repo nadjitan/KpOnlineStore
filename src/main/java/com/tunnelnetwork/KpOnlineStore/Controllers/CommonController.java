@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
+import com.tunnelnetwork.KpOnlineStore.Models.Comment;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 import com.tunnelnetwork.KpOnlineStore.Models.Receipt;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 import com.tunnelnetwork.KpOnlineStore.Service.CartService;
+import com.tunnelnetwork.KpOnlineStore.Service.CommentService;
 import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
 import com.tunnelnetwork.KpOnlineStore.Service.ReceiptService;
 import com.tunnelnetwork.KpOnlineStore.Service.VoucherService;
@@ -41,6 +43,9 @@ public class CommonController {
 
   @Autowired
   private ReceiptService receiptService;
+
+  @Autowired
+  private CommentService commentService;
 
   @GetMapping("/store")
   public String products(Model model) {
@@ -94,6 +99,29 @@ public class CommonController {
 
     model.addAttribute("cart", cartService.getCartOfUser());
     return "checkout";
+  }
+
+  @RequestMapping(value = "/comment", method=RequestMethod.POST)
+  @ResponseBody
+  public ModelAndView makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
+    if (!comment.isBlank()) {
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      Product product = productService.getProduct(id);
+      Comment newComment = new Comment();
+      newComment.setCommentUserId(0);
+      newComment.setCreatedAt(LocalDateTime.now());
+      newComment.setUserComment(comment);
+      newComment.setUpdatedAt(LocalDateTime.now());
+      newComment.setUserName(authentication.getName());
+
+      commentService.save(newComment);
+
+      product.getComments().add(newComment);
+
+      productService.save(product);
+    }
+
+    return new ModelAndView("redirect:/product/" + id);
   }
 
   // Shopping cart buttons logic

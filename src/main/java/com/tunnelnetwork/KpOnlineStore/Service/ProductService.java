@@ -17,5 +17,7 @@ public interface ProductService {
 
     Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
 
+    Product save(@NotNull(message = "The product cannot be null.") @Valid Product product);
+
     List<Product> save(@NotNull(message = "The product cannot be null.") @Valid List<Product> product);
 }

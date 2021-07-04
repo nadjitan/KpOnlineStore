@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public interface ReceiptService {
   
-  Receipt getReceipt(@Min(value = 1L, message = "Invalid product ID.") long id);
+  Receipt getReceipt(@Min(value = 1L, message = "Invalid receipt ID.") long id);
   
   Iterable<Receipt> getReceiptsByName(@NotNull(message = "The username cannot be null.") @Valid String username);
 

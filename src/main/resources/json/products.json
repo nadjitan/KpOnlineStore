@@ -12,15 +12,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "id": 1,
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "id": 2,
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -40,15 +40,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "id": 3,
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "id": 4,
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -68,13 +68,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -94,13 +96,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -120,13 +124,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -146,13 +152,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -172,13 +180,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -198,13 +208,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -224,13 +236,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
@@ -250,13 +264,15 @@
     "tags": ["tag1", "tag2"],
     "comments": [
       {
-        "userId": 1,
+        "commentUserId": 1,
+        "userName": "John",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
-        "userId": 2,
+        "commentUserId": 2,
+        "userName": "Rachel",
         "userComment": "Test",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"

@@ -68,7 +68,7 @@
           <p
             th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"
           ></p>
-          <p th:text="${'₱ ' + receipt.getTotalOrderPrice()}"></p>
+          <p th:text="${'₱ ' + receipt.getDiscountedPrice()}"></p>
           <div th:each="voucher : ${receipt.voucherList}">
             <p th:text="${voucher.voucherName}"></p>
           </div>

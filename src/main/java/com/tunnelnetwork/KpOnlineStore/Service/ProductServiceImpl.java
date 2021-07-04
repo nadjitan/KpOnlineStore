@@ -30,7 +30,12 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  public Product save(Product product) {
+    return productRepository.saveAndFlush(product);
+  }
+
+  @Override
   public List<Product> save(List<Product> product) {
-    return productRepository.saveAll(product);
+    return productRepository.saveAllAndFlush(product);
   }
 }

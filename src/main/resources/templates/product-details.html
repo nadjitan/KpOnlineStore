@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-  <head th:replace="../fragments/header"></head>
+  <head th:replace="../fragments/header"> </head>
+
+  <style>
+    #comments {
+      height: max-content;
+      width: 50%;
+      background-color: bisque;
+    }
+
+    #comments > .comment {
+      width: 100%;
+      background-color: aquamarine;
+      padding: 20px 0px;
+    }
+
+    #comments > .comment > p {
+      margin-left: 20px;
+    }
+
+    #comments > .comment > div {
+      display: flex;
+      align-items: center;
+    }
+
+    #comments > .comment > div > h4 {
+      margin-left: 20px;
+    }
+  </style>
 
   <body>
     <div id="home">
@@ -34,6 +61,30 @@
           Add to cart
         </button>
       </form>
+      <div id="comments">
+        <h3>COMMENTS</h3>
+        <div th:if="${product.comments.empty}">No Comments</div>
+        <div class="comment" th:each="comment : ${product.getComments()}">
+          <div>
+            <img src="#" alt="user-img.png" />
+            <h4 th:text="${comment.userName}"></h4>
+          </div>
+          <p th:text="${comment.userComment}"></p>
+        </div>
+      </div>
+
+      <form th:action="@{/comment}" method="post">
+        <section>
+          <h4>MAKE A COMMENT</h4>
+          <textarea
+            id="user-comment"
+            name="userComment"
+            style="resize: none"
+          ></textarea>
+        </section>
+        <button name="productId" type="submit" th:value="${product.id}">SUBMIT</button>
+      </form>
+
       <button><a th:href="@{/store}">GO BACK</a></button>
     </div>
 
