@@ -2,6 +2,8 @@ package com.tunnelnetwork.KpOnlineStore.Controllers;
 
 import java.time.LocalDateTime;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 
@@ -26,6 +28,7 @@ public class ProductDetailsController extends CommonController{
       return "redirect:/";
     }
 
+    model.addAttribute("maxRating", 5);
     model.addAttribute("product", productService.getProduct(id));
     return "product-details";
   }
@@ -34,9 +37,15 @@ public class ProductDetailsController extends CommonController{
   @ResponseBody
   public ModelAndView makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
     if (!comment.isBlank()) {
+      if (!isThereLoggedInUser()) {
+        return new ModelAndView("redirect:/");
+      }
+
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
       Product product = productService.getProduct(id);
       Comment newComment = new Comment();
+      
       newComment.setCommentUserId(0);
       newComment.setCreatedAt(LocalDateTime.now());
       newComment.setUserComment(comment);
@@ -49,6 +58,22 @@ public class ProductDetailsController extends CommonController{
 
       productService.save(product);
     }
+
+    return new ModelAndView("redirect:/product/" + id);
+  }
+
+  @RequestMapping(value = "/rate", method=RequestMethod.POST)
+  @ResponseBody
+  public ModelAndView rateProduct(@RequestParam("rating") Integer rating, @RequestParam("productId") Integer id) {
+    if (!isThereLoggedInUser()) {
+      return new ModelAndView("redirect:/");
+    }
+
+    Product product = productService.getProduct(id);
+
+    product.setRating(rating);
+
+    productService.save(product);
 
     return new ModelAndView("redirect:/product/" + id);
   }

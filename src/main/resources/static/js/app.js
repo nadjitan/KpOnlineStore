@@ -5,18 +5,25 @@
 //   console.log(e);
 // });
 
-// $(document).ready(function () {
-//   $(".add-to-cart").click(function (e) {
-//     const inputQuantity = $(this).prev().val();
-//     const id = $(this).val();
-//     console.log(inputQuantity);
+// $(function () {
+//   $(document).on("click", "[class^=star-]", function () {
+//     const inputRating = $(this).next().val();
+//     const inputProductId = $(this).next().next().val();
 
 //     $.ajax({
-//       url: "/addproduct",
 //       type: "POST",
-//       data: {
-//         productId: id,
-//         productQuantity: inputQuantity,
+//       contentType: "application/json",
+//       url: "rate",
+//       data: { rating: inputRating, productId: inputProductId },
+//       dataType: "json",
+//       success: function (result) {
+//         console.log("SUCCESS: ", result);
+//       },
+//       error: function (e) {
+//         console.log("ERROR: ", e);
+//       },
+//       done: function (e) {
+//         console.log("DONE");
 //       },
 //     });
 //   });

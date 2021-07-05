@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"> </head>
 
-  <style>
+  <style th:inline="text">
     #product-details {
       background-color: brown;
     }
@@ -32,6 +32,21 @@
     #comments > .comment > div > h4 {
       margin-left: 20px;
     }
+
+    [class*="star-"] {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+    [class*="star-"]:hover {
+      transform: translateY(5px);
+    }
+
+    .btn-star {
+      background-color: transparent;
+      border: none;
+    }
   </style>
 
   <body>
@@ -49,6 +64,45 @@
         <h3 class="product-name" th:text="${product.productName}"></h3>
         <p class="product-category" th:text="${product.category}"></p>
         <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+
+        <div
+          th:each="i : ${#numbers.sequence(1, product.rating)}"
+          style="display: inline-block"
+        >
+          <form th:action="@{/rate}" method="POST">
+            <input type="hidden" name="rating" th:value="${i}" />
+            <input type="hidden" name="productId" th:value="${product.id}" />
+            <button type="submit" class="btn-star">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+            </button>
+          </form>
+        </div>
+
+        <div
+          th:if="${product.rating < 5}"
+          th:each="i : ${#numbers.sequence(1, 5 - product.rating)}"
+          style="display: inline-block"
+        >
+          <form th:action="@{/rate}" method="POST">
+            <input
+              type="hidden"
+              name="rating"
+              th:value="${i + product.rating}"
+            />
+            <input type="hidden" name="productId" th:value="${product.id}" />
+            <button type="submit" class="btn-star">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+            </button>
+          </form>
+        </div>
       </div>
 
       <form th:action="@{/addProduct}" method="post">
