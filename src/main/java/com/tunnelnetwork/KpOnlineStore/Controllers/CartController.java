@@ -19,6 +19,7 @@ public class CartController extends CommonController{
     }
 
     model.addAttribute("cart", cartService.getCartOfUser());
+
     return "cart";
   }
 
@@ -30,7 +31,7 @@ public class CartController extends CommonController{
       cartService.addToCart(productService.getProduct(id), productQuantity);
     }
 
-    return new ModelAndView("redirect:/store");
+    return new ModelAndView("redirect:/store/1");
   }
   @RequestMapping(value="/removeProduct", method=RequestMethod.POST)
   @ResponseBody

@@ -2,6 +2,16 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
 
+  <style>
+    .page-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    [class*="btn-"] {
+      cursor: pointer;
+    }
+  </style>
+
   <body>
     <div id="home">
       <p>
@@ -21,6 +31,23 @@
             <p class="product-price" th:text="${'₱ ' + product.price}"></p>
           </a>
         </div>
+      </div>
+
+      <div class="page-buttons">
+        <button class="btn-back" th:if="${showBack == true}">
+          <a th:href="@{|/store/${newPage - 2}|}">BACK</a>
+        </button>
+
+        <button
+          th:each="i : ${#numbers.sequence(1, totalPages)}"
+          th:if="${newPage - 1 != i && totalPages > 1}"
+        >
+          <a th:href="@{|/store/${i}|}" th:text="${i}"></a>
+        </button>
+
+        <button class="btn-next" th:if="${showNext== true}">
+          <a th:href="@{|/store/${newPage}|}">NEXT</a>
+        </button>
       </div>
 
       <button>

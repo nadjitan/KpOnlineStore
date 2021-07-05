@@ -38,4 +38,9 @@ public class ProductServiceImpl implements ProductService {
   public List<Product> save(List<Product> product) {
     return productRepository.saveAllAndFlush(product);
   }
+
+  @Override
+  public Integer size() {
+    return productRepository.findAll().size();
+  }
 }

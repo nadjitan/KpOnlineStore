@@ -2,8 +2,6 @@ package com.tunnelnetwork.KpOnlineStore.Controllers;
 
 import java.time.LocalDateTime;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 

@@ -62,10 +62,12 @@ public class CheckoutController extends CommonController {
       List<Voucher> receiptVoucherList = new ArrayList<Voucher>();
 
       for (Voucher voucher : cartVoucherList) {
+        voucher.removeUserInList(cart.getCartOwner());
         receiptVoucherList.add(voucher);
       }
 
       cartService.removeVouchers(cart.getCartOwner());
+
       receipt.setVoucherList(receiptVoucherList);
     }
 

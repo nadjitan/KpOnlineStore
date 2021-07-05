@@ -19,5 +19,7 @@ public interface ProductService {
 
     Product save(@NotNull(message = "The product cannot be null.") @Valid Product product);
 
+    Integer size();
+
     List<Product> save(@NotNull(message = "The product cannot be null.") @Valid List<Product> product);
 }
