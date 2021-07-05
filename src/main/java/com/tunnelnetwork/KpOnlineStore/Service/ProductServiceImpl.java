@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
-
+  
   @Autowired
   private ProductRepository productRepository;
 
@@ -30,7 +30,17 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  public Product save(Product product) {
+    return productRepository.saveAndFlush(product);
+  }
+
+  @Override
   public List<Product> save(List<Product> product) {
-    return productRepository.saveAll(product);
+    return productRepository.saveAllAndFlush(product);
+  }
+
+  @Override
+  public Integer size() {
+    return productRepository.findAll().size();
   }
 }

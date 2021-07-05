@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -24,36 +27,49 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Cart {
+public class Receipt {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_generator")
-  @SequenceGenerator(name="cart_generator", sequenceName = "cart_seq")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receipt_generator")
+  @SequenceGenerator(name="receipt_generator", sequenceName = "receipt_seq")
   @Column(name = "id", updatable = false, nullable = false)   
   private long id;
 
-  private String cartOwner;
+  private String receiptOwner;
 
   @Embedded
   @ElementCollection
-  private List<Product> cartProducts = new ArrayList<Product>();
+  private List<Voucher> voucherList = new ArrayList<Voucher>();
   
-  @Embedded
-  @ElementCollection
-  private List<Voucher> vouchers = new ArrayList<Voucher>();
-  private int useVoucher = 0;
+  @ManyToMany
+  @JoinTable(name="tbl_product",
+  joinColumns=@JoinColumn(name="receiptId"),
+  inverseJoinColumns=@JoinColumn(name="productId")
+  )
+  private List<Product> productList = new ArrayList<Product>();
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime createdAt;
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
-  private LocalDateTime updatedAt;
+
+  @Transient
+  public int getNumberOfProducts() {
+    int count = 0;
+    
+    List<Product> products = getProductList();
+
+    for (Product product : products) {
+      count += (1 * product.getQuantity());
+    }
+
+    return count;
+  }
 
   @Transient
   public Double getTotalOrderPrice() {
     double sum = 0D;
-    List<Product> cartProducts = getCartProducts();
+    List<Product> products = getProductList();
 
-    for (Product product : cartProducts) {
+    for (Product product : products) {
       sum += (product.getPrice() * product.getQuantity());
     }
 
@@ -65,24 +81,11 @@ public class Cart {
     double s = 0;
     double finalPrice = getTotalOrderPrice();
 
-    for (Voucher voucher : vouchers) {
+    for (Voucher voucher : voucherList) {
       s = 100 - voucher.getDiscount(); 
       finalPrice = (s * finalPrice) / 100;
     }
 
     return finalPrice;
-  }
-
-  @Transient
-  public int getNumberOfProducts() {
-    int count = 0;
-    
-    List<Product> cartProducts = getCartProducts();
-
-    for (Product product : cartProducts) {
-      count += (1 * product.getQuantity());
-    }
-
-    return count;
   }
 }

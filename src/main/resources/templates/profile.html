@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="../fragments/header"></head>
+
+  <style>
+    /* Ayos ba Jeremy? */
+    /*         - Nadji */
+    #orders-title {
+      place-self: start;
+    }
+
+    #orders-table {
+      width: 60%;
+      display: grid;
+      place-items: center;
+    }
+
+    section[class*="orders-"] {
+      padding: 0px 20px;
+      width: 100%;
+      display: grid;
+      align-items: center;
+      grid-gap: 1rem;
+      grid-template-columns: repeat(6, 0.5fr);
+    }
+
+    section[class*="orders-"] > p,
+    section[class*="orders-"] > h4 {
+      min-width: 90%;
+      overflow-wrap: break-word;
+    }
+
+    section.orders-header {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    section.orders-row {
+      font-size: 0.8rem;
+    }
+  </style>
+
+  <body>
+    <div id="home">
+      <p>
+        Hello [[${#httpServletRequest.remoteUser}]]!
+        <button><a th:href="@{/profile}">PROFILE</a></button>
+      </p>
+      <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" class="submit" />
+      </form>
+      <button>
+        <a th:href="@{/store/1}" style="margin-top: 20px">GO TO STORE</a>
+      </button>
+
+      <div id="orders-table">
+        <h2 id="orders-title">ORDER HISTORY</h2>
+        <section class="orders-header">
+          <h4>REF NO.</h4>
+          <h4>DATE</h4>
+          <h4>PRICE</h4>
+          <h4>VOUCHER</h4>
+          <h4>STATUS</h4>
+          <h4>DETAILS</h4>
+        </section>
+        <section class="orders-row" th:each="receipt : ${receiptList}">
+          <p th:text="${receipt.id}"></p>
+          <p
+            th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"
+          ></p>
+          <p th:text="${'₱ ' + receipt.getDiscountedPrice()}"></p>
+          <div th:each="voucher : ${receipt.voucherList}">
+            <p th:text="${voucher.voucherName}"></p>
+          </div>
+          <p th:if="${receipt.voucherList.empty}">No voucher used</p>
+          <p>pending</p>
+          <img src="#" alt="eye-icon.png" />
+        </section>
+      </div>
+      <div th:if="${receiptList.empty}">You have no orders</div>
+    </div>
+
+    <div th:replace="../fragments/footer.html"></div>
+  </body>
+</html>

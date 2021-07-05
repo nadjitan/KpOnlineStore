@@ -18,6 +18,11 @@ body,
   place-items: center;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 #home {
   width: 100%;
 }
@@ -25,18 +30,36 @@ body,
 #home > #store,
 #home > #cart {
   display: flex;
-  background-color: aqua;
   width: 70%;
+  overflow: auto;
 }
 
-#cart {
-  background-color: brown;
-}
-
-#store > .product #cart > .product {
+#store > .product,
+#cart > .product {
   display: grid;
   place-items: center;
+  cursor: pointer;
   width: 200px;
+  margin: 0px 2px;
+  border: 0.8px solid black;
+}
+
+#voucher {
+  display: grid;
+  place-items: center;
+  background-color: cadetblue;
+}
+
+#store > .product {
+  background-color: aqua;
+}
+
+#cart > .product {
+  background-color: brown;
+}
+#cart > .cart-total {
+  place-self: center;
+  margin-left: auto;
 }
 
 #login > input,
@@ -62,9 +85,10 @@ body,
 .error,
 .success {
   width: max-content;
-  padding: 0px 1.5em 0px 1.5em;
+  padding: 1em 1.2em 1em 1.2em;
+  font-weight: bold;
   margin-bottom: 1em;
-  border-radius: 15px;
+  border-radius: 10px;
   border: 1px solid transparent;
   font-size: 0.7em;
   color: white;

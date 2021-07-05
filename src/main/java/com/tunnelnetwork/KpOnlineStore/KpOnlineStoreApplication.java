@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
+import com.tunnelnetwork.KpOnlineStore.Service.CommentService;
 import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
 
 
@@ -26,7 +27,7 @@ public class KpOnlineStoreApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(ProductService productService) {
+	CommandLineRunner runner(ProductService productService, CommentService commentService) {
 		return args -> {
 			// Read json and write to db
 			ObjectMapper mapper = new ObjectMapper();
@@ -41,6 +42,7 @@ public class KpOnlineStoreApplication {
 			// Start saving to product database
 			try {
 				List<Product> products = mapper.readValue(inputStream,typeReference);
+
 				productService.save(products);
 
 				System.out.println("Products Saved!");

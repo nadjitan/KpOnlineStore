@@ -12,6 +12,6 @@ An online kpop merchandise store for a course in CIIT College of Arts and Techno
 ### Group Members
 
 - [Nadji Tan](https://github.com/Kapatid) (Kapatid)
-- [Jeremy Habal](https://github.com/J-Habal) test
+- [Jeremy Habal](https://github.com/J-Habal) 
 - [Gabriel Verceles](https://github.com/Koruuin)
-- [Jerwin Fabelico](https://github.com/Omni-ssiah)
+- [Jerwin Fabelico](https://github.com/Omni-ssiah) (Omni-ssiah)

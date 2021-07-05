@@ -36,12 +36,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     http
       .authorizeRequests()
         .antMatchers(
+          "/contact-us/**",
+          "/about-us/**",
+          "/store/**",
+          "/profile/**",
           "/cart/**",
+          "/checkout/**",
           "/products/**",
           "/js/**",
           "/css/**",
           "/img/**").permitAll()
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
+        .antMatchers(HttpMethod.POST, "/addproduct").permitAll()
+        .antMatchers(HttpMethod.POST, "/removeProduct").permitAll()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .anyRequest().authenticated()
         .and()
