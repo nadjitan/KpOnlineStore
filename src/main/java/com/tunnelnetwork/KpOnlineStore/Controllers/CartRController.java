@@ -19,12 +19,12 @@ public class CartRController {
   private CartService cartService;
 
   @GetMapping("/{id}")
-  public Cart findCart(@PathVariable("id") long id) {
+  private Cart findCart(@PathVariable("id") long id) {
     return cartService.getCart(id);
   }
 
   @GetMapping("/all")
-  public @NotNull Iterable<Cart> list() {
+  private @NotNull Iterable<Cart> list() {
     return cartService.getAllCarts();
   }
 }

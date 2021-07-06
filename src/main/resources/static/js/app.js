@@ -5,26 +5,40 @@
 //   console.log(e);
 // });
 
-// $(function () {
-//   $(document).on("click", "[class^=star-]", function () {
-//     const inputRating = $(this).next().val();
-//     const inputProductId = $(this).next().next().val();
+$(function () {
+  var prevRatingInput = null;
 
-//     $.ajax({
-//       type: "POST",
-//       contentType: "application/json",
-//       url: "rate",
-//       data: { rating: inputRating, productId: inputProductId },
-//       dataType: "json",
-//       success: function (result) {
-//         console.log("SUCCESS: ", result);
-//       },
-//       error: function (e) {
-//         console.log("ERROR: ", e);
-//       },
-//       done: function (e) {
-//         console.log("DONE");
-//       },
-//     });
-//   });
-// });
+  $(".btn-edit, .btn-delete, .btn-add, .btn-product-details").click(
+    function () {
+      const form = $(this).prev();
+
+      form.css("display", "grid");
+      form.find(".exit-modal").css("margin-left", "auto");
+    }
+  );
+
+  $(".exit-modal").click(function () {
+    const form = $(this).parent().parent();
+
+    form.css("display", "none");
+  });
+
+  $(".exit-modal-add-product").click(function () {
+    const form = $(this).parent();
+
+    form.css("display", "none");
+  });
+
+  $(".btn-rating").click(function () {
+    const input = $(this).prev();
+
+    if (prevRatingInput != null) {
+      $(prevRatingInput).prop("checked", false);
+      $(prevRatingInput).next().css("background-color", "transparent");
+    }
+
+    $(this).css("background-color", "aquamarine");
+
+    prevRatingInput = input;
+  });
+});

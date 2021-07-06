@@ -5,8 +5,8 @@
     "productName": "Ceiling Light",
     "description": "A very bright light.",
     "category": "Light",
-    "price": 20,
-    "status": "available",
+    "price": 10,
+    "status": "AVAILABLE",
     "image": "/img/img1.png",
     "rating": 5,
     "tags": ["tag1", "tag2"],
@@ -34,9 +34,9 @@
     "description": "A fine print of your favorite K-POP idol.",
     "category": "Cards",
     "price": 10,
-    "status": "available",
+    "status": "AVAILABLE",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 4,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -62,9 +62,9 @@
     "description": "A photocard of your favorite K-POP idol.",
     "category": "Cards",
     "price": 10,
-    "status": "available",
+    "status": "AVAILABLE",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 3,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -90,9 +90,9 @@
     "description": "An album of your favorite K-POP idol.",
     "category": "Album",
     "price": 10,
-    "status": "available",
+    "status": "PREORDER",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 2,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -118,9 +118,9 @@
     "description": "A Jacket of your favorite K-POP idol.",
     "category": "Wearables",
     "price": 10,
-    "status": "available",
+    "status": "PREORDER",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 1,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -146,7 +146,7 @@
     "description": "A T-shirt of your favorite K-POP idol.",
     "category": "Wearables",
     "price": 10,
-    "status": "available",
+    "status": "PREORDER",
     "image": "/img/img2.png",
     "rating": 5,
     "tags": ["tag1", "tag2"],
@@ -174,9 +174,9 @@
     "description": "A small 11 x 17 poster of your favorite K-POP idol.",
     "category": "Poster",
     "price": 10,
-    "status": "available",
+    "status": "OUTOFSTOCK",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 4,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -202,9 +202,9 @@
     "description": "A medium 18 x 24 poster of your favorite K-POP idol.",
     "category": "Poster",
     "price": 10,
-    "status": "available",
+    "status": "OUTOFSTOCK",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 3,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -230,9 +230,9 @@
     "description": "A large 24 x 36 poster of your favorite K-POP idol.",
     "category": "Poster",
     "price": 10,
-    "status": "available",
+    "status": "OUTOFSTOCK",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 2,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -258,9 +258,9 @@
     "description": "A Photobook of your favorite K-POP idol.",
     "category": "Photobook",
     "price": 10,
-    "status": "available",
+    "status": "AVAILABLE",
     "image": "/img/img2.png",
-    "rating": 5,
+    "rating": 1,
     "tags": ["tag1", "tag2"],
     "comments": [
       {

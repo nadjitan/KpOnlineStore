@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CartController extends CommonController{
 
   @GetMapping("/cart/home")
-  public String cartHomePage(Model model) {
+  private String cartHomePage(Model model) {
     if (!isThereLoggedInUser() || cartService.getCartOfUser() == null) {
       return "redirect:/";
     }
@@ -26,7 +26,7 @@ public class CartController extends CommonController{
   // Shopping cart buttons logic
   @RequestMapping(value = "/addProduct", method=RequestMethod.POST)
   @ResponseBody
-  public ModelAndView addProduct(@RequestParam("productId") long id, @RequestParam("productQuantity") Integer productQuantity) {
+  private ModelAndView addProduct(@RequestParam("productId") long id, @RequestParam("productQuantity") Integer productQuantity) {
     if (!cartService.isProductInCart(id)) {
       cartService.addToCart(productService.getProduct(id), productQuantity);
     }
@@ -35,7 +35,7 @@ public class CartController extends CommonController{
   }
   @RequestMapping(value="/removeProduct", method=RequestMethod.POST)
   @ResponseBody
-  public ModelAndView removeProduct(@RequestParam("productId") long id){
+  private ModelAndView removeProduct(@RequestParam("productId") long id){
     if (cartService.isProductInCart(id)) {
       cartService.removeProduct(id);
     }

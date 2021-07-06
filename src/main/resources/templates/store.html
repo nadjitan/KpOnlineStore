@@ -3,6 +3,10 @@
   <head th:replace="../fragments/header"></head>
 
   <style>
+    body {
+      display: flex;
+    }
+
     .page-buttons {
       display: flex;
       gap: 10px;
@@ -10,9 +14,249 @@
     [class*="btn-"] {
       cursor: pointer;
     }
+
+    #store {
+      width: 100%;
+      background-color: aquamarine;
+    }
+
+    #filters {
+      margin-left: 40px;
+      width: 40%;
+      background-color: antiquewhite;
+    }
+
+    #filters > h2 {
+      border-bottom: 1px solid black;
+      padding: 0px 0px 20px 0px;
+    }
+
+    #star-ratings > div {
+      display: flex;
+      align-items: center;
+    }
+
+    input[id*="star-"] {
+      display: none;
+    }
+
+    input[id*="star-"] + label:hover {
+      background-color: #0000002a;
+    }
   </style>
 
   <body>
+    <div id="filters">
+      <h2>FILTERS</h2>
+      <form th:action="@{/store/1/addFilters}" method="GET" id="form-filters">
+        <section>
+          <h4>STATUS</h4>
+          <input
+            type="checkbox"
+            th:checked="${AVAILABLE}"
+            name="available"
+            id="checkbox-available"
+            value="AVAILABLE"
+          />
+          <label for="checkbox-available">Available</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${PREORDER}"
+            name="preorder"
+            id="checkbox-preorder"
+            value="PREORDER"
+          />
+          <label for="checkbox-preorder">Preorder</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${OUTOFSTOCK}"
+            name="outOfStock"
+            id="checkbox-outofstock"
+            value="OUTOFSTOCK"
+          />
+          <label for="checkbox-outofstock">Out of stock</label>
+        </section>
+        <section>
+          <h4>PRICE RANGE</h4>
+          <input
+            type="number"
+            name="priceMin"
+            id="input-price-min"
+            placeholder="₱ Min"
+            th:value="${priceMin}"
+            min="1"
+          />
+          -->
+          <input
+            type="number"
+            name="priceMax"
+            id="input-price-max"
+            placeholder="₱ Max"
+            th:value="${priceMax}"
+            min="1"
+          />
+        </section>
+        <section id="star-ratings">
+          <h4>RATING</h4>
+          <div>
+            <input type="checkbox" name="fiveStar" id="star-five" value="5" />
+            <label for="star-five" class="btn-rating">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" name="fourStar" id="star-four" value="4" />
+            <label for="star-four" class="btn-rating">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+            </label>
+            &nbsp; and up
+          </div>
+          <div>
+            <input type="checkbox" name="threeStar" id="star-three" value="3" />
+            <label for="star-three" class="btn-rating">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+            </label>
+            &nbsp; and up
+          </div>
+          <div>
+            <input type="checkbox" name="twoStar" id="star-two" value="2" />
+            <label for="star-two" class="btn-rating">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+            </label>
+            &nbsp; and up
+          </div>
+          <div>
+            <input type="checkbox" name="oneStar" id="star-one" value="1" />
+            <label for="star-one" class="btn-rating">
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+            </label>
+            &nbsp; and up
+          </div>
+        </section>
+        <button type="submit">APPLY</button>
+      </form>
+    </div>
+
     <div id="home">
       <p>
         Hello [[${#httpServletRequest.remoteUser}]]!
@@ -29,24 +273,62 @@
             <h3 class="product-name" th:text="${product.productName}"></h3>
             <p class="product-category" th:text="${product.category}"></p>
             <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+
+            <div
+              th:each="i : ${#numbers.sequence(1, product.rating)}"
+              style="display: inline-block"
+            >
+              <img
+                alt="star-img"
+                th:src="${'/img/star_black_24dp.svg'}"
+                class="star-filled"
+              />
+            </div>
+
+            <div
+              th:if="${product.rating < 5}"
+              th:each="i : ${#numbers.sequence(1, 5 - product.rating)}"
+              style="display: inline-block"
+            >
+              <img
+                alt="star-img"
+                th:src="${'/img/star_border_black_24dp.svg'}"
+                class="star-empty"
+              />
+            </div>
           </a>
         </div>
       </div>
 
       <div class="page-buttons">
-        <button class="btn-back" th:if="${showBack == true}">
+        <button class="btn-back" th:if="${showBack == true and uri == null}">
           <a th:href="@{|/store/${newPage - 2}|}">BACK</a>
+        </button>
+        <button class="btn-back" th:if="${showBack == true and uri != null}">
+          <a th:href="@{|/store/${newPage - 2}/${uri}|}">BACK</a>
         </button>
 
         <button
           th:each="i : ${#numbers.sequence(1, totalPages)}"
           th:if="${newPage - 1 != i && totalPages > 1}"
         >
-          <a th:href="@{|/store/${i}|}" th:text="${i}"></a>
+          <a
+            th:if="${uri == null}"
+            th:href="@{|/store/${i}|}"
+            th:text="${i}"
+          ></a>
+          <a
+            th:if="${uri}"
+            th:href="@{|/store/${i}/${uri}|}"
+            th:text="${i}"
+          ></a>
         </button>
 
-        <button class="btn-next" th:if="${showNext== true}">
+        <button class="btn-next" th:if="${showNext == true and uri == null}">
           <a th:href="@{|/store/${newPage}|}">NEXT</a>
+        </button>
+        <button class="btn-next" th:if="${showNext == true and uri != null}">
+          <a th:href="@{|/store/${newPage}/${uri}|}">NEXT</a>
         </button>
       </div>
 
