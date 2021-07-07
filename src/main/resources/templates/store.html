@@ -50,6 +50,13 @@
     input[id*="star-"] + label:hover {
       background-color: #0000002a;
     }
+
+    #dropdown-categories {
+      display: grid;
+      gap: 10px;
+      height: 120px;
+      overflow: auto;
+    }
   </style>
 
   <body>
@@ -375,6 +382,55 @@
       <form th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout" class="submit" />
       </form>
+
+      <div id="dropdown-categories">
+        <a th:href="@{|/store/1/addFilters?album=albums&priceMin=&priceMax=|}"
+          >Albums</a
+        >
+        <a th:href="@{|/store/1/addFilters?doll=dolls&priceMin=&priceMax=|}"
+          >Dolls</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?imagePicket=imagePickets&priceMin=&priceMax=|}"
+          >Image Pickets</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?lightStick=lightSticks&priceMin=&priceMax=|}"
+          >Light Sticks</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?package=packages&priceMin=&priceMax=|}"
+          >Packages</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?phoneCase=phoneCases&priceMin=&priceMax=|}"
+          >Phone Cases</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?photobook=photobooks&priceMin=&priceMax=|}"
+          onchange="location = this.value;"
+          >Photobooks</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?photocard=photocards&priceMin=&priceMax=|}"
+          >Photocards</a
+        >
+        <a th:href="@{|/store/1/addFilters?poster=posters&priceMin=&priceMax=|}"
+          >Posters</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?sticker=stickers&priceMin=&priceMax=|}"
+          >Stickers</a
+        >
+        <a th:href="@{|/store/1/addFilters?tag=tags&priceMin=&priceMax=|}"
+          >Tags</a
+        >
+        <a
+          th:href="@{|/store/1/addFilters?wearable=wearables&priceMin=&priceMax=|}"
+          >Wearables</a
+        >
+      </div>
+
       <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
         <input
           type="text"
