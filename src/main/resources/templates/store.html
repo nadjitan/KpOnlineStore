@@ -7,6 +7,10 @@
       display: flex;
     }
 
+    label {
+      user-select: none;
+    }
+
     .page-buttons {
       display: flex;
       gap: 10px;
@@ -24,6 +28,9 @@
       margin-left: 40px;
       width: 40%;
       background-color: antiquewhite;
+      font-size: 0.8rem;
+      height: 60vh;
+      overflow: auto;
     }
 
     #filters > h2 {
@@ -56,7 +63,7 @@
             th:checked="${AVAILABLE}"
             name="available"
             id="checkbox-available"
-            value="AVAILABLE"
+            value="available"
           />
           <label for="checkbox-available">Available</label> <br />
           <input
@@ -64,7 +71,7 @@
             th:checked="${PREORDER}"
             name="preorder"
             id="checkbox-preorder"
-            value="PREORDER"
+            value="preorder"
           />
           <label for="checkbox-preorder">Preorder</label> <br />
           <input
@@ -72,9 +79,112 @@
             th:checked="${OUTOFSTOCK}"
             name="outOfStock"
             id="checkbox-outofstock"
-            value="OUTOFSTOCK"
+            value="outOfStock"
           />
           <label for="checkbox-outofstock">Out of stock</label>
+        </section>
+        <section>
+          <div th:if="${test1}" th:text="${test1}"></div>
+          <div th:if="${test2}" th:text="${test2}"></div>
+          <h4>CATEGORY</h4>
+          <div>
+            <input
+              type="checkbox"
+              th:checked="${ALBUMS}"
+              name="album"
+              id="checkbox-albums"
+              value="albums"
+            />
+            <label for="checkbox-albums">Albums</label> <br />
+          </div>
+          <input
+            type="checkbox"
+            th:checked="${DOLLS}"
+            name="doll"
+            id="checkbox-dolls"
+            value="dolls"
+          />
+          <label for="checkbox-dolls">Dolls</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${IMAGEPICKETS}"
+            name="imagePicket"
+            id="checkbox-imagePickets"
+            value="imagePickets"
+          />
+          <label for="checkbox-imagePickets">Image Pickets</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${LIGHTSTICKS}"
+            name="lightStick"
+            id="checkbox-lightSticks"
+            value="lightSticks"
+          />
+          <label for="checkbox-lightSticks">Light Sticks</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${PACKAGES}"
+            name="package"
+            id="checkbox-packages"
+            value="packages"
+          />
+          <label for="checkbox-packages">Packages</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${PHONECASES}"
+            name="phoneCase"
+            id="checkbox-phoneCases"
+            value="phoneCases"
+          />
+          <label for="checkbox-phoneCases">Phone Cases</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${PHOTOBOOKS}"
+            name="photobook"
+            id="checkbox-photobooks"
+            value="photobooks"
+          />
+          <label for="checkbox-photobooks">Photobooks</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${PHOTOCARDS}"
+            name="photocard"
+            id="checkbox-photocards"
+            value="photocards"
+          />
+          <label for="checkbox-photocards">Photocards</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${POSTERS}"
+            name="poster"
+            id="checkbox-posters"
+            value="posters"
+          />
+          <label for="checkbox-posters">Posters</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${STICKERS}"
+            name="sticker"
+            id="checkbox-stickers"
+            value="stickers"
+          />
+          <label for="checkbox-stickers">Stickers</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${TAGS}"
+            name="tag"
+            id="checkbox-tags"
+            value="tags"
+          />
+          <label for="checkbox-tags">Tags</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${WEARABLES}"
+            name="wearable"
+            id="checkbox-wearables"
+            value="wearables"
+          />
+          <label for="checkbox-wearables">Wearables</label> <br />
         </section>
         <section>
           <h4>PRICE RANGE</h4>
@@ -99,7 +209,7 @@
         <section id="star-ratings">
           <h4>RATING</h4>
           <div>
-            <input type="checkbox" name="fiveStar" id="star-five" value="5" />
+            <input type="checkbox" name="rating" id="star-five" value="5" />
             <label for="star-five" class="btn-rating">
               <img
                 alt="star-img"
@@ -129,7 +239,7 @@
             </label>
           </div>
           <div>
-            <input type="checkbox" name="fourStar" id="star-four" value="4" />
+            <input type="checkbox" name="rating" id="star-four" value="4" />
             <label for="star-four" class="btn-rating">
               <img
                 alt="star-img"
@@ -160,7 +270,7 @@
             &nbsp; and up
           </div>
           <div>
-            <input type="checkbox" name="threeStar" id="star-three" value="3" />
+            <input type="checkbox" name="rating" id="star-three" value="3" />
             <label for="star-three" class="btn-rating">
               <img
                 alt="star-img"
@@ -191,7 +301,7 @@
             &nbsp; and up
           </div>
           <div>
-            <input type="checkbox" name="twoStar" id="star-two" value="2" />
+            <input type="checkbox" name="rating" id="star-two" value="2" />
             <label for="star-two" class="btn-rating">
               <img
                 alt="star-img"
@@ -222,7 +332,7 @@
             &nbsp; and up
           </div>
           <div>
-            <input type="checkbox" name="oneStar" id="star-one" value="1" />
+            <input type="checkbox" name="rating" id="star-one" value="1" />
             <label for="star-one" class="btn-rating">
               <img
                 alt="star-img"
@@ -264,6 +374,15 @@
       </p>
       <form th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout" class="submit" />
+      </form>
+      <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
+        <input
+          type="text"
+          name="storeSearch"
+          id="input-search"
+          placeholder="Product name or Category"
+        />
+        <button type="submit">search</button>
       </form>
 
       <div id="store">

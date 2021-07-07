@@ -37,6 +37,43 @@ public class StoreController extends CommonController{
     return new ModelAndView("store");
   }
 
+  @GetMapping("/store/{changePage}/storeSearch")
+  private String search(
+    HttpServletRequest request, Model model, 
+    @PathVariable(value ="changePage") Integer changePage,
+    @RequestParam("storeSearch") Optional<String> storeSearch) {
+    
+    List<Product> newProductList = new ArrayList<Product>();
+    List<Product> newDividedProductList = new ArrayList<Product>();
+    List<Product> productListBasedOnName = productService.getProductsContainingInName(storeSearch.get());
+    List<Product> productListBasedOnCategory = productService.getProductsContainingInCategory(storeSearch.get());
+
+    if (!storeSearch.isEmpty()) {
+      if (productListBasedOnName != null) {
+        for (Product product : productListBasedOnName) {
+          newProductList.add(product);
+        }
+      }
+      else if (productListBasedOnCategory != null) {
+        for (Product product : productListBasedOnCategory) {
+          newProductList.add(product);
+        }
+      }
+    } else {
+      for (Product product : productService.getAllProducts()) {
+        newProductList.add(product);
+      }
+    }
+
+    pagination(model, changePage, newDividedProductList, newProductList);
+
+    model.addAttribute("products", newDividedProductList);
+    createCartAndVoucher(model);
+    model.addAttribute("uri", "storeSearch?" + request.getQueryString());
+
+    return "store";
+  }
+
   @GetMapping("/store/{changePage}/addFilters")
   private String addFilters(
     HttpServletRequest request,
@@ -45,44 +82,111 @@ public class StoreController extends CommonController{
     @RequestParam("available") Optional<String> available,
     @RequestParam("preorder") Optional<String> preorder,
     @RequestParam("outOfStock") Optional<String> outOfStock,
+    @RequestParam("album") Optional<String> albums,
+    @RequestParam("doll") Optional<String> dolls,
+    @RequestParam("imagePicket") Optional<String> imagePickets,
+    @RequestParam("lightStick") Optional<String> lightSticks,
+    @RequestParam("package") Optional<String> packages,
+    @RequestParam("phoneCase") Optional<String> phoneCases,
+    @RequestParam("photobook") Optional<String> photobooks,
+    @RequestParam("photocard") Optional<String> photocards,
+    @RequestParam("poster") Optional<String> posters,
+    @RequestParam("sticker") Optional<String> stickers,
+    @RequestParam("tag") Optional<String> tags,
+    @RequestParam("wearable") Optional<String> wearables,
     @RequestParam("priceMin") Optional<Integer> priceMin,
     @RequestParam("priceMax") Optional<Integer> priceMax,
-    @RequestParam("fiveStar") Optional<Integer> fiveStar,
-    @RequestParam("fourStar") Optional<Integer> fourStar,
-    @RequestParam("threeStar") Optional<Integer> threeStar,
-    @RequestParam("twoStar") Optional<Integer> twoStar,
-    @RequestParam("oneStar") Optional<Integer> oneStar)  {
+    @RequestParam("rating") Optional<Integer> rating)  {
     
     List<Product> newProductList = new ArrayList<Product>();
+
+    boolean isStatusListEmpty = true;
     List<Optional<String>> statusList = new ArrayList<Optional<String>>();
     statusList.add(available);
     statusList.add(preorder);
     statusList.add(outOfStock);
 
-    List<Optional<Integer>> ratingList = new ArrayList<Optional<Integer>>();
-    ratingList.add(fiveStar);
-    ratingList.add(fourStar);
-    ratingList.add(threeStar);
-    ratingList.add(twoStar);
-    ratingList.add(oneStar);
+    boolean isCategoryListEmpty = true;
+    List<Optional<String>> categoryList = new ArrayList<Optional<String>>();
+    categoryList.add(albums);
+    categoryList.add(dolls);
+    categoryList.add(imagePickets);
+    categoryList.add(lightSticks);
+    categoryList.add(packages);
+    categoryList.add(phoneCases);
+    categoryList.add(photobooks);
+    categoryList.add(photocards);
+    categoryList.add(posters);
+    categoryList.add(stickers);
+    categoryList.add(tags);
+    categoryList.add(wearables);
 
-    // Check if user picked a product status
     for (Optional<String> status : statusList) {
       if (status.isPresent()) {
-        for (Product product : productService.getProductsByStatus(status.get())) {
-          getProductsByPrice(model, newProductList, product, priceMin, 
-                                  priceMax, ratingList);
-        }
-
-        model.addAttribute(status.get(), "checked");
+        isStatusListEmpty = false;
+        break;
+      }
+    }
+    for (Optional<String> category : categoryList) {
+      if (category.isPresent()) {
+        isCategoryListEmpty = false;
+        break;
       }
     }
 
-    // When user did not pick any product status
-    if (!available.isPresent() && !preorder.isPresent() && !outOfStock.isPresent()) {
+    if (!isStatusListEmpty && isCategoryListEmpty) {
+      for (Optional<String> status : statusList) {
+        if (status.isPresent()) {
+          for (Product product : productService.getProductsByStatus(status.get())) {
+            getProductsByPrice(model, newProductList, product, priceMin, 
+                                    priceMax, rating);
+          }
+          model.addAttribute(status.get().toUpperCase(), "checked");
+        }
+      }
+    } 
+    if (isStatusListEmpty && !isCategoryListEmpty) {
+      for (Optional<String> category : categoryList) {
+        if (category.isPresent()) {
+          for (Product product : productService.getProductsByCategory(category.get())) {
+            getProductsByPrice(model, newProductList, product, priceMin, 
+                                    priceMax, rating);
+          }
+          model.addAttribute(category.get().toUpperCase(), "checked");
+        }
+      }
+    }
+    if (!isStatusListEmpty && !isCategoryListEmpty) {
+      List<Product> productsBasedStatus = new ArrayList<Product>();
+
+      for (Optional<String> status : statusList) {
+        if (status.isPresent()) {
+          for (Product product : productService.getProductsByStatus(status.get())) {
+            productsBasedStatus.add(product);
+          }
+          model.addAttribute(status.get().toUpperCase(), "checked");
+        }
+      }
+      for (Optional<String> category : categoryList) {
+        if (category.isPresent()) {
+          for (Product product : productsBasedStatus) {
+            if (product.getCategory().equals(category.get())) {
+              getProductsByPrice(model, newProductList, product, priceMin, 
+                                        priceMax, rating);
+            }
+          }
+
+          model.addAttribute(category.get().toUpperCase(), "checked");
+        }
+      }
+    }
+
+    // When user did not pick any product status or category
+    if (isStatusListEmpty && isCategoryListEmpty) {
+          
       for (Product product : productService.getAllProducts()) {
         getProductsByPrice(model, newProductList, product, priceMin, 
-                                priceMax, ratingList);
+                                    priceMax, rating);
       }
     }
 
@@ -99,20 +203,11 @@ public class StoreController extends CommonController{
     Model model,
     List<Product> newProductList, Product productToAdd,
     Optional<Integer> priceMin, Optional<Integer> priceMax,
-    List<Optional<Integer>> ratingList) {
-    
-    boolean isThereRatings = false;
-
-    for (Optional<Integer> rating : ratingList) {
-      if (rating.isPresent()) {
-        isThereRatings = true;
-        break;
-      }
-    }
+    Optional<Integer> rating) {
 
     if(!priceMin.isPresent() && !priceMax.isPresent()) {
-      if (isThereRatings) {
-        getProductsByRating(model, ratingList, newProductList, productToAdd);
+      if (rating.isPresent()) {
+        getProductsByRating(model, rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -120,8 +215,8 @@ public class StoreController extends CommonController{
     }  
     else if(priceMin.isPresent() && !priceMax.isPresent() && 
             productToAdd.getPrice() >= priceMin.get()) {
-      if (isThereRatings) {
-        getProductsByRating(model, ratingList, newProductList, productToAdd);
+      if (rating.isPresent()) {
+        getProductsByRating(model, rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -131,8 +226,8 @@ public class StoreController extends CommonController{
     }
     else if(!priceMin.isPresent() && priceMax.isPresent() && 
             productToAdd.getPrice() <= priceMax.get()) {
-      if (isThereRatings) {
-        getProductsByRating(model, ratingList, newProductList, productToAdd);
+      if (rating.isPresent()) {
+        getProductsByRating(model, rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -142,8 +237,8 @@ public class StoreController extends CommonController{
     }
     else if(priceMin.isPresent() && priceMax.isPresent() && 
             productToAdd.getPrice() >= priceMin.get() && productToAdd.getPrice() <= priceMax.get()) {
-      if (isThereRatings) {
-        getProductsByRating(model, ratingList, newProductList, productToAdd);
+      if (rating.isPresent()) {
+        getProductsByRating(model, rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -156,16 +251,14 @@ public class StoreController extends CommonController{
 
   private void getProductsByRating(
     Model model,
-    List<Optional<Integer>> ratingList, 
+    Optional<Integer> rating, 
     List<Product> newProductList, Product productToAdd) {
 
-    for (Optional<Integer> rating : ratingList) {
-      if (rating.isPresent() && rating.get() == 5 && productToAdd.getRating() >= rating.get()) {
-        newProductList.add(productToAdd);
-      }
-      else if (rating.isPresent() && productToAdd.getRating() >= rating.get()) {
-        newProductList.add(productToAdd);
-      }
+    if (rating.isPresent() && rating.get() == 5 && productToAdd.getRating() == rating.get()) {
+      newProductList.add(productToAdd);
+    }
+    else if (rating.isPresent() && productToAdd.getRating() >= rating.get()) {
+      newProductList.add(productToAdd);
     }
   }
 

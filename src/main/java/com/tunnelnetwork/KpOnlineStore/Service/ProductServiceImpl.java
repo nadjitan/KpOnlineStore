@@ -53,4 +53,19 @@ public class ProductServiceImpl implements ProductService {
   public List<Product> getProductsByStatus(String status) {
     return productRepository.findDistinctProductByStatus(status);
   }
+
+  @Override
+  public List<Product> getProductsContainingInName(String productName) {
+    return productRepository.findByProductNameContainingIgnoreCase(productName);
+  }
+
+  @Override
+  public List<Product> getProductsContainingInCategory(String category) {
+    return productRepository.findByCategoryContainingIgnoreCase(category);
+  }
+
+  @Override
+  public List<Product> getProductsByCategory(String category) {
+    return productRepository.findDistinctProductByCategory(category);
+  }
 }

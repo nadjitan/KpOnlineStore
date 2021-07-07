@@ -19,6 +19,12 @@ public interface ProductService {
 
     List<Product> getProductsByStatus(@NotNull(message = "The status cannot be null.") @Valid String status);
 
+    List<Product> getProductsByCategory(@NotNull(message = "The category cannot be null.") @Valid String category);
+
+    List<Product> getProductsContainingInName(@NotNull(message = "The name cannot be null.") @Valid String productName);
+
+    List<Product> getProductsContainingInCategory(@NotNull(message = "The category cannot be null.") @Valid String category);
+
     Product save(@NotNull(message = "The product cannot be null.") @Valid Product product);
 
     Integer size();
