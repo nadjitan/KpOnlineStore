@@ -88,4 +88,10 @@ public class CommonController {
 
     return true;
   }
+
+  protected boolean hasRole (String roleName)
+  {
+    return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+            .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(roleName));
+  }
 }

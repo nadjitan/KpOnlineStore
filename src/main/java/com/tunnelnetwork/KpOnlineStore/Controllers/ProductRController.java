@@ -17,12 +17,12 @@ public class ProductRController {
   private ProductService productService;
 
   @GetMapping("/list")
-  public Iterable<Product> list() {
+  private Iterable<Product> list() {
     return productService.getAllProducts();
   }
 
   @GetMapping("/{id}")
-  public Product findProduct(@PathVariable("id") long id) {
+  private Product findProduct(@PathVariable("id") long id) {
     return productService.getProduct(id);
   }
 }

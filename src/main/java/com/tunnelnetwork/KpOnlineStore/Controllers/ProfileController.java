@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProfileController extends CommonController{
 
   @GetMapping("/profile")
-  public String profilePage(Model model) {
+  private String profilePage(Model model) {
 
-    
     if (!isThereLoggedInUser()) {
       return "redirect:/";
     }

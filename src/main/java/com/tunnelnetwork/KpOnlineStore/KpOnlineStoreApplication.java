@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,16 +20,40 @@ import com.tunnelnetwork.KpOnlineStore.Models.Product;
 import com.tunnelnetwork.KpOnlineStore.Service.CommentService;
 import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
 
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @SpringBootApplication
 public class KpOnlineStoreApplication {
 
+	@Autowired
+  private InMemoryUserDetailsManager inMemoryUserDetailsManager;
+
+	public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
 	public static void main(String[] args) {
 		SpringApplication.run(KpOnlineStoreApplication.class, args);
+		
+	}
+
+	public void createAdmin() {
+		try {
+			inMemoryUserDetailsManager.createUser(User.withUsername("admin").password(passwordEncoder().encode("admin")).authorities("ADMIN").build());
+
+			System.out.println("Admin saved!");
+		} catch (Exception e) {
+			System.out.println("Admin not created:" + e.getMessage());
+		}
 	}
 
 	@Bean
 	CommandLineRunner runner(ProductService productService, CommentService commentService) {
+		createAdmin();
+		
 		return args -> {
 			// Read json and write to db
 			ObjectMapper mapper = new ObjectMapper();

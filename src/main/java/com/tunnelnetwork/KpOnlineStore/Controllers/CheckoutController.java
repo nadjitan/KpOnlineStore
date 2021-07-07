@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
-  public String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
+  private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
     if (!isThereLoggedInUser() && cartService.getCartOfUser() == null) {
       return "redirect:/";
     }
@@ -41,7 +41,13 @@ public class CheckoutController extends CommonController {
   }
 
   @RequestMapping(value="/checkout", method=RequestMethod.POST)
-  public ModelAndView goCheckout() {
+  private ModelAndView goCheckout() {
+    if (!isThereLoggedInUser() || 
+        cartService.getCartOfUser() == null || 
+        cartService.getCartOfUser().getCartProducts().isEmpty()) {
+      return new ModelAndView("redirect:/");
+    }
+
     Cart cart = cartService.getCartOfUser();
     Receipt receipt = new Receipt();
 
@@ -76,5 +82,4 @@ public class CheckoutController extends CommonController {
     
     return new ModelAndView("redirect:/profile");
   }
-  
 }

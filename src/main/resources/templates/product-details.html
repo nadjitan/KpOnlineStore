@@ -103,6 +103,10 @@
             </button>
           </form>
         </div>
+
+        <p th:if="${!didUserBuyProduct}">
+          Buy the product first before rating.
+        </p>
       </div>
 
       <form th:action="@{/addProduct}" method="post">
@@ -135,7 +139,10 @@
         </div>
       </div>
 
-      <form th:action="@{/comment}" method="post">
+      <div th:if="${!didUserBuyProduct}">
+        Buy the product to make a comment.
+      </div>
+      <form th:action="@{/comment}" method="post" th:if="${didUserBuyProduct}">
         <section>
           <h4>MAKE A COMMENT</h4>
           <textarea
