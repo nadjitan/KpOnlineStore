@@ -178,20 +178,20 @@
           <label for="checkbox-stickers">Stickers</label> <br />
           <input
             type="checkbox"
-            th:checked="${TAGS}"
-            name="tag"
-            id="checkbox-tags"
-            value="tags"
+            th:checked="${KEYRINGS}"
+            name="keyRing"
+            id="checkbox-keyRings"
+            value="keyRings"
           />
-          <label for="checkbox-tags">Tags</label> <br />
+          <label for="checkbox-keyRings">Key Rings</label> <br />
           <input
             type="checkbox"
-            th:checked="${WEARABLES}"
-            name="wearable"
-            id="checkbox-wearables"
-            value="wearables"
+            th:checked="${APPAREL}"
+            name="apparel"
+            id="checkbox-apparels"
+            value="apparels"
           />
-          <label for="checkbox-wearables">Wearables</label> <br />
+          <label for="checkbox-apparels">Apparel</label> <br />
         </section>
         <section>
           <h4>PRICE RANGE</h4>
@@ -422,12 +422,12 @@
           th:href="@{|/store/1/addFilters?sticker=stickers&priceMin=&priceMax=|}"
           >Stickers</a
         >
-        <a th:href="@{|/store/1/addFilters?tag=tags&priceMin=&priceMax=|}"
-          >Tags</a
+        <a th:href="@{|/store/1/addFilters?keyRing=KeyRings&priceMin=&priceMax=|}"
+          >Key Rings</a
         >
         <a
-          th:href="@{|/store/1/addFilters?wearable=wearables&priceMin=&priceMax=|}"
-          >Wearables</a
+          th:href="@{|/store/1/addFilters?apparel=apparels&priceMin=&priceMax=|}"
+          >Apparels</a
         >
       </div>
 

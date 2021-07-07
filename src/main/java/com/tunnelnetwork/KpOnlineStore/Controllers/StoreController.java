@@ -92,8 +92,8 @@ public class StoreController extends CommonController{
     @RequestParam("photocard") Optional<String> photocards,
     @RequestParam("poster") Optional<String> posters,
     @RequestParam("sticker") Optional<String> stickers,
-    @RequestParam("tag") Optional<String> tags,
-    @RequestParam("wearable") Optional<String> wearables,
+    @RequestParam("keyRing") Optional<String> keyRings,
+    @RequestParam("apparel") Optional<String> apparels,
     @RequestParam("priceMin") Optional<Integer> priceMin,
     @RequestParam("priceMax") Optional<Integer> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
@@ -118,8 +118,8 @@ public class StoreController extends CommonController{
     categoryList.add(photocards);
     categoryList.add(posters);
     categoryList.add(stickers);
-    categoryList.add(tags);
-    categoryList.add(wearables);
+    categoryList.add(keyRings);
+    categoryList.add(apparels);
 
     for (Optional<String> status : statusList) {
       if (status.isPresent()) {
@@ -134,6 +134,7 @@ public class StoreController extends CommonController{
       }
     }
 
+    // If user picked a status but no category
     if (!isStatusListEmpty && isCategoryListEmpty) {
       for (Optional<String> status : statusList) {
         if (status.isPresent()) {
@@ -145,6 +146,7 @@ public class StoreController extends CommonController{
         }
       }
     } 
+    // If user picked a category but no status
     if (isStatusListEmpty && !isCategoryListEmpty) {
       for (Optional<String> category : categoryList) {
         if (category.isPresent()) {
@@ -156,6 +158,7 @@ public class StoreController extends CommonController{
         }
       }
     }
+    // If user picked a category and status
     if (!isStatusListEmpty && !isCategoryListEmpty) {
       List<Product> productsBasedStatus = new ArrayList<Product>();
 
