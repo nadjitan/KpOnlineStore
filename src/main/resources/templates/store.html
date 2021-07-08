@@ -91,6 +91,17 @@
           <label for="checkbox-outofstock">Out of stock</label>
         </section>
         <section>
+          <h4>RECOMMENDATION</h4>
+          <input
+            type="checkbox"
+            th:checked="${BESTSELLER}"
+            name="bestSeller"
+            id="checkbox-bestSeller"
+            value="bestSeller"
+          />
+          <label for="checkbox-bestSeller">Best Seller</label> <br />
+        </section>
+        <section>
           <div th:if="${test1}" th:text="${test1}"></div>
           <div th:if="${test2}" th:text="${test2}"></div>
           <h4>CATEGORY</h4>
@@ -186,7 +197,7 @@
           <label for="checkbox-keyRings">Key Rings</label> <br />
           <input
             type="checkbox"
-            th:checked="${APPAREL}"
+            th:checked="${APPARELS}"
             name="apparel"
             id="checkbox-apparels"
             value="apparels"
@@ -422,7 +433,8 @@
           th:href="@{|/store/1/addFilters?sticker=stickers&priceMin=&priceMax=|}"
           >Stickers</a
         >
-        <a th:href="@{|/store/1/addFilters?keyRing=KeyRings&priceMin=&priceMax=|}"
+        <a
+          th:href="@{|/store/1/addFilters?keyRing=KeyRings&priceMin=&priceMax=|}"
           >Key Rings</a
         >
         <a

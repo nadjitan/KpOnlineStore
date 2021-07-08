@@ -1,8 +1,10 @@
 package com.tunnelnetwork.KpOnlineStore.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.ProductRepository;
+import com.tunnelnetwork.KpOnlineStore.DAO.SoldProductsSorter;
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 
@@ -67,5 +69,22 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public List<Product> getProductsByCategory(String category) {
     return productRepository.findDistinctProductByCategory(category);
+  }
+
+  @Override
+  public List<Product> getProductsByBestSeller(List<Product> listToSort) {
+    listToSort.sort(new SoldProductsSorter());
+    
+    List<Product> bestSellers = new ArrayList<Product>();
+
+    for (int i = 0; i < 10; i++) {
+      try {
+        bestSellers.add(listToSort.get(i));
+      } catch (Exception e) {
+        break;
+      }
+    }
+    
+    return bestSellers;
   }
 }

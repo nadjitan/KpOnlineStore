@@ -21,6 +21,8 @@ public interface ProductService {
 
     List<Product> getProductsByCategory(@NotNull(message = "The category cannot be null.") @Valid String category);
 
+    List<Product> getProductsByBestSeller(@NotNull(message = "The product list cannot be null.") @Valid List<Product> listToSort);
+
     List<Product> getProductsContainingInName(@NotNull(message = "The name cannot be null.") @Valid String productName);
 
     List<Product> getProductsContainingInCategory(@NotNull(message = "The category cannot be null.") @Valid String category);
