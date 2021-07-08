@@ -56,6 +56,11 @@ public class CheckoutController extends CommonController {
 
     for (Product product : cartProductList) {
       receiptProductList.add(product);
+
+      Product productFromDB = productService.getProduct(product.getId());
+      productFromDB.setNumberOfSold(productFromDB.getNumberOfSold() + product.getQuantity());
+
+      productService.save(productFromDB);
     }
     
     receipt.setCreatedAt(LocalDateTime.now());

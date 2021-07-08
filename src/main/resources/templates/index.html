@@ -2,6 +2,25 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
 
+  <style>
+    #container-best-sellers {
+      display: grid;
+      column-gap: 1rem;
+      row-gap: 1rem;
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: repeat(5, 1fr);
+      width: 50%;
+      height: 100px;
+    }
+
+    .product-best-seller > a {
+      display: grid;
+      place-items: center;
+      background-color: burlywood;
+      font-size: 0.8rem;
+    }
+  </style>
+
   <body>
     <div id="home">
       <p>
@@ -19,6 +38,18 @@
       <button>
         <a th:href="@{/store/1}" style="margin-top: 20px">GO TO STORE</a>
       </button>
+
+      <h3>BEST SELLERS</h3>
+      <div id="container-best-sellers">
+        <div th:if="${bestSellers.empty}">No products available</div>
+        <div class="product-best-seller" th:each="product : ${bestSellers}">
+          <a th:href="@{|/product/${product.id}|}">
+            <h3 class="product-name" th:text="${product.productName}"></h3>
+            <p class="product-category" th:text="${product.category}"></p>
+            <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+          </a>
+        </div>
+      </div>
     </div>
 
     <footer th:replace="../fragments/footer"></footer>
