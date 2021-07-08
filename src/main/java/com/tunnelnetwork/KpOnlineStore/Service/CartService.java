@@ -16,11 +16,17 @@ public interface CartService {
 
     Cart getCart(@Min(value = 1L, message = "Invalid product ID.") long id);
 
-    Cart save(Cart cart);
+    Cart save(@NotNull(message = "The cart cannot be null.") @Valid Cart cart);
 
     boolean isProductInCart(long id);
 
     Cart getCartOfUser();
 
-    Cart addToCart(@NotNull(message = "The product cannot be null.") @Valid Product product);
+    Cart addToCart(@NotNull(message = "The product cannot be null.") @Valid Product product, @Valid Integer productQuantity);
+
+    void removeProduct(@Min(value = 1L, message = "The id cannot be null.") long id);
+
+    void removeProducts(@NotNull(message = "The username cannot be null.") @Valid String username);
+
+    void removeVouchers(@NotNull(message = "The username cannot be null.") @Valid String username);
 }

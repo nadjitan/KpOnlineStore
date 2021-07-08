@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
 
 public class CommentDeserializer extends JsonDeserializer<List<Comment>> {
-
+  
   @Override
   public List<Comment> deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
       final ObjectCodec objectCodec = p.getCodec();
@@ -27,8 +27,6 @@ public class CommentDeserializer extends JsonDeserializer<List<Comment>> {
       } else {
         result.add(objectCodec.treeToValue(listOrObjectNode, Comment.class));
       }
-
-      // System.out.println(result);
 
       return result;
   }

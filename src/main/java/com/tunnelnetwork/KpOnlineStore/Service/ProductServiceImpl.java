@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
   private ProductRepository productRepository;
 
   @Override
-  public Iterable<Product> getAllProducts() {
+  public List<Product> getAllProducts() {
     return productRepository.findAll();
   }
 
@@ -30,7 +30,42 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  public Product save(Product product) {
+    return productRepository.saveAndFlush(product);
+  }
+
+  @Override
   public List<Product> save(List<Product> product) {
-    return productRepository.saveAll(product);
+    return productRepository.saveAllAndFlush(product);
+  }
+
+  @Override
+  public Integer size() {
+    return productRepository.findAll().size();
+  }
+
+  @Override
+  public void delete(Product product) {
+    productRepository.delete(product);
+  }
+
+  @Override
+  public List<Product> getProductsByStatus(String status) {
+    return productRepository.findDistinctProductByStatus(status);
+  }
+
+  @Override
+  public List<Product> getProductsContainingInName(String productName) {
+    return productRepository.findByProductNameContainingIgnoreCase(productName);
+  }
+
+  @Override
+  public List<Product> getProductsContainingInCategory(String category) {
+    return productRepository.findByCategoryContainingIgnoreCase(category);
+  }
+
+  @Override
+  public List<Product> getProductsByCategory(String category) {
+    return productRepository.findDistinctProductByCategory(category);
   }
 }

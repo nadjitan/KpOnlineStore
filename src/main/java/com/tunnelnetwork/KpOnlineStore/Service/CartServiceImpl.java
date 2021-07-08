@@ -7,6 +7,7 @@ import com.tunnelnetwork.KpOnlineStore.DAO.CartRepository;
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
+import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -51,9 +52,10 @@ public class CartServiceImpl implements CartService {
   }
 
   @Override
-  public Cart addToCart(Product product) {
+  public Cart addToCart(Product product, Integer productQuantity) {
     Cart cart = getCartOfUser();
     List<Product> currProducts = new ArrayList<Product>();
+    product.setQuantity(productQuantity);
     
     if (cart.getCartProducts() == null) {
       currProducts.add(product);
@@ -81,5 +83,39 @@ public class CartServiceImpl implements CartService {
     }
 
     return false;
+  }
+
+  @Override
+  public void removeProduct(long id) {
+    Cart cart = getCartOfUser();
+
+    for (Product cartProduct : cart.getCartProducts()) {
+      if (cartProduct.getId() == id) {
+        cart.getCartProducts().remove(cartProduct);
+        cartRepository.saveAndFlush(cart);
+
+        break;
+      }
+    }
+  }
+  
+  @Override
+  public void removeProducts(String username) {
+    Cart cart = getCartOfUser();
+    List<Product> productList = new ArrayList<Product>();
+
+    cart.setCartProducts(productList);
+
+    cartRepository.saveAndFlush(cart);
+  }
+
+  @Override
+  public void removeVouchers(String username) {
+    Cart cart = getCartOfUser();
+    List<Voucher> voucherList = new ArrayList<Voucher>();
+
+    cart.setVouchers(voucherList);
+
+    cartRepository.saveAndFlush(cart);
   }
 }

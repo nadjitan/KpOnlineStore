@@ -18,6 +18,15 @@ body,
   place-items: center;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  cursor: pointer;
+}
+
 #home {
   width: 100%;
 }
@@ -26,13 +35,23 @@ body,
 #home > #cart {
   display: flex;
   width: 70%;
+  overflow: auto;
 }
 
 #store > .product,
 #cart > .product {
   display: grid;
   place-items: center;
+  cursor: pointer;
   width: 200px;
+  margin: 0px 2px;
+  border: 0.8px solid black;
+}
+
+#voucher {
+  display: grid;
+  place-items: center;
+  background-color: cadetblue;
 }
 
 #store > .product {

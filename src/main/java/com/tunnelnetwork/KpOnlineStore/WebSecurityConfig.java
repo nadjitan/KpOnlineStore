@@ -28,7 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
   // @Override
   // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
   //     auth.inMemoryAuthentication()
-  //             .withUser("admin").password(passwordEncoder().encode("adminadmin")).roles("USER", "ADMIN");
+  //       .withUser("admin").password(passwordEncoder().encode("admin")).authorities("ADMIN").and()
+  //       .withUser("test").password(passwordEncoder().encode("123")).authorities("USER");         
   // }
 
   @Override
@@ -36,13 +37,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     http
       .authorizeRequests()
         .antMatchers(
+          "/crud/**",
+          "/contact-us/**",
+          "/about-us/**",
+          "/store/**",
+          "/profile/**",
           "/cart/**",
+          "/checkout/**",
           "/products/**",
           "/js/**",
           "/css/**",
           "/img/**").permitAll()
         .antMatchers(HttpMethod.POST, "/signup").permitAll()
         .antMatchers(HttpMethod.POST, "/addproduct").permitAll()
+        .antMatchers(HttpMethod.POST, "/removeProduct").permitAll()
         .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .anyRequest().authenticated()
         .and()

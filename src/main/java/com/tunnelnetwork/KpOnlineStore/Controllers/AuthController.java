@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AuthController {
 
-  public PasswordEncoder passwordEncoder() {
+  private PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
@@ -27,7 +27,7 @@ public class AuthController {
 
   // Make sure /login & /signup are only accessed by users without accounts
   @GetMapping("/login")
-  public String showLoginPage() {
+  private String showLoginPage() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
@@ -48,7 +48,7 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password, RedirectAttributes ra) {
+  private ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password, RedirectAttributes ra) {
 
     // When user fails to fill up form
     if (username == "" || password == "") {
@@ -58,7 +58,7 @@ public class AuthController {
 
     // Create user and catch on creation failure
     try {
-      inMemoryUserDetailsManager.createUser(User.withUsername(username).password(passwordEncoder().encode(password)).roles("USER").build());
+      inMemoryUserDetailsManager.createUser(User.withUsername(username).password(passwordEncoder().encode(password)).authorities("USER").build());
     } catch (Exception e) {
       ra.addFlashAttribute("userNotCreated", "Invalid inputs or user is already created. Please try again.");
       return new ModelAndView("redirect:/signup");
