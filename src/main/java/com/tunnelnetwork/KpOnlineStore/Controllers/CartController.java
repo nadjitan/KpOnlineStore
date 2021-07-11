@@ -14,11 +14,11 @@ public class CartController extends CommonController{
 
   @GetMapping("/cart/home")
   private String cartHomePage(Model model) {
-    if (!isThereLoggedInUser() || cartService.getCartOfUser() == null) {
+    if (!isThereLoggedInUser() || cartRepository.getCartOfUser() == null) {
       return "redirect:/";
     }
 
-    model.addAttribute("cart", cartService.getCartOfUser());
+    model.addAttribute("cart", cartRepository.getCartOfUser());
 
     return "cart";
   }
@@ -27,8 +27,8 @@ public class CartController extends CommonController{
   @RequestMapping(value = "/addProduct", method=RequestMethod.POST)
   @ResponseBody
   private ModelAndView addProduct(@RequestParam("productId") long id, @RequestParam("productQuantity") Integer productQuantity) {
-    if (!cartService.isProductInCart(id)) {
-      cartService.addToCart(productService.getProduct(id), productQuantity);
+    if (!cartRepository.isProductInCart(id)) {
+      cartRepository.addToCart(productRepository.getProduct(id), productQuantity);
     }
 
     return new ModelAndView("redirect:/store/1");
@@ -36,8 +36,8 @@ public class CartController extends CommonController{
   @RequestMapping(value="/removeProduct", method=RequestMethod.POST)
   @ResponseBody
   private ModelAndView removeProduct(@RequestParam("productId") long id){
-    if (cartService.isProductInCart(id)) {
-      cartService.removeProduct(id);
+    if (cartRepository.isProductInCart(id)) {
+      cartRepository.removeProduct(id);
     }
 
     return new ModelAndView("redirect:/cart/home");

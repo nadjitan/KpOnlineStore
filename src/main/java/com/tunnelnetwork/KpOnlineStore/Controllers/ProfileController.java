@@ -19,7 +19,7 @@ public class ProfileController extends CommonController{
     }
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    Iterable<Receipt> receiptOfUser = receiptService.getReceiptsByName(authentication.getName());
+    Iterable<Receipt> receiptOfUser = receiptRepository.getReceiptsByName(authentication.getName());
 
     model.addAttribute("receiptList", receiptOfUser);
     

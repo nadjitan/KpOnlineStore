@@ -26,7 +26,7 @@ public class StoreController extends CommonController{
     Model model) {
 
     List<Product> newProductList = new ArrayList<Product>();
-    List<Product> oldProductList = productService.getAllProducts();
+    List<Product> oldProductList = productRepository.getAllProducts();
     
     pagination(model, changePage, newProductList, oldProductList);
 
@@ -45,8 +45,8 @@ public class StoreController extends CommonController{
     
     List<Product> newProductList = new ArrayList<Product>();
     List<Product> newDividedProductList = new ArrayList<Product>();
-    List<Product> productListBasedOnName = productService.getProductsContainingInName(storeSearch.get());
-    List<Product> productListBasedOnCategory = productService.getProductsContainingInCategory(storeSearch.get());
+    List<Product> productListBasedOnName = productRepository.getProductsContainingInName(storeSearch.get());
+    List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
 
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
@@ -60,7 +60,7 @@ public class StoreController extends CommonController{
         }
       }
     } else {
-      for (Product product : productService.getAllProducts()) {
+      for (Product product : productRepository.getAllProducts()) {
         newProductList.add(product);
       }
     }
@@ -140,15 +140,15 @@ public class StoreController extends CommonController{
       for (Optional<String> status : statusList) {
         if (status.isPresent()) {
           if (bestSeller.isPresent()) {
-            for (Product product : productService.getProductsByBestSeller(
-                                   productService.getProductsByStatus(status.get()))) {
+            for (Product product : productRepository.getProductsByBestSeller(
+                                   productRepository.getProductsByStatus(status.get()))) {
               getProductsByPrice(model, newProductList, product, priceMin, 
                                       priceMax, rating);
             } 
 
             model.addAttribute(bestSeller.get().toUpperCase(), "checked");
           } else {
-            for (Product product : productService.getProductsByStatus(status.get())) {
+            for (Product product : productRepository.getProductsByStatus(status.get())) {
               getProductsByPrice(model, newProductList, product, priceMin, 
                                       priceMax, rating);
             }
@@ -163,15 +163,15 @@ public class StoreController extends CommonController{
       for (Optional<String> category : categoryList) {
         if (category.isPresent()) {
           if (bestSeller.isPresent()) {
-            for (Product product : productService.getProductsByBestSeller(
-                                   productService.getProductsByCategory(category.get()))) {
+            for (Product product : productRepository.getProductsByBestSeller(
+                                   productRepository.getProductsByCategory(category.get()))) {
               getProductsByPrice(model, newProductList, product, priceMin, 
                                       priceMax, rating);
             }
 
             model.addAttribute(bestSeller.get().toUpperCase(), "checked");
           } else {
-            for (Product product : productService.getProductsByCategory(category.get())) {
+            for (Product product : productRepository.getProductsByCategory(category.get())) {
               getProductsByPrice(model, newProductList, product, priceMin, 
                                       priceMax, rating);
             }
@@ -188,14 +188,14 @@ public class StoreController extends CommonController{
       for (Optional<String> status : statusList) {
         if (status.isPresent()) {
           if (bestSeller.isPresent()) {
-            for (Product product : productService.getProductsByBestSeller(
-                                   productService.getProductsByStatus(status.get()))){
+            for (Product product : productRepository.getProductsByBestSeller(
+                                   productRepository.getProductsByStatus(status.get()))){
               productsBasedStatus.add(product);
             }
 
             model.addAttribute(bestSeller.get().toUpperCase(), "checked");
           } else {
-            for (Product product : productService.getProductsByStatus(status.get())) {
+            for (Product product : productRepository.getProductsByStatus(status.get())) {
               productsBasedStatus.add(product);
             }
           }
@@ -220,14 +220,14 @@ public class StoreController extends CommonController{
     // When user did not pick any product status and category
     if (isStatusListEmpty && isCategoryListEmpty) {
         if (bestSeller.isPresent()) {
-          for (Product product : productService.getProductsByBestSeller(productService.getAllProducts())) {
+          for (Product product : productRepository.getProductsByBestSeller(productRepository.getAllProducts())) {
             getProductsByPrice(model, newProductList, product, priceMin, 
                                         priceMax, rating);
           }
 
           model.addAttribute(bestSeller.get().toUpperCase(), "checked");
         } else {
-          for (Product product : productService.getAllProducts()) {
+          for (Product product : productRepository.getAllProducts()) {
             getProductsByPrice(model, newProductList, product, priceMin, 
                                         priceMax, rating);
           }

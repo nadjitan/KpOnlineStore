@@ -23,7 +23,7 @@ public class CrudController extends CommonController{
       return "redirect:/";
     }
     
-    Iterable<Product> products = productService.getAllProducts();
+    Iterable<Product> products = productRepository.getAllProducts();
 
     model.addAttribute("products", products);
      
@@ -44,7 +44,7 @@ public class CrudController extends CommonController{
     product.setCreatedAt(LocalDateTime.now());
     product.setUpdatedAt(LocalDateTime.now());
     
-    productService.save(product);
+    productRepository.saveAndFlush(product);
 
     ra.addFlashAttribute("crudStatus", "Product \"" + product.getProductName() + "\" have been successfully created!");
      
@@ -66,10 +66,10 @@ public class CrudController extends CommonController{
     //   return result.getAllErrors().toString();
     // }
 
-    product.setCreatedAt(productService.getProduct(id).getCreatedAt());
+    product.setCreatedAt(productRepository.getProduct(id).getCreatedAt());
     product.setUpdatedAt(LocalDateTime.now());
     
-    productService.save(product);
+    productRepository.saveAndFlush(product);
 
     ra.addFlashAttribute("crudStatus", "Product \"" + product.getProductName() + "\" was successfully updated!");
      
@@ -88,7 +88,7 @@ public class CrudController extends CommonController{
     
     ra.addFlashAttribute("crudStatus", "Product is now deleted.");
 
-    productService.delete(product);
+    productRepository.delete(product);
 
     return "redirect:/crud";
   }

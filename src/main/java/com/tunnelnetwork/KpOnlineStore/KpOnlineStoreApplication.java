@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import com.tunnelnetwork.KpOnlineStore.DAO.CommentRepository;
+import com.tunnelnetwork.KpOnlineStore.DAO.ProductRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
-import com.tunnelnetwork.KpOnlineStore.Service.CommentService;
-import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,7 +51,7 @@ public class KpOnlineStoreApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(ProductService productService, CommentService commentService) {
+	CommandLineRunner runner(ProductRepository productRepository, CommentRepository commentRepository){
 		createAdmin();
 		
 		return args -> {
@@ -69,7 +69,7 @@ public class KpOnlineStoreApplication {
 			try {
 				List<Product> products = mapper.readValue(inputStream,typeReference);
 
-				productService.save(products);
+				productRepository.save(products);
 
 				System.out.println("Products Saved!");
 			} catch (IOException e){

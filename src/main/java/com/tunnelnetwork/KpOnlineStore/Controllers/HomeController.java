@@ -17,7 +17,7 @@ public class HomeController extends CommonController{
       model.addAttribute("crud", false);
     }
     
-    model.addAttribute("bestSellers", productService.getProductsByBestSeller(productService.getAllProducts()));
+    model.addAttribute("bestSellers", productRepository.getProductsByBestSeller(productRepository.getAllProducts()));
 
     return "index";
   }
