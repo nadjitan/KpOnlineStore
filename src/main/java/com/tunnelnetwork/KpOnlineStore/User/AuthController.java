@@ -78,7 +78,7 @@ public class AuthController {
   }
 
   @GetMapping("/sign-up/confirm")
-	String confirmMail(@RequestParam("token") String token) {
+	private String confirmMail(@RequestParam("token") String token) {
 
 		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
 
@@ -86,4 +86,36 @@ public class AuthController {
 
 		return "/login";
 	}
+
+  @GetMapping("/forgot-password")
+  private String goToForgotPassword() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      return "forgot-password";
+    }
+
+    return "redirect:/";
+  }
+  @GetMapping("/change-password")
+  private String goToChangePassword() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      return "change-password";
+    }
+
+    return "redirect:/";
+  }
+
+  @PostMapping("/forgot-password")
+  private String forgotPassword(@RequestParam("email") String email) {
+
+    return "forgot-password";
+  }
+  @PostMapping("/change-password")
+  private String changePassword(@RequestParam("password") String password) {
+
+    return "change-password";
+  }
 }
