@@ -9,6 +9,11 @@
 
     label {
       user-select: none;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      cursor: pointer;
     }
 
     .page-buttons {
@@ -387,7 +392,10 @@
 
     <div id="home">
       <p>
-        Hello [[${#httpServletRequest.remoteUser}]]!
+        Hello
+        <span
+          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+        ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       <form th:action="@{/logout}" method="POST">
@@ -395,52 +403,30 @@
       </form>
 
       <div id="dropdown-categories">
-        <a th:href="@{|/store/1/addFilters?album=albums&priceMin=&priceMax=|}"
-          >Albums</a
-        >
-        <a th:href="@{|/store/1/addFilters?doll=dolls&priceMin=&priceMax=|}"
-          >Dolls</a
-        >
-        <a
-          th:href="@{|/store/1/addFilters?imagePicket=imagePickets&priceMin=&priceMax=|}"
+        <a th:href="@{|/store/1/addFilters?album=albums|}">Albums</a>
+        <a th:href="@{|/store/1/addFilters?doll=dolls|}">Dolls</a>
+        <a th:href="@{|/store/1/addFilters?imagePicket=imagePickets|}"
           >Image Pickets</a
         >
-        <a
-          th:href="@{|/store/1/addFilters?lightStick=lightSticks&priceMin=&priceMax=|}"
+        <a th:href="@{|/store/1/addFilters?lightStick=lightSticks|}"
           >Light Sticks</a
         >
-        <a
-          th:href="@{|/store/1/addFilters?package=packages&priceMin=&priceMax=|}"
-          >Packages</a
-        >
-        <a
-          th:href="@{|/store/1/addFilters?phoneCase=phoneCases&priceMin=&priceMax=|}"
+        <a th:href="@{|/store/1/addFilters?package=packages|}">Packages</a>
+        <a th:href="@{|/store/1/addFilters?phoneCase=phoneCases|}"
           >Phone Cases</a
         >
         <a
-          th:href="@{|/store/1/addFilters?photobook=photobooks&priceMin=&priceMax=|}"
+          th:href="@{|/store/1/addFilters?photobook=photobooks|}"
           onchange="location = this.value;"
           >Photobooks</a
         >
-        <a
-          th:href="@{|/store/1/addFilters?photocard=photocards&priceMin=&priceMax=|}"
+        <a th:href="@{|/store/1/addFilters?photocard=photocards|}"
           >Photocards</a
         >
-        <a th:href="@{|/store/1/addFilters?poster=posters&priceMin=&priceMax=|}"
-          >Posters</a
-        >
-        <a
-          th:href="@{|/store/1/addFilters?sticker=stickers&priceMin=&priceMax=|}"
-          >Stickers</a
-        >
-        <a
-          th:href="@{|/store/1/addFilters?keyRing=KeyRings&priceMin=&priceMax=|}"
-          >Key Rings</a
-        >
-        <a
-          th:href="@{|/store/1/addFilters?apparel=apparels&priceMin=&priceMax=|}"
-          >Apparels</a
-        >
+        <a th:href="@{|/store/1/addFilters?poster=posters|}">Posters</a>
+        <a th:href="@{|/store/1/addFilters?sticker=stickers|}">Stickers</a>
+        <a th:href="@{|/store/1/addFilters?keyRing=KeyRings|}">Key Rings</a>
+        <a th:href="@{|/store/1/addFilters?apparel=apparels|}">Apparels</a>
       </div>
 
       <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
@@ -495,6 +481,7 @@
           <a th:href="@{|/store/${newPage - 2}/${uri}|}">BACK</a>
         </button>
 
+        <!-- Number buttons -->
         <button
           th:each="i : ${#numbers.sequence(1, totalPages)}"
           th:if="${newPage - 1 != i && totalPages > 1}"

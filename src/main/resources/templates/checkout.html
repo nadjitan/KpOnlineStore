@@ -66,7 +66,9 @@
 
   <body>
     <div id="home">
-      <p>Hello [[${#httpServletRequest.remoteUser}]]! <button><a th:href="@{/profile}">PROFILE</a></button></p>
+      <p>Hello <span
+        th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+      ></span> <button><a th:href="@{/profile}">PROFILE</a></button></p>
       <form th:action="@{/logout}" method="POST">
         <button type="submit" class="submit">Logout</button>
       </form>

@@ -69,6 +69,8 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newDividedProductList);
     createCartAndVoucher(model);
+    
+    // uri to put in our page buttons
     model.addAttribute("uri", "storeSearch?" + request.getQueryString());
 
     return "store";
@@ -122,6 +124,7 @@ public class StoreController extends CommonController{
     categoryList.add(keyRings);
     categoryList.add(apparels);
 
+    // Check if at least status and category have one present value/checkbox
     for (Optional<String> status : statusList) {
       if (status.isPresent()) {
         isStatusListEmpty = false;
@@ -219,19 +222,19 @@ public class StoreController extends CommonController{
 
     // When user did not pick any product status and category
     if (isStatusListEmpty && isCategoryListEmpty) {
-        if (bestSeller.isPresent()) {
-          for (Product product : productRepository.getProductsByBestSeller(productRepository.getAllProducts())) {
-            getProductsByPrice(model, newProductList, product, priceMin, 
-                                        priceMax, rating);
-          }
-
-          model.addAttribute(bestSeller.get().toUpperCase(), "checked");
-        } else {
-          for (Product product : productRepository.getAllProducts()) {
-            getProductsByPrice(model, newProductList, product, priceMin, 
-                                        priceMax, rating);
-          }
+      if (bestSeller.isPresent()) {
+        for (Product product : productRepository.getProductsByBestSeller(productRepository.getAllProducts())) {
+          getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
         }
+
+        model.addAttribute(bestSeller.get().toUpperCase(), "checked");
+      } else {
+        for (Product product : productRepository.getAllProducts()) {
+          getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+        }
+      }
     }
 
     List<Product> newDividedProductList = new ArrayList<Product>();
@@ -239,7 +242,10 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newDividedProductList);
     createCartAndVoucher(model);
+
+    // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());
+
     return "store";
   }
 
@@ -251,7 +257,7 @@ public class StoreController extends CommonController{
 
     if(!priceMin.isPresent() && !priceMax.isPresent()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -260,7 +266,7 @@ public class StoreController extends CommonController{
     else if(priceMin.isPresent() && !priceMax.isPresent() && 
             productToAdd.getPrice() >= priceMin.get()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -269,9 +275,9 @@ public class StoreController extends CommonController{
       model.addAttribute("priceMin", priceMin.get());
     }
     else if(!priceMin.isPresent() && priceMax.isPresent() && 
-            productToAdd.getPrice() <= priceMax.get()) {
+             productToAdd.getPrice() <= priceMax.get()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -282,7 +288,7 @@ public class StoreController extends CommonController{
     else if(priceMin.isPresent() && priceMax.isPresent() && 
             productToAdd.getPrice() >= priceMin.get() && productToAdd.getPrice() <= priceMax.get()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -294,7 +300,6 @@ public class StoreController extends CommonController{
   }
 
   private void getProductsByRating(
-    Model model,
     Optional<Integer> rating, 
     List<Product> newProductList, Product productToAdd) {
 
@@ -306,6 +311,14 @@ public class StoreController extends CommonController{
     }
   }
 
+  /**
+   * Add pages to the store page
+   * 
+   * @param model - where to pass the attributes
+   * @param changePage - page to go to
+   * @param newProductList - list divided based on max products
+   * @param productsToTransfer - all products based on filters
+   */
   private void pagination(
     Model model, Integer changePage, 
     List<Product> newProductList, List<Product> productsToTransfer) {
@@ -318,6 +331,7 @@ public class StoreController extends CommonController{
     }
     model.addAttribute("totalPages" , (int) totalPages);
 
+    // When store is at first page
     if (changePage == 1) {
       for (int i = 0; i < maxItems; i++) {
         try {
@@ -327,10 +341,12 @@ public class StoreController extends CommonController{
         }
       }
 
-      if (totalPages != 1) {
+      // Avoid showing NEXT when no other pages
+      if (totalPages != 1 && newProductList.size() != 0) {
         model.addAttribute("showNext", true);
       }
     }
+    // When it is not in first page
     if (changePage > 1) {
       for (int i = endOfProducts - maxItems; i < endOfProducts; i++) {
         try {
@@ -340,12 +356,17 @@ public class StoreController extends CommonController{
         }
       }
 
-      model.addAttribute("showBack", true);
-      if (changePage != totalPages) {
+      if (newProductList.size() != 0) {
+        model.addAttribute("showBack", true);
+      }
+
+      // Avoid showing NEXT when at last page
+      if (changePage != totalPages && newProductList.size() != 0) {
         model.addAttribute("showNext", true);
       }
     }
    
+    // Get next page after running codes
     model.addAttribute("newPage", changePage + 1);
   }
 }

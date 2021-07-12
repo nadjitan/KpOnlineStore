@@ -36,10 +36,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     return this.findAll().size();
   }
 
-  default void delete(Product product) {
-    this.delete(product);
-  }
-
   default List<Product> getProductsByStatus(String status) {
     return this.findDistinctProductByStatus(status);
   }
