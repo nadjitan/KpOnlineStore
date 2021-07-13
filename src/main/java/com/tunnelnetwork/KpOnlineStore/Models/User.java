@@ -1,9 +1,13 @@
 package com.tunnelnetwork.KpOnlineStore.Models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,17 +20,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Builder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Entity(name = "Users")
 public class User implements UserDetails {
 
@@ -37,12 +39,15 @@ public class User implements UserDetails {
 	private Long id;
 
 	private String firstName;
-
 	private String lastName;
-
 	private String email;
-
 	private String password;
+
+	@Embedded
+  @ElementCollection
+	@Builder.Default
+	private List<Product> whishlist = new ArrayList<Product>();
+
 
 	@Builder.Default
 	private UserRole userRole = UserRole.USER;

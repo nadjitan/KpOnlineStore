@@ -63,10 +63,26 @@
       </form>
 
       <div id="product-details">
-        <img src="#" alt="product-img.png" />
+        <img th:src="${product.image}" alt="product-img.png" />
         <h3 class="product-name" th:text="${product.productName}"></h3>
         <p class="product-category" th:text="${product.category}"></p>
         <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+
+        <form th:action="@{/addToWishlist}" method="post">
+          <input type="hidden" name="productId" th:value="${product.id}" />
+          <button type="submit">
+            <img
+              alt="wishlist-img"
+              th:if="${inUserWishlist != true}"
+              th:src="${'/img/bookmark_border_black_24dp.svg'}"
+            />
+            <img
+              alt="wishlist-img"
+              th:if="${inUserWishlist == true}"
+              th:src="${'/img/bookmark_black_24dp.svg'}"
+            />
+          </button>
+        </form>
 
         <div
           th:each="i : ${#numbers.sequence(1, product.rating)}"

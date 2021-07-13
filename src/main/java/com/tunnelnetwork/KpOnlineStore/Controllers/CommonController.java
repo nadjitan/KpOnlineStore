@@ -12,6 +12,7 @@ import com.tunnelnetwork.KpOnlineStore.DAO.VoucherRepository;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
+import com.tunnelnetwork.KpOnlineStore.User.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -38,6 +39,8 @@ public class CommonController {
   @Autowired
   protected ReceiptRepository receiptRepository;
   
+  @Autowired
+  protected UserService userService;
 
   protected void createCartAndVoucher(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

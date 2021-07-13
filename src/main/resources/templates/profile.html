@@ -80,7 +80,7 @@
 
       <div id="orders-table">
         <h2 id="orders-title">ORDER HISTORY</h2>
-
+        <div th:if="${receiptList.empty}">You have no orders</div>
         <table>
           <tr class="orders-header">
             <th>REF NO.</th>
@@ -111,11 +111,18 @@
                   <button type="reset" class="exit-modal">X</button>
                   <table class="modal">
                     <tr>
+                      <th>IMAGE</th>
                       <th>NAME</th>
                       <th>QUANTITY</th>
                       <th>PRICE</th>
                     </tr>
                     <tr th:each="product : ${receipt.productList}">
+                      <td>
+                        <img
+                          th:alt="${product.productName + '-img.png'}"
+                          th:src="${product.image}"
+                        />
+                      </td>
                       <td th:text="${product.productName}"></td>
                       <td th:text="${product.quantity}"></td>
                       <td th:text="${product.price}"></td>
@@ -131,7 +138,38 @@
         </table>
       </div>
 
-      <div th:if="${receiptList.empty}">You have no orders</div>
+      <div class="" id="wishlist-table">
+        <h2 id="orders-title">WISHLIST</h2>
+        <p th:if="${wishlist.isEmpty}">There are no items in your wishlist.</p>
+        <table>
+          <tr>
+            <th>IMAGE</th>
+            <th>NAME</th>
+            <th>CATEGORY</th>
+            <th>STATUS</th>
+            <th>PRICE</th>
+          </tr>
+          <tr th:each="product : ${wishlist}">
+            <td>
+              <img
+                th:alt="${product.productName + '-img.png'}"
+                th:src="${product.image}"
+              />
+            </td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.status}"></td>
+            <td th:text="${'₱ ' + product.price}"></td>
+            <td>
+              <form th:action="@{/removeFromWishlist}" method="post">
+                <button type="submit" th:value="${product.id}" name="productId">
+                  remove
+                </button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
