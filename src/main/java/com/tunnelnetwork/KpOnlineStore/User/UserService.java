@@ -22,7 +22,7 @@ public class UserService implements UserDetailsService {
 
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	private final ConfirmationTokenService confirmationTokenService;
+	private final ConfirmationTokenRepository confirmationTokenRepository;
 
 	private final EmailSenderService emailSenderService;
 
@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
 		final SimpleMailMessage mailMessage = new SimpleMailMessage();
 		final ConfirmationToken confirmationToken = new ConfirmationToken(userRepository.findByEmail(userEmail).get());
 
-		confirmationTokenService.saveConfirmationToken(confirmationToken);
+		confirmationTokenRepository.saveConfirmationToken(confirmationToken);
 
 		mailMessage.setTo(userEmail);
 		mailMessage.setSubject("Password Reset");
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
 
 		userRepository.save(user);
 
-		confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+		confirmationTokenRepository.deleteConfirmationToken(confirmationToken.getId());
 
 	}
 
@@ -87,7 +87,7 @@ public class UserService implements UserDetailsService {
 
 		final ConfirmationToken confirmationToken = new ConfirmationToken(user);
 
-		confirmationTokenService.saveConfirmationToken(confirmationToken);
+		confirmationTokenRepository.saveConfirmationToken(confirmationToken);
 
 		sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
 
@@ -101,7 +101,7 @@ public class UserService implements UserDetailsService {
 
 		userRepository.save(user);
 
-		confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+		confirmationTokenRepository.deleteConfirmationToken(confirmationToken.getId());
 
 	}
 

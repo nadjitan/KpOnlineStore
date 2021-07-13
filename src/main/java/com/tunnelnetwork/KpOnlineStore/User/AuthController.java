@@ -26,7 +26,7 @@ public class AuthController {
 
   private final UserService userService;
 
-	private final ConfirmationTokenService confirmationTokenService;
+	private final ConfirmationTokenRepository confirmationTokenRepository;
 
   public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -82,7 +82,7 @@ public class AuthController {
   @GetMapping("/sign-up/confirm")
 	private String confirmMail(@RequestParam("token") String token) {
 
-		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
 		optionalConfirmationToken.ifPresent(userService::confirmUser);
 
@@ -102,7 +102,7 @@ public class AuthController {
   @GetMapping("/change-password/confirm")
 	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
 
-		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
 		if (optionalConfirmationToken.isPresent()) {
       model.addAttribute("token", token);
@@ -137,7 +137,7 @@ public class AuthController {
     @RequestParam("password") String password,
     @RequestParam("confirmPassword") String confirmPassword) {
 
-    Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+    Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
 		if (optionalConfirmationToken.isPresent()) {
       if (password.equals(confirmPassword)) {
