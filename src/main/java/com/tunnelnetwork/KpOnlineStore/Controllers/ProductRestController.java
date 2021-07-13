@@ -1,7 +1,7 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
+import com.tunnelnetwork.KpOnlineStore.DAO.ProductRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
-import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/products")
-public class ProductRController {
-  
+public class ProductRestController {
+
   @Autowired
-  private ProductService productService;
+  private ProductRepository productRepository;
 
   @GetMapping("/list")
   private Iterable<Product> list() {
-    return productService.getAllProducts();
+    return productRepository.getAllProducts();
   }
 
   @GetMapping("/{id}")
   private Product findProduct(@PathVariable("id") long id) {
-    return productService.getProduct(id);
+    return productRepository.getProduct(id);
   }
 }

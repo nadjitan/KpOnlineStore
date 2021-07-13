@@ -29,7 +29,7 @@ public class ProductDetailsController extends CommonController{
     }
 
     model.addAttribute("maxRating", 5);
-    model.addAttribute("product", productService.getProduct(id));
+    model.addAttribute("product", productRepository.getProduct(id));
     model.addAttribute("didUserBuyProduct", didUserBuyProduct(id));
     return "product-details";
   }
@@ -45,7 +45,7 @@ public class ProductDetailsController extends CommonController{
       if (didUserBuyProduct(id)) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Product product = productService.getProduct(id);
+        Product product = productRepository.getProduct(id);
         Comment newComment = new Comment();
         
         newComment.setCommentUserId(0);
@@ -54,11 +54,11 @@ public class ProductDetailsController extends CommonController{
         newComment.setUpdatedAt(LocalDateTime.now());
         newComment.setUserName(authentication.getName());
 
-        commentService.save(newComment);
+        commentRepository.saveAndFlush(newComment);
 
         product.getComments().add(newComment);
 
-        productService.save(product);
+        productRepository.saveAndFlush(product);
       }
     }
 
@@ -73,11 +73,11 @@ public class ProductDetailsController extends CommonController{
     }
 
     if (didUserBuyProduct(id)) {
-      Product product = productService.getProduct(id);
+      Product product = productRepository.getProduct(id);
 
       product.setRating(rating);
 
-      productService.save(product);
+      productRepository.saveAndFlush(product);
     }
 
     return new ModelAndView("redirect:/product/" + id);
@@ -86,8 +86,8 @@ public class ProductDetailsController extends CommonController{
   private boolean didUserBuyProduct(long id) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    Iterable<Receipt> receiptOfUSer = receiptService.getReceiptsByName(authentication.getName());
-    Product productToCheck = productService.getProduct(id);
+    Iterable<Receipt> receiptOfUSer = receiptRepository.getReceiptsByName(authentication.getName());
+    Product productToCheck = productRepository.getProduct(id);
 
     if (receiptOfUSer != null) {
       for (Receipt receipt : receiptOfUSer) {

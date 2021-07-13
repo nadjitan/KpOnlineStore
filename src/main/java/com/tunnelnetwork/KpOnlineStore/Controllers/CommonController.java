@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tunnelnetwork.KpOnlineStore.DAO.CartRepository;
+import com.tunnelnetwork.KpOnlineStore.DAO.CommentRepository;
+import com.tunnelnetwork.KpOnlineStore.DAO.ProductRepository;
+import com.tunnelnetwork.KpOnlineStore.DAO.ReceiptRepository;
+import com.tunnelnetwork.KpOnlineStore.DAO.VoucherRepository;
+
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
-
-import com.tunnelnetwork.KpOnlineStore.Service.CartService;
-import com.tunnelnetwork.KpOnlineStore.Service.CommentService;
-import com.tunnelnetwork.KpOnlineStore.Service.ProductService;
-import com.tunnelnetwork.KpOnlineStore.Service.ReceiptService;
-import com.tunnelnetwork.KpOnlineStore.Service.VoucherService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -24,26 +24,26 @@ import org.springframework.ui.Model;
 public class CommonController {
 
   @Autowired
-  protected ProductService productService;
+  protected ProductRepository productRepository;
 
   @Autowired
-  protected CartService cartService;
+  protected CartRepository cartRepository;
   
   @Autowired
-  protected VoucherService voucherService;
+  protected VoucherRepository voucherRepository;
 
   @Autowired
-  protected CommentService commentService;
+  protected CommentRepository commentRepository;
 
   @Autowired
-  protected ReceiptService receiptService;
+  protected ReceiptRepository receiptRepository;
   
 
   protected void createCartAndVoucher(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     // Get cart but if there is none create new cart for new user
-    if (cartService.getCartOfUser() == null) {
+    if (cartRepository.getCartOfUser() == null) {
       Voucher voucher = new Voucher();
       voucher.setVoucherName("New user discount");
       voucher.addUserInList(authentication.getName());
@@ -60,14 +60,14 @@ public class CommonController {
       cart.setCreatedAt(LocalDateTime.now());
       cart.setUpdatedAt(LocalDateTime.now());
 
-      voucherService.save(voucher);
-      cartService.save(cart);
+      voucherRepository.saveAndFlush(voucher);
+      cartRepository.saveAndFlush(cart);
 
-      model.addAttribute("cart", cartService.getCartOfUser());
+      model.addAttribute("cart", cartRepository.getCartOfUser());
       
     } else {
-      Cart cart = cartService.getCartOfUser();
-      Voucher voucher = voucherService.getVoucherByName("New user discount");
+      Cart cart = cartRepository.getCartOfUser();
+      Voucher voucher = voucherRepository.getVoucherByName("New user discount");
 
       if (voucher.isUserInList(authentication.getName())) {
         List<Voucher> cartVouchers = new ArrayList<Voucher>();

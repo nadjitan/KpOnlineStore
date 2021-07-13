@@ -23,18 +23,18 @@ public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
   private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
-    if (!isThereLoggedInUser() && cartService.getCartOfUser() == null) {
+    if (!isThereLoggedInUser() && cartRepository.getCartOfUser() == null) {
       return "redirect:/";
     }
 
-    Cart cart = cartService.getCartOfUser();
+    Cart cart = cartRepository.getCartOfUser();
     if (check.isPresent()) {
       cart.setUseVoucher(1);
     } else {
       cart.setUseVoucher(0);
     }
 
-    cartService.save(cart);
+    cartRepository.saveAndFlush(cart);
 
     model.addAttribute("cart", cart);
     return "checkout";
@@ -43,12 +43,12 @@ public class CheckoutController extends CommonController {
   @RequestMapping(value="/checkout", method=RequestMethod.POST)
   private ModelAndView goCheckout() {
     if (!isThereLoggedInUser() || 
-        cartService.getCartOfUser() == null || 
-        cartService.getCartOfUser().getCartProducts().isEmpty()) {
+        cartRepository.getCartOfUser() == null || 
+        cartRepository.getCartOfUser().getCartProducts().isEmpty()) {
       return new ModelAndView("redirect:/");
     }
 
-    Cart cart = cartService.getCartOfUser();
+    Cart cart = cartRepository.getCartOfUser();
     Receipt receipt = new Receipt();
 
     List<Product> cartProductList = cart.getCartProducts();
@@ -56,6 +56,11 @@ public class CheckoutController extends CommonController {
 
     for (Product product : cartProductList) {
       receiptProductList.add(product);
+
+      Product productFromDB = productRepository.getProduct(product.getId());
+      productFromDB.setNumberOfSold(productFromDB.getNumberOfSold() + product.getQuantity());
+
+      productRepository.saveAndFlush(productFromDB);
     }
     
     receipt.setCreatedAt(LocalDateTime.now());
@@ -72,13 +77,13 @@ public class CheckoutController extends CommonController {
         receiptVoucherList.add(voucher);
       }
 
-      cartService.removeVouchers(cart.getCartOwner());
+      cartRepository.removeVouchers(cart.getCartOwner());
 
       receipt.setVoucherList(receiptVoucherList);
     }
 
-    cartService.removeProducts(cart.getCartOwner());
-    receiptService.save(receipt);
+    cartRepository.removeProducts(cart.getCartOwner());
+    receiptRepository.saveAndFlush(receipt);
     
     return new ModelAndView("redirect:/profile");
   }

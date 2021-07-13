@@ -26,7 +26,7 @@ public class StoreController extends CommonController{
     Model model) {
 
     List<Product> newProductList = new ArrayList<Product>();
-    List<Product> oldProductList = productService.getAllProducts();
+    List<Product> oldProductList = productRepository.getAllProducts();
     
     pagination(model, changePage, newProductList, oldProductList);
 
@@ -45,8 +45,8 @@ public class StoreController extends CommonController{
     
     List<Product> newProductList = new ArrayList<Product>();
     List<Product> newDividedProductList = new ArrayList<Product>();
-    List<Product> productListBasedOnName = productService.getProductsContainingInName(storeSearch.get());
-    List<Product> productListBasedOnCategory = productService.getProductsContainingInCategory(storeSearch.get());
+    List<Product> productListBasedOnName = productRepository.getProductsContainingInName(storeSearch.get());
+    List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
 
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
@@ -60,7 +60,7 @@ public class StoreController extends CommonController{
         }
       }
     } else {
-      for (Product product : productService.getAllProducts()) {
+      for (Product product : productRepository.getAllProducts()) {
         newProductList.add(product);
       }
     }
@@ -69,6 +69,8 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newDividedProductList);
     createCartAndVoucher(model);
+    
+    // uri to put in our page buttons
     model.addAttribute("uri", "storeSearch?" + request.getQueryString());
 
     return "store";
@@ -82,6 +84,7 @@ public class StoreController extends CommonController{
     @RequestParam("available") Optional<String> available,
     @RequestParam("preorder") Optional<String> preorder,
     @RequestParam("outOfStock") Optional<String> outOfStock,
+    @RequestParam("bestSeller") Optional<String> bestSeller,
     @RequestParam("album") Optional<String> albums,
     @RequestParam("doll") Optional<String> dolls,
     @RequestParam("imagePicket") Optional<String> imagePickets,
@@ -92,8 +95,8 @@ public class StoreController extends CommonController{
     @RequestParam("photocard") Optional<String> photocards,
     @RequestParam("poster") Optional<String> posters,
     @RequestParam("sticker") Optional<String> stickers,
-    @RequestParam("tag") Optional<String> tags,
-    @RequestParam("wearable") Optional<String> wearables,
+    @RequestParam("keyRing") Optional<String> keyRings,
+    @RequestParam("apparel") Optional<String> apparels,
     @RequestParam("priceMin") Optional<Integer> priceMin,
     @RequestParam("priceMax") Optional<Integer> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
@@ -118,9 +121,10 @@ public class StoreController extends CommonController{
     categoryList.add(photocards);
     categoryList.add(posters);
     categoryList.add(stickers);
-    categoryList.add(tags);
-    categoryList.add(wearables);
+    categoryList.add(keyRings);
+    categoryList.add(apparels);
 
+    // Check if at least status and category have one present value/checkbox
     for (Optional<String> status : statusList) {
       if (status.isPresent()) {
         isStatusListEmpty = false;
@@ -134,36 +138,71 @@ public class StoreController extends CommonController{
       }
     }
 
+    // If user picked a status but no category
     if (!isStatusListEmpty && isCategoryListEmpty) {
       for (Optional<String> status : statusList) {
         if (status.isPresent()) {
-          for (Product product : productService.getProductsByStatus(status.get())) {
-            getProductsByPrice(model, newProductList, product, priceMin, 
-                                    priceMax, rating);
+          if (bestSeller.isPresent()) {
+            for (Product product : productRepository.getProductsByBestSeller(
+                                   productRepository.getProductsByStatus(status.get()))) {
+              getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+            } 
+
+            model.addAttribute(bestSeller.get().toUpperCase(), "checked");
+          } else {
+            for (Product product : productRepository.getProductsByStatus(status.get())) {
+              getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+            }
           }
+
           model.addAttribute(status.get().toUpperCase(), "checked");
         }
       }
     } 
+    // If user picked a category but no status
     if (isStatusListEmpty && !isCategoryListEmpty) {
       for (Optional<String> category : categoryList) {
         if (category.isPresent()) {
-          for (Product product : productService.getProductsByCategory(category.get())) {
-            getProductsByPrice(model, newProductList, product, priceMin, 
-                                    priceMax, rating);
+          if (bestSeller.isPresent()) {
+            for (Product product : productRepository.getProductsByBestSeller(
+                                   productRepository.getProductsByCategory(category.get()))) {
+              getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+            }
+
+            model.addAttribute(bestSeller.get().toUpperCase(), "checked");
+          } else {
+            for (Product product : productRepository.getProductsByCategory(category.get())) {
+              getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+            }
           }
+          
           model.addAttribute(category.get().toUpperCase(), "checked");
         }
       }
     }
+    // If user picked a category and status
     if (!isStatusListEmpty && !isCategoryListEmpty) {
       List<Product> productsBasedStatus = new ArrayList<Product>();
 
       for (Optional<String> status : statusList) {
         if (status.isPresent()) {
-          for (Product product : productService.getProductsByStatus(status.get())) {
-            productsBasedStatus.add(product);
+          if (bestSeller.isPresent()) {
+            for (Product product : productRepository.getProductsByBestSeller(
+                                   productRepository.getProductsByStatus(status.get()))){
+              productsBasedStatus.add(product);
+            }
+
+            model.addAttribute(bestSeller.get().toUpperCase(), "checked");
+          } else {
+            for (Product product : productRepository.getProductsByStatus(status.get())) {
+              productsBasedStatus.add(product);
+            }
           }
+          
           model.addAttribute(status.get().toUpperCase(), "checked");
         }
       }
@@ -181,12 +220,20 @@ public class StoreController extends CommonController{
       }
     }
 
-    // When user did not pick any product status or category
+    // When user did not pick any product status and category
     if (isStatusListEmpty && isCategoryListEmpty) {
-          
-      for (Product product : productService.getAllProducts()) {
-        getProductsByPrice(model, newProductList, product, priceMin, 
-                                    priceMax, rating);
+      if (bestSeller.isPresent()) {
+        for (Product product : productRepository.getProductsByBestSeller(productRepository.getAllProducts())) {
+          getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+        }
+
+        model.addAttribute(bestSeller.get().toUpperCase(), "checked");
+      } else {
+        for (Product product : productRepository.getAllProducts()) {
+          getProductsByPrice(model, newProductList, product, priceMin, 
+                                      priceMax, rating);
+        }
       }
     }
 
@@ -195,7 +242,10 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newDividedProductList);
     createCartAndVoucher(model);
+
+    // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());
+
     return "store";
   }
 
@@ -207,7 +257,7 @@ public class StoreController extends CommonController{
 
     if(!priceMin.isPresent() && !priceMax.isPresent()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -216,7 +266,7 @@ public class StoreController extends CommonController{
     else if(priceMin.isPresent() && !priceMax.isPresent() && 
             productToAdd.getPrice() >= priceMin.get()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -225,9 +275,9 @@ public class StoreController extends CommonController{
       model.addAttribute("priceMin", priceMin.get());
     }
     else if(!priceMin.isPresent() && priceMax.isPresent() && 
-            productToAdd.getPrice() <= priceMax.get()) {
+             productToAdd.getPrice() <= priceMax.get()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -238,7 +288,7 @@ public class StoreController extends CommonController{
     else if(priceMin.isPresent() && priceMax.isPresent() && 
             productToAdd.getPrice() >= priceMin.get() && productToAdd.getPrice() <= priceMax.get()) {
       if (rating.isPresent()) {
-        getProductsByRating(model, rating, newProductList, productToAdd);
+        getProductsByRating(rating, newProductList, productToAdd);
       } 
       else {
         newProductList.add(productToAdd);
@@ -250,7 +300,6 @@ public class StoreController extends CommonController{
   }
 
   private void getProductsByRating(
-    Model model,
     Optional<Integer> rating, 
     List<Product> newProductList, Product productToAdd) {
 
@@ -262,6 +311,14 @@ public class StoreController extends CommonController{
     }
   }
 
+  /**
+   * Add pages to the store page
+   * 
+   * @param model - where to pass the attributes
+   * @param changePage - page to go to
+   * @param newProductList - list divided based on max products
+   * @param productsToTransfer - all products based on filters
+   */
   private void pagination(
     Model model, Integer changePage, 
     List<Product> newProductList, List<Product> productsToTransfer) {
@@ -274,6 +331,7 @@ public class StoreController extends CommonController{
     }
     model.addAttribute("totalPages" , (int) totalPages);
 
+    // When store is at first page
     if (changePage == 1) {
       for (int i = 0; i < maxItems; i++) {
         try {
@@ -283,10 +341,12 @@ public class StoreController extends CommonController{
         }
       }
 
-      if (totalPages != 1) {
+      // Avoid showing NEXT when no other pages
+      if (totalPages != 1 && newProductList.size() != 0) {
         model.addAttribute("showNext", true);
       }
     }
+    // When it is not in first page
     if (changePage > 1) {
       for (int i = endOfProducts - maxItems; i < endOfProducts; i++) {
         try {
@@ -296,12 +356,17 @@ public class StoreController extends CommonController{
         }
       }
 
-      model.addAttribute("showBack", true);
-      if (changePage != totalPages) {
+      if (newProductList.size() != 0) {
+        model.addAttribute("showBack", true);
+      }
+
+      // Avoid showing NEXT when at last page
+      if (changePage != totalPages && newProductList.size() != 0) {
         model.addAttribute("showNext", true);
       }
     }
    
+    // Get next page after running codes
     model.addAttribute("newPage", changePage + 1);
   }
 }

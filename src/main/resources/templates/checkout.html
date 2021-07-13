@@ -42,10 +42,7 @@
     section:nth-of-type(4) > div{
       grid-column: span 3;
     }
-    section:nth-of-type(5) #cards{
-      width: 300px;
-    }
-    section:nth-of-type(6) [id*="expiration-date-"]{
+    section:nth-of-type(5) [id*="expiration-date-"]{
       width: 45%;
     }
 
@@ -69,7 +66,9 @@
 
   <body>
     <div id="home">
-      <p>Hello [[${#httpServletRequest.remoteUser}]]! <button><a th:href="@{/profile}">PROFILE</a></button></p>
+      <p>Hello <span
+        th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+      ></span> <button><a th:href="@{/profile}">PROFILE</a></button></p>
       <form th:action="@{/logout}" method="POST">
         <button type="submit" class="submit">Logout</button>
       </form>
@@ -102,29 +101,20 @@
           </div>
           <div>
             <label for="postal-code">Postal Code</label>
-            <input type="text" id="postal-code" name="postalCode" />
+            <input type="text" id="postal-code" name="postalCode" maxlength="4" placeholder="xxxx"/>
           </div>
         </section>
         <section class="form-field">
           <div>
             <label for="phone-number">Phone Number</label>
-            <input type="number" id="phone-number" />
-          </div>
-        </section>
-        <section class="form-field">
-          <div>
-            <label for="cards">Payment Method</label>
-            <select id="cards" name="cards">
-              <option value="visa">Visa</option>
-              <option value="paypal">PayPal</option>
-              <option value="mastercard">Mastercard</option>
-            </select>
+            <input id="phone-number" type="text" maxlength="11"/>
           </div>
         </section>
         <section class="form-field">
           <div>
             <label for="card-number">Card Number</label>
-            <input type="number" id="card-number" name="cardNumber" />
+            <input id="ccn" type="text" placeholder="xxxx xxxx xxxx xxxx"/>
+            <div id="ccn-type" style="font-size: 0.8rem; font-style: italic; text-transform:capitalize;">Type:</div>
           </div>
           <div>
             <label for="expiration-date-1">Expiration Date</label>
@@ -139,7 +129,7 @@
           </div>
           <div>
             <label for="security-code"></label>Security Code</label>
-            <input type="number" id="security-code" name="security-code" />
+            <input type="text" id="security-code" name="security-code" maxlength="3" placeholder="xxx"/>
           </div>
         </section>
 
@@ -170,5 +160,10 @@
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
+    <script
+      defer
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"
+    ></script>
   </body>
 </html>

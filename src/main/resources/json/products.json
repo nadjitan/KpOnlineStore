@@ -9,6 +9,7 @@
     "status": "available",
     "image": "/img/img1.png",
     "rating": 5,
+    "numberOfSold": 100,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -37,6 +38,7 @@
     "status": "available",
     "image": "/img/img2.png",
     "rating": 4,
+    "numberOfSold": 20,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -65,6 +67,7 @@
     "status": "available",
     "image": "/img/img2.png",
     "rating": 3,
+    "numberOfSold": 40,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -93,6 +96,7 @@
     "status": "preorder",
     "image": "/img/img2.png",
     "rating": 2,
+    "numberOfSold": 50,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -116,11 +120,12 @@
     "updatedAt": "2021-06-28 10:44:32",
     "productName": "Jacket",
     "description": "A Jacket of your favorite K-POP idol.",
-    "category": "wearables",
+    "category": "apparels",
     "price": 10,
     "status": "preorder",
     "image": "/img/img2.png",
     "rating": 1,
+    "numberOfSold": 50,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -144,11 +149,12 @@
     "updatedAt": "2021-06-28 10:44:32",
     "productName": "T-shirt",
     "description": "A T-shirt of your favorite K-POP idol.",
-    "category": "wearables",
+    "category": "apparels",
     "price": 10,
     "status": "preorder",
     "image": "/img/img2.png",
     "rating": 5,
+    "numberOfSold": 80,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -177,6 +183,7 @@
     "status": "outOfStock",
     "image": "/img/img2.png",
     "rating": 4,
+    "numberOfSold": 30,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -205,6 +212,7 @@
     "status": "outOfStock",
     "image": "/img/img2.png",
     "rating": 3,
+    "numberOfSold": 40,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -233,6 +241,7 @@
     "status": "outOfStock",
     "image": "/img/img2.png",
     "rating": 2,
+    "numberOfSold": 5,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
@@ -261,6 +270,7 @@
     "status": "available",
     "image": "/img/img2.png",
     "rating": 1,
+    "numberOfSold": 35,
     "tags": ["tag1", "tag2"],
     "comments": [
       {
