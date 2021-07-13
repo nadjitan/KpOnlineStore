@@ -33,10 +33,39 @@ public class UserService implements UserDetailsService {
 		mailMessage.setSubject("Mail Confirmation Link!");
 		mailMessage.setFrom("tunnelnetworkkpop@gmail.com");
 		mailMessage.setText(
-				"Thank you for registering. Please click on the below link to activate your account." + "http://localhost:8080/sign-up/confirm?token="
+				"Thank you for registering. Please click the link to activate your account. " + "http://localhost:8080/sign-up/confirm?token="
 						+ token);
 
 		emailSenderService.sendEmail(mailMessage);
+	}
+
+	void sendResetPasswordMail(String userEmail) {
+
+		final SimpleMailMessage mailMessage = new SimpleMailMessage();
+		final ConfirmationToken confirmationToken = new ConfirmationToken(userRepository.findByEmail(userEmail).get());
+
+		confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+		mailMessage.setTo(userEmail);
+		mailMessage.setSubject("Password Reset");
+		mailMessage.setFrom("tunnelnetworkkpop@gmail.com");
+		mailMessage.setText(
+				"Please click the link to reset the password of your account. " + "http://localhost:8080/change-password/confirm?token="
+						+ confirmationToken.getConfirmationToken());
+
+		emailSenderService.sendEmail(mailMessage);
+	}
+
+	void confirmResetPassword(ConfirmationToken confirmationToken, String newPassword) {
+
+		final User user = confirmationToken.getUser();
+
+		user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+
+		userRepository.save(user);
+
+		confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+
 	}
 
 	@Override
@@ -74,5 +103,9 @@ public class UserService implements UserDetailsService {
 
 		confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
 
+	}
+
+	public boolean doesUserExist(String email) {
+		return userRepository.findByEmail(email).isPresent();
 	}
 }

@@ -8,9 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -53,28 +57,26 @@ public class AuthController {
   }
 
   @PostMapping("/sign-up")
-  private String signup(User user) {
+  private ModelAndView signup(RedirectAttributes ra, User user) {
 
-    // // When user fails to fill up form
-    // if (username == "" || password == "") {
-    //   ra.addFlashAttribute("userNotCreated", "Please fill out form.");
-    //   return new ModelAndView("redirect:/sign-up");
-    // }
+    if (userService.doesUserExist(user.getEmail())) {
+      ra.addFlashAttribute("userNotCreated", "Email is already in use."); 
 
-    // // Create user and catch on creation failure
-    // try {
-    //   inMemoryUserDetailsManager.createUser(User.withUsername(username).password(passwordEncoder().encode(password)).authorities("USER").build());
-    // } catch (Exception e) {
-    //   ra.addFlashAttribute("userNotCreated", "Invalid inputs or user is already created. Please try again.");
-    //   return new ModelAndView("redirect:/sign-up");
-    // }
+      return new ModelAndView("redirect:/sign-up");
+    }
+    else if (user.getEmail().isEmpty() || user.getFirstName().isEmpty() || 
+             user.getLastName().isEmpty() || user.getPassword().isEmpty()) {
+      ra.addFlashAttribute("userNotCreated", "Please fill out form."); 
 
-    // // Only runs once there are no failures catched
-    // ra.addFlashAttribute("userCreated", "User have been successfully created you may now login.");
+      return new ModelAndView("redirect:/sign-up");
+    }
+    else {
+      userService.signUpUser(user);
+      
+      ra.addFlashAttribute("userCreated", "Email have been sent. Please confirm your registration."); 
 
-    userService.signUpUser(user);
-  
-    return "redirect:/login";
+      return new ModelAndView("redirect:/login");
+    }
   }
 
   @GetMapping("/sign-up/confirm")
@@ -97,25 +99,64 @@ public class AuthController {
 
     return "redirect:/";
   }
-  @GetMapping("/change-password")
-  private String goToChangePassword() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  @GetMapping("/change-password/confirm")
+	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+
+		if (optionalConfirmationToken.isPresent()) {
+      model.addAttribute("token", token);
+
       return "change-password";
     }
-
-    return "redirect:/";
-  }
+    else {
+      return "redirect:/";
+    }
+	}
 
   @PostMapping("/forgot-password")
-  private String forgotPassword(@RequestParam("email") String email) {
+  private ModelAndView forgotPassword(RedirectAttributes ra, @RequestParam("email") String email) {
+    if (userService.doesUserExist(email)) {
+      userService.sendResetPasswordMail(email);
 
-    return "forgot-password";
+      ra.addFlashAttribute("passwordStatus", "Reset password confimation have been sent to your email.");
+
+      return new ModelAndView("redirect:/forgot-password");
+    }
+    else {
+      ra.addFlashAttribute("passwordStatus", "User does not exist.");
+
+      return new ModelAndView("redirect:/forgot-password");
+    }
   }
-  @PostMapping("/change-password")
-  private String changePassword(@RequestParam("password") String password) {
 
-    return "change-password";
+  @PostMapping("/change-password/confirm/{token}")
+  private ModelAndView changePassword(
+    RedirectAttributes ra,
+    @PathVariable(value ="token") String token, 
+    @RequestParam("password") String password,
+    @RequestParam("confirmPassword") String confirmPassword) {
+
+    Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+
+		if (optionalConfirmationToken.isPresent()) {
+      if (password.equals(confirmPassword)) {
+        userService.confirmResetPassword(optionalConfirmationToken.get(), password);
+
+        ra.addFlashAttribute("passwordStatus", "Password have been reset. You can now login.");
+
+        return new ModelAndView("redirect:/login");
+      }
+      else {
+        ra.addFlashAttribute("passwordStatus", "Password does not match.");
+
+        return new ModelAndView("redirect:/change-password/confirm?token=" + token);
+      }
+    }
+    else {
+      ra.addFlashAttribute("passwordStatus", "Error invalid token.");
+
+      return new ModelAndView("redirect:/change-password");
+    }
   }
 }

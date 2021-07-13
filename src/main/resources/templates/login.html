@@ -11,6 +11,8 @@
         You have successfully logged out!
       </p>
 
+      <p th:if="${passwordStatus}" th:text="${passwordStatus}" class="success"></p>
+
       <p th:if="${userCreated}" th:text="${userCreated}" class="success"></p>
 
       <label for="username"></label>
