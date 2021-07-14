@@ -19,8 +19,12 @@ public class CrudController extends CommonController{
 
   @GetMapping("/crud")
   private String profilePage(Model model) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
     if (!isThereLoggedInUser() && hasRole("USER")) {
-      return "redirect:/";
+      return "redirect:/login";
     }
     
     Iterable<Product> products = productRepository.getAllProducts();

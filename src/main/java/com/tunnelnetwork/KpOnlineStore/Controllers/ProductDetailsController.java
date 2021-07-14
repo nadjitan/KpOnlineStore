@@ -16,15 +16,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProductDetailsController extends CommonController{
   
   @GetMapping("/product/{id}")
   private String productPage(Model model, @PathVariable("id") long id) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
     if (!isThereLoggedInUser()) {
-      return "redirect:/";
+      return "redirect:/login";
     }
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,10 +52,10 @@ public class ProductDetailsController extends CommonController{
   }
 
   @PostMapping("/comment")
-  private ModelAndView makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
+  private String makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
     if (!comment.isBlank()) {
       if (!isThereLoggedInUser()) {
-        return new ModelAndView("redirect:/");
+        return "redirect:/";
       }
 
       if (didUserBuyProduct(id)) {
@@ -75,13 +78,13 @@ public class ProductDetailsController extends CommonController{
       }
     }
 
-    return new ModelAndView("redirect:/product/" + id);
+    return "redirect:/product/" + id;
   }
 
   @PostMapping("/rate")
-  private ModelAndView rateProduct(@RequestParam("rating") Integer rating, @RequestParam("productId") Integer id) {
+  private String rateProduct(@RequestParam("rating") Integer rating, @RequestParam("productId") Integer id) {
     if (!isThereLoggedInUser()) {
-      return new ModelAndView("redirect:/");
+      return "redirect:/";
     }
 
     if (didUserBuyProduct(id)) {
@@ -92,7 +95,7 @@ public class ProductDetailsController extends CommonController{
       productRepository.saveAndFlush(product);
     }
 
-    return new ModelAndView("redirect:/product/" + id);
+    return "redirect:/product/" + id;
   }
 
   @PostMapping("/addToWishlist")

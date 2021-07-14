@@ -18,10 +18,14 @@ public class ProfileController extends CommonController{
 
   @GetMapping("/profile")
   private String profilePage(Model model) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
     if (!isThereLoggedInUser()) {
-      return "redirect:/";
+      return "redirect:/login";
     }
+    
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     Iterable<Receipt> receiptOfUser = receiptRepository.getReceiptsByName(authentication.getName());

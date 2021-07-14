@@ -13,18 +13,20 @@ import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
   private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
     if (!isThereLoggedInUser() && cartRepository.getCartOfUser() == null) {
-      return "redirect:/";
+      return "redirect:/login";
     }
 
     Cart cart = cartRepository.getCartOfUser();
@@ -40,12 +42,12 @@ public class CheckoutController extends CommonController {
     return "checkout";
   }
 
-  @RequestMapping(value="/checkout", method=RequestMethod.POST)
-  private ModelAndView goCheckout() {
+  @PostMapping("/checkout")
+  private String goCheckout() {
     if (!isThereLoggedInUser() || 
         cartRepository.getCartOfUser() == null || 
         cartRepository.getCartOfUser().getCartProducts().isEmpty()) {
-      return new ModelAndView("redirect:/");
+      return "redirect:/";
     }
 
     Cart cart = cartRepository.getCartOfUser();
@@ -85,6 +87,6 @@ public class CheckoutController extends CommonController {
     cartRepository.removeProducts(cart.getCartOwner());
     receiptRepository.saveAndFlush(receipt);
     
-    return new ModelAndView("redirect:/profile");
+    return "redirect:/profile";
   }
 }

@@ -23,18 +23,25 @@
 
   <body>
     <div id="home">
-      <p>
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span
-          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
-        ></span>
+        <span th:text="${userFullname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
 
-      <button th:if="${crud == true}">
+      <button th:if="${userRole == false}">
+        <a th:href="@{/login}">Login</a>
+      </button>
+
+      <button th:if="${userRole == 'ADMIN'}">
         <a th:href="@{/crud}">GO TO CRUD</a>
       </button>
 

@@ -57,6 +57,22 @@
         0 6.3px 17.9px rgba(0, 0, 0, 0.066), 0 28px 80px rgba(0, 0, 0, 0.11);
     }
 
+    .product-tags {
+      display: inline;
+    }
+    .product-tags > div {
+      border-radius: 20px;
+      background-color: black;
+      font-size: 0.8rem;
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      height: 30px;
+      width: max-content;
+      padding: 3px 15px;
+      color: white;
+    }
+
     .exit-modal {
       place-self: right;
     }
@@ -64,14 +80,18 @@
 
   <body>
     <div id="home">
-      <p>
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
         <span
-          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+          th:text="${userFullname}"
         ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
       <button>
@@ -113,6 +133,7 @@
                     <tr>
                       <th>IMAGE</th>
                       <th>NAME</th>
+                      <th>TAGS</th>
                       <th>QUANTITY</th>
                       <th>PRICE</th>
                     </tr>
@@ -124,6 +145,13 @@
                         />
                       </td>
                       <td th:text="${product.productName}"></td>
+                      <td>
+                        <div class="product-tags">
+                          <div th:each="tag : ${product.tags}">
+                            <p th:text="${tag}"></p>
+                          </div>
+                        </div>
+                      </td>
                       <td th:text="${product.quantity}"></td>
                       <td th:text="${product.price}"></td>
                     </tr>
@@ -145,6 +173,7 @@
           <tr>
             <th>IMAGE</th>
             <th>NAME</th>
+            <th>TAGS</th>
             <th>CATEGORY</th>
             <th>STATUS</th>
             <th>PRICE</th>
@@ -157,13 +186,23 @@
               />
             </td>
             <td th:text="${product.productName}"></td>
+            <td>
+              <div class="product-tags">
+                <div th:each="tag : ${product.tags}">
+                  <p th:text="${tag}"></p>
+                </div>
+              </div>
+            </td>
             <td th:text="${product.category}"></td>
             <td th:text="${product.status}"></td>
             <td th:text="${'₱ ' + product.price}"></td>
             <td>
+              <button>
+                <a th:href="@{|/product/${product.id}|}">Go to product</a>
+              </button>
               <form th:action="@{/removeFromWishlist}" method="post">
                 <button type="submit" th:value="${product.id}" name="productId">
-                  remove
+                  Remove
                 </button>
               </form>
             </td>

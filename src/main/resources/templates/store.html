@@ -48,6 +48,13 @@
       align-items: center;
     }
 
+    #dropdown-categories {
+      display: grid;
+      gap: 10px;
+      height: 120px;
+      overflow: auto;
+    }
+
     input[id*="star-"] {
       display: none;
     }
@@ -56,11 +63,29 @@
       background-color: #0000002a;
     }
 
-    #dropdown-categories {
+    .product-tags {
+      display: inline;
+    }
+    .product-tags > div {
+      border-radius: 20px;
+      background-color: black;
+      font-size: 0.8rem;
       display: grid;
-      gap: 10px;
-      height: 120px;
-      overflow: auto;
+      justify-content: center;
+      align-content: center;
+      height: 30px;
+      width: max-content;
+      padding: 3px 15px;
+      color: white;
+    }
+
+    .clear-filters {
+      background-color: black;
+      color: white;
+      border-radius: 10px;
+      padding: 8px;
+      width: max-content;
+      cursor: pointer;
     }
   </style>
 
@@ -94,6 +119,7 @@
             value="outOfStock"
           />
           <label for="checkbox-outofstock">Out of stock</label>
+          <div class="clear-filters">Clear</div>
         </section>
         <section>
           <h4>RECOMMENDATION</h4>
@@ -107,25 +133,154 @@
           <label for="checkbox-bestSeller">Best Seller</label> <br />
         </section>
         <section>
-          <div th:if="${test1}" th:text="${test1}"></div>
-          <div th:if="${test2}" th:text="${test2}"></div>
+          <h4>BANDS</h4>
+          <input
+            type="checkbox"
+            th:checked="${GIDLE}"
+            name="gIdle"
+            id="checkbox-gIdle"
+            value="(G)I-DLE"
+          />
+          <label for="checkbox-gIdle">(G)I-DLE</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${BLACKPINK}"
+            name="blackpink"
+            id="checkbox-blackpink"
+            value="Blackpink"
+          />
+          <label for="checkbox-blackpink">Blackpink</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${BTS}"
+            name="bts"
+            id="checkbox-bts"
+            value="BTS"
+          />
+          <label for="checkbox-bts">BTS</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${DAY6}"
+            name="day6"
+            id="checkbox-day6"
+            value="Day6"
+          />
+          <label for="checkbox-day6">Day6</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${ENHYPEN}"
+            name="enhypen"
+            id="checkbox-enhypen"
+            value="ENHYPEN"
+          />
+          <label for="checkbox-enhypen">ENHYPEN</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${EXO}"
+            name="exo"
+            id="checkbox-exo"
+            value="EXO"
+          />
+          <label for="checkbox-exo">EXO</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${GIRLSGENERATION}"
+            name="girlsGeneration"
+            id="checkbox-girlsGeneration"
+            value="Girls Generation"
+          />
+          <label for="checkbox-girlsGeneration">Girls Generation</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${ITZY}"
+            name="itzy"
+            id="checkbox-itzy"
+            value="ITZY"
+          />
+          <label for="checkbox-itzy">ITZY</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${IU}"
+            name="iu"
+            id="checkbox-iu"
+            value="IU"
+          />
+          <label for="checkbox-iu">IU</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${MAMAMOO}"
+            name="mamamoo"
+            id="checkbox-mamamoo"
+            value="Mamamoo"
+          />
+          <label for="checkbox-mamamoo">Mamamoo</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${NCT}"
+            name="nct"
+            id="checkbox-nct"
+            value="NCT"
+          />
+          <label for="checkbox-nct">NCT</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${REDVELVET}"
+            name="redVelvet"
+            id="checkbox-redVelvet"
+            value="Red Velvet"
+          />
+          <label for="checkbox-redVelvet">Red Velvet</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${SEVENTEEN}"
+            name="seventeen"
+            id="checkbox-seventeen"
+            value="SEVENTEEN"
+          />
+          <label for="checkbox-seventeen">SEVENTEEN</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${STRAYKIDS}"
+            name="strayKids"
+            id="checkbox-strayKids"
+            value="Stray Kids"
+          />
+          <label for="checkbox-strayKids">Stray Kids</label> <br />
+          <input
+            type="checkbox"
+            th:checked="${TOMORROWXTOGETHER}"
+            name="tomorrowXTogether"
+            id="checkbox-tomorrowXTogether"
+            value="Tomorrow x Together"
+          />
+          <label for="checkbox-tomorrowXTogether">Tomorrow x Together</label>
+          <br />
+          <input
+            type="checkbox"
+            th:checked="${TWICE}"
+            name="twice"
+            id="checkbox-twice"
+            value="TWICE"
+          />
+          <label for="checkbox-twice">TWICE</label> <br />
+          <div class="clear-filters">Clear</div>
+        </section>
+        <section>
           <h4>CATEGORY</h4>
-          <div>
-            <input
-              type="checkbox"
-              th:checked="${ALBUMS}"
-              name="album"
-              id="checkbox-albums"
-              value="albums"
-            />
-            <label for="checkbox-albums">Albums</label> <br />
-          </div>
+          <input
+            type="checkbox"
+            th:checked="${ALBUMS}"
+            name="album"
+            id="checkbox-albums"
+            value="Albums"
+          />
+          <label for="checkbox-albums">Albums</label> <br />
           <input
             type="checkbox"
             th:checked="${DOLLS}"
             name="doll"
             id="checkbox-dolls"
-            value="dolls"
+            value="Dolls"
           />
           <label for="checkbox-dolls">Dolls</label> <br />
           <input
@@ -133,7 +288,7 @@
             th:checked="${IMAGEPICKETS}"
             name="imagePicket"
             id="checkbox-imagePickets"
-            value="imagePickets"
+            value="Image Pickets"
           />
           <label for="checkbox-imagePickets">Image Pickets</label> <br />
           <input
@@ -141,7 +296,7 @@
             th:checked="${LIGHTSTICKS}"
             name="lightStick"
             id="checkbox-lightSticks"
-            value="lightSticks"
+            value="Light Sticks"
           />
           <label for="checkbox-lightSticks">Light Sticks</label> <br />
           <input
@@ -149,7 +304,7 @@
             th:checked="${PACKAGES}"
             name="package"
             id="checkbox-packages"
-            value="packages"
+            value="Packages"
           />
           <label for="checkbox-packages">Packages</label> <br />
           <input
@@ -157,7 +312,7 @@
             th:checked="${PHONECASES}"
             name="phoneCase"
             id="checkbox-phoneCases"
-            value="phoneCases"
+            value="Phone Cases"
           />
           <label for="checkbox-phoneCases">Phone Cases</label> <br />
           <input
@@ -165,7 +320,7 @@
             th:checked="${PHOTOBOOKS}"
             name="photobook"
             id="checkbox-photobooks"
-            value="photobooks"
+            value="Photobooks"
           />
           <label for="checkbox-photobooks">Photobooks</label> <br />
           <input
@@ -173,7 +328,7 @@
             th:checked="${PHOTOCARDS}"
             name="photocard"
             id="checkbox-photocards"
-            value="photocards"
+            value="Photocards"
           />
           <label for="checkbox-photocards">Photocards</label> <br />
           <input
@@ -181,7 +336,7 @@
             th:checked="${POSTERS}"
             name="poster"
             id="checkbox-posters"
-            value="posters"
+            value="Posters"
           />
           <label for="checkbox-posters">Posters</label> <br />
           <input
@@ -189,7 +344,7 @@
             th:checked="${STICKERS}"
             name="sticker"
             id="checkbox-stickers"
-            value="stickers"
+            value="Stickers"
           />
           <label for="checkbox-stickers">Stickers</label> <br />
           <input
@@ -197,7 +352,7 @@
             th:checked="${KEYRINGS}"
             name="keyRing"
             id="checkbox-keyRings"
-            value="keyRings"
+            value="Key Rings"
           />
           <label for="checkbox-keyRings">Key Rings</label> <br />
           <input
@@ -205,9 +360,10 @@
             th:checked="${APPARELS}"
             name="apparel"
             id="checkbox-apparels"
-            value="apparels"
+            value="Apparels"
           />
-          <label for="checkbox-apparels">Apparel</label> <br />
+          <label for="checkbox-apparels">Apparels</label> <br />
+          <div class="clear-filters">Clear</div>
         </section>
         <section>
           <h4>PRICE RANGE</h4>
@@ -391,42 +547,42 @@
     </div>
 
     <div id="home">
-      <p>
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
         <span
           th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
         ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
 
       <div id="dropdown-categories">
-        <a th:href="@{|/store/1/addFilters?album=albums|}">Albums</a>
-        <a th:href="@{|/store/1/addFilters?doll=dolls|}">Dolls</a>
-        <a th:href="@{|/store/1/addFilters?imagePicket=imagePickets|}"
+        <a th:href="@{/store/1/addFilters?album=albums}">Albums</a>
+        <a th:href="@{/store/1/addFilters?doll=dolls}">Dolls</a>
+        <a th:href="@{/store/1/addFilters?imagePicket=imagePickets}"
           >Image Pickets</a
         >
-        <a th:href="@{|/store/1/addFilters?lightStick=lightSticks|}"
+        <a th:href="@{/store/1/addFilters?lightStick=lightSticks}"
           >Light Sticks</a
         >
-        <a th:href="@{|/store/1/addFilters?package=packages|}">Packages</a>
-        <a th:href="@{|/store/1/addFilters?phoneCase=phoneCases|}"
-          >Phone Cases</a
-        >
+        <a th:href="@{/store/1/addFilters?package=packages}">Packages</a>
+        <a th:href="@{/store/1/addFilters?phoneCase=phoneCases}">Phone Cases</a>
         <a
-          th:href="@{|/store/1/addFilters?photobook=photobooks|}"
+          th:href="@{/store/1/addFilters?photobook=photobooks}"
           onchange="location = this.value;"
           >Photobooks</a
         >
-        <a th:href="@{|/store/1/addFilters?photocard=photocards|}"
-          >Photocards</a
-        >
-        <a th:href="@{|/store/1/addFilters?poster=posters|}">Posters</a>
-        <a th:href="@{|/store/1/addFilters?sticker=stickers|}">Stickers</a>
-        <a th:href="@{|/store/1/addFilters?keyRing=KeyRings|}">Key Rings</a>
-        <a th:href="@{|/store/1/addFilters?apparel=apparels|}">Apparels</a>
+        <a th:href="@{/store/1/addFilters?photocard=photocards}">Photocards</a>
+        <a th:href="@{/store/1/addFilters?poster=posters}">Posters</a>
+        <a th:href="@{/store/1/addFilters?sticker=stickers}">Stickers</a>
+        <a th:href="@{/store/1/addFilters?keyRing=KeyRings}">Key Rings</a>
+        <a th:href="@{/store/1/addFilters?apparel=apparels}">Apparels</a>
       </div>
 
       <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
@@ -434,7 +590,7 @@
           type="text"
           name="storeSearch"
           id="input-search"
-          placeholder="Product name or Category"
+          placeholder="Product name, Category, or Band"
         />
         <button type="submit">search</button>
       </form>
@@ -450,6 +606,12 @@
             <h3 class="product-name" th:text="${product.productName}"></h3>
             <p class="product-category" th:text="${product.category}"></p>
             <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+
+            <div class="product-tags">
+              <div th:each="tag : ${product.tags}">
+                <p th:text="${tag}"></p>
+              </div>
+            </div>
 
             <div
               th:each="i : ${#numbers.sequence(1, product.rating)}"

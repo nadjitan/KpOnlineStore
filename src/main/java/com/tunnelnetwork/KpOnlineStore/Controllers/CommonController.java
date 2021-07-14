@@ -11,6 +11,7 @@ import com.tunnelnetwork.KpOnlineStore.DAO.ReceiptRepository;
 import com.tunnelnetwork.KpOnlineStore.DAO.VoucherRepository;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
+import com.tunnelnetwork.KpOnlineStore.Models.User;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 import com.tunnelnetwork.KpOnlineStore.User.UserService;
 
@@ -92,9 +93,33 @@ public class CommonController {
     return true;
   }
 
-  protected boolean hasRole (String roleName)
+  protected boolean hasRole(String roleName)
   {
     return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
             .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(roleName));
+  }
+
+  protected void getUserRole(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      model.addAttribute("userRole", false);
+    }
+    else {
+      model.addAttribute("userRole", SecurityContextHolder.
+          getContext().getAuthentication().getAuthorities().toString().replaceAll("[^a-zA-Z0-9]", ""));
+    }
+  }
+
+  protected void getUserFirstAndLastName(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+      model.addAttribute("userFullname", false);
+    }
+    else {
+      User user = userService.getUserByEmail(authentication.getName()).get();
+      model.addAttribute("userFullname", user.getFirstName() + " " + user.getLastName());
+    }
   }
 }

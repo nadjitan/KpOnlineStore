@@ -42,6 +42,12 @@ $(function () {
     prevRatingInput = input;
   });
 
+  $(".clear-filters").click(function () {
+    const inputs = $(this).parent();
+
+    inputs.find("input").prop("checked", false);
+  });
+
   $(
     'input[id*="input-price-"], #postal-code, #ccn, #security-code, #phone-number'
   ).keypress(function (e) {
