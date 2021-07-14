@@ -70,11 +70,18 @@
 
   <body>
     <div id="home">
-      <p>
-        Hello [[${#httpServletRequest.remoteUser}]]!
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
+        Hello
+        <span
+          th:text="${userFullname}"
+        ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
       <button>

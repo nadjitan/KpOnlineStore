@@ -6,6 +6,7 @@ import java.util.List;
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 import com.tunnelnetwork.KpOnlineStore.Models.Receipt;
+import com.tunnelnetwork.KpOnlineStore.Models.User;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,39 +14,54 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProductDetailsController extends CommonController{
   
   @GetMapping("/product/{id}")
   private String productPage(Model model, @PathVariable("id") long id) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
     if (!isThereLoggedInUser()) {
-      return "redirect:/";
+      return "redirect:/login";
+    }
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    User user = userService.getUserByEmail(authentication.getName()).get(); // Get name returns email
+
+    for (Product product : user.getWhishlist()) {
+      if (product == productRepository.getById(id)) {
+        model.addAttribute("inUserWishlist", true);
+
+        break;
+      }
+      else {
+        model.addAttribute("inUserWishlist", false);
+      }
     }
 
     model.addAttribute("maxRating", 5);
-    model.addAttribute("product", productService.getProduct(id));
+    model.addAttribute("product", productRepository.getProduct(id));
     model.addAttribute("didUserBuyProduct", didUserBuyProduct(id));
     return "product-details";
   }
 
-  @RequestMapping(value = "/comment", method=RequestMethod.POST)
-  @ResponseBody
-  private ModelAndView makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
+  @PostMapping("/comment")
+  private String makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
     if (!comment.isBlank()) {
       if (!isThereLoggedInUser()) {
-        return new ModelAndView("redirect:/");
+        return "redirect:/";
       }
 
       if (didUserBuyProduct(id)) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Product product = productService.getProduct(id);
+        Product product = productRepository.getProduct(id);
         Comment newComment = new Comment();
         
         newComment.setCommentUserId(0);
@@ -54,40 +70,63 @@ public class ProductDetailsController extends CommonController{
         newComment.setUpdatedAt(LocalDateTime.now());
         newComment.setUserName(authentication.getName());
 
-        commentService.save(newComment);
+        commentRepository.saveAndFlush(newComment);
 
         product.getComments().add(newComment);
 
-        productService.save(product);
+        productRepository.saveAndFlush(product);
       }
     }
 
-    return new ModelAndView("redirect:/product/" + id);
+    return "redirect:/product/" + id;
   }
 
-  @RequestMapping(value = "/rate", method=RequestMethod.POST)
-  @ResponseBody
-  private ModelAndView rateProduct(@RequestParam("rating") Integer rating, @RequestParam("productId") Integer id) {
+  @PostMapping("/rate")
+  private String rateProduct(@RequestParam("rating") Integer rating, @RequestParam("productId") Integer id) {
     if (!isThereLoggedInUser()) {
-      return new ModelAndView("redirect:/");
+      return "redirect:/";
     }
 
     if (didUserBuyProduct(id)) {
-      Product product = productService.getProduct(id);
+      Product product = productRepository.getProduct(id);
 
       product.setRating(rating);
 
-      productService.save(product);
+      productRepository.saveAndFlush(product);
     }
 
-    return new ModelAndView("redirect:/product/" + id);
+    return "redirect:/product/" + id;
+  }
+
+  @PostMapping("/addToWishlist")
+  private String addToWishlist(@RequestParam("productId") long productId) {
+    if (!isThereLoggedInUser()) {
+      return "redirect:/";
+    }
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    User user = userService.getUserByEmail(authentication.getName()).get(); // Get name returns email
+
+    if (!isProductInWishlisht(productId)) {
+      user.getWhishlist().add(productRepository.getById(productId));
+
+      userService.saveUser(user);
+    }
+    else {
+      user.getWhishlist().remove(productRepository.getById(productId));
+
+      userService.saveUser(user);
+    }
+    
+    return "redirect:/product/" + productId;
   }
 
   private boolean didUserBuyProduct(long id) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    Iterable<Receipt> receiptOfUSer = receiptService.getReceiptsByName(authentication.getName());
-    Product productToCheck = productService.getProduct(id);
+    Iterable<Receipt> receiptOfUSer = receiptRepository.getReceiptsByName(authentication.getName());
+    Product productToCheck = productRepository.getProduct(id);
 
     if (receiptOfUSer != null) {
       for (Receipt receipt : receiptOfUSer) {
@@ -101,6 +140,20 @@ public class ProductDetailsController extends CommonController{
       }
     } else {
       return false;
+    }
+
+    return false;
+  }
+
+  private boolean isProductInWishlisht(long productId) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    User user = userService.getUserByEmail(authentication.getName()).get(); // Get name returns email
+
+    for (Product product : user.getWhishlist()) {
+      if (product.getId() == productId) {
+        return true;
+      }
     }
 
     return false;

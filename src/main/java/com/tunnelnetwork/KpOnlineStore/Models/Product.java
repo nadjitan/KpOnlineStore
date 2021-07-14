@@ -44,6 +44,7 @@ public class Product {
   private String status;
   private String image;
   private Integer rating;
+  private Integer numberOfSold;
   private String[] tags;
 
   @Lob

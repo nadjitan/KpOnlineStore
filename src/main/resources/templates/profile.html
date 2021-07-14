@@ -57,6 +57,22 @@
         0 6.3px 17.9px rgba(0, 0, 0, 0.066), 0 28px 80px rgba(0, 0, 0, 0.11);
     }
 
+    .product-tags {
+      display: inline;
+    }
+    .product-tags > div {
+      border-radius: 20px;
+      background-color: black;
+      font-size: 0.8rem;
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      height: 30px;
+      width: max-content;
+      padding: 3px 15px;
+      color: white;
+    }
+
     .exit-modal {
       place-self: right;
     }
@@ -64,11 +80,18 @@
 
   <body>
     <div id="home">
-      <p>
-        Hello [[${#httpServletRequest.remoteUser}]]!
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
+        Hello
+        <span
+          th:text="${userFullname}"
+        ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
       <button>
@@ -77,7 +100,7 @@
 
       <div id="orders-table">
         <h2 id="orders-title">ORDER HISTORY</h2>
-
+        <div th:if="${receiptList.empty}">You have no orders</div>
         <table>
           <tr class="orders-header">
             <th>REF NO.</th>
@@ -108,12 +131,27 @@
                   <button type="reset" class="exit-modal">X</button>
                   <table class="modal">
                     <tr>
+                      <th>IMAGE</th>
                       <th>NAME</th>
+                      <th>TAGS</th>
                       <th>QUANTITY</th>
                       <th>PRICE</th>
                     </tr>
                     <tr th:each="product : ${receipt.productList}">
+                      <td>
+                        <img
+                          th:alt="${product.productName + '-img.png'}"
+                          th:src="${product.image}"
+                        />
+                      </td>
                       <td th:text="${product.productName}"></td>
+                      <td>
+                        <div class="product-tags">
+                          <div th:each="tag : ${product.tags}">
+                            <p th:text="${tag}"></p>
+                          </div>
+                        </div>
+                      </td>
                       <td th:text="${product.quantity}"></td>
                       <td th:text="${product.price}"></td>
                     </tr>
@@ -128,7 +166,49 @@
         </table>
       </div>
 
-      <div th:if="${receiptList.empty}">You have no orders</div>
+      <div class="" id="wishlist-table">
+        <h2 id="orders-title">WISHLIST</h2>
+        <p th:if="${wishlist.isEmpty}">There are no items in your wishlist.</p>
+        <table>
+          <tr>
+            <th>IMAGE</th>
+            <th>NAME</th>
+            <th>TAGS</th>
+            <th>CATEGORY</th>
+            <th>STATUS</th>
+            <th>PRICE</th>
+          </tr>
+          <tr th:each="product : ${wishlist}">
+            <td>
+              <img
+                th:alt="${product.productName + '-img.png'}"
+                th:src="${product.image}"
+              />
+            </td>
+            <td th:text="${product.productName}"></td>
+            <td>
+              <div class="product-tags">
+                <div th:each="tag : ${product.tags}">
+                  <p th:text="${tag}"></p>
+                </div>
+              </div>
+            </td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.status}"></td>
+            <td th:text="${'₱ ' + product.price}"></td>
+            <td>
+              <button>
+                <a th:href="@{|/product/${product.id}|}">Go to product</a>
+              </button>
+              <form th:action="@{/removeFromWishlist}" method="post">
+                <button type="submit" th:value="${product.id}" name="productId">
+                  Remove
+                </button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>

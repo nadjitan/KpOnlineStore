@@ -1,28 +1,30 @@
 package com.tunnelnetwork.KpOnlineStore;
 
-import org.springframework.context.annotation.Bean;
+import com.tunnelnetwork.KpOnlineStore.User.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 // import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
+import lombok.AllArgsConstructor;
+
 @Configuration
-@EnableWebSecurity 
+@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+  private final UserService userService;
 
-  @Bean
-	public InMemoryUserDetailsManager getInMemoryUserDetailsManager() {
-    return new InMemoryUserDetailsManager();
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+  @Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userService)
+				.passwordEncoder(bCryptPasswordEncoder);
 	}
 
   // @Override
@@ -37,6 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     http
       .authorizeRequests()
         .antMatchers(
+          "/",
+          "/removeFromWishlist/**",
+          "/addToWishlist/**",
+          "/forgot-password/**",
+          "/change-password/**",
+          "/sign-up/**",
           "/crud/**",
           "/contact-us/**",
           "/about-us/**",
@@ -48,10 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
           "/js/**",
           "/css/**",
           "/img/**").permitAll()
-        .antMatchers(HttpMethod.POST, "/signup").permitAll()
         .antMatchers(HttpMethod.POST, "/addproduct").permitAll()
         .antMatchers(HttpMethod.POST, "/removeProduct").permitAll()
-        .antMatchers(HttpMethod.GET, "/signup").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()

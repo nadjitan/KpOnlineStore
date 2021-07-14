@@ -13,42 +13,44 @@ import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
   private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
-    if (!isThereLoggedInUser() && cartService.getCartOfUser() == null) {
-      return "redirect:/";
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
+    if (!isThereLoggedInUser() && cartRepository.getCartOfUser() == null) {
+      return "redirect:/login";
     }
 
-    Cart cart = cartService.getCartOfUser();
+    Cart cart = cartRepository.getCartOfUser();
     if (check.isPresent()) {
       cart.setUseVoucher(1);
     } else {
       cart.setUseVoucher(0);
     }
 
-    cartService.save(cart);
+    cartRepository.saveAndFlush(cart);
 
     model.addAttribute("cart", cart);
     return "checkout";
   }
 
-  @RequestMapping(value="/checkout", method=RequestMethod.POST)
-  private ModelAndView goCheckout() {
+  @PostMapping("/checkout")
+  private String goCheckout() {
     if (!isThereLoggedInUser() || 
-        cartService.getCartOfUser() == null || 
-        cartService.getCartOfUser().getCartProducts().isEmpty()) {
-      return new ModelAndView("redirect:/");
+        cartRepository.getCartOfUser() == null || 
+        cartRepository.getCartOfUser().getCartProducts().isEmpty()) {
+      return "redirect:/";
     }
 
-    Cart cart = cartService.getCartOfUser();
+    Cart cart = cartRepository.getCartOfUser();
     Receipt receipt = new Receipt();
 
     List<Product> cartProductList = cart.getCartProducts();
@@ -56,6 +58,11 @@ public class CheckoutController extends CommonController {
 
     for (Product product : cartProductList) {
       receiptProductList.add(product);
+
+      Product productFromDB = productRepository.getProduct(product.getId());
+      productFromDB.setNumberOfSold(productFromDB.getNumberOfSold() + product.getQuantity());
+
+      productRepository.saveAndFlush(productFromDB);
     }
     
     receipt.setCreatedAt(LocalDateTime.now());
@@ -72,14 +79,14 @@ public class CheckoutController extends CommonController {
         receiptVoucherList.add(voucher);
       }
 
-      cartService.removeVouchers(cart.getCartOwner());
+      cartRepository.removeVouchers(cart.getCartOwner());
 
       receipt.setVoucherList(receiptVoucherList);
     }
 
-    cartService.removeProducts(cart.getCartOwner());
-    receiptService.save(receipt);
+    cartRepository.removeProducts(cart.getCartOwner());
+    receiptRepository.saveAndFlush(receipt);
     
-    return new ModelAndView("redirect:/profile");
+    return "redirect:/profile";
   }
 }
