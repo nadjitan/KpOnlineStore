@@ -29,7 +29,8 @@ public class Comment {
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
 
-  private long userId;
+  private long commentUserId;
+  private String userName;
   private String userComment;
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

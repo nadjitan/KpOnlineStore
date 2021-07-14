@@ -5,7 +5,10 @@
   <body>
     <div id="home">
       <p>
-        Hello [[${#httpServletRequest.remoteUser}]]!
+        Hello
+        <span
+          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+        ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       <form th:action="@{/logout}" method="POST">

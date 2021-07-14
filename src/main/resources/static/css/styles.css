@@ -23,6 +23,10 @@ a {
   color: black;
 }
 
+button {
+  cursor: pointer;
+}
+
 #home {
   width: 100%;
 }

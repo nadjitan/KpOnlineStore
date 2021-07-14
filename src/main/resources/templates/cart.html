@@ -5,7 +5,10 @@
   <body>
     <div id="home">
       <p>
-        Hello [[${#httpServletRequest.remoteUser}]]!
+        Hello
+        <span
+          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+        ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       <form th:action="@{/logout}" method="POST">
@@ -36,9 +39,9 @@
             th:text="${'Discounted Total: ₱ ' + cart.getDiscountedPrice()}"
           ></p>
 
-          <button>
-            <a th:href="@{/checkout}">PROCEED TO CHECKOUT</a>
-          </button>
+          <form th:action="@{/checkout}" method="GET" id="proceed-form">
+            <button type="submit">PROCEED TO CHECKOUT</button>
+          </form>
         </div>
       </div>
 
@@ -51,11 +54,20 @@
           <p
             th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}"
           ></p>
+          <label for="use-voucher">Use Voucher</label>
+          <input
+            type="checkbox"
+            name="useVoucher"
+            id="use-voucher"
+            checked="checked"
+            form="proceed-form"
+            value="1"
+          />
         </div>
       </div>
 
       <button>
-        <a th:href="@{/store}">BACK TO STORE</a>
+        <a th:href="@{/store/1}">BACK TO STORE</a>
       </button>
     </div>
 

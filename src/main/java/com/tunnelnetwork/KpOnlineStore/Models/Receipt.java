@@ -75,4 +75,17 @@ public class Receipt {
 
     return sum;
   }
+
+  @Transient
+  public double getDiscountedPrice() {
+    double s = 0;
+    double finalPrice = getTotalOrderPrice();
+
+    for (Voucher voucher : voucherList) {
+      s = 100 - voucher.getDiscount(); 
+      finalPrice = (s * finalPrice) / 100;
+    }
+
+    return finalPrice;
+  }
 }

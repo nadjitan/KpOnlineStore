@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="../fragments/header"></head>
+
+  <style>
+    #products-table {
+      height: 70vh;
+      overflow-y: scroll;
+    }
+
+    table {
+      z-index: 1;
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    .form-bg {
+      z-index: 49;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.308);
+      display: none;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .modal {
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      position: relative;
+      padding: 20px;
+      box-shadow: 0 1.9px 5.3px rgba(0, 0, 0, 0.044),
+        0 6.3px 17.9px rgba(0, 0, 0, 0.066), 0 28px 80px rgba(0, 0, 0, 0.11);
+      background-color: white;
+    }
+
+    .add-product {
+      display: none;
+      position: absolute;
+    }
+
+    .modal label {
+      margin: 15px 0px 0px 0px;
+      place-self: start;
+    }
+
+    .modal button[type="submit"] {
+      justify-self: center;
+    }
+
+    .crud-results {
+      background-color: greenyellow;
+      padding: 1.2rem;
+      border-radius: 20px;
+      text-align: center;
+    }
+  </style>
+
+  <body>
+    <div id="home">
+      <p>
+        Hello
+        <span
+          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+        ></span>
+        <button><a th:href="@{/profile}">PROFILE</a></button>
+      </p>
+      <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" class="submit" />
+      </form>
+      <button>
+        <a th:href="@{/store/1}" style="margin-top: 20px">GO TO STORE</a>
+      </button>
+
+      <form th:action="@{/crud/create}" method="POST" class="modal add-product">
+        <button type="reset" class="exit-modal-add-product">X</button>
+        <label for="product-name">Product Name</label>
+        <input type="text" name="productName" id="product-name" />
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" />
+        <label for="category">Category</label>
+        <input type="text" name="category" id="category" />
+        <label for="price">Price</label>
+        <input type="text" name="price" id="price" />
+        <label for="status">Status</label>
+        <input type="text" name="status" id="status" />
+        <label for="image">Image</label>
+        <input type="text" name="image" id="image" />
+        <label for="tags">Tags</label>
+        <input type="text" name="tags" id="tags" />
+        <input type="hidden" name="rating" value="5" />
+        <button type="submit">SAVE</button>
+      </form>
+      <button class="btn-add">ADD PRODUCT</button>
+
+      <div
+        class="crud-results"
+        th:if="${crudStatus}"
+        th:text="${crudStatus}"
+      ></div>
+
+      <div id="products-table">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>PRODUCT NAME</th>
+            <th>DESCRIPTION</th>
+            <th>CATEGORY</th>
+            <th>PRICE</th>
+            <th>STATUS</th>
+            <th>IMAGE</th>
+            <th>TAGS</th>
+            <th>CREATED AT</th>
+            <th>UPDATED AT</th>
+            <th>CONTROLS</th>
+          </tr>
+          <tr class="product" th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.status}"></td>
+            <td th:text="${product.image}"></td>
+            <td>
+              <p th:each="tag : ${product.tags}" th:text="${tag}"></p>
+            </td>
+            <td
+              th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH-MM')}"
+            ></td>
+            <td
+              th:text="${#temporals.format(product.updatedAt, 'yyyy-MM-dd HH-MM')}"
+            ></td>
+            <td>
+              <div class="form-bg">
+                <form
+                  th:action="@{/crud/update}"
+                  method="POST"
+                  class="modal"
+                  modelAttribute="product"
+                >
+                  <button type="reset" class="exit-modal">X</button>
+                  <input type="hidden" name="id" th:value="${product.id}" />
+                  <input
+                    type="hidden"
+                    name="createdAt"
+                    th:value="${product.createdAt}"
+                  />
+                  <label for="product-name">Product Name</label>
+                  <input
+                    type="text"
+                    name="productName"
+                    id="product-name"
+                    th:value="${product.productName}"
+                  />
+                  <label for="description">Description</label>
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    th:value="${product.description}"
+                  />
+                  <label for="category">Category</label>
+                  <input
+                    type="text"
+                    name="category"
+                    id="category"
+                    th:value="${product.category}"
+                  />
+                  <label for="price">Price</label>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    th:value="${product.price}"
+                  />
+                  <label for="status">Status</label>
+                  <input
+                    type="text"
+                    name="status"
+                    id="status"
+                    th:value="${product.status}"
+                  />
+                  <label for="image">Image</label>
+                  <input
+                    type="text"
+                    name="image"
+                    id="image"
+                    th:value="${product.image}"
+                  />
+                  <label for="tags">Tags</label>
+                  <input
+                    type="text"
+                    name="tags"
+                    id="tags"
+                    th:value="${product.tags}"
+                  />
+                  <button type="submit">UPDATE</button>
+                </form>
+              </div>
+              <button class="btn-edit">Edit</button>
+
+              <div class="form-bg">
+                <form
+                  th:action="@{/crud/delete}"
+                  method="post"
+                  class="modal delete"
+                >
+                  <button type="reset" class="exit-modal">X</button>
+                  <h3 th:text="${product.id}"></h3>
+                  <h2 th:text="${product.productName}"></h2>
+                  <button type="submit" name="id" th:value="${product.id}">
+                    DELETE
+                  </button>
+                </form>
+              </div>
+              <button class="btn-delete">Delete</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- <div th:if="${products.empty}">There are no products</div> -->
+    </div>
+
+    <div th:replace="../fragments/footer.html"></div>
+  </body>
+</html>

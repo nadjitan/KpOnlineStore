@@ -4,14 +4,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -41,12 +44,16 @@ public class Product {
   private String status;
   private String image;
   private Integer rating;
+  private Integer numberOfSold;
   private String[] tags;
 
   @Lob
   private Integer quantity;
 
   @Embedded
+  @ElementCollection
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name="product_id")
   @JsonDeserialize(using = CommentDeserializer.class)
   private List<Comment> comments = new ArrayList<Comment>();
 

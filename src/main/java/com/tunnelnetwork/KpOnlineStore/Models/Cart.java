@@ -41,6 +41,7 @@ public class Cart {
   @Embedded
   @ElementCollection
   private List<Voucher> vouchers = new ArrayList<Voucher>();
+  private int useVoucher = 0;
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
   private LocalDateTime createdAt;

@@ -11,12 +11,14 @@
         You have successfully logged out!
       </p>
 
+      <p th:if="${passwordStatus}" th:text="${passwordStatus}" class="success"></p>
+
       <p th:if="${userCreated}" th:text="${userCreated}" class="success"></p>
 
       <label for="username"></label>
       <input
         type="text"
-        placeholder="Enter username"
+        placeholder="Enter email"
         name="username"
         id="username"
       />
@@ -28,7 +30,8 @@
         name="password"
         id="password"
       />
-      <a href="/signup">Don't have an account?</a>
+      <a href="/sign-up">Don't have an account?</a>
+      <a href="/forgot-password">Forgot password?</a>
       <input type="submit" value="Login" class="submit" />
     </form>
   </body>

@@ -3,7 +3,7 @@
   <head th:replace="../fragments/header"> </head>
 
   <body>
-    <form th:action="@{/signup}" method="POST" id="signup">
+    <form th:action="@{/sign-up}" method="POST" id="signup">
       <h1>SIGN UP</h1>
 
       <p
@@ -12,22 +12,20 @@
         th:text="${userNotCreated}"
       ></p>
 
-      <label for="username"></label>
-      <input
-        type="text"
-        placeholder="Enter username"
-        name="username"
-        id="username"
-      />
-      <label for="password"></label>
-      <input
-        type="password"
-        placeholder="Enter password"
-        name="password"
-        id="password"
-      />
+      <label>First Name</label>
+      <input type="text" id="name" name="firstName" />
+
+      <label>Last Name</label>
+      <input type="text" id="surname" name="lastName" />
+
+      <label>Email</label>
+      <input type="text" id="email" name="email" />
+
+      <label>Password</label>
+      <input type="password" id="password" name="password" />
 
       <a href="/login">Already have an account?</a>
+
       <input type="submit" value="Sign up" class="submit" />
     </form>
   </body>

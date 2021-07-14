@@ -3,80 +3,134 @@
   <head th:replace="../fragments/header"></head>
 
   <style>
-    /* Ayos ba Jeremy? */
-    /*         - Nadji */
     #orders-title {
       place-self: start;
     }
 
     #orders-table {
-      width: 60%;
-      display: grid;
-      place-items: center;
+      height: 60vh;
+      width: 70%;
+      overflow-y: auto;
     }
 
-    section[class*="orders-"] {
-      padding: 0px 20px;
+    table {
+      z-index: 1;
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
       width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    .product-bg {
+      z-index: 49;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.308);
+      display: none;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .modal {
+      z-index: 50;
       display: grid;
-      align-items: center;
-      grid-gap: 1rem;
-      grid-template-columns: repeat(6, 0.5fr);
+      width: max-content;
+      place-items: center;
+      position: relative;
+      padding: 20px;
     }
 
-    section[class*="orders-"] > p,
-    section[class*="orders-"] > h4 {
-      min-width: 90%;
-      overflow-wrap: break-word;
+    .product-bg > div {
+      display: grid;
+      background-color: white;
+      padding: 15px;
+      box-shadow: 0 1.9px 5.3px rgba(0, 0, 0, 0.044),
+        0 6.3px 17.9px rgba(0, 0, 0, 0.066), 0 28px 80px rgba(0, 0, 0, 0.11);
     }
 
-    section.orders-header {
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-
-    section.orders-row {
-      font-size: 0.8rem;
+    .exit-modal {
+      place-self: right;
     }
   </style>
 
   <body>
     <div id="home">
       <p>
-        Hello [[${#httpServletRequest.remoteUser}]]!
+        Hello
+        <span
+          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+        ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       <form th:action="@{/logout}" method="POST">
         <input type="submit" value="Logout" class="submit" />
       </form>
       <button>
-        <a th:href="@{/store}" style="margin-top: 20px">GO TO STORE</a>
+        <a th:href="@{/store/1}" style="margin-top: 20px">GO TO STORE</a>
       </button>
 
       <div id="orders-table">
         <h2 id="orders-title">ORDER HISTORY</h2>
-        <section class="orders-header">
-          <h4>REF NO.</h4>
-          <h4>DATE</h4>
-          <h4>PRICE</h4>
-          <h4>VOUCHER</h4>
-          <h4>STATUS</h4>
-          <h4>DETAILS</h4>
-        </section>
-        <section class="orders-row" th:each="receipt : ${receiptList}">
-          <p th:text="${receipt.id}"></p>
-          <p
-            th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"
-          ></p>
-          <p th:text="${'₱ ' + receipt.getTotalOrderPrice()}"></p>
-          <div th:each="voucher : ${receipt.voucherList}">
-            <p th:text="${voucher.voucherName}"></p>
-          </div>
-          <p th:if="${receipt.voucherList.empty}">No voucher used</p>
-          <p>pending</p>
-          <img src="#" alt="eye-icon.png" />
-        </section>
+
+        <table>
+          <tr class="orders-header">
+            <th>REF NO.</th>
+            <th>DATE</th>
+            <th>PRICE</th>
+            <th>VOUCHER</th>
+            <th>STATUS</th>
+            <th>DETAILS</th>
+          </tr>
+          <tr class="orders-row" th:each="receipt : ${receiptList}">
+            <td><p th:text="${receipt.id}"></p></td>
+            <td>
+              <p
+                th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"
+              ></p>
+            </td>
+            <td><p th:text="${'₱ ' + receipt.getDiscountedPrice()}"></p></td>
+            <td>
+              <div th:each="voucher : ${receipt.voucherList}">
+                <p th:text="${voucher.voucherName}"></p>
+              </div>
+              <p th:if="${receipt.voucherList.empty}">No voucher used</p>
+            </td>
+            <td><p>pending</p></td>
+            <td>
+              <div class="product-details product-bg">
+                <div>
+                  <button type="reset" class="exit-modal">X</button>
+                  <table class="modal">
+                    <tr>
+                      <th>NAME</th>
+                      <th>QUANTITY</th>
+                      <th>PRICE</th>
+                    </tr>
+                    <tr th:each="product : ${receipt.productList}">
+                      <td th:text="${product.productName}"></td>
+                      <td th:text="${product.quantity}"></td>
+                      <td th:text="${product.price}"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <button class="btn-product-details">
+                <img src="#" alt="eye-icon.png" />
+              </button>
+            </td>
+          </tr>
+        </table>
       </div>
+
       <div th:if="${receiptList.empty}">You have no orders</div>
     </div>
 
