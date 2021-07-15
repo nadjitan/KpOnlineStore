@@ -10,6 +10,12 @@ a {
   color: black;
 }
 
+h1 {
+  font-size: 18px !important;
+  font-family: Poppins Medium;
+  color: black;
+}
+
 h2 {
   font-size: 15px !important;
   font-family: Poppins Medium;
@@ -41,6 +47,10 @@ input:-webkit-autofill:active
 
 .mr-auto, .mx-auto {
   margin-right: auto!important;
+}
+
+a:focus.dropdown-item{
+  background-color:#B85C5C !important;
 }
 
 .defaultMargin {
@@ -131,6 +141,14 @@ input:-webkit-autofill:active
   background-color: #F5F5F5;
 }
 
+.accountName {
+  max-width: 3ch;
+}
+
+.dropdown-item {
+  text-transform: capitalize !important;
+}
+
 #home {
   width: 100%;
 }
@@ -169,4 +187,3 @@ input:-webkit-autofill:active
   place-self: center;
   margin-left: auto;
 }
-

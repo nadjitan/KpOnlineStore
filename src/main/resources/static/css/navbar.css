@@ -5,11 +5,33 @@
 .main-navbar,
 .category-navbar {
   height: 70px;
+  background-color: white !important;
  }
   
 .main-navbar {
   z-index: 1022;
   align-items: flex-end;
+}
+
+.navbar-brand {
+  color: #B85C5C !important;
+}
+
+.navbar-brand-margin {
+    width: 290px;
+}
+
+.nav-link {
+  color: black !important;
+  font-family: Poppins Medium;
+  font-size: 15px;
+  transition: 0.25s;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.nav-link:hover {
+  color: #B85C5C !important;
 }
   
 .search-nav,
@@ -21,6 +43,65 @@
   display: flex;
 }
 
+.search-bar {
+  border: 1px solid #FAE1E1;
+  padding: 7px 30px 7px 30px;
+  color: #CEC5C6;
+  font-size: 15px;
+  border-radius: 25px 0px 0px 25px;
+}
+
+.search-bar:focus {
+  color: #24252B;
+  background-color:white !important;
+}
+
+.search-button {
+  font-family: Poppins Medium;
+  background-color: #FAE1E1;
+  color: #B85C5C;
+  border-radius: 0px 25px 25px 0px;
+  border: 0px;
+  padding: 7px 30px 7px 30px;
+  transition: 0.25s;
+}
+
+.search-button:hover {
+  background-color: #B85C5C;
+  color: white;
+}
+
 .footer {
-    background-color: white;
+  background-color: white;
+}
+
+.account-Button,
+.cart-Button {
+  width: 100%;
+  padding: 10px 35px 10px 35px !important;
+  font-size: 15px !important;
+  font-family: Poppins Medium;
+  border-radius: 25px;
+  transition: 0.25s;
+}
+
+.account-Button {
+  border: 1px solid #FAE1E1;
+  color: #B85C5C !important;
+  background-color: #FAE1E1;
+}
+
+.account-Button:hover {
+  color: white !important;
+  background-color: #B85C5C;
+}
+
+.cart-Button {
+  border: white;
+  color: black;
+  background-color: white;
+}
+
+.dropdown-menu {
+  border: none !important;
 }
