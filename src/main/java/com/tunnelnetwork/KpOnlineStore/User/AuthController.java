@@ -111,6 +111,10 @@ public class AuthController extends CommonController{
 
     getUserFirstAndLastName(model);
 
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+    
 		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
 		if (optionalConfirmationToken.isPresent()) {
