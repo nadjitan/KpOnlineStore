@@ -27,6 +27,10 @@ public class CartController extends CommonController{
   // Shopping cart buttons logic
   @PostMapping("/addProduct")
   private String addProduct(@RequestParam("productId") long id, @RequestParam("productQuantity") Integer productQuantity) {
+    if (!isThereLoggedInUser()) {
+      return "redirect:/login";
+    }
+    
     if (!cartRepository.isProductInCart(id)) {
       cartRepository.addToCart(productRepository.getProduct(id), productQuantity);
     }
