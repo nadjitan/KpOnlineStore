@@ -1,0 +1,23 @@
+.footer {
+    height: 314px;
+}
+  
+.main-navbar,
+.category-navbar {
+  height: 70px;
+ }
+  
+.main-navbar {
+  z-index: 1022;
+  align-items: flex-end;
+}
+  
+.search-nav,
+.search-form {
+  width: 100%;
+}
+  
+.search-form {
+  display: flex;
+}
+  

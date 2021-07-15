@@ -2,11 +2,47 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh !important;
+  font-family: Poppins Regular;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+h2 {
+  font-size: 15px !important;
+  font-family: Poppins Medium;
+  color: #4E7FA1;
+}
+
+input:focus { 
+  outline: none !important;
+  border-color: black;
+}
+
+textarea:focus { 
+  outline: none !important;
+  border-color: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #CEC5C6;
+  opacity: 1; /* Firefox */
+}
+
+
+
+.mr-auto, .mx-auto {
+  margin-right: auto!important;
 }
 
 .defaultMargin {
@@ -19,34 +55,35 @@ a {
   min-height: calc(100vh - 314px) !important;
 }
 
-.footer {
-  height: 314px;
-}
-
-.main-navbar {
-  height: 108px;
-}
-
-.category-navbar {
-  height: 70px;
-  align-items: flex-start;
-}
-
-.search-nav,
-.search-form {
+.form-style {
   width: 100%;
+  padding: 10px 25px 10px 25px;
+  font-size: 13px;
+  font-family: Poppins Light;
+  color: black;
+  border: 1px solid #CEC5C6;
+  border-radius: 25px;
 }
 
-.search-form {
-  display: flex;
+.error,
+.success {
+  width: 100%;
+  padding: 5px;
+  font-size: 13px;
+  font-family: Poppins Regular;
+  border-radius: 25px;
+  border: 1px solid;
+  text-align: center;
 }
 
-h1 {
-  font-size: 2em !important;
+.error {
+  color: #B85C5C;
+  border-color: #B85C5C;
 }
 
-.mr-auto, .mx-auto {
-  margin-right: auto!important;
+.success {
+  color: #4E7FA1;
+  border-color: #4E7FA1;
 }
 
 #home {
@@ -86,42 +123,5 @@ h1 {
 #cart > .cart-total {
   place-self: center;
   margin-left: auto;
-}
-
-#login > input,
-#signup > input {
-  margin-bottom: 1.2em;
-  padding: 1em 1em;
-  width: 12em;
-}
-
-#login > a,
-#signup > a {
-  margin-bottom: 0.8em;
-  font-size: 0.8em;
-  text-decoration: none;
-}
-
-.submit {
-  cursor: pointer;
-  padding: 0.8em 1em;
-  width: 8em;
-}
-
-.error,
-.success {
-  width: max-content;
-  padding: 1em 1.2em 1em 1.2em;
-  font-weight: bold;
-  margin-bottom: 1em;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  font-size: 0.7em;
-  color: white;
-  background-color: rgb(214, 69, 69);
-}
-
-.success {
-  background-color: rgb(36, 199, 36);
 }
 
