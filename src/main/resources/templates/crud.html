@@ -73,7 +73,7 @@
       <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
         <span
-          th:text="${userFullname}"
+          th:text="${userFirstname + ' ' + userLastname}"
         ></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>

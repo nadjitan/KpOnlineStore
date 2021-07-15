@@ -100,9 +100,8 @@ public class CommonController {
   }
 
   protected void getUserRole(Model model) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    if (!isThereLoggedInUser()) {
       model.addAttribute("userRole", false);
     }
     else {
@@ -114,12 +113,10 @@ public class CommonController {
   protected void getUserFirstAndLastName(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-      model.addAttribute("userFullname", false);
-    }
-    else {
+    if (isThereLoggedInUser()) {
       User user = userService.getUserByEmail(authentication.getName()).get();
-      model.addAttribute("userFullname", user.getFirstName() + " " + user.getLastName());
+      model.addAttribute("userFirstname", user.getFirstName());
+      model.addAttribute("userLastname", user.getLastName());
     }
   }
 }

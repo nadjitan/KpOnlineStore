@@ -36,7 +36,10 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newProductList);
 
-    createCartAndVoucher(model);
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
     model.addAttribute("uri", null);
     return "store";
   }
@@ -78,7 +81,10 @@ public class StoreController extends CommonController{
     pagination(model, changePage, newDividedProductList, newProductList);
 
     model.addAttribute("products", newDividedProductList);
-    createCartAndVoucher(model);
+
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
     
     // uri to put in our page buttons
     model.addAttribute("uri", "storeSearch?" + request.getQueryString());
@@ -302,7 +308,10 @@ public class StoreController extends CommonController{
     pagination(model, changePage, newDividedProductList, removeDuplicatesProductList);
 
     model.addAttribute("products", newDividedProductList);
-    createCartAndVoucher(model);
+    
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
 
     // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());

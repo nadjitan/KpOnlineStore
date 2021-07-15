@@ -599,10 +599,11 @@
         <div th:if="${products.empty}">No products available</div>
         <div class="product" th:each="product : ${products}">
           <a th:href="@{|/product/${product.id}|}">
-            <img
+            <!-- <img
               th:src="${product.image}"
               th:alt="${product.productName + '-img.png'}"
-            />
+            /> -->
+            <img th:alt="${product.productName + '-img.png'}" />
             <h3 class="product-name" th:text="${product.productName}"></h3>
             <p class="product-category" th:text="${product.category}"></p>
             <p class="product-price" th:text="${'₱ ' + product.price}"></p>
@@ -672,7 +673,7 @@
         </button>
       </div>
 
-      <button>
+      <button th:if="${cart}">
         <a
           th:href="@{/cart/home}"
           th:text="${'GO TO CART ('+ cart.getNumberOfProducts() + ')'}"

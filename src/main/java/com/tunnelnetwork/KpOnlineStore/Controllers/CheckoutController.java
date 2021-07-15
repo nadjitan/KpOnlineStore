@@ -43,13 +43,33 @@ public class CheckoutController extends CommonController {
   }
 
   @PostMapping("/checkout")
-  private String goCheckout() {
+  private String goCheckout(
+    @RequestParam("firstName") Optional<String> firstName,
+    @RequestParam("lastName") Optional<String> lastName,
+    @RequestParam("address") Optional<String> address,
+    @RequestParam("region") Optional<String> region,
+    @RequestParam("city") Optional<String> city,
+    @RequestParam("postalCode") Optional<Integer> postalCode,
+    @RequestParam("phoneNumber") Optional<Integer> phoneNumber,
+    @RequestParam("ccn") Optional<Integer> ccn,
+    @RequestParam("expiration-date-1") Optional<Integer> expirationDate1,
+    @RequestParam("expiration-date-2") Optional<Integer> expirationDate2,
+    @RequestParam("securityCode") Optional<Integer> securityCode,
+    @RequestParam("useCc") Optional<String> useCc
+    ) {
+
     if (!isThereLoggedInUser() || 
         cartRepository.getCartOfUser() == null || 
         cartRepository.getCartOfUser().getCartProducts().isEmpty()) {
       return "redirect:/";
     }
 
+    makeReceipt();
+    
+    return "redirect:/profile";
+  }
+
+  private void makeReceipt() {
     Cart cart = cartRepository.getCartOfUser();
     Receipt receipt = new Receipt();
 
@@ -86,7 +106,5 @@ public class CheckoutController extends CommonController {
 
     cartRepository.removeProducts(cart.getCartOwner());
     receiptRepository.saveAndFlush(receipt);
-    
-    return "redirect:/profile";
   }
 }

@@ -2,9 +2,6 @@ package com.tunnelnetwork.KpOnlineStore.User;
 
 import lombok.AllArgsConstructor;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
@@ -17,11 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
+import com.tunnelnetwork.KpOnlineStore.Controllers.CommonController;
 import com.tunnelnetwork.KpOnlineStore.Models.User;
 
 @Controller
 @AllArgsConstructor
-public class AuthController {
+public class AuthController extends CommonController{
 
   private final UserService userService;
 
@@ -36,9 +34,8 @@ public class AuthController {
   // Make sure /login & /sign-up are only accessed by users without accounts
   @GetMapping("/login")
   private String showLoginPage() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    if (!isThereLoggedInUser()) {
       return "login";
     }
 
@@ -46,9 +43,8 @@ public class AuthController {
   }
   @GetMapping("/sign-up")
   public String showSignupPage() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    if (!isThereLoggedInUser()) {
       return "sign-up";
     }
 
@@ -90,9 +86,8 @@ public class AuthController {
 
   @GetMapping("/forgot-password")
   private String goToForgotPassword() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    if (!isThereLoggedInUser()) {
       return "forgot-password";
     }
 

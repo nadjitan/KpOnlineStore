@@ -25,7 +25,7 @@
     <div id="home">
       <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span th:text="${userFullname}"></span>
+        <span th:text="${userFirstname + ' ' + userLastname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
 
@@ -54,6 +54,11 @@
         <div th:if="${bestSellers.empty}">No products available</div>
         <div class="product-best-seller" th:each="product : ${bestSellers}">
           <a th:href="@{|/product/${product.id}|}">
+            <!-- <img
+              th:src="${product.image}"
+              th:alt="${product.productName + '-img.png'}"
+            /> -->
+            <img th:alt="${product.productName + '-img.png'}" />
             <h3 class="product-name" th:text="${product.productName}"></h3>
             <p class="product-category" th:text="${product.category}"></p>
             <p class="product-price" th:text="${'₱ ' + product.price}"></p>

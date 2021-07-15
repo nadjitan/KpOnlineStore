@@ -69,7 +69,7 @@
     <div id="home">
       <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span th:text="${userFullname}"></span>
+        <span th:text="${userFirstname + ' ' + userLastname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       <form
@@ -81,7 +81,11 @@
       </form>
 
       <div id="product-details">
-        <img th:src="${product.image}" alt="product-img.png" />
+        <!-- <img
+              th:src="${product.image}"
+              th:alt="${product.productName + '-img.png'}"
+            /> -->
+        <img th:alt="${product.productName + '-img.png'}" />
         <h3 class="product-name" th:text="${product.productName}"></h3>
         <p class="product-description" th:text="${product.description}"></p>
         <p class="product-status" th:text="${product.status}"></p>
