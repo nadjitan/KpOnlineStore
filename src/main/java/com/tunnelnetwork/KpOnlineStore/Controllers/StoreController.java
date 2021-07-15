@@ -132,6 +132,10 @@ public class StoreController extends CommonController{
     @RequestParam("priceMin") Optional<Integer> priceMin,
     @RequestParam("priceMax") Optional<Integer> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
     
     List<Product> newProductList = new ArrayList<Product>();
 

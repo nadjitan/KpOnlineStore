@@ -30,7 +30,7 @@
                         <a class="nav-link" th:href="@{/contact-us}">CONTACT US</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">FAQ</a>
+                        <a class="nav-link" th:href="@{/faq}">FAQ</a>
                     </li>
                 </ul>
                 <!--cart-->
@@ -77,8 +77,8 @@
             </ul>
             <!--Search-->
             <ul class="navbar-nav search-nav">
-                <form method="get" class="search-form">
-                    <input type="text" name="search_all" required class="form-control search-bar" style="width: 100%;" placeholder="Search for a product here...">
+                <form th:action="@{/store/1/storeSearch}" method="GET" class="search-form">
+                    <input type="text" name="storeSearch" id="input-search" required class="form-control search-bar" style="width: 100%;" placeholder="Search for a product here...">
                     <button class="btn btn-danger search-button" type="submit">Search</button>
                 </form>
             </ul>

@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
           "/change-password/**",
           "/sign-up/**",
           "/crud/**",
+          "/faq/**",
           "/contact-us/**",
           "/about-us/**",
           "/store/**",
