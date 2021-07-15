@@ -33,7 +33,11 @@ public class AuthController extends CommonController{
 
   // Make sure /login & /sign-up are only accessed by users without accounts
   @GetMapping("/login")
-  private String showLoginPage() {
+  private String showLoginPage(Model model) {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
     if (!isThereLoggedInUser()) {
       return "login";
@@ -42,7 +46,11 @@ public class AuthController extends CommonController{
     return "redirect:/";
   }
   @GetMapping("/sign-up")
-  public String showSignupPage() {
+  public String showSignupPage(Model model) {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
     if (!isThereLoggedInUser()) {
       return "sign-up";
@@ -75,7 +83,11 @@ public class AuthController extends CommonController{
   }
 
   @GetMapping("/sign-up/confirm")
-	private String confirmMail(@RequestParam("token") String token) {
+	private String confirmMail(@RequestParam("token") String token, Model model) {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
 		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
@@ -85,7 +97,11 @@ public class AuthController extends CommonController{
 	}
 
   @GetMapping("/forgot-password")
-  private String goToForgotPassword() {
+  private String goToForgotPassword(Model model) {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
     if (!isThereLoggedInUser()) {
       return "forgot-password";
@@ -96,6 +112,10 @@ public class AuthController extends CommonController{
   @GetMapping("/change-password/confirm")
 	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
 
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+    
 		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
 		if (optionalConfirmationToken.isPresent()) {
