@@ -98,7 +98,11 @@
           </div>
         </div>
 
-        <form th:action="@{/addToWishlist}" method="post">
+        <form
+          th:action="@{/addToWishlist}"
+          method="post"
+          th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        >
           <input type="hidden" name="productId" th:value="${product.id}" />
           <button type="submit">
             <img

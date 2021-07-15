@@ -34,7 +34,6 @@ public class AuthController extends CommonController{
   // Make sure /login & /sign-up are only accessed by users without accounts
   @GetMapping("/login")
   private String showLoginPage(Model model) {
-
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -47,7 +46,6 @@ public class AuthController extends CommonController{
   }
   @GetMapping("/sign-up")
   public String showSignupPage(Model model) {
-
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -84,7 +82,6 @@ public class AuthController extends CommonController{
 
   @GetMapping("/sign-up/confirm")
 	private String confirmMail(@RequestParam("token") String token, Model model) {
-
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -98,7 +95,6 @@ public class AuthController extends CommonController{
 
   @GetMapping("/forgot-password")
   private String goToForgotPassword(Model model) {
-
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -111,6 +107,9 @@ public class AuthController extends CommonController{
   }
   @GetMapping("/change-password/confirm")
 	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
     getUserRole(model);
 

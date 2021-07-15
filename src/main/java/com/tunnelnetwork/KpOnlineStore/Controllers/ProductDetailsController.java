@@ -26,22 +26,20 @@ public class ProductDetailsController extends CommonController{
 
     getUserFirstAndLastName(model);
 
-    if (!isThereLoggedInUser()) {
-      return "redirect:/login";
-    }
-
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    User user = userService.getUserByEmail(authentication.getName()).get(); // Get name returns email
+    if (isThereLoggedInUser()) {
+      User user = userService.getUserByEmail(authentication.getName()).get(); // Get name returns email
 
-    for (Product product : user.getWhishlist()) {
-      if (product == productRepository.getById(id)) {
-        model.addAttribute("inUserWishlist", true);
+      for (Product product : user.getWhishlist()) {
+        if (product == productRepository.getById(id)) {
+          model.addAttribute("inUserWishlist", true);
 
-        break;
-      }
-      else {
-        model.addAttribute("inUserWishlist", false);
+          break;
+        }
+        else {
+          model.addAttribute("inUserWishlist", false);
+        }
       }
     }
 
