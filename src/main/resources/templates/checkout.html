@@ -10,7 +10,7 @@
     }
 
     label {
-      pointer-events: none;
+      user-select: none;
     }
 
     input, select {
@@ -66,28 +66,28 @@
 
   <body>
     <div id="home">
-      <p>Hello <span
-        th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">Hello <span
+        th:text="${userFirstname + ' ' + userLastname}"
       ></span> <button><a th:href="@{/profile}">PROFILE</a></button></p>
-      <form th:action="@{/logout}" method="POST">
+      <form th:if="${userRole == 'USER' || userRole == 'ADMIN'}" th:action="@{/logout}" method="POST">
         <button type="submit" class="submit">Logout</button>
       </form>
 
-      <form action="">
+      <form th:action="@{/checkout}" method="post">
         <section class="form-field">
           <div>
             <label for="first-name">First name</label>
-            <input type="text" id="first-name" name="firstName" />
+            <input type="text" id="first-name" name="firstName" th:value="${userFirstname}" />
           </div>
           <div>
             <label for="last-name">Last name</label>
-            <input type="text" id="last-name" name="lastName" />
+            <input type="text" id="last-name" name="lastName" th:value="${userLastname}" />
           </div>
         </section>
         <section class="form-field">
           <div>
             <label for="address">Address</label>
-            <input type="text" id="address" name="address" />
+            <input type="text" id="address" name="address" placeholder="block, street, village/subdivision"/>
           </div>
         </section>
         <section class="form-field">
@@ -107,31 +107,53 @@
         <section class="form-field">
           <div>
             <label for="phone-number">Phone Number</label>
-            <input id="phone-number" type="text" maxlength="11"/>
+            <input id="phone-number" name="phoneNumber" type="text" maxlength="11"/>
           </div>
         </section>
-        <section class="form-field">
+        <section class="form-field form-cc">
           <div>
             <label for="card-number">Card Number</label>
-            <input id="ccn" type="text" placeholder="xxxx xxxx xxxx xxxx"/>
+            <input id="ccn" type="text" name="ccn" placeholder="xxxx xxxx xxxx xxxx"/>
             <div id="ccn-type" style="font-size: 0.8rem; font-style: italic; text-transform:capitalize;">Type:</div>
           </div>
           <div>
             <label for="expiration-date-1">Expiration Date</label>
             <select id="expiration-date-1" name="expiration-date-1">
-              <option value="1">1</option>
-              <option value="2">2</option>
+              <option value="1">01</option>
+              <option value="2">02</option>
+              <option value="3">03</option>
+              <option value="4">04</option>
+              <option value="5">05</option>
+              <option value="6">06</option>
+              <option value="7">07</option>
+              <option value="8">08</option>
+              <option value="9">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
             </select>
             <select id="expiration-date-2" name="expiration-date-2">
-              <option value="1">1</option>
-              <option value="2">2</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
             </select>
           </div>
           <div>
             <label for="security-code"></label>Security Code</label>
-            <input type="text" id="security-code" name="security-code" maxlength="3" placeholder="xxx"/>
+            <input type="text" id="security-code" name="securityCode" maxlength="3" placeholder="xxx"/>
           </div>
         </section>
+
+        <div style="cursor: pointer;">
+          <label for="checkbox-useCc">Cash on delivery</label>
+          <input type="checkbox" id="checkbox-useCc" name="useCc" value="useCc">
+        </div>
 
         <div id="summary">
           <h3>ORDER SUMMARY</h3>
@@ -151,19 +173,14 @@
             <div th:if="${cart.useVoucher == 0}" th:text="${'₱ ' + cart.getTotalOrderPrice()}"></div>
           </div>
         </div>
-      </form>
 
-      <form th:action="@{/checkout}" method="post">
         <button type="submit">CONFIRM PURCHASE</button>
       </form>
+
       <button><a th:href="@{/cart/home}">GO BACK</a></button>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
-    <script
-      defer
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"
-    ></script>
+    
   </body>
 </html>

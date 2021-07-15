@@ -4,14 +4,16 @@
 
   <body>
     <div id="home">
-      <p>
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span
-          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
-        ></span>
+        <span th:text="${userFirstname + ' ' + userLastname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
       <a th:href="@{/profile}">PROFILE</a>

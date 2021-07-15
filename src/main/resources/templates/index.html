@@ -23,18 +23,25 @@
 
   <body>
     <div id="home">
-      <p>
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span
-          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
-        ></span>
+        <span th:text="${userFirstname + ' ' + userLastname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
 
-      <button th:if="${crud == true}">
+      <button th:if="${userRole == false}">
+        <a th:href="@{/login}">Login</a>
+      </button>
+
+      <button th:if="${userRole == 'ADMIN'}">
         <a th:href="@{/crud}">GO TO CRUD</a>
       </button>
 
@@ -47,6 +54,11 @@
         <div th:if="${bestSellers.empty}">No products available</div>
         <div class="product-best-seller" th:each="product : ${bestSellers}">
           <a th:href="@{|/product/${product.id}|}">
+            <!-- <img
+              th:src="${product.image}"
+              th:alt="${product.productName + '-img.png'}"
+            /> -->
+            <img th:alt="${product.productName + '-img.png'}" />
             <h3 class="product-name" th:text="${product.productName}"></h3>
             <p class="product-category" th:text="${product.category}"></p>
             <p class="product-price" th:text="${'₱ ' + product.price}"></p>

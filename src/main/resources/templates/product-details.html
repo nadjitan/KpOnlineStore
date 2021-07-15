@@ -7,6 +7,22 @@
       background-color: brown;
     }
 
+    .product-tags {
+      display: inline;
+    }
+    .product-tags > div {
+      border-radius: 20px;
+      background-color: black;
+      font-size: 0.8rem;
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      height: 30px;
+      width: max-content;
+      padding: 3px 15px;
+      color: white;
+    }
+
     #comments {
       height: max-content;
       width: 50%;
@@ -51,22 +67,52 @@
 
   <body>
     <div id="home">
-      <p>
+      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span
-          th:text="${#authentication.getPrincipal().getFirstName() + ' ' + #authentication.getPrincipal().getLastName() + '!'}"
-        ></span>
+        <span th:text="${userFirstname + ' ' + userLastname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
-      <form th:action="@{/logout}" method="POST">
+      <form
+        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+        th:action="@{/logout}"
+        method="POST"
+      >
         <input type="submit" value="Logout" class="submit" />
       </form>
 
       <div id="product-details">
-        <img src="#" alt="product-img.png" />
+        <!-- <img
+              th:src="${product.image}"
+              th:alt="${product.productName + '-img.png'}"
+            /> -->
+        <img th:alt="${product.productName + '-img.png'}" />
         <h3 class="product-name" th:text="${product.productName}"></h3>
+        <p class="product-description" th:text="${product.description}"></p>
+        <p class="product-status" th:text="${product.status}"></p>
         <p class="product-category" th:text="${product.category}"></p>
         <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+
+        <div class="product-tags">
+          <div th:each="tag : ${product.tags}">
+            <p th:text="${tag}"></p>
+          </div>
+        </div>
+
+        <form th:action="@{/addToWishlist}" method="post">
+          <input type="hidden" name="productId" th:value="${product.id}" />
+          <button type="submit">
+            <img
+              alt="wishlist-img"
+              th:if="${inUserWishlist != true}"
+              th:src="${'/img/bookmark_border_black_24dp.svg'}"
+            />
+            <img
+              alt="wishlist-img"
+              th:if="${inUserWishlist == true}"
+              th:src="${'/img/bookmark_black_24dp.svg'}"
+            />
+          </button>
+        </form>
 
         <div
           th:each="i : ${#numbers.sequence(1, product.rating)}"

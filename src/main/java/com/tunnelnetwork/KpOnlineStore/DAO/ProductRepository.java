@@ -1,6 +1,7 @@
 package com.tunnelnetwork.KpOnlineStore.DAO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
@@ -46,6 +47,39 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
   default List<Product> getProductsContainingInCategory(String category) {
     return this.findByCategoryContainingIgnoreCase(category);
+  }
+
+  default List<Product> getProductsContainingInBand(String bandName) {
+    List<Product> allProducts = getAllProducts();
+    List<Product> productsBasedOnBand = new ArrayList<Product>();
+
+    for (Product product : allProducts) {
+      List<String> tags = Arrays.asList(product.getTags());
+
+      for (String tag : tags) {
+        if (tag.replaceAll("[^a-zA-Z0-9]", "").toUpperCase().equals(bandName.replaceAll("[^a-zA-Z0-9]", "").toUpperCase())) {
+          productsBasedOnBand.add(product);
+
+          break;
+        }
+      }
+    }
+
+
+    return productsBasedOnBand;
+  }
+
+  default List<Product> getProductsByBand(String bandName) {
+    List<Product> allProducts = getAllProducts();
+    List<Product> productsBasedOnBand = new ArrayList<Product>();
+
+    for (Product product : allProducts) {
+      if (Arrays.asList(product.getTags()).contains(bandName)) {
+        productsBasedOnBand.add(product);
+      }
+    }
+
+    return productsBasedOnBand;
   }
 
   default List<Product> getProductsByCategory(String category) {
