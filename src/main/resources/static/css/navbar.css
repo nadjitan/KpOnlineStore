@@ -20,4 +20,7 @@
 .search-form {
   display: flex;
 }
-  
+
+.footer {
+    background-color: white;
+}
