@@ -563,26 +563,22 @@
       </form>
 
       <div id="dropdown-categories">
-        <a th:href="@{/store/1/addFilters?album=albums}">Albums</a>
-        <a th:href="@{/store/1/addFilters?doll=dolls}">Dolls</a>
-        <a th:href="@{/store/1/addFilters?imagePicket=imagePickets}"
+        <a th:href="@{/store/1/addFilters?album=Albums}">Albums</a>
+        <a th:href="@{/store/1/addFilters?doll=Dolls}">Dolls</a>
+        <a th:href="@{/store/1/addFilters?imagePicket=Image+Pickets}"
           >Image Pickets</a
         >
-        <a th:href="@{/store/1/addFilters?lightStick=lightSticks}"
+        <a th:href="@{/store/1/addFilters?lightStick=Light+Sticks}"
           >Light Sticks</a
         >
-        <a th:href="@{/store/1/addFilters?package=packages}">Packages</a>
-        <a th:href="@{/store/1/addFilters?phoneCase=phoneCases}">Phone Cases</a>
-        <a
-          th:href="@{/store/1/addFilters?photobook=photobooks}"
-          onchange="location = this.value;"
-          >Photobooks</a
-        >
-        <a th:href="@{/store/1/addFilters?photocard=photocards}">Photocards</a>
-        <a th:href="@{/store/1/addFilters?poster=posters}">Posters</a>
-        <a th:href="@{/store/1/addFilters?sticker=stickers}">Stickers</a>
-        <a th:href="@{/store/1/addFilters?keyRing=KeyRings}">Key Rings</a>
-        <a th:href="@{/store/1/addFilters?apparel=apparels}">Apparels</a>
+        <a th:href="@{/store/1/addFilters?package=Packages}">Packages</a>
+        <a th:href="@{/store/1/addFilters?phoneCase=Phonecases}">Phone Cases</a>
+        <a th:href="@{/store/1/addFilters?photobook=Photobooks}">Photobooks</a>
+        <a th:href="@{/store/1/addFilters?photocard=Photocards}">Photocards</a>
+        <a th:href="@{/store/1/addFilters?poster=Posters}">Posters</a>
+        <a th:href="@{/store/1/addFilters?sticker=Stickers}">Stickers</a>
+        <a th:href="@{/store/1/addFilters?keyRing=Key+Rings}">Key Rings</a>
+        <a th:href="@{/store/1/addFilters?apparel=Apparels}">Apparels</a>
       </div>
 
       <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
