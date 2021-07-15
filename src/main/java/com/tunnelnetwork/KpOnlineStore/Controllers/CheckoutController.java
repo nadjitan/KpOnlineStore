@@ -13,18 +13,20 @@ import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
   private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
     if (!isThereLoggedInUser() && cartRepository.getCartOfUser() == null) {
-      return "redirect:/";
+      return "redirect:/login";
     }
 
     Cart cart = cartRepository.getCartOfUser();
@@ -40,14 +42,34 @@ public class CheckoutController extends CommonController {
     return "checkout";
   }
 
-  @RequestMapping(value="/checkout", method=RequestMethod.POST)
-  private ModelAndView goCheckout() {
+  @PostMapping("/checkout")
+  private String goCheckout(
+    @RequestParam("firstName") Optional<String> firstName,
+    @RequestParam("lastName") Optional<String> lastName,
+    @RequestParam("address") Optional<String> address,
+    @RequestParam("region") Optional<String> region,
+    @RequestParam("city") Optional<String> city,
+    @RequestParam("postalCode") Optional<Integer> postalCode,
+    @RequestParam("phoneNumber") Optional<Integer> phoneNumber,
+    @RequestParam("ccn") Optional<Integer> ccn,
+    @RequestParam("expiration-date-1") Optional<Integer> expirationDate1,
+    @RequestParam("expiration-date-2") Optional<Integer> expirationDate2,
+    @RequestParam("securityCode") Optional<Integer> securityCode,
+    @RequestParam("useCc") Optional<String> useCc
+    ) {
+
     if (!isThereLoggedInUser() || 
         cartRepository.getCartOfUser() == null || 
         cartRepository.getCartOfUser().getCartProducts().isEmpty()) {
-      return new ModelAndView("redirect:/");
+      return "redirect:/";
     }
 
+    makeReceipt();
+    
+    return "redirect:/profile";
+  }
+
+  private void makeReceipt() {
     Cart cart = cartRepository.getCartOfUser();
     Receipt receipt = new Receipt();
 
@@ -84,7 +106,5 @@ public class CheckoutController extends CommonController {
 
     cartRepository.removeProducts(cart.getCartOwner());
     receiptRepository.saveAndFlush(receipt);
-    
-    return new ModelAndView("redirect:/profile");
   }
 }

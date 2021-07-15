@@ -11,7 +11,9 @@ import com.tunnelnetwork.KpOnlineStore.DAO.ReceiptRepository;
 import com.tunnelnetwork.KpOnlineStore.DAO.VoucherRepository;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
+import com.tunnelnetwork.KpOnlineStore.Models.User;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
+import com.tunnelnetwork.KpOnlineStore.User.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -38,6 +40,8 @@ public class CommonController {
   @Autowired
   protected ReceiptRepository receiptRepository;
   
+  @Autowired
+  protected UserService userService;
 
   protected void createCartAndVoucher(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -89,9 +93,30 @@ public class CommonController {
     return true;
   }
 
-  protected boolean hasRole (String roleName)
+  protected boolean hasRole(String roleName)
   {
     return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
             .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(roleName));
+  }
+
+  protected void getUserRole(Model model) {
+
+    if (!isThereLoggedInUser()) {
+      model.addAttribute("userRole", false);
+    }
+    else {
+      model.addAttribute("userRole", SecurityContextHolder.
+          getContext().getAuthentication().getAuthorities().toString().replaceAll("[^a-zA-Z0-9]", ""));
+    }
+  }
+
+  protected void getUserFirstAndLastName(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (isThereLoggedInUser()) {
+      User user = userService.getUserByEmail(authentication.getName()).get();
+      model.addAttribute("userFirstname", user.getFirstName());
+      model.addAttribute("userLastname", user.getLastName());
+    }
   }
 }

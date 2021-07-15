@@ -39,10 +39,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     http
       .authorizeRequests()
         .antMatchers(
+          "/",
+          "/product/**",
+          "/fonts/**",
+          "/removeFromWishlist/**",
+          "/addToWishlist/**",
           "/forgot-password/**",
           "/change-password/**",
           "/sign-up/**",
           "/crud/**",
+          "/faq/**",
           "/contact-us/**",
           "/about-us/**",
           "/store/**",

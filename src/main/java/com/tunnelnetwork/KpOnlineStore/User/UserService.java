@@ -25,6 +25,14 @@ public class UserService implements UserDetailsService {
 	private final ConfirmationTokenRepository confirmationTokenRepository;
 
 	private final EmailSenderService emailSenderService;
+	
+	public Optional<User> getUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+	public void saveUser(User user) {
+		userRepository.saveAndFlush(user);
+	}
 
 	void sendConfirmationMail(String userMail, String token) {
 

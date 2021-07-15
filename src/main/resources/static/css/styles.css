@@ -1,21 +1,8 @@
-html {
-  font-size: 16px;
-}
-
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body,
-#login,
-#signup,
-#home {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh !important;
+  font-family: Poppins Regular;
 }
 
 a {
@@ -23,8 +10,125 @@ a {
   color: black;
 }
 
-button {
-  cursor: pointer;
+h2 {
+  font-size: 15px !important;
+  font-family: Poppins Medium;
+  color: #4E7FA1;
+}
+
+input:focus { 
+  outline: none !important;
+  border-color: #B85C5C;
+}
+
+textarea:focus { 
+  outline: none !important;
+  border-color: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #CEC5C6;
+  opacity: 1; /* Firefox */
+}
+
+.mr-auto, .mx-auto {
+  margin-right: auto!important;
+}
+
+.defaultMargin {
+  width: 1188px;
+  min-width: 1188px;
+  margin: 0 auto;
+}
+
+.allButFooter {
+  min-height: calc(100vh - 314px) !important;
+}
+
+.input-style {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 7px 20px 7px 20px;
+  font-size: 13px !important;
+  font-family: Poppins Light;
+  color: black;
+  border: 1px solid #CEC5C6;
+  border-radius: 25px;
+}
+
+.label-style {
+  font-size: 13px !important;
+  font-family: Poppins Light;
+  color: black;
+}
+
+.submit-style {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 8px 20px 8px 20px;
+  font-size: 15px !important;
+  font-family: Poppins Medium;
+  color: #B85C5C;
+  background-color: #FAE1E1;
+  border: 1px solid #FAE1E1;
+  border-radius: 25px;
+  transition: 0.25s;
+}
+
+.submit-style:hover {
+  color: white;
+  background-color: #B85C5C;
+}
+
+.link-style {
+  font-size: 13px !important;
+  font-family: Poppins Regular;
+  color: #B85C5C;
+  transition: 0.25s;
+}
+
+.link-style:hover {
+  color: #4E7FA1; 
+}
+
+.error,
+.success {
+  width: 100%;
+  padding: 8px 20px 8px 20px;
+  font-size: 13px;
+  font-family: Poppins Regular;
+  color:white;
+  text-align: center;
+  border-radius: 25px;
+  border: 1px solid;
+}
+
+.error {
+  border-color: #B85C5C;
+  color: #B85C5C;
+}
+
+.success {
+  border-color: #4E7FA1;
+  color: #4E7FA1;
+}
+
+.background-blue {
+  background-color: #D3E3EE;
+}
+
+.background-grey {
+  background-color: #F5F5F5;
 }
 
 #home {
@@ -66,39 +170,3 @@ button {
   margin-left: auto;
 }
 
-#login > input,
-#signup > input {
-  margin-bottom: 1.2em;
-  padding: 1em 1em;
-  width: 12em;
-}
-
-#login > a,
-#signup > a {
-  margin-bottom: 0.8em;
-  font-size: 0.8em;
-  text-decoration: none;
-}
-
-.submit {
-  cursor: pointer;
-  padding: 0.8em 1em;
-  width: 8em;
-}
-
-.error,
-.success {
-  width: max-content;
-  padding: 1em 1.2em 1em 1.2em;
-  font-weight: bold;
-  margin-bottom: 1em;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  font-size: 0.7em;
-  color: white;
-  background-color: rgb(214, 69, 69);
-}
-
-.success {
-  background-color: rgb(36, 199, 36);
-}

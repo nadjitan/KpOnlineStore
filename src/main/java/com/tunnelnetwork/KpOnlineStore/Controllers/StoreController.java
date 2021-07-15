@@ -3,6 +3,7 @@ package com.tunnelnetwork.KpOnlineStore.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.LinkedHashSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StoreController extends CommonController{
@@ -21,9 +21,13 @@ public class StoreController extends CommonController{
   private int maxItems = 5;
 
   @GetMapping("/store/{changePage}")
-  public ModelAndView openStore(
+  public String openStore(
     @PathVariable(value ="changePage") Integer changePage,
     Model model) {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
     List<Product> newProductList = new ArrayList<Product>();
     List<Product> oldProductList = productRepository.getAllProducts();
@@ -32,9 +36,12 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newProductList);
 
-    createCartAndVoucher(model);
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
     model.addAttribute("uri", null);
-    return new ModelAndView("store");
+    return "store";
   }
 
   @GetMapping("/store/{changePage}/storeSearch")
@@ -46,6 +53,7 @@ public class StoreController extends CommonController{
     List<Product> newProductList = new ArrayList<Product>();
     List<Product> newDividedProductList = new ArrayList<Product>();
     List<Product> productListBasedOnName = productRepository.getProductsContainingInName(storeSearch.get());
+    List<Product> productListBasedOnBand = productRepository.getProductsContainingInBand(storeSearch.get());
     List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
 
     if (!storeSearch.isEmpty()) {
@@ -54,7 +62,12 @@ public class StoreController extends CommonController{
           newProductList.add(product);
         }
       }
-      else if (productListBasedOnCategory != null) {
+      if (productListBasedOnBand != null) {
+        for (Product product : productListBasedOnBand) {
+          newProductList.add(product);
+        }
+      }
+      if (productListBasedOnCategory != null) {
         for (Product product : productListBasedOnCategory) {
           newProductList.add(product);
         }
@@ -68,7 +81,10 @@ public class StoreController extends CommonController{
     pagination(model, changePage, newDividedProductList, newProductList);
 
     model.addAttribute("products", newDividedProductList);
-    createCartAndVoucher(model);
+
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
     
     // uri to put in our page buttons
     model.addAttribute("uri", "storeSearch?" + request.getQueryString());
@@ -85,6 +101,22 @@ public class StoreController extends CommonController{
     @RequestParam("preorder") Optional<String> preorder,
     @RequestParam("outOfStock") Optional<String> outOfStock,
     @RequestParam("bestSeller") Optional<String> bestSeller,
+    @RequestParam("gIdle") Optional<String> gIdle,
+    @RequestParam("blackpink") Optional<String> blackpink,
+    @RequestParam("bts") Optional<String> bts,
+    @RequestParam("day6") Optional<String> day6,
+    @RequestParam("enhypen") Optional<String> enhypen,
+    @RequestParam("exo") Optional<String> exo,
+    @RequestParam("girlsGeneration") Optional<String> girlsGeneration,
+    @RequestParam("itzy") Optional<String> itzy,
+    @RequestParam("iu") Optional<String> iu,
+    @RequestParam("mamamoo") Optional<String> mamamoo,
+    @RequestParam("nct") Optional<String> nct,
+    @RequestParam("redVelvet") Optional<String> redVelvet,
+    @RequestParam("seventeen") Optional<String> seventeen,
+    @RequestParam("strayKids") Optional<String> strayKids,
+    @RequestParam("tomorrowXTogether") Optional<String> tomorrowXTogether,
+    @RequestParam("twice") Optional<String> twice,
     @RequestParam("album") Optional<String> albums,
     @RequestParam("doll") Optional<String> dolls,
     @RequestParam("imagePicket") Optional<String> imagePickets,
@@ -100,6 +132,10 @@ public class StoreController extends CommonController{
     @RequestParam("priceMin") Optional<Integer> priceMin,
     @RequestParam("priceMax") Optional<Integer> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
     
     List<Product> newProductList = new ArrayList<Product>();
 
@@ -108,6 +144,25 @@ public class StoreController extends CommonController{
     statusList.add(available);
     statusList.add(preorder);
     statusList.add(outOfStock);
+
+    boolean isBandListEmpty = true;
+    List<Optional<String>> bandList = new ArrayList<Optional<String>>();
+    bandList.add(gIdle);
+    bandList.add(blackpink);
+    bandList.add(bts);
+    bandList.add(day6);
+    bandList.add(enhypen);
+    bandList.add(exo);
+    bandList.add(girlsGeneration);
+    bandList.add(itzy);
+    bandList.add(iu);
+    bandList.add(mamamoo);
+    bandList.add(nct);
+    bandList.add(redVelvet);
+    bandList.add(seventeen);
+    bandList.add(strayKids);
+    bandList.add(tomorrowXTogether);
+    bandList.add(twice);
 
     boolean isCategoryListEmpty = true;
     List<Optional<String>> categoryList = new ArrayList<Optional<String>>();
@@ -131,6 +186,12 @@ public class StoreController extends CommonController{
         break;
       }
     }
+    for (Optional<String> band : bandList) {
+      if (band.isPresent()) {
+        isBandListEmpty = false;
+        break;
+      }
+    }
     for (Optional<String> category : categoryList) {
       if (category.isPresent()) {
         isCategoryListEmpty = false;
@@ -138,110 +199,123 @@ public class StoreController extends CommonController{
       }
     }
 
-    // If user picked a status but no category
-    if (!isStatusListEmpty && isCategoryListEmpty) {
+    if (!isStatusListEmpty) {
       for (Optional<String> status : statusList) {
         if (status.isPresent()) {
-          if (bestSeller.isPresent()) {
-            for (Product product : productRepository.getProductsByBestSeller(
-                                   productRepository.getProductsByStatus(status.get()))) {
-              getProductsByPrice(model, newProductList, product, priceMin, 
-                                      priceMax, rating);
-            } 
 
-            model.addAttribute(bestSeller.get().toUpperCase(), "checked");
-          } else {
-            for (Product product : productRepository.getProductsByStatus(status.get())) {
-              getProductsByPrice(model, newProductList, product, priceMin, 
-                                      priceMax, rating);
-            }
-          }
+          getProductsByBestSeller(
+            model, bestSeller, newProductList, 
+            productRepository.getProductsByStatus(status.get()), 
+            priceMin, priceMax, rating);
 
           model.addAttribute(status.get().toUpperCase(), "checked");
         }
       }
     } 
-    // If user picked a category but no status
-    if (isStatusListEmpty && !isCategoryListEmpty) {
+
+    if (!isCategoryListEmpty) {
       for (Optional<String> category : categoryList) {
         if (category.isPresent()) {
-          if (bestSeller.isPresent()) {
-            for (Product product : productRepository.getProductsByBestSeller(
-                                   productRepository.getProductsByCategory(category.get()))) {
-              getProductsByPrice(model, newProductList, product, priceMin, 
-                                      priceMax, rating);
-            }
 
-            model.addAttribute(bestSeller.get().toUpperCase(), "checked");
-          } else {
-            for (Product product : productRepository.getProductsByCategory(category.get())) {
-              getProductsByPrice(model, newProductList, product, priceMin, 
-                                      priceMax, rating);
-            }
-          }
+          getProductsByBestSeller(
+            model, bestSeller, newProductList, 
+            productRepository.getProductsByCategory(category.get()), 
+            priceMin, priceMax, rating);
           
-          model.addAttribute(category.get().toUpperCase(), "checked");
+          model.addAttribute(category.get().replaceAll("[^a-zA-Z0-9]", "").toUpperCase(), "checked");
         }
       }
     }
-    // If user picked a category and status
-    if (!isStatusListEmpty && !isCategoryListEmpty) {
-      List<Product> productsBasedStatus = new ArrayList<Product>();
 
-      for (Optional<String> status : statusList) {
-        if (status.isPresent()) {
-          if (bestSeller.isPresent()) {
-            for (Product product : productRepository.getProductsByBestSeller(
-                                   productRepository.getProductsByStatus(status.get()))){
-              productsBasedStatus.add(product);
-            }
+    if (!isBandListEmpty) {
+      for (Optional<String> band : bandList) {
+        if (band.isPresent()) {
 
-            model.addAttribute(bestSeller.get().toUpperCase(), "checked");
-          } else {
-            for (Product product : productRepository.getProductsByStatus(status.get())) {
-              productsBasedStatus.add(product);
-            }
-          }
+          getProductsByBestSeller(
+            model, bestSeller, newProductList, 
+            productRepository.getProductsByBand(band.get()), 
+            priceMin, priceMax, rating);
           
-          model.addAttribute(status.get().toUpperCase(), "checked");
-        }
-      }
-      for (Optional<String> category : categoryList) {
-        if (category.isPresent()) {
-          for (Product product : productsBasedStatus) {
-            if (product.getCategory().equals(category.get())) {
-              getProductsByPrice(model, newProductList, product, priceMin, 
-                                        priceMax, rating);
-            }
-          }
-
-          model.addAttribute(category.get().toUpperCase(), "checked");
+          model.addAttribute(band.get().replaceAll("[^a-zA-Z0-9]", "").toUpperCase(), "checked");
         }
       }
     }
 
-    // When user did not pick any product status and category
-    if (isStatusListEmpty && isCategoryListEmpty) {
-      if (bestSeller.isPresent()) {
-        for (Product product : productRepository.getProductsByBestSeller(productRepository.getAllProducts())) {
-          getProductsByPrice(model, newProductList, product, priceMin, 
-                                      priceMax, rating);
-        }
-
-        model.addAttribute(bestSeller.get().toUpperCase(), "checked");
-      } else {
-        for (Product product : productRepository.getAllProducts()) {
-          getProductsByPrice(model, newProductList, product, priceMin, 
-                                      priceMax, rating);
-        }
-      }
+    // When user did not pick any product status, band, & category
+    if (isStatusListEmpty && isCategoryListEmpty && isBandListEmpty) {
+      getProductsByBestSeller(model, bestSeller, newProductList, 
+                              productRepository.getAllProducts(), 
+                              priceMin, priceMax, rating);
     }
+
+    List<Product> removeDuplicatesProductList = new ArrayList<>(new LinkedHashSet<>(newProductList));
+    // List<Product> productsToRemove = new ArrayList<Product>();
+
+    // if (!isStatusListEmpty && !isCategoryListEmpty && isBandListEmpty) {
+    //   for (Product product : removeDuplicatesProductList) {
+    //     for (Optional<String> status : statusList) {
+    //       if (status.isPresent()) {
+    //         for (Optional<String> category : categoryList){
+    //           if (category.isPresent()) {
+    //             if (!product.getCategory().equals(category.get()) && 
+    //                 !product.getStatus().equals(status.get())) {
+    //               productsToRemove.add(product);
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // else if (!isBandListEmpty && !isCategoryListEmpty && isStatusListEmpty) {
+    //   for (Product product : removeDuplicatesProductList) {
+    //     for (Optional<String> band : bandList) {
+    //       if (band.isPresent()) {
+    //         for (String tag : product.getTags()) {
+    //           for (Optional<String> category : categoryList){
+    //             if (category.isPresent()) {
+    //               if (!product.getCategory().equals(category.get()) && 
+    //                   !tag.equals(band.get())) {
+    //                 productsToRemove.add(product);
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // else if (!isBandListEmpty && !isStatusListEmpty && isCategoryListEmpty) {
+    //   for (Product product : removeDuplicatesProductList) {
+    //     for (Optional<String> band : bandList) {
+    //       if (band.isPresent()) {
+    //         for (String tag : product.getTags()) {
+    //           for (Optional<String> status : statusList){
+    //             if (status.isPresent()) {
+    //               if (!product.getStatus().equals(status.get()) && 
+    //                   !tag.equals(band.get())) {
+    //                 productsToRemove.add(product);
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    // for (Product product : productsToRemove) {
+    //   removeDuplicatesProductList.remove(product);
+    // }
 
     List<Product> newDividedProductList = new ArrayList<Product>();
-    pagination(model, changePage, newDividedProductList, newProductList);
+    pagination(model, changePage, newDividedProductList, removeDuplicatesProductList);
 
     model.addAttribute("products", newDividedProductList);
-    createCartAndVoucher(model);
+    
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
 
     // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());
@@ -249,6 +323,26 @@ public class StoreController extends CommonController{
     return "store";
   }
 
+  private void getProductsByBestSeller(
+    Model model, Optional<String> bestSeller,
+    List<Product> newProductList, List<Product> filterList,
+    Optional<Integer> priceMin, Optional<Integer> priceMax,
+    Optional<Integer> rating) {
+
+    if (bestSeller.isPresent()) {
+      for (Product product : productRepository.getProductsByBestSeller(filterList)) {
+        getProductsByPrice(model, newProductList, product, priceMin, 
+                                priceMax, rating);
+      } 
+
+      model.addAttribute(bestSeller.get().toUpperCase(), "checked");
+    } else {
+      for (Product product : filterList) {
+        getProductsByPrice(model, newProductList, product, priceMin, 
+                                priceMax, rating);
+      }
+    }
+  }
   private void getProductsByPrice(
     Model model,
     List<Product> newProductList, Product productToAdd,
