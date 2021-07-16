@@ -56,6 +56,10 @@ public class StoreController extends CommonController{
     List<Product> productListBasedOnBand = productRepository.getProductsContainingInBand(storeSearch.get());
     List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
 
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+    
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
         for (Product product : productListBasedOnName) {

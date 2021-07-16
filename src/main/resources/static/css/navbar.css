@@ -18,7 +18,7 @@
 }
 
 .navbar-brand-margin {
-    width: 290px;
+    width: 250px;
 }
 
 .nav-link {
@@ -44,22 +44,31 @@
 }
 
 .search-bar {
+  margin-left: 15px !important;
   border: 1px solid #FAE1E1;
   padding: 7px 30px 7px 30px;
-  color: #CEC5C6;
+  color: black;
   font-size: 15px;
   border-radius: 25px 0px 0px 25px;
 }
 
+.search-bar::placeholder { 
+  color: #CEC5C6;
+  opacity: 1; 
+}
+
 .search-bar:focus {
-  color: #24252B;
+  outline: none !important;
+  border-color: #FAE1E1;
   background-color:white !important;
 }
 
 .search-button {
   font-family: Poppins Medium;
+  font-size: 15px !important;
   background-color: #FAE1E1;
   color: #B85C5C;
+  outline: none !important;
   border-radius: 0px 25px 25px 0px;
   border: 0px;
   padding: 7px 30px 7px 30px;
@@ -78,7 +87,7 @@
 .account-Button,
 .cart-Button {
   width: 100%;
-  padding: 10px 35px 10px 35px !important;
+  padding: 10px 30px 10px 30px !important;
   font-size: 15px !important;
   font-family: Poppins Medium;
   border-radius: 25px;
@@ -91,7 +100,8 @@
   background-color: #FAE1E1;
 }
 
-.account-Button:hover {
+.account-Button:hover,
+.account-Button:focus {
   color: white !important;
   background-color: #B85C5C;
 }
@@ -102,6 +112,33 @@
   background-color: white;
 }
 
+.category-dropdown {
+  font-size: 15px !important;
+  color: #B85C5C !important;
+  background-color: #FAE1E1 !important;
+}
+
+.category-dropdown:hover,
+.category-dropdown:focus {
+  color: white !important;
+  background-color: #B85C5C !important;
+}
+
+.category-dropdown-menu,
+.category-dropdown-item {
+  width: 250px;
+}
+
+.category-dropdown,
+.category-dropdown-item {
+  padding-left: 20px !important;
+}
+
 .dropdown-menu {
   border: none !important;
+}
+
+.dropdown-item:focus {
+  color:white;
+  background-color: #B85C5C !important;
 }
