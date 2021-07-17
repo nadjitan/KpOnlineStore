@@ -8,7 +8,9 @@ import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
   List<Product> findDistinctProductByStatus(String status);
