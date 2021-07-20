@@ -100,8 +100,7 @@
   background-color: #FAE1E1;
 }
 
-.account-Button:hover,
-.account-Button:focus {
+.account-Button:hover {
   color: white !important;
   background-color: #B85C5C;
 }
@@ -118,8 +117,7 @@
   background-color: #FAE1E1 !important;
 }
 
-.category-dropdown:hover,
-.category-dropdown:focus {
+.category-dropdown:hover {
   color: white !important;
   background-color: #B85C5C !important;
 }

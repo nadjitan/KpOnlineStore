@@ -33,19 +33,45 @@
       </p>
       -->
       <div class="defaultMargin py-5 ">
-        <h1>BEST SELLERS</h1>
+        <div class="d-flex align-items-center py-3">
+          <h1 class="mr-auto mb-0">BEST SELLERS</h1>
+          <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}"><button class="seeMore">SEE MORE ></button></a>
+        </li>
+        </div>
         <div id="container-products" class="row">
           <div th:if="${bestSellers.empty}">No products available</div>
-          <div class="product-best-seller col-2" style="border: 1px solid black;" th:each="product : ${bestSellers}">
+          <div class="col-2 py-2" th:each="product: ${bestSellers}">
             <a th:href="@{|/product/${product.id}|}">
-              <!-- <img
-                th:src="${product.image}"
-                th:alt="${product.productName + '-img.png'}"
-              /> -->
-              <img th:alt="${product.productName + '-img.png'}" />
-              <h4 class="product-name" th:text="${product.productName}"></h3>
-              <p class="product-category" th:text="${product.category}"></p>
-              <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+              <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
+                <div class="card-product-image-container d-flex align-items-center">
+                  <div>
+                    <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+                  </div>
+                </div>
+                <!-- <img
+                  th:src="${product.image}"
+                  th:alt="${product.productName + '-img.png'}"
+                /> -->
+                <div class="card-body card-product-body mr-auto">
+                  <h4 class="product-name" th:text="${product.productName}"></h4>
+                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
+                  <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
+                  <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="fas fa-star star"></i>
+                    </form>
+                  </div>
+                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i + product.rating}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="far fa-star star"></i>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </a>
           </div>
         </div>
