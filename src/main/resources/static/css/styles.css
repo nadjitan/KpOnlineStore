@@ -298,7 +298,7 @@ input[id*="star-"] + label:hover {
   background: white;
 }
 
-.filters {
+.sidebar {
   background: white;
   width: 270px
 }
