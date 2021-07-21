@@ -31,7 +31,7 @@ h3 {
 
 h4 {
   font-size: 14px !important;
-  font-family: Poppins Regular !important;
+  font-family: Poppins Light !important;
   color: black !important;
   margin-bottom: 5px;
 }
@@ -139,6 +139,11 @@ a:focus.dropdown-item{
   background-color: #B85C5C;
 }
 
+.submit-style-small {
+  font-size: 13px !important;
+  font-family: Poppins Regular;
+}
+
 .link-style {
   font-size: 13px !important;
   font-family: Poppins Regular;
@@ -224,13 +229,12 @@ a:focus.dropdown-item{
 }
 
 .card-product-image {
-  max-width: 170px;
-  max-height: 170px;
+  max-width: 192px;
+  max-height: 192px;
 }
 
 .card-product-image-container {
-  min-height: 170px;
-  padding: 0.85rem;
+  min-height: 192px;
   padding-bottom: 0rem;
 }
 
@@ -254,41 +258,122 @@ a:focus.dropdown-item{
   background-color: #B85C5C;
 }
 
-#home {
-  width: 100%;
-}
-
-#home > #store,
-#home > #cart {
-  display: flex;
-  width: 70%;
-  overflow: auto;
-}
-
-#store > .product,
-#cart > .product {
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  width: 200px;
-  margin: 0px 2px;
-  border: 0.8px solid black;
-}
-
 #voucher {
   display: grid;
   place-items: center;
   background-color: cadetblue;
 }
 
-#store > .product {
-  background-color: aqua;
-}
-
-#cart > .product {
-  background-color: brown;
-}
 #cart > .cart-total {
   place-self: center;
   margin-left: auto;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+[class*="btn-"] {
+  cursor: pointer;
+}
+
+input[id*="star-"] {
+  display: none;
+}
+
+input[id*="star-"] + label:hover {
+  background-color: #0000002a;
+}
+
+.product-tags {
+  display: inline;
+}
+
+.product-tags > div {
+  border-radius: 20px;
+  background-color: black;
+  font-size: 0.8rem;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 30px;
+  width: max-content;
+  padding: 3px 15px;
+  color: white;
+}
+
+.clear-filters {
+  background-color: #FAE1E1;
+  color: #B85C5C;
+  border: 0px;
+  border-radius: 25px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.store-products {
+  background: white;
+}
+
+.filters {
+  background: white;
+  width: 270px
+}
+
+.btn-rating {
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 25px;
+}
+
+.star-filter {
+  font-size: 13px;
+  color: #B85C5C;
+}
+
+.directory-link {
+  font-size: 12px;
+  transition: 0.25s;
+}
+
+.directory-link-active,
+.directory-link:hover {
+  color: #B85C5C !important;
+}
+
+.form-check-input[type=checkbox] {
+  border-radius: 0px;
+  border: 1px solid #CEC5C6;
+}
+
+
+.form-check-input:checked {
+  background-color: #B85C5C;
+  border-color: #B85C5C;
+}
+
+.form-check-input:focus {
+  border-color: #B85C5C;
+}
+
+.form-check-label {
+  width: 100%;
+  font-family: Poppins Light;
+  font-size: 13px;
+}
+
+.pagination-button {
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  font-size: 12px !important;
+  font-family: Poppins Medium;
+  color: black !important;
+  background-color: white;
+  transition: 0.25s;
+}
+
+.pagination-button:hover {
+  color: white !important;
+  background-color: #B85C5C;
 }

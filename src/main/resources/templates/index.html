@@ -38,7 +38,7 @@
           <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}"><button class="seeMore">SEE MORE ></button></a>
         </li>
         </div>
-        <div id="container-products" class="row">
+        <div class="row">
           <div th:if="${bestSellers.empty}">No products available</div>
           <div class="col-2 py-2" th:each="product: ${bestSellers}">
             <a th:href="@{|/product/${product.id}|}">

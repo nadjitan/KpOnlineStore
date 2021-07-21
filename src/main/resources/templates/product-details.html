@@ -65,8 +65,17 @@
     }
   </style>
 
-  <body>
+  <body class="background-grey">
     <div id="home">
+      <div class="defaultMargin py-3">
+        <span class="directory-link">
+          <a class="directory-link" th:href="@{/}">Home</a>
+          <span class="mx-1">></span>
+          <a class="directory-link" th:href="@{/store/1}">Products</a>
+          <span class="mx-1">></span>
+          <a class="directory-link-active" th:text="${product.productName}" th:href="@{|/product/${product.id}|}"></h3>
+        </span>
+      </div>
       <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
         <span th:text="${userFirstname + ' ' + userLastname}"></span>
