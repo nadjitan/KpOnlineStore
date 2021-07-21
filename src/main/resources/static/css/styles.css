@@ -361,6 +361,11 @@ input[id*="star-"] + label:hover {
   background-color: #B85C5C;
 }
 
+.pagination-button-active {
+  color: white !important;
+  background-color: #B85C5C;
+}
+
 [class*="star-"] {
   cursor: pointer;
   transition: all 0.3s ease-in-out;

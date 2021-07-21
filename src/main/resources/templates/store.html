@@ -545,6 +545,7 @@
                     <h4 class="product-name" th:text="${product.productName}"></h4>
                     <!-- <p class="product-category" th:text="${product.category}"></p> -->
                     <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
+                    <div th:text="${'Number of sold: ' + product.numberOfSold}"></div>
                     <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                       <form th:action="@{/rate}" method="POST">
                         <input type="hidden" name="rating" th:value="${i}" />
@@ -579,12 +580,13 @@
             </a>
             
             <!-- Number buttons -->
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${newPage - 1 != i && totalPages > 1}" th:href="@{|/store/${i}|}">
-              <button class="pagination-button" th:if="${uri == null}" th:text="${i}" ></button>
+            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1}" th:href="@{|/store/${i}|}">
+              <button class="pagination-button" th:if="${uri == null}" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
             </a>
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${newPage - 1 != i && totalPages > 1}" th:href="@{|/store/${i}/${uri}|}">
-              <button class="pagination-button" th:if="${uri}" th:text="${i}" ></button>
+            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1}" th:href="@{|/store/${i}/${uri}|}">
+              <button class="pagination-button" th:if="${uri}" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
             </a>
+            
             <!-- (original number buttons code)
             <button
               class="pagination-button"

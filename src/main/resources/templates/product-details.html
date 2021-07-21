@@ -25,6 +25,7 @@
           <p class="product-status" th:text="${product.status}"></p>
           <p class="product-category" th:text="${product.category}"></p>
           <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+          <p th:text="${'Number of sold: ' + product.numberOfSold}"></p>
     
           <div class="product-tags">
             <div th:each="tag : ${product.tags}">
