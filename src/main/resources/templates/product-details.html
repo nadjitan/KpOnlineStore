@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"> </head>
-
   <body class="background-grey">
     <div class="defaultMargin py-3">
       <span class="directory-link">
@@ -12,9 +11,11 @@
         <a class="directory-link-active" th:text="${product.productName}" th:href="@{|/product/${product.id}|}"></a>
       </span>
     </div>
-    <div class="defaultMargin row">
-      <div class="col-9 mb-4">
-        <div class="product-details-item p-4">
+    <div class="defaultMargin row mb-5">
+      <!--Left-->
+      <div class="col-9 p-0 mr-auto">
+        <!--Product Detail-->
+        <div class="product-details-item mb-4 p-4">
           <!-- <img
             th:src="${product.image}"
             th:alt="${product.productName + '-img.png'}"
@@ -95,8 +96,6 @@
           <p th:if="${!didUserBuyProduct}">
             Buy the product first before rating.
           </p>
-        </div>
-        <div class="product-details-item p-4">
           <form th:action="@{/addProduct}" method="post">
             <input
               type="number"
@@ -115,6 +114,10 @@
               Add to cart
             </button>
           </form>
+        </div>
+        <!--Comments-->
+        <div class="product-details-item p-4">
+          
           <div id="comments">
             <h3>COMMENTS</h3>
             <div th:if="${product.comments.empty}">No Comments</div>
@@ -147,7 +150,49 @@
           <button><a th:href="@{/store/1}">GO BACK</a></button>
         </div>
       </div>
+      <!--Right-->
+      <div class="sidebar col-3 p-4">
+        <h1 class="mb-4">RELATED PRODUCTS</h1>
+        <div class="row pb-4">
+          <div th:if="${productList.empty}">No products available</div>
+          <div class="col-12 py-2 d-flex justify-content-center" th:each="product: ${productList}">
+            <a th:href="@{|/product/${product.id}|}">
+              <div class="card card-product " style="width: 12rem;"> 
+                <div class="card-product-image-container d-flex align-items-center">
+                  <div>
+                    <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+                  </div>
+                </div>
+                <!-- <img
+                  th:src="${product.image}"
+                  th:alt="${product.productName + '-img.png'}"
+                /> -->
+                <div class="card-body card-product-body mr-auto">
+                  <h4 class="product-name" th:text="${product.productName}"></h4>
+                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
+                  <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
+                  <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="fas fa-star star"></i>
+                    </form>
+                  </div>
+                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i + product.rating}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="far fa-star star"></i>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+    
     <div th:replace="../fragments/footer.html"></div>
   </body>
 </html>

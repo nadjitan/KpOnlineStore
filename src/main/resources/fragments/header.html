@@ -59,8 +59,7 @@
                             <span class="accountName" th:text="${userFirstname}"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Wishlist</a></li>
-                            <li><a class="dropdown-item" th:href="@{/profile}">Order History</a></li>
+                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
                             <li><a class="dropdown-item" th:href="@{/crud}" th:if="${userRole == 'ADMIN'}">Products</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li></li>

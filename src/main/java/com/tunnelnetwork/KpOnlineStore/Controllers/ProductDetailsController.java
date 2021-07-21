@@ -1,6 +1,7 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
@@ -20,8 +21,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProductDetailsController extends CommonController{
   
+  Integer maxProducts = 3;
+
   @GetMapping("/product/{id}")
   private String productPage(Model model, @PathVariable("id") long id) {
+    List<Product> newProductList = new ArrayList<Product>();
+    for (String bandName : productRepository.getProduct(id).getTags()) {
+      for (Product product : productRepository.getProductsByBand(bandName)) {
+        if (product != productRepository.getById(id) && maxProducts > newProductList.size()) {
+          newProductList.add(product);
+        }
+      }
+    }
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -45,6 +57,7 @@ public class ProductDetailsController extends CommonController{
 
     model.addAttribute("maxRating", 5);
     model.addAttribute("product", productRepository.getProduct(id));
+    model.addAttribute("productList", newProductList);
     model.addAttribute("didUserBuyProduct", didUserBuyProduct(id));
     return "product-details";
   }
