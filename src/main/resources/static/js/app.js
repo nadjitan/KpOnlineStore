@@ -6,7 +6,7 @@
 // });
 
 document.addEventListener("DOMContentLoaded", () => {
-  if ($(location).attr("pathname") == "/checkout") {
+  if (document.location.pathname.indexOf("/checkout") == 0) {
     $("#checkbox-useCc").click(function () {
       const input = $(this);
 

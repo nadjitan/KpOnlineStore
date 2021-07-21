@@ -9,7 +9,7 @@
         <a class="directory-link-active" th:href="@{/store/1}">Products</a>
       </span>
     </div>
-    <div class="defaultMargin pb-5 row">
+    <div class="product-details defaultMargin pb-5 row">
       <!--FILTERS-->
       <div class="col-3 p-0">
         <div class="filters p-4 mr-auto">
@@ -513,7 +513,7 @@
       </div>
   
       <!--PRODUCTS-->
-      <div class="col-9">
+      <div class="col-9 p-0">
         <div class="store-products p-4">
           <!--
           <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
@@ -618,15 +618,16 @@
             </a>
           </div>
     
+          <!--
           <button th:if="${cart}">
             <a
               th:href="@{/cart/home}"
               th:text="${'GO TO CART ('+ cart.getNumberOfProducts() + ')'}"
             ></a>
           </button>
+          -->
         </div>
       </div>
-      
     </div>
     <footer th:replace="../fragments/footer"></footer>
   </body>

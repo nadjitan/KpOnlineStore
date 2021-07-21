@@ -285,23 +285,6 @@ input[id*="star-"] + label:hover {
   background-color: #0000002a;
 }
 
-.product-tags {
-  display: inline;
-}
-
-.product-tags > div {
-  border-radius: 20px;
-  background-color: black;
-  font-size: 0.8rem;
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  height: 30px;
-  width: max-content;
-  padding: 3px 15px;
-  color: white;
-}
-
 .clear-filters {
   background-color: #FAE1E1;
   color: #B85C5C;
@@ -376,4 +359,16 @@ input[id*="star-"] + label:hover {
 .pagination-button:hover {
   color: white !important;
   background-color: #B85C5C;
+}
+
+[class*="star-"] {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+[class*="star-"]:hover {
+  transform: translateY(-5px);
+}
+
+.product-details-item {
+  background-color: white
 }
