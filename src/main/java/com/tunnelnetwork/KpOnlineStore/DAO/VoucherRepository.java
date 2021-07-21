@@ -4,7 +4,9 @@ import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Voucher;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface VoucherRepository extends JpaRepository<Voucher, Long> {
 
   Voucher findByVoucherName(String username);
