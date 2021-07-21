@@ -3,10 +3,22 @@
   <head th:replace="../fragments/header"></head>
 
   <style>
+
     /* Eto power ng css Jeremy */
     /*                 - Nadji */
     /* wala akong nakikitang power dito nadj hahaha */
     /*                                      -jeremy */
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number]{
+      -moz-appearance: textfield;
+    }
+
     input, label {
       display:  block;
     }
@@ -109,6 +121,7 @@
           <div>
             <label for="phone-number">Phone Number</label>
             <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" placeholder="xxxxxxxxxxxx"/>
+            <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" />
           </div>
         </section>
         <section class="form-field form-cc">
@@ -147,7 +160,7 @@
           </div>
           <div>
             <label for="security-code"></label>Security Code</label>
-            <input type="text" pattern="\d*" maxlength="3" id="security-code" name="securityCode"  placeholder="xxx"/>
+            <input type="text" pattern="\d*" maxlength="3" id="security-code" name="securityCode" placeholder="xxx"/>
           </div>
         </section>
 
