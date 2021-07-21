@@ -3,6 +3,12 @@
   <head th:replace="../fragments/header"></head>
 
   <style>
+
+    /* Eto power ng css Jeremy */
+    /*                 - Nadji */
+    /* wala akong nakikitang power dito nadj hahaha */
+    /*                                      -jeremy */
+
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -39,7 +45,6 @@
       grid-gap: 1rem;
       grid-template-columns: repeat(3, 0.5fr);
     }
-
 
     section:nth-of-type(1){
       grid-template-columns: repeat(2, 0.5fr);
@@ -115,6 +120,7 @@
         <section class="form-field">
           <div>
             <label for="phone-number">Phone Number</label>
+            <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" placeholder="xxxxxxxxxxxx"/>
             <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" />
           </div>
         </section>

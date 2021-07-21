@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-  <head th:replace="../fragments/header"> </head>
+  <head th:replace="../fragments/header"></head>
+  <body class="background-blue">
+    <div class="defaultMargin py-5 d-flex row justify-content-center align-items-center">
+      <div class="container" style="width: 755px">
+        <h2>CREATE YOUR SEOUL SOUL ACCOUNT</h1>
+      </div>
+      <div class="container row p-4 mt-4" style="background-color:white; width: 755px">
+        <div class="col-6 p-0">
+          <form th:action="@{/sign-up}" method="POST" id="signup">
+            <p class="error" th:if="${userNotCreated}" th:text="${userNotCreated}"></p>
+      
+            <div class="form-label-group">
+              <label class="label-style">First Name</label>
+              <input class="input-style" type="text" placeholder="Please enter your first name" id="name" name="firstName" />
+            </div>
+            <div class="form-label-group">
+              <label class="label-style">Last Name</label>
+              <input class="input-style" type="text" placeholder="Please enter your last name" id="surname" name="lastName" />
+            </div>
+            <div class="form-label-group">
+              <label class="label-style">Email</label>
+              <input class="input-style" type="text" placeholder="Please enter your email" id="email" name="email" />
+            </div>
+            <div class="form-label-group">
+              <label class="label-style">Password</label>
+              <input class="input-style" type="password" placeholder="Please enter your password" id="password" name="password" />
+            </div>
+            
+            <input class="submit-style" type="submit" value="SIGN UP" />
 
-  <body>
-    <form th:action="@{/sign-up}" method="POST" id="signup">
-      <h1>SIGN UP</h1>
+            <div class="text-center mt-2 mb-2">
+              <a class="link-style" href="/login">Already have an account?</a>
+            </div>
+          </form>
+        </div>
+        <div class="col-6 p-0 d-flex justify-content-center align-items-center">
+          SEOUL SOUL
+        </div>
+      </div>
+    </div>
 
-      <p
-        th:if="${userNotCreated}"
-        class="error"
-        th:text="${userNotCreated}"
-      ></p>
-
-      <label>First Name</label>
-      <input type="text" id="name" name="firstName" />
-
-      <label>Last Name</label>
-      <input type="text" id="surname" name="lastName" />
-
-      <label>Email</label>
-      <input type="text" id="email" name="email" />
-
-      <label>Password</label>
-      <input type="password" id="password" name="password" />
-
-      <a href="/login">Already have an account?</a>
-
-      <input type="submit" value="Sign up" class="submit" />
-    </form>
+    <footer th:replace="../fragments/footer"></footer>
   </body>
 </html>

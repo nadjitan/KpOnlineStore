@@ -93,7 +93,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     
     List<Product> bestSellers = new ArrayList<Product>();
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 12; i++) {
       try {
         bestSellers.add(listToSort.get(i));
       } catch (Exception e) {

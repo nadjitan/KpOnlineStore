@@ -59,7 +59,7 @@ public class StoreController extends CommonController{
     getUserRole(model);
 
     getUserFirstAndLastName(model);
-
+    
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
         for (Product product : productListBasedOnName) {

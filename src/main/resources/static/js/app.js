@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         $(prevRatingInput).next().css("background-color", "transparent");
       }
 
-      $(this).css("background-color", "aquamarine");
+      $(this).css("background-color", "#FAE1E1");
 
       prevRatingInput = input;
     });
