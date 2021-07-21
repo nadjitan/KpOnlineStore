@@ -81,7 +81,7 @@ public class CartRepositoryIntegrationTests {
 
     String email = "test@mail.com";
     Cart cart = cartRepository.findByCartOwner(email);  
-    
+     
     assertEquals(email, cart.getCartOwner());
   }
 

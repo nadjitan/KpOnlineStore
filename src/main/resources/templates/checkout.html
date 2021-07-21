@@ -3,8 +3,16 @@
   <head th:replace="../fragments/header"></head>
 
   <style>
-    /* Eto power ng css Jeremy */
-    /*                 - Nadji */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number]{
+      -moz-appearance: textfield;
+    }
+
     input, label {
       display:  block;
     }
@@ -101,13 +109,13 @@
           </div>
           <div>
             <label for="postal-code">Postal Code</label>
-            <input type="text" id="postal-code" name="postalCode" maxlength="4" placeholder="xxxx"/>
+            <input type="text" pattern="\d*" maxlength="4" id="postal-code" name="postalCode" placeholder="xxxx"/>
           </div>
         </section>
         <section class="form-field">
           <div>
             <label for="phone-number">Phone Number</label>
-            <input id="phone-number" name="phoneNumber" type="text" maxlength="11"/>
+            <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" />
           </div>
         </section>
         <section class="form-field form-cc">
@@ -146,7 +154,7 @@
           </div>
           <div>
             <label for="security-code"></label>Security Code</label>
-            <input type="text" id="security-code" name="securityCode" maxlength="3" placeholder="xxx"/>
+            <input type="text" pattern="\d*" maxlength="3" id="security-code" name="securityCode" placeholder="xxx"/>
           </div>
         </section>
 
