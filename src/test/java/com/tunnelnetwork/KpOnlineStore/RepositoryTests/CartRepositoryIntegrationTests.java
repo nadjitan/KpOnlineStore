@@ -1,4 +1,4 @@
-package com.tunnelnetwork.KpOnlineStore;
+package com.tunnelnetwork.KpOnlineStore.RepositoryTests;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.CartRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.Cart;
@@ -27,7 +27,7 @@ import java.util.Optional;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @DataJpaTest
 public class CartRepositoryIntegrationTests {
-
+  
   @Autowired
   private CartRepository cartRepository;
 
@@ -78,49 +78,65 @@ public class CartRepositoryIntegrationTests {
 
   @Test
   public void whenFindByCartOwner_thenCartShouldBeFound() {
-
+    
+    // Given
     String email = "test@mail.com";
+
+    // When
     Cart cart = cartRepository.findByCartOwner(email);  
-     
+    
+    // Then
     assertEquals(email, cart.getCartOwner());
   }
 
   @Test
   public void whenInvalidCartOwner_thenCartShouldNotBeFound() {
 
+    // Given
     String email = "notregisteredmail@mail.com";
-    Cart cart = cartRepository.findByCartOwner(email);
 
+    // When
+    Cart cart = cartRepository.findByCartOwner(email);
+    
+    // Then
     assertNull(cart);
   }
 
   @Test
   public void whenFindById_thenCartShouldBeFound() {
 
+    // When
     Optional<Cart> cart = cartRepository.findById(cartId);
 
+    // Then
     assertTrue(cart.isPresent());
   }
 
   @Test
   public void whenInvalidId_thenCartShouldNotBeFound() {
-
+    
+    // Given
     long id = -100;
+
+    //When
     Optional<Cart> cart = cartRepository.findById(id);
 
+    // Then
     assertFalse(cart.isPresent());
   }
 
   @Test
   public void given1DuplicateProduct_whenAddedToCart_thenReturnException() {
 
+    // Given
     // Get exact copy of a product in cart
     Cart cartFromDb = testEntityManager.find(Cart.class, cartId);
-
     Product duplicateProduct = cartFromDb.getCartProducts().get(0);
 
+    // When
     cartFromDb.getCartProducts().add(duplicateProduct);
     
+    // Then
     assertThrows(DataIntegrityViolationException.class, () -> {
       
       cartRepository.saveAndFlush(cartFromDb);

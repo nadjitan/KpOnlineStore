@@ -1,4 +1,4 @@
-package com.tunnelnetwork.KpOnlineStore;
+package com.tunnelnetwork.KpOnlineStore.RepositoryTests;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.ReceiptRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.Receipt;
@@ -92,14 +92,17 @@ public class ReceiptRepositoryIntegrationTests {
     String cartOwner = cartFromDb.getCartOwner();
     List<Voucher> cartVouchers = cartFromDb.getVouchers();
 
+    // Given
     receiptFromDb.setCreatedAt(localDateTime);
     receiptFromDb.setProductList(cartProducts);
     receiptFromDb.setReceiptOwner(cartOwner);
     receiptFromDb.setVoucherList(cartVouchers);
 
+    // When
     testEntityManager.detach(cartFromDb);
     Receipt receipt = testEntityManager.persistAndFlush(receiptFromDb);
 
+    // Then
     assertEquals(localDateTime, receipt.getCreatedAt());
     assertIterableEquals(cartProducts, receipt.getProductList());
     assertEquals(cartOwner, receipt.getReceiptOwner());
@@ -109,35 +112,49 @@ public class ReceiptRepositoryIntegrationTests {
   @Test
   public void whenFindAllByReceiptOwner_thenReceiptShouldBeFound() {
 
+    // Given
     String email = "test@mail.com";
+
+    // When
     Iterable<Receipt> receipt = receiptRepository.findAllByReceiptOwner(email);  
     
+    // Then
     assertEquals(email, receipt.iterator().next().getReceiptOwner());
   }
 
   @Test
   public void whenInvalidReceiptOwner_thenReceiptShouldNotBeFound() {
 
+    // Given
     String email = "notregisteredmail@mail.com";
+
+    // When
     Iterable<Receipt> receipt= receiptRepository.findAllByReceiptOwner(email);
 
+    // Then
     assertEquals(StreamSupport.stream(receipt.spliterator(), false).count(), 0);
   }
 
   @Test
   public void whenFindById_thenReceiptShouldBeFound() {
 
+    // When
     Optional<Receipt> receipt = receiptRepository.findById(this.receiptId);
 
+    // Then
     assertTrue(receipt.isPresent());
   }
 
   @Test
   public void whenInvalidId_thenReceiptShouldNotBeFound() {
 
+    // Given
     long id = -100;
+
+    // When
     Optional<Receipt> receipt = receiptRepository.findById(id);
 
+    // Then
     assertFalse(receipt.isPresent());
   }
 }

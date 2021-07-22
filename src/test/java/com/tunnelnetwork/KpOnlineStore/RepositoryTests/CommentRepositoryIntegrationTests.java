@@ -1,4 +1,4 @@
-package com.tunnelnetwork.KpOnlineStore;
+package com.tunnelnetwork.KpOnlineStore.RepositoryTests;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.CommentRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
@@ -45,35 +45,49 @@ public class CommentRepositoryIntegrationTests {
   @Test
   public void whenFindByUserName_thenCommentShouldBeFound() {
 
+    // Given
     Comment comment = testEntityManager.find(Comment.class, commentId);
+
+    // When
     Iterable<Comment> commentList = commentRepository.getAllCommentsByUsername(comment.getUserName());
 
+    // Then
     assertEquals(StreamSupport.stream(commentList.spliterator(), false).count(), 1);
   }
 
   @Test
   public void whenInvalidUserName_thenCommentShouldNotBeFound() {
 
+    // Given
     String username = "notregisteredmail@mail.com";
+
+    // When
     Iterable<Comment> commentList = commentRepository.getAllCommentsByUsername(username);
 
+    // Then
     assertEquals(StreamSupport.stream(commentList.spliterator(), false).count(), 0);
   }
 
   @Test
   public void whenFindById_thenCommentShouldBeFound() {
 
+    // When
     Optional<Comment> comment = commentRepository.findById(commentId);
 
+    // Then
     assertTrue(comment.isPresent());
   }
 
   @Test
   public void whenInvalidId_thenCommentShouldNotBeFound() {
 
+    // Given
     long id = -100;
+
+    // When
     Optional<Comment> comment = commentRepository.findById(id);
 
+    // Then
     assertFalse(comment.isPresent());
   }
 }
