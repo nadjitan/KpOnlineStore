@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  var prevRatingInput = null;
   if (document.location.pathname.indexOf("/store/") == 0) {
-    var prevRatingInput = null;
 
     $(".btn-rating").click(function () {
       const input = $(this).prev();
@@ -57,9 +57,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $(".clear-filters").click(function () {
-      const inputs = $(this).parent();
+      const inputs = $(this).parent().parent();
 
       inputs.find("input").prop("checked", false);
+
+      inputs.find("#input-price-min").val("");
+      inputs.find("#input-price-max").val("");
+
+      $(prevRatingInput).prop("checked", false);
+      $(prevRatingInput).next().css("background-color", "transparent");
     });
   }
 

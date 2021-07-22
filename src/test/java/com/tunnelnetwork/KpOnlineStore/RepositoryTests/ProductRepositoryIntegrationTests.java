@@ -1,4 +1,4 @@
-package com.tunnelnetwork.KpOnlineStore;
+package com.tunnelnetwork.KpOnlineStore.RepositoryTests;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.ProductRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
@@ -39,35 +39,49 @@ public class ProductRepositoryIntegrationTests {
   @Test
   public void whenFindByProductNameIgnoreCase_thenProductShouldBeFound() {
 
+    // Given
     String productName = "cream";
+
+    // When
     List<Product> productList = productRepository.findByProductNameContainingIgnoreCase(productName);
 
+    // Then
     assertFalse(productList.isEmpty());
   }
 
   @Test
   public void whenInvalidProductName_thenProductShouldNotBeFound() {
 
+    // Given
     String productName = "guitar";
+
+    // When
     List<Product> productList = productRepository.findByProductNameContainingIgnoreCase(productName);
 
+    // Then
     assertTrue(productList.isEmpty());
   }
 
   @Test
   public void whenFindById_thenProductShouldBeFound() {
 
+    // When
     Optional<Product> product = productRepository.findById(productId);
 
+    // Then
     assertTrue(product.isPresent());
   }
 
   @Test
   public void whenInvalidId_thenProductShouldNotBeFound() {
 
+    // Given
     long id = -100;
+
+    // When
     Optional<Product> product = productRepository.findById(id);
 
+    // Then
     assertFalse(product.isPresent());
   }
 }

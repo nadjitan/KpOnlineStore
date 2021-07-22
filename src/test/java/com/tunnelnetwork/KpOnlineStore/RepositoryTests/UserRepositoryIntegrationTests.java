@@ -1,4 +1,4 @@
-package com.tunnelnetwork.KpOnlineStore;
+package com.tunnelnetwork.KpOnlineStore.RepositoryTests;
 
 import com.tunnelnetwork.KpOnlineStore.Models.User;
 import com.tunnelnetwork.KpOnlineStore.Models.UserRole;
@@ -49,36 +49,49 @@ public class UserRepositoryIntegrationTests {
 
   @Test
   public void whenFindByEmail_thenUserShouldBeFound() {
-
+    // Given
     String email = "test@mail.com";
+
+    // When
     User found = userRepository.findByEmail(email).get();
 
+    // Then
     assertEquals(email, found.getEmail());
   }
 
   @Test
   public void whenNonExistingEmail_thenUserShouldNotExist() {
-
+    
+    // Given
     String email = "notregisteredmail@mail.com";
+
+    // When
     Optional<User> found = userRepository.findByEmail(email);
 
+    // Then
     assertFalse(found.isPresent());
   }
 
   @Test
   public void whenValidId_thenUserShouldBeFound() {
 
+    // When
     Optional<User> found = userRepository.findById(userId);
 
+    // Then
     assertTrue(found.isPresent());
   }
 
   @Test
   public void whenInvalidId_thenUserShouldNotBeFound() {
 
+    // Given
     long id = -100;
+
+    // When
     Optional<User> found = userRepository.findById(id);
 
+    // Then
     assertFalse(found.isPresent());
   }
 
@@ -86,10 +99,12 @@ public class UserRepositoryIntegrationTests {
   public void given2Users_whenFindAll_thenReturn2Users() {
     
     // 1st user is admin which is created before running the app
-    // 2nd is the test user
+    // 2nd is the test user we just created
 
+    // When
     List<User> usersInDb = userRepository.findAll();
 
+    // Then
     assertEquals(2, usersInDb.size());
   }
 }

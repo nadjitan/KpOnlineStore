@@ -1,4 +1,4 @@
-package com.tunnelnetwork.KpOnlineStore;
+package com.tunnelnetwork.KpOnlineStore.RepositoryTests;
 
 import com.tunnelnetwork.KpOnlineStore.DAO.VoucherRepository;
 import com.tunnelnetwork.KpOnlineStore.Models.User;
@@ -60,47 +60,67 @@ public class VoucherRepositoryIntegrationTests {
   @Test
   public void whenFindByVoucherName_thenVoucherShouldBeFound() {
 
+    // Given
     String voucherName = "Voucher";
+
+    // When
     Voucher voucher = voucherRepository.findByVoucherName(voucherName);
 
+    // Then
     assertEquals(voucherName, voucher.getVoucherName());
   }
 
   @Test
   public void whenInvalidVoucherName_thenVoucherShouldNotBeFound() {
 
+    // Given
     String voucherName = "NonExistentVoucher";
+
+    // When
     Voucher voucher = voucherRepository.findByVoucherName(voucherName);
 
+    // Then
     assertNull(voucher);
   }
 
   @Test
   public void whenFindById_thenVoucherShouldBeFound() {
 
+    // Given
     long id = 1;
+
+    // When
     Optional<Voucher> voucher = voucherRepository.findById(id);
     System.out.println("VOUCHERS: " + voucherRepository.findAll());
+
+    // Then
     assertTrue(voucher.isPresent());
   }
 
   @Test
   public void whenInvalidId_thenVoucherShouldNotBeFound() {
 
+    // Given
     long id = -100;
+
+    // When
     Optional<Voucher> voucher = voucherRepository.findById(id);
 
+    // Then
     assertFalse(voucher.isPresent());
   }
 
   @Test
   public void given1DuplicateUserName_whenAddedToVoucher_thenReturnException() {
 
+    // Given
     // Get exact copy of a name in voucher
     Voucher voucherFromDb = testEntityManager.find(Voucher.class, voucherId);
 
+    // When
     String duplicateUserName = voucherFromDb.getUserList().get(0);
     
+    // Then
     assertThrows(DataIntegrityViolationException.class, () -> {
       voucherFromDb.addUserInList(duplicateUserName);
       
