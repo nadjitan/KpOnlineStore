@@ -23,6 +23,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * @param receiptOwner
+ * @param voucherList
+ * @param productList
+ * @param createdAt
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

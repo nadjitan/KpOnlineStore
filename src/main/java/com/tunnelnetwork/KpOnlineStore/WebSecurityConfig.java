@@ -40,12 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
       .authorizeRequests()
         .antMatchers(
           "/",
+          "/product/**",
+          "/fonts/**",
           "/removeFromWishlist/**",
           "/addToWishlist/**",
           "/forgot-password/**",
           "/change-password/**",
           "/sign-up/**",
           "/crud/**",
+          "/faq/**",
           "/contact-us/**",
           "/about-us/**",
           "/store/**",

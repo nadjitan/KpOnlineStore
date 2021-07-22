@@ -17,6 +17,8 @@ import javax.validation.constraints.Digits;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,7 +58,11 @@ public class Voucher {
 
   @Transient
   public void addUserInList(String username) {
-    userList.add(username);
+    if (!userList.contains(username)) {
+      userList.add(username);
+    } else {
+      throw new DataIntegrityViolationException(username);
+    }
   }
 
   @Transient

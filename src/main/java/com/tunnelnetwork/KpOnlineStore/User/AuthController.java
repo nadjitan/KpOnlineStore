@@ -2,9 +2,6 @@ package com.tunnelnetwork.KpOnlineStore.User;
 
 import lombok.AllArgsConstructor;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
@@ -17,11 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
+import com.tunnelnetwork.KpOnlineStore.Controllers.CommonController;
 import com.tunnelnetwork.KpOnlineStore.Models.User;
 
 @Controller
 @AllArgsConstructor
-public class AuthController {
+public class AuthController extends CommonController{
 
   private final UserService userService;
 
@@ -35,20 +33,24 @@ public class AuthController {
 
   // Make sure /login & /sign-up are only accessed by users without accounts
   @GetMapping("/login")
-  private String showLoginPage() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  private String showLoginPage(Model model) {
+    getUserRole(model);
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    getUserFirstAndLastName(model);
+
+    if (!isThereLoggedInUser()) {
       return "login";
     }
 
     return "redirect:/";
   }
   @GetMapping("/sign-up")
-  public String showSignupPage() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  public String showSignupPage(Model model) {
+    getUserRole(model);
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    getUserFirstAndLastName(model);
+
+    if (!isThereLoggedInUser()) {
       return "sign-up";
     }
 
@@ -79,7 +81,10 @@ public class AuthController {
   }
 
   @GetMapping("/sign-up/confirm")
-	private String confirmMail(@RequestParam("token") String token) {
+	private String confirmMail(@RequestParam("token") String token, Model model) {
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
 
 		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
@@ -89,10 +94,12 @@ public class AuthController {
 	}
 
   @GetMapping("/forgot-password")
-  private String goToForgotPassword() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  private String goToForgotPassword(Model model) {
+    getUserRole(model);
 
-    if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+    getUserFirstAndLastName(model);
+
+    if (!isThereLoggedInUser()) {
       return "forgot-password";
     }
 
@@ -100,7 +107,14 @@ public class AuthController {
   }
   @GetMapping("/change-password/confirm")
 	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
+    getUserRole(model);
 
+    getUserFirstAndLastName(model);
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+    
 		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
 
 		if (optionalConfirmationToken.isPresent()) {

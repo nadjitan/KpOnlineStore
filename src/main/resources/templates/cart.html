@@ -6,7 +6,7 @@
     <div id="home">
       <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
         Hello
-        <span th:text="${userFullname}"></span>
+        <span th:text="${userFirstname + ' ' + userLastname}"></span>
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       <form

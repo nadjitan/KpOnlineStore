@@ -36,7 +36,10 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newProductList);
 
-    createCartAndVoucher(model);
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
     model.addAttribute("uri", null);
     return "store";
   }
@@ -53,6 +56,10 @@ public class StoreController extends CommonController{
     List<Product> productListBasedOnBand = productRepository.getProductsContainingInBand(storeSearch.get());
     List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
 
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+    
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
         for (Product product : productListBasedOnName) {
@@ -78,7 +85,10 @@ public class StoreController extends CommonController{
     pagination(model, changePage, newDividedProductList, newProductList);
 
     model.addAttribute("products", newDividedProductList);
-    createCartAndVoucher(model);
+
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
     
     // uri to put in our page buttons
     model.addAttribute("uri", "storeSearch?" + request.getQueryString());
@@ -126,6 +136,10 @@ public class StoreController extends CommonController{
     @RequestParam("priceMin") Optional<Integer> priceMin,
     @RequestParam("priceMax") Optional<Integer> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
     
     List<Product> newProductList = new ArrayList<Product>();
 
@@ -302,7 +316,10 @@ public class StoreController extends CommonController{
     pagination(model, changePage, newDividedProductList, removeDuplicatesProductList);
 
     model.addAttribute("products", newDividedProductList);
-    createCartAndVoucher(model);
+    
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
 
     // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());

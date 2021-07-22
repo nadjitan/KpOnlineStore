@@ -11,6 +11,10 @@ public class HomeController extends CommonController{
   @GetMapping("/")
   private String indexPage(Model model) {
 
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
