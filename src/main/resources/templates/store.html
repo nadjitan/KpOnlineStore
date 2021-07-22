@@ -569,23 +569,23 @@
     
           <div class="d-flex justify-content-center">
             <!-- Back button -->
-            <a th:href="@{|/store/${newPage - 2}|}">
-              <button class="btn-back pagination-button" th:if="${showBack == true and uri == null}">
+            <a th:href="@{|/store/${newPage - 2}|}" th:if="${showBack == true and uri == null}">
+              <button class="btn-back pagination-button" >
                 <i class="fas fa-chevron-left"></i>
               </button>
             </a>
-            <a th:href="@{|/store/${newPage - 2}/${uri}|}">
-              <button class="btn-back pagination-button" th:if="${showBack == true and uri != null}">
+            <a th:href="@{|/store/${newPage - 2}/${uri}|}" th:if="${showBack == true and uri != null}">
+              <button class="btn-back pagination-button" >
                 <i class="fas fa-chevron-left"></i>
               </button>
             </a>
             
             <!-- Number buttons -->
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1}" th:href="@{|/store/${i}|}">
-              <button class="pagination-button" th:if="${uri == null}" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
+            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1 && uri == null}" th:href="@{|/store/${i}|}">
+              <button class="pagination-button" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
             </a>
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1}" th:href="@{|/store/${i}/${uri}|}">
-              <button class="pagination-button" th:if="${uri}" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
+            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1 && uri != null}" th:href="@{|/store/${i}/${uri}|}">
+              <button class="pagination-button" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
             </a>
             
             <!-- (original number buttons code)

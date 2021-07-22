@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var prevRatingInput = null;
   if (document.location.pathname.indexOf("/store/") == 0) {
-
     $(".btn-rating").click(function () {
       const input = $(this).prev();
 
@@ -60,12 +59,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputs = $(this).parent().parent();
 
       inputs.find("input").prop("checked", false);
+      inputs.find("input").removeAttr("checked");
 
       inputs.find("#input-price-min").val("");
       inputs.find("#input-price-max").val("");
 
       $(prevRatingInput).prop("checked", false);
+      $(prevRatingInput).removeAttr("checked");
       $(prevRatingInput).next().css("background-color", "transparent");
+
+      var pageNumber = 0;
+      $(".pagination-button").each(function(index) {
+        pageNumber = $(this).text();
+
+        $(this).parent().prop("href", "/store/" + pageNumber);
+      });
     });
   }
 
