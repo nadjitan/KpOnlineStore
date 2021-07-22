@@ -570,12 +570,14 @@
           <div class="d-flex justify-content-center">
             <!-- Back button -->
             <a th:href="@{|/store/${newPage - 2}|}" th:if="${showBack == true and uri == null}">
-              <button class="btn-back pagination-button" >
+              <input type="hidden" th:value="${newPage - 2}">
+              <button class="btn-back pagination-button-arrow" >
                 <i class="fas fa-chevron-left"></i>
               </button>
             </a>
             <a th:href="@{|/store/${newPage - 2}/${uri}|}" th:if="${showBack == true and uri != null}">
-              <button class="btn-back pagination-button" >
+              <input type="hidden" th:value="${newPage - 2}">
+              <button class="btn-back pagination-button-arrow" >
                 <i class="fas fa-chevron-left"></i>
               </button>
             </a>
@@ -608,14 +610,16 @@
             -->
     
             <!-- Next button -->
-            <a th:href="@{|/store/${newPage}|}">
-              <button class="btn-next pagination-button" th:if="${showNext == true and uri == null}">
+            <a th:href="@{|/store/${newPage}|}" th:if="${showNext == true and uri == null}">
+              <input type="hidden" th:value="${newPage}">
+              <button class="btn-next pagination-button-arrow">
                 <i class="fas fa-chevron-right"></i>
               </button>
             </a>
             
-            <a th:href="@{|/store/${newPage}/${uri}|}">
-              <button class="btn-next pagination-button" th:if="${showNext == true and uri != null}">
+            <a th:href="@{|/store/${newPage}/${uri}|}" th:if="${showNext == true and uri != null}">
+              <input type="hidden" th:value="${newPage}">
+              <button class="btn-next pagination-button-arrow">
                 <i class="fas fa-chevron-right"></i>
                </button>
             </a>

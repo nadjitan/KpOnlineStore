@@ -356,6 +356,17 @@ input[id*="star-"] + label:hover {
   transition: 0.25s;
 }
 
+.pagination-button-arrow {
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  font-size: 12px !important;
+  font-family: Poppins Medium;
+  color: black !important;
+  background-color: white;
+  transition: 0.25s;
+}
+
 .pagination-button:hover {
   color: white !important;
   background-color: #B85C5C;

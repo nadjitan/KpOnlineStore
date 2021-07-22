@@ -74,6 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         $(this).parent().prop("href", "/store/" + pageNumber);
       });
+
+      $(".pagination-button-arrow").each(function(index) {
+        pageNumber = $(this).prev().val();
+
+        $(this).parent().prop("href", "/store/" + pageNumber);
+      });
     });
   }
 
