@@ -2,75 +2,104 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
 
-  <body>
-    <div id="home">
-      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
-        Hello
-        <span th:text="${userFirstname + ' ' + userLastname}"></span>
-        <button><a th:href="@{/profile}">PROFILE</a></button>
-      </p>
-      <form
-        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
-        th:action="@{/logout}"
-        method="POST"
-      >
-        <input type="submit" value="Logout" class="submit" />
-      </form>
-
-      <div th:if="${cart.cartProducts.empty}">No items in your cart.</div>
-      <div id="cart">
-        <div class="product" th:each="product : ${cart.cartProducts}">
-          <h3 class="product-name" th:text="${product.productName}"></h3>
-          <p class="product-category" th:text="${product.category}"></p>
-          <p class="product-price" th:text="${'₱ ' + product.price}"></p>
-          <p
-            class="product-quantity"
-            th:text="${'Quantity: ' + product.quantity}"
-          ></p>
-
-          <form th:action="@{/removeProduct}" method="post">
-            <button type="submit" name="productId" th:value="${product.id}">
-              REMOVE
-            </button>
-          </form>
-        </div>
-        <div th:if="${!cart.cartProducts.empty}" class="cart-total">
-          <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
-          <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
-          <p
-            th:text="${'Discounted Total: ₱ ' + cart.getDiscountedPrice()}"
-          ></p>
-
-          <form th:action="@{/checkout}" method="GET" id="proceed-form">
-            <button type="submit">PROCEED TO CHECKOUT</button>
-          </form>
-        </div>
-      </div>
-
-      <div id="voucher">
-        <div th:if="${cart.vouchers.empty}">You have no vouchers</div>
-        <div th:each="voucher : ${cart.vouchers}">
-          <h3 th:text="${voucher.voucherName}"></h3>
-          <p th:text="${voucher.description}"></p>
-          <p th:text="${voucher.discount + '%'}"></p>
-          <p
-            th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}"
-          ></p>
-          <label for="use-voucher">Use Voucher</label>
-          <input
-            type="checkbox"
-            name="useVoucher"
-            id="use-voucher"
-            checked="checked"
-            form="proceed-form"
-            value="1"
-          />
+  <body class="background-grey">
+    <div class="defaultMargin py-3">
+      <span class="directory-link">
+        <a class="directory-link" th:href="@{/}">Home</a>
+        <span class="mx-1">></span>
+        <a class="directory-link-active" th:href="@{/cart/home}">Cart</a>
+      </span>
+    </div>
+    <div class="defaultMargin row mb-5">
+      <!--Left-->
+      <div class="col-8 p-0 mr-auto">
+        <div class="container-cart p-4 mr-auto">
+          <h1 class="mb-4">CART</h1>
+          <div th:if="${cart.cartProducts.empty}">No items in your cart.</div>
+          <table th:if="${!cart.cartProducts.empty}" class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="product" th:each="product : ${cart.cartProducts}">
+                <th scope="row" class="align-middle">
+                  <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="cart-product-image"/>
+                </th>
+                <td th:text="${product.productName}" class="align-middle"></td>
+                <td th:text="${'x' + product.quantity}" class="align-middle"></td>
+                <td th:text="${'₱ ' + product.price * product.quantity}" class="align-middle"></td>
+                <td class="align-middle">
+                  <form th:action="@{/removeProduct}" method="post">
+                    <button type="submit" class="btn submit-style w-auto px-3 m-0" name="productId" th:value="${product.id}">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--
+          <div class="product" th:each="product : ${cart.cartProducts}">
+            <h3 class="product-name" th:text="${product.productName}"></h3>
+            <p class="product-category" th:text="${product.category}"></p>
+            <p class="product-price" th:text="${'₱ ' + product.price * product.quantity}"></p>
+            <p
+              class="product-quantity"
+              th:text="${'Quantity: ' + product.quantity}"
+            ></p>
+  
+            <form th:action="@{/removeProduct}" method="post">
+              <button type="submit" name="productId" th:value="${product.id}">
+                REMOVE
+              </button>
+            </form>
+          </div>
+          -->
         </div>
       </div>
-
-      <button>
-        <a th:href="@{/store/1}">BACK TO STORE</a>
-      </button>
+      <!--Right-->
+      <div class="col-4 ps-4 pe-0">
+        <div class="sidebar-big p-4 ml-auto">
+          <div id="voucher">
+            <div th:if="${cart.vouchers.empty}">You have no vouchers</div>
+            <div th:each="voucher : ${cart.vouchers}">
+              <h3 th:text="${voucher.voucherName}"></h3>
+              <p th:text="${voucher.description}"></p>
+              <p th:text="${voucher.discount + '%'}"></p>
+              <p
+                th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}"
+              ></p>
+              <label for="use-voucher">Use Voucher</label>
+              <input
+              class="form-check-input" 
+                type="checkbox"
+                name="useVoucher"
+                id="use-voucher"
+                form="proceed-form"
+                value="1"
+              />
+            </div>
+          </div>
+          <hr>
+          <div th:if="${!cart.cartProducts.empty}" class="cart-total">
+            <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
+            <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
+            <p
+              th:text="${'Discounted Total: ₱ ' + cart.getDiscountedPrice()}"
+            ></p>
+  
+            <form th:action="@{/checkout}" method="GET" id="proceed-form">
+              <button type="submit" class="btn submit-style submit-style-small m-0">PROCEED TO CHECKOUT</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
