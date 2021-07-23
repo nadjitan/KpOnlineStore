@@ -34,6 +34,8 @@ public class ProductDetailsController extends CommonController{
       }
     }
 
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);

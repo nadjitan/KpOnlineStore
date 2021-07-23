@@ -15,6 +15,8 @@ public class HomeController extends CommonController{
       createCartAndVoucher(model);
     }
 
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);

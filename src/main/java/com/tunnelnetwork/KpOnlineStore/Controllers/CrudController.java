@@ -19,6 +19,9 @@ public class CrudController extends CommonController{
 
   @GetMapping("/crud")
   private String profilePage(Model model) {
+
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
