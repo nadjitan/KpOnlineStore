@@ -36,13 +36,9 @@
         </div>
         <div th:if="${!cart.cartProducts.empty}" class="cart-total">
           <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
+          <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
           <p
-            th:if="${checboxStatus == null}"
-            th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"
-          ></p>
-          <p
-            th:if="${checboxStatus}"
-            th:text="${'Total: ₱ ' + cart.getDiscountedPrice()}"
+            th:text="${'Discounted Total: ₱ ' + cart.getDiscountedPrice()}"
           ></p>
 
           <form th:action="@{/checkout}" method="GET" id="proceed-form">
@@ -59,7 +55,7 @@
         </div>
       </div>
 
-      <div id="voucher" th:if="${!cart.cartProducts.empty}">
+      <div id="voucher">
         <div th:if="${cart.vouchers.empty}">You have no vouchers</div>
         <div th:each="voucher : ${cart.vouchers}">
           <h3 th:text="${voucher.voucherName}"></h3>
