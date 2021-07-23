@@ -19,13 +19,13 @@ h1 {
 h2 {
   font-size: 15px !important;
   font-family: Poppins Medium;
-  color: #4E7FA1;
+  color: #4e7fa1;
 }
 
 h3 {
   font-size: 20px !important;
   font-family: Poppins Regular !important;
-  color: #B85C5C !important;
+  color: #b85c5c !important;
   margin-bottom: 0px;
 }
 
@@ -42,7 +42,7 @@ h5 {
 }
 
 input:focus,
-textarea:focus { 
+textarea:focus {
   outline: none !important;
 }
 
@@ -51,42 +51,42 @@ textarea:focus {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active
-{
- -webkit-box-shadow: 0 0 0 30px white inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-textarea:hover, 
-input:hover, 
+textarea:hover,
+input:hover,
 button:hover,
-textarea:active, 
-input:active, 
+textarea:active,
+input:active,
 button:active,
-textarea:focus, 
+textarea:focus,
 input:focus,
 button:focus,
 label:focus,
 .btn:active,
-.btn.active
-{
-    outline:0px !important;
-    -webkit-appearance:none !important;
-    box-shadow: none !important;
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none !important;
+  box-shadow: none !important;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #CEC5C6;
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #cec5c6;
   opacity: 1; /* Firefox */
 }
 
-.mr-auto, .mx-auto {
-  margin-right: auto!important;
+.mr-auto,
+.mx-auto {
+  margin-right: auto !important;
 }
 
-a:focus.dropdown-item{
-  background-color:#B85C5C !important;
+a:focus.dropdown-item {
+  background-color: #b85c5c !important;
 }
 
 .dropdown-menu {
@@ -111,7 +111,7 @@ a:focus.dropdown-item{
   font-size: 13px !important;
   font-family: Poppins Light;
   color: black;
-  border: 1px solid #CEC5C6;
+  border: 1px solid #cec5c6;
   border-radius: 25px;
 }
 
@@ -138,7 +138,7 @@ a:focus.dropdown-item{
 
 .submit-style:hover {
   color: white;
-  background-color: #B85C5C;
+  background-color: #b85c5c;
 }
 
 .submit-style:active {
@@ -159,12 +159,12 @@ a:focus.dropdown-item{
 .link-style {
   font-size: 13px !important;
   font-family: Poppins Regular;
-  color: #B85C5C;
+  color: #b85c5c;
   transition: 0.25s;
 }
 
 .link-style:hover {
-  color: #4E7FA1; 
+  color: #4e7fa1;
 }
 
 .link-style-input {
@@ -178,28 +178,28 @@ a:focus.dropdown-item{
   padding: 8px 20px 8px 20px;
   font-size: 13px;
   font-family: Poppins Regular;
-  color:white;
+  color: white;
   text-align: center;
   border-radius: 25px;
   border: 1px solid;
 }
 
 .error {
-  border-color: #B85C5C;
-  color: #B85C5C;
+  border-color: #b85c5c;
+  color: #b85c5c;
 }
 
 .success {
-  border-color: #4E7FA1;
-  color: #4E7FA1;
+  border-color: #4e7fa1;
+  color: #4e7fa1;
 }
 
 .background-blue {
-  background-color: #D3E3EE;
+  background-color: #d3e3ee;
 }
 
 .background-grey {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .accountName {
@@ -228,10 +228,10 @@ a:focus.dropdown-item{
 
 .star {
   font-size: 11px;
-  color: #F8C955;
+  color: #f8c955;
 }
 
-.container-star{
+.container-star {
   display: inline-block;
 }
 
@@ -272,7 +272,7 @@ a:focus.dropdown-item{
 
 .seeMore:hover {
   color: white !important;
-  background-color: #B85C5C;
+  background-color: #b85c5c;
 }
 
 #voucher {
@@ -302,6 +302,15 @@ input[id*="star-"] + label:hover {
   background-color: #0000002a;
 }
 
+.clear-filters {
+  background-color: #fae1e1;
+  color: #b85c5c;
+  border: 0px;
+  border-radius: 25px;
+  padding: 8px;
+  cursor: pointer;
+}
+
 .store-products {
   background: white;
 }
@@ -319,7 +328,7 @@ input[id*="star-"] + label:hover {
 
 .star-filter {
   font-size: 13px;
-  color: #B85C5C;
+  color: #b85c5c;
 }
 
 .directory-link {
@@ -329,21 +338,21 @@ input[id*="star-"] + label:hover {
 
 .directory-link-active,
 .directory-link:hover {
-  color: #B85C5C !important;
+  color: #b85c5c !important;
 }
 
-.form-check-input[type=checkbox] {
+.form-check-input[type="checkbox"] {
   border-radius: 0px;
-  border: 1px solid #CEC5C6;
+  border: 1px solid #cec5c6;
 }
 
 .form-check-input:checked {
-  background-color: #B85C5C;
-  border-color: #B85C5C;
+  background-color: #b85c5c;
+  border-color: #b85c5c;
 }
 
 .form-check-input:focus {
-  border-color: #B85C5C;
+  border-color: #b85c5c;
 }
 
 .form-check-label {
@@ -373,6 +382,10 @@ input[id*="star-"] + label:hover {
   background-color: white;
   transition: 0.25s;
 }
+.pagination-button-arrow:hover {
+  color: white !important;
+  background-color: #b85c5c;
+}
 
 .pagination-button:hover {
   color: #B85C5C !important;
@@ -382,7 +395,7 @@ input[id*="star-"] + label:hover {
 .pagination-button-active,
 .pagination-button-active:hover {
   color: white !important;
-  background-color: #B85C5C;
+  background-color: #b85c5c;
 }
 
 [class*="star-"] {
@@ -394,5 +407,5 @@ input[id*="star-"] + label:hover {
 }
 
 .product-details-item {
-  background-color: white
+  background-color: white;
 }

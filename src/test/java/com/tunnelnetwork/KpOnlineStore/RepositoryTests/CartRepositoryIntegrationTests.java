@@ -118,7 +118,7 @@ public class CartRepositoryIntegrationTests {
     // Given
     long id = -100;
 
-    //When
+    // When
     Optional<Cart> cart = cartRepository.findById(id);
 
     // Then
