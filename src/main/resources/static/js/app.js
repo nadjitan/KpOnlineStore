@@ -6,7 +6,7 @@
 // });
 
 document.addEventListener("DOMContentLoaded", () => {
-  if ($(location).attr("pathname") == "/checkout") {
+  if (document.location.pathname.indexOf("/checkout") == 0) {
     $("#checkbox-useCc").click(function () {
       const input = $(this);
 
@@ -40,9 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  var prevRatingInput = null;
   if (document.location.pathname.indexOf("/store/") == 0) {
-    var prevRatingInput = null;
-
     $(".btn-rating").click(function () {
       const input = $(this).prev();
 
@@ -51,15 +50,36 @@ document.addEventListener("DOMContentLoaded", () => {
         $(prevRatingInput).next().css("background-color", "transparent");
       }
 
-      $(this).css("background-color", "aquamarine");
+      $(this).css("background-color", "#FAE1E1");
 
       prevRatingInput = input;
     });
 
     $(".clear-filters").click(function () {
-      const inputs = $(this).parent();
+      const inputs = $(this).parent().parent();
 
       inputs.find("input").prop("checked", false);
+      inputs.find("input").removeAttr("checked");
+
+      inputs.find("#input-price-min").val("");
+      inputs.find("#input-price-max").val("");
+
+      $(prevRatingInput).prop("checked", false);
+      $(prevRatingInput).removeAttr("checked");
+      $(prevRatingInput).next().css("background-color", "transparent");
+
+      var pageNumber = 0;
+      $(".pagination-button").each(function(index) {
+        pageNumber = $(this).text();
+
+        $(this).parent().prop("href", "/store/" + pageNumber);
+      });
+
+      $(".pagination-button-arrow").each(function(index) {
+        pageNumber = $(this).prev().val();
+
+        $(this).parent().prop("href", "/store/" + pageNumber);
+      });
     });
   }
 
@@ -99,5 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       form.css("display", "none");
     });
+  }
+
+  if (document.location.pathname.indexOf("/cart/home") == 0) {
+    $("#use-voucher").change(function() {
+      $('#form-voucher').submit();
+    })
   }
 });

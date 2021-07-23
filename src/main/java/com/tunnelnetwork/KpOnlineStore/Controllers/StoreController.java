@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StoreController extends CommonController{
 
-  private int maxItems = 5;
+  private int maxItems = 8;
 
   @GetMapping("/store/{changePage}")
   public String openStore(
     @PathVariable(value ="changePage") Integer changePage,
     Model model) {
+
+      getNumberOfProductsInCart(model);
 
     getUserRole(model);
 
@@ -56,6 +58,10 @@ public class StoreController extends CommonController{
     List<Product> productListBasedOnBand = productRepository.getProductsContainingInBand(storeSearch.get());
     List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
 
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+    
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
         for (Product product : productListBasedOnName) {

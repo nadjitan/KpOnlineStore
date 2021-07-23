@@ -1,6 +1,7 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
@@ -20,8 +21,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProductDetailsController extends CommonController{
   
+  Integer maxProducts = 3;
+
   @GetMapping("/product/{id}")
   private String productPage(Model model, @PathVariable("id") long id) {
+    List<Product> newProductList = new ArrayList<Product>();
+    for (String bandName : productRepository.getProduct(id).getTags()) {
+      for (Product product : productRepository.getProductsByBand(bandName)) {
+        if (product != productRepository.getById(id) && maxProducts > newProductList.size()) {
+          newProductList.add(product);
+        }
+      }
+    }
+
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -45,6 +59,7 @@ public class ProductDetailsController extends CommonController{
 
     model.addAttribute("maxRating", 5);
     model.addAttribute("product", productRepository.getProduct(id));
+    model.addAttribute("productList", newProductList);
     model.addAttribute("didUserBuyProduct", didUserBuyProduct(id));
     return "product-details";
   }
@@ -58,6 +73,7 @@ public class ProductDetailsController extends CommonController{
 
       if (didUserBuyProduct(id)) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(authentication.getName()).get();;
 
         Product product = productRepository.getProduct(id);
         Comment newComment = new Comment();
@@ -66,7 +82,7 @@ public class ProductDetailsController extends CommonController{
         newComment.setCreatedAt(LocalDateTime.now());
         newComment.setUserComment(comment);
         newComment.setUpdatedAt(LocalDateTime.now());
-        newComment.setUserName(authentication.getName());
+        newComment.setUserName(user.getFirstName() + " " + user.getLastName());
 
         commentRepository.saveAndFlush(newComment);
 

@@ -10,7 +10,7 @@
     "image": "/img/img1.png",
     "rating": 5,
     "numberOfSold": 100,
-    "tags": ["ENHYPEN"],
+    "tags": ["ENHYPEN", "(G)I-DLE", "BTS"], 
     "comments": [
       {
         "commentUserId": 1,

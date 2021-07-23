@@ -21,6 +21,9 @@ public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
   private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
+
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -49,12 +52,12 @@ public class CheckoutController extends CommonController {
     @RequestParam("address") Optional<String> address,
     @RequestParam("region") Optional<String> region,
     @RequestParam("city") Optional<String> city,
-    @RequestParam("postalCode") Optional<Integer> postalCode,
-    @RequestParam("phoneNumber") Optional<Integer> phoneNumber,
-    @RequestParam("ccn") Optional<Integer> ccn,
+    @RequestParam("postalCode") Optional<String> postalCode,
+    @RequestParam("phoneNumber") Optional<String> phoneNumber,
+    @RequestParam("ccn") Optional<String> ccn,
     @RequestParam("expiration-date-1") Optional<Integer> expirationDate1,
     @RequestParam("expiration-date-2") Optional<Integer> expirationDate2,
-    @RequestParam("securityCode") Optional<Integer> securityCode,
+    @RequestParam("securityCode") Optional<String> securityCode,
     @RequestParam("useCc") Optional<String> useCc
     ) {
 
