@@ -55,7 +55,7 @@ public class CartController extends CommonController{
       cartRepository.addToCart(productRepository.getProduct(id), productQuantity);
     }
 
-    return "redirect:/store/1";
+    return "redirect:/cart/home";
   }
   @PostMapping("/removeProduct")
   private String removeProduct(@RequestParam("productId") long id){
