@@ -120,4 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
       form.css("display", "none");
     });
   }
+
+  if (document.location.pathname.indexOf("/cart/home") == 0) {
+    $("#use-voucher").change(function() {
+      $('#form-voucher').submit();
+    })
+  }
 });

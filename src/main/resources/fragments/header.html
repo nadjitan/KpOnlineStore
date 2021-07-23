@@ -45,6 +45,11 @@
                     <li class="nav-item">
                         <a class="btn nav-link cart-Button" th:href="@{/cart/home}">
                             <i class="fas fa-shopping-cart pe-2"></i> CART
+                            <span
+                              th:if="${numberOfProductsInCart}"
+                              th:text="${' ('+ numberOfProductsInCart + ')'}"
+                            >
+                            </span>
                         </a>
                     </li>
                     <!--my account-->

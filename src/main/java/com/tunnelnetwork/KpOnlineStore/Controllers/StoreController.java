@@ -25,6 +25,8 @@ public class StoreController extends CommonController{
     @PathVariable(value ="changePage") Integer changePage,
     Model model) {
 
+      getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);

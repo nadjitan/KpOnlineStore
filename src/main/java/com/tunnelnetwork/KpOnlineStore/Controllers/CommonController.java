@@ -119,4 +119,13 @@ public class CommonController {
       model.addAttribute("userLastname", user.getLastName());
     }
   }
+
+  protected void getNumberOfProductsInCart(Model model) {
+
+    if (isThereLoggedInUser()) {
+      Cart cart = cartRepository.getCartOfUser();
+
+      model.addAttribute("numberOfProductsInCart", cart.getNumberOfProducts());
+    }
+  }
 }

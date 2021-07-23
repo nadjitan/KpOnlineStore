@@ -21,6 +21,9 @@ public class CheckoutController extends CommonController {
 
   @GetMapping("/checkout")
   private String checkoutPage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
+
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);

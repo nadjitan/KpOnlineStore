@@ -9,6 +9,9 @@ public class WebInfoController extends CommonController{
   
   @GetMapping("/about-us")
   private String goToAboutUs(Model model) {    
+
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -17,6 +20,9 @@ public class WebInfoController extends CommonController{
   }
   @GetMapping("/contact-us")
   private String goToContactUs(Model model) {    
+
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -25,6 +31,9 @@ public class WebInfoController extends CommonController{
   }
   @GetMapping("/faq")
   private String goToFAQ(Model model) {    
+
+    getNumberOfProductsInCart(model);
+    
     getUserRole(model);
 
     getUserFirstAndLastName(model);

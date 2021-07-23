@@ -75,26 +75,38 @@
               <p
                 th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}"
               ></p>
-              <label for="use-voucher">Use Voucher</label>
-              <input
-              class="form-check-input" 
-                type="checkbox"
-                name="useVoucher"
-                id="use-voucher"
-                form="proceed-form"
-                value="1"
-              />
+
+              <form id="form-voucher" th:action="@{/cart/home}" method="GET">
+                <label for="use-voucher">Use Voucher</label>
+                <input
+                  class="form-check-input" 
+                  type="checkbox"
+                  name="useVoucher"
+                  id="use-voucher"
+                  th:checked="${checkboxStatus}"
+                  value="1"
+                />
+              </form>
             </div>
           </div>
           <hr>
           <div th:if="${!cart.cartProducts.empty}" class="cart-total">
             <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
-            <p th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
+            <p th:if="${checkboxStatus == null}" th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
             <p
-              th:text="${'Discounted Total: ₱ ' + cart.getDiscountedPrice()}"
+              th:if="${checkboxStatus}"
+              th:text="${'Total: ₱ ' + cart.getDiscountedPrice()}"
             ></p>
-  
+
             <form th:action="@{/checkout}" method="GET" id="proceed-form">
+              <input
+                id="hidden-useVoucher"
+                type="checkbox"
+                th:checked="${checkboxStatus}"
+                name="useVoucher"
+                value="1"
+                style="display: none"
+              />
               <button type="submit" class="btn submit-style submit-style-small m-0">PROCEED TO CHECKOUT</button>
             </form>
           </div>
