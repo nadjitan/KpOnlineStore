@@ -24,7 +24,7 @@ h2 {
 
 h3 {
   font-size: 20px !important;
-  font-family: Poppins Regular !important;
+  font-family: Poppins Regular, sans-serif !important;
   color: #b85c5c !important;
   margin-bottom: 0px;
 }
@@ -39,6 +39,13 @@ h4 {
 h5 {
   font-size: 25px !important;
   font-family: Poppins Regular !important;
+}
+
+h6 {
+  font-size: 40px !important;
+  font-family: Poppins Medium, sans-serif !important;
+  color: #b85c5c !important;
+  margin-bottom: 0px;
 }
 
 input:focus,
@@ -87,6 +94,11 @@ label:focus,
 
 a:focus.dropdown-item {
   background-color: #b85c5c !important;
+}
+
+.vr-1{
+  width: 1px !important;
+  height: 24px !important;
 }
 
 .dropdown-menu {
@@ -169,7 +181,7 @@ a:focus.dropdown-item {
 
 .link-style-input {
   border: 0px;
-  background-color: white;
+  background-color: white !important;
 }
 
 .error,
@@ -219,15 +231,21 @@ a:focus.dropdown-item {
 }
 
 .product-price {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to show */
-  -webkit-box-orient: vertical;
+  max-width: 13ch !important;
 }
 
 .star {
   font-size: 11px;
+  color: #f8c955;
+}
+
+.star-big {
+  font-size: 16px;
+  color: #f8c955;
+}
+
+.star-huge {
+  font-size: 25px;
   color: #f8c955;
 }
 
@@ -372,21 +390,6 @@ input[id*="star-"] + label:hover {
   transition: 0.25s;
 }
 
-.pagination-button-arrow {
-  width: 30px;
-  height: 30px;
-  border: 0px;
-  font-size: 12px !important;
-  font-family: Poppins Medium;
-  color: black !important;
-  background-color: white;
-  transition: 0.25s;
-}
-.pagination-button-arrow:hover {
-  color: white !important;
-  background-color: #b85c5c;
-}
-
 .pagination-button:hover {
   color: #B85C5C !important;
   background-color: #FAE1E1;
@@ -398,14 +401,47 @@ input[id*="star-"] + label:hover {
   background-color: #b85c5c;
 }
 
-[class*="star-"] {
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-[class*="star-"]:hover {
-  transform: translateY(-5px);
-}
-
 .product-details-item {
   background-color: white;
+}
+
+.status {
+  background-color: #B85C5C;
+  color: white;
+  font-size: 12px;
+  font-family: Poppins Regular;
+}
+
+.tags {
+  background-color: #FAE1E1;
+  color: #B85C5C;
+  font-size: 12px;
+  font-family: Poppins Regular;
+  cursor: default;
+}
+
+.product-subheader-text {
+  font-size: 14px;
+  font-family: Poppins Light;
+}
+
+.product-description-text,
+.comment-customer-comment  {
+  font-size: 13px;
+  font-family: Poppins Light;
+}
+
+.comment-customer-name {
+  font-size: 12px;
+  font-family: Poppins Regular;
+}
+
+.didUserBuyProduct {
+  font-size: 12px;
+  font-family: Poppins Regular;
+  color: #CEC5C6;
+}
+
+hr {
+  border: 1px solid #CEC5C6;
 }
