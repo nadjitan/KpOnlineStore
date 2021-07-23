@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StoreController extends CommonController{
 
+<<<<<<< HEAD
   private int maxItems = 8;
+=======
+  private int maxItems = 5;
+>>>>>>> af35d9ca62ee4875e3bcb0c8eb52fe7d6c4c5a13
 
   @GetMapping("/store/{changePage}")
   public String openStore(
