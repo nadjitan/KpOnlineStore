@@ -36,9 +36,9 @@
         </div>
         <div th:if="${!cart.cartProducts.empty}" class="cart-total">
           <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
-          <p th:if="${checboxStatus == nul}" th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
+          <p th:if="${checkboxStatus == null}" th:text="${'Total: ₱ ' + cart.getTotalOrderPrice()}"></p>
           <p
-            th:if="${checboxStatus}"
+            th:if="${checkboxStatus}"
             th:text="${'Total: ₱ ' + cart.getDiscountedPrice()}"
           ></p>
 
@@ -46,7 +46,7 @@
             <input
               id="hidden-useVoucher"
               type="checkbox"
-              th:checked="${checboxStatus}"
+              th:checked="${checkboxStatus}"
               name="useVoucher"
               value="1"
               style="display: none"
@@ -71,7 +71,7 @@
               type="checkbox"
               name="useVoucher"
               id="use-voucher"
-              th:checked="${checboxStatus}"
+              th:checked="${checkboxStatus}"
               value="1"
             />
           </form>

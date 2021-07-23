@@ -30,7 +30,7 @@ public class CartController extends CommonController{
     if (check.isPresent()) {
       cart.setUseVoucher(1);
 
-      model.addAttribute("checboxStatus", true);
+      model.addAttribute("checkboxStatus", true);
 
       cartRepository.saveAndFlush(cart);
     }
