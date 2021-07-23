@@ -69,18 +69,27 @@ document.addEventListener("DOMContentLoaded", () => {
       $(prevRatingInput).next().css("background-color", "transparent");
 
       var pageNumber = 0;
-      $(".pagination-button").each(function(index) {
+      $(".pagination-button").each(function (index) {
         pageNumber = $(this).text();
 
-        $(this).parent().prop("href", "/store/" + pageNumber);
+        $(this)
+          .parent()
+          .prop("href", "/store/" + pageNumber);
       });
 
-      $(".pagination-button-arrow").each(function(index) {
+      $(".pagination-button-arrow").each(function (index) {
         pageNumber = $(this).prev().val();
 
-        $(this).parent().prop("href", "/store/" + pageNumber);
+        $(this)
+          .parent()
+          .prop("href", "/store/" + pageNumber);
       });
     });
+  }
+
+  if (document.location.pathname.indexOf("/product") == 0) {
+    const statusText = $(".product-status").text();
+    $(".product-status").text(statusText.replace(/([A-Z])/g, " $1").trim());
   }
 
   if (document.location.pathname.indexOf("/crud") == 0) {
@@ -122,8 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (document.location.pathname.indexOf("/cart/home") == 0) {
-    $("#use-voucher").change(function() {
-      $('#form-voucher').submit();
-    })
+    $("#use-voucher").change(function () {
+      $("#form-voucher").submit();
+    });
   }
 });
