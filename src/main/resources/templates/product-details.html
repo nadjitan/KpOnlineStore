@@ -15,45 +15,71 @@
       <!--Left-->
       <div class="col-9 p-0 mr-auto">
         <!--Product Detail-->
-        <div class="product-details-item mb-4 p-4">
+        <div class="product-details-item row mb-4 mx-0 p-4">
           <!-- <img
             th:src="${product.image}"
             th:alt="${product.productName + '-img.png'}"
           /> -->
-          <img th:alt="${product.productName + '-img.png'}" />
-          <h3 class="product-name" th:text="${product.productName}"></h3>
-          <p class="product-description" th:text="${product.description}"></p>
-          <p class="product-status" th:text="${product.status}"></p>
-          <p class="product-category" th:text="${product.category}"></p>
-          <p class="product-price" th:text="${'₱ ' + product.price}"></p>
-          <p th:text="${'Number of sold: ' + product.numberOfSold}"></p>
-    
-          <div class="product-tags">
-            <div th:each="tag : ${product.tags}">
-              <p th:text="${tag}"></p>
+          <div class="col-5 ps-0">
+            <!--<img th:alt="${product.productName + '-img.png'}" />-->
+            <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" style="width:100%;"/>
+          </div>
+          <div class="col-7">
+            <h5 class="product-name" th:text="${product.productName}"></h5>
+            <p class="product-description" th:text="${product.description}"></p>
+            <p class="product-status" th:text="${product.status}"></p>
+            <p class="product-category" th:text="${product.category}"></p>
+            <p class="product-price" th:text="${'₱ ' + product.price}"></p>
+            <p th:text="${'Number of sold: ' + product.numberOfSold}"></p>
+      
+            <!--Tags-->
+            <div class="product-tags">
+              <div th:each="tag : ${product.tags}">
+                <p th:text="${tag}"></p>
+              </div>
+            </div>
+
+            <!--Wishlist-->
+            <form
+              th:action="@{/addToWishlist}"
+              method="post"
+              th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
+            >
+              <input type="hidden" name="productId" th:value="${product.id}" />
+              <button type="submit">
+                <img
+                  alt="wishlist-img"
+                  th:if="${inUserWishlist != true}"
+                  th:src="${'/img/bookmark_border_black_24dp.svg'}"
+                />
+                <img
+                  alt="wishlist-img"
+                  th:if="${inUserWishlist == true}"
+                  th:src="${'/img/bookmark_black_24dp.svg'}"
+                />
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="product-details-item p-4">
+          
+          <div id="comments">
+            <h3>COMMENTS</h3>
+            <div th:if="${product.comments.empty}">No Comments</div>
+            <div class="comment" th:each="comment : ${product.getComments()}">
+              <div>
+                .
+                <h4 th:text="${comment.userName}"></h4>
+              </div>
+              <p th:text="${comment.userComment}"></p>
             </div>
           </div>
-
-          <form
-            th:action="@{/addToWishlist}"
-            method="post"
-            th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
-          >
-            <input type="hidden" name="productId" th:value="${product.id}" />
-            <button type="submit">
-              <img
-                alt="wishlist-img"
-                th:if="${inUserWishlist != true}"
-                th:src="${'/img/bookmark_border_black_24dp.svg'}"
-              />
-              <img
-                alt="wishlist-img"
-                th:if="${inUserWishlist == true}"
-                th:src="${'/img/bookmark_black_24dp.svg'}"
-              />
-            </button>
-          </form>
-
+      
+          <div th:if="${!didUserBuyProduct}">
+            Buy the product to make a comment.
+          </div>
+          <!--Stars-->
           <div
             th:each="i : ${#numbers.sequence(1, product.rating)}"
             style="display: inline-block"
@@ -114,25 +140,6 @@
               Add to cart
             </button>
           </form>
-        </div>
-        <!--Comments-->
-        <div class="product-details-item p-4">
-          
-          <div id="comments">
-            <h3>COMMENTS</h3>
-            <div th:if="${product.comments.empty}">No Comments</div>
-            <div class="comment" th:each="comment : ${product.getComments()}">
-              <div>
-                <img src="#" alt="user-img.png" />
-                <h4 th:text="${comment.userName}"></h4>
-              </div>
-              <p th:text="${comment.userComment}"></p>
-            </div>
-          </div>
-      
-          <div th:if="${!didUserBuyProduct}">
-            Buy the product to make a comment.
-          </div>
           <form th:action="@{/comment}" method="post" th:if="${didUserBuyProduct}">
             <section>
               <h4>MAKE A COMMENT</h4>
@@ -146,50 +153,51 @@
               SUBMIT
             </button>
           </form>
-      
-          <button><a th:href="@{/store/1}">GO BACK</a></button>
         </div>
       </div>
       <!--Right-->
-      <div class="sidebar col-3 p-4">
-        <h1 class="mb-4">RELATED PRODUCTS</h1>
-        <div class="row pb-4">
-          <div th:if="${productList.empty}">No products available</div>
-          <div class="col-12 py-2 d-flex justify-content-center" th:each="product: ${productList}">
-            <a th:href="@{|/product/${product.id}|}">
-              <div class="card card-product " style="width: 12rem;"> 
-                <div class="card-product-image-container d-flex align-items-center">
-                  <div>
-                    <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+      <div class="col-3 ps-4 pe-0">
+        <div class="sidebar p-4 ml-auto">
+          <h1 class="mb-4">RELATED PRODUCTS</h1>
+          <div class="row">
+            <div th:if="${productList.empty}">No products available</div>
+            <div class="col-12 py-2 d-flex justify-content-center" th:each="product: ${productList}">
+              <a th:href="@{|/product/${product.id}|}">
+                <div class="card card-product " style="width: 12rem;"> 
+                  <div class="card-product-image-container d-flex align-items-center">
+                    <div>
+                      <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+                    </div>
+                  </div>
+                  <!-- <img
+                    th:src="${product.image}"
+                    th:alt="${product.productName + '-img.png'}"
+                  /> -->
+                  <div class="card-body card-product-body mr-auto">
+                    <h4 class="product-name" th:text="${product.productName}"></h4>
+                    <!-- <p class="product-category" th:text="${product.category}"></p> -->
+                    <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
+                    <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
+                      <form th:action="@{/rate}" method="POST">
+                        <input type="hidden" name="rating" th:value="${i}" />
+                        <input type="hidden" name="productId" th:value="${product.id}" />
+                        <i class="fas fa-star star"></i>
+                      </form>
+                    </div>
+                    <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+                      <form th:action="@{/rate}" method="POST">
+                        <input type="hidden" name="rating" th:value="${i + product.rating}" />
+                        <input type="hidden" name="productId" th:value="${product.id}" />
+                        <i class="far fa-star star"></i>
+                      </form>
+                    </div>
                   </div>
                 </div>
-                <!-- <img
-                  th:src="${product.image}"
-                  th:alt="${product.productName + '-img.png'}"
-                /> -->
-                <div class="card-body card-product-body mr-auto">
-                  <h4 class="product-name" th:text="${product.productName}"></h4>
-                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
-                  <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
-                  <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
-                    <form th:action="@{/rate}" method="POST">
-                      <input type="hidden" name="rating" th:value="${i}" />
-                      <input type="hidden" name="productId" th:value="${product.id}" />
-                      <i class="fas fa-star star"></i>
-                    </form>
-                  </div>
-                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
-                    <form th:action="@{/rate}" method="POST">
-                      <input type="hidden" name="rating" th:value="${i + product.rating}" />
-                      <input type="hidden" name="productId" th:value="${product.id}" />
-                      <i class="far fa-star star"></i>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
+        
       </div>
     </div>
     

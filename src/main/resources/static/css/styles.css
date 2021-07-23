@@ -36,13 +36,14 @@ h4 {
   margin-bottom: 5px;
 }
 
+h5 {
+  font-size: 25px !important;
+  font-family: Poppins Regular !important;
+}
+
 input:focus,
 textarea:focus { 
   outline: none !important;
-}
-
-input:focus {
-  border-color: #B85C5C;
 }
 
 textarea:focus { 
@@ -127,9 +128,10 @@ a:focus.dropdown-item{
   padding: 8px 20px 8px 20px;
   font-size: 15px !important;
   font-family: Poppins Medium;
+  outline: none !important;
+  border: 0px;
   color: #B85C5C;
   background-color: #FAE1E1;
-  border: 1px solid #FAE1E1;
   border-radius: 25px;
   transition: 0.25s;
 }
@@ -139,9 +141,19 @@ a:focus.dropdown-item{
   background-color: #B85C5C;
 }
 
+.submit-style:active {
+  color: white;
+  background-color: #B85C5C;
+}
+
 .submit-style-small {
   font-size: 13px !important;
   font-family: Poppins Regular;
+}
+
+.submit-style:focus {
+  outline: 0 !important;
+  outline: none !important;
 }
 
 .link-style {
@@ -153,6 +165,11 @@ a:focus.dropdown-item{
 
 .link-style:hover {
   color: #4E7FA1; 
+}
+
+.link-style-input {
+  border: 0px;
+  background-color: white;
 }
 
 .error,
@@ -246,7 +263,7 @@ a:focus.dropdown-item{
   padding: 10px 30px 10px 30px !important;
   font-size: 15px !important;
   font-family: Poppins Medium;
-  border: 1px solid #FAE1E1;
+  border: 0;
   color: #B85C5C !important;
   background-color: #FAE1E1;
   border-radius: 25px;
@@ -285,22 +302,13 @@ input[id*="star-"] + label:hover {
   background-color: #0000002a;
 }
 
-.clear-filters {
-  background-color: #FAE1E1;
-  color: #B85C5C;
-  border: 0px;
-  border-radius: 25px;
-  padding: 8px;
-  cursor: pointer;
-}
-
 .store-products {
   background: white;
 }
 
 .sidebar {
   background: white;
-  width: 270px
+  width: 270px;
 }
 
 .btn-rating {
@@ -329,7 +337,6 @@ input[id*="star-"] + label:hover {
   border: 1px solid #CEC5C6;
 }
 
-
 .form-check-input:checked {
   background-color: #B85C5C;
   border-color: #B85C5C;
@@ -351,17 +358,18 @@ input[id*="star-"] + label:hover {
   border: 0px;
   font-size: 12px !important;
   font-family: Poppins Medium;
-  color: black !important;
+  color: #CEC5C6 !important;
   background-color: white;
   transition: 0.25s;
 }
 
 .pagination-button:hover {
-  color: white !important;
-  background-color: #B85C5C;
+  color: #B85C5C !important;
+  background-color: #FAE1E1;
 }
 
-.pagination-button-active {
+.pagination-button-active,
+.pagination-button-active:hover {
   color: white !important;
   background-color: #B85C5C;
 }
