@@ -2,143 +2,107 @@
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Ceiling Light",
-    "description": "A very bright light.",
-    "category": "Light Sticks",
-    "price": 10,
-    "status": "available",
-    "image": "/img/img1.png",
-    "rating": 5,
-    "numberOfSold": 100,
-    "tags": ["ENHYPEN", "(G)I-DLE", "BTS"], 
-    "comments": [
-      {
-        "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      },
-      {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      }
-    ]
-  },
-  {
-    "createdAt": "2021-06-28 10:44:32",
-    "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Postcard",
-    "description": "A fine print of your favorite K-POP idol.",
-    "category": "Photocards",
-    "price": 10,
-    "status": "available",
-    "image": "/img/img2.png",
-    "rating": 4,
-    "numberOfSold": 20,
-    "tags": ["SEVENTEEN"],
-    "comments": [
-      {
-        "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      },
-      {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      }
-    ]
-  },
-  {
-    "createdAt": "2021-06-28 10:44:32",
-    "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Photocard",
-    "description": "A photocard of your favorite K-POP idol.",
-    "category": "Photocards",
-    "price": 10,
-    "status": "available",
-    "image": "/img/img2.png",
-    "rating": 3,
-    "numberOfSold": 40,
-    "tags": ["Red Velvet"],
-    "comments": [
-      {
-        "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      },
-      {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      }
-    ]
-  },
-  {
-    "createdAt": "2021-06-28 10:44:32",
-    "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Album",
-    "description": "An album of your favorite K-POP idol.",
+    "productName": "Blackpink the show album",
+    "description": "Blackpink album that was released on June 11 2021.",
     "category": "Albums",
-    "price": 10,
+    "price": 2000,
+    "status": "available",
+    "image": "/img/Albums/Blackpink the show album (2000 php).png",
+    "rating": 5,
+    "numberOfSold": 20,
+    "tags": ["Blackpink"], 
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Johnny",
+        "userComment": "Going to order again in this shop soon.",
+        "createdAt": "2021-06-17 10:44:32",
+        "updatedAt": "2021-06-17 10:44:32"
+      },
+      {
+        "commentUserId": 2,
+        "userName": "Rachelle",
+        "userComment": "This shop is the best.",
+        "createdAt": "2021-06-18 10:44:32",
+        "updatedAt": "2021-06-18 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS butter album",
+    "description": "The new album of BTS that was released on June 4, 2021.",
+    "category": "Albums",
+    "price": 1500,
     "status": "preorder",
-    "image": "/img/img2.png",
-    "rating": 2,
-    "numberOfSold": 50,
+    "image": "/img/Albums/BTS butter album (1500 php).jpg",
+    "rating": 5,
+    "numberOfSold": 20,
     "tags": ["BTS"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
+        "userName": "Makoto",
+        "userComment": "Butter up",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
       },
       {
         "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
+        "userName": "lloyd",
+        "userComment": "Wow so fast and good",
+        "createdAt": "2021-06-27 10:44:32",
+        "updatedAt": "2021-06-27 10:44:32"
       }
     ]
   },
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Jacket",
-    "description": "A Jacket of your favorite K-POP idol.",
-    "category": "Apparels",
+    "productName": "Enhypen Border Carnival Album",
+    "description": "Enhypen new album that was released on April 26, 2021.",
+    "category": "Albums",
+    "price": 1100,
+    "status": "available",
+    "image": "/img/Albums/Enhypen Border Carnival Album (1100 php).png",
+    "rating": 4,
+    "numberOfSold": 40,
+    "tags": ["ENHYPEN"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Jerwin",
+        "userComment": "Kenneth kalbo, going to order again",
+        "createdAt": "2021-06-29 10:44:32",
+        "updatedAt": "2021-06-29 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Itzy not shy album",
+    "description": "Itzy album that was released on August 17, 2020.",
+    "category": "Albums",
     "price": 10,
-    "status": "preorder",
-    "image": "/img/img2.png",
-    "rating": 1,
+    "status": "available",
+    "image": "/img/Albums/Itzy not shy album (1200 php).jpg",
+    "rating": 3,
     "numberOfSold": 50,
-    "tags": ["Day6"],
+    "tags": ["ITZY"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
+        "userName": "Reona",
+        "userComment": "Best itzy album for me.",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
         "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
+        "userName": "Ralph",
+        "userComment": "Nice shop going to order again yezzir.",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       }
@@ -147,27 +111,27 @@
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "T-shirt",
-    "description": "A T-shirt of your favorite K-POP idol.",
-    "category": "Apparels",
-    "price": 10,
-    "status": "preorder",
-    "image": "/img/img2.png",
+    "productName": "IU lilac album volume 5",
+    "description": "IU's new album that was released on March 26, 2021.",
+    "category": "Albums",
+    "price": 1300,
+    "status": "available",
+    "image": "/img/Albums/IU lilac album volume 5 (1300 php).jpeg",
     "rating": 5,
-    "numberOfSold": 80,
-    "tags": ["Blackpink"],
+    "numberOfSold": 70,
+    "tags": ["IU"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
+        "userName": "Reiji",
+        "userComment": "The best singer, going to order again soon.",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       },
       {
         "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
+        "userName": "Vin",
+        "userComment": "I will play this album with my family so we can become stronger.",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
       }
@@ -176,116 +140,975 @@
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Small poster",
-    "description": "A small 11 x 17 poster of your favorite K-POP idol.",
-    "category": "Posters",
-    "price": 10,
+    "productName": "Mamamoo Reality in black album",
+    "description": "Mamamoo album that was released on November 14, 2019",
+    "category": "Albums",
+    "price": 1800,
+    "status": "available",
+    "image": "/img/Albums/Mamamoo Reality in black album (1800 php).jpg",
+    "rating": 3,
+    "numberOfSold": 20,
+    "tags": ["Mamamoo"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Raphtalia",
+        "userComment": "Will order again.",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      },
+      {
+        "commentUserId": 2,
+        "userName": "Tyler sisters",
+        "userComment": "For realzies",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "NCT loveholic album",
+    "description": "NCT new album that was released on February 17, 2021.",
+    "category": "Albums",
+    "price": 1600,
     "status": "outOfStock",
-    "image": "/img/img2.png",
+    "image": "/img/Albums/NCT loveholic album (1600 php).png",
+    "rating": 5,
+    "numberOfSold": 100,
+    "tags": ["NCT"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Rean",
+        "userComment": ":D",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Seventeen an ode album",
+    "description": "Seventeen album that was released on September 16, 2019.",
+    "category": "Albums",
+    "price": 1700,
+    "status": "available",
+    "image": "/img/Albums/Seventeen an ode album (1700 php).jpg",
+    "rating": 4,
+    "numberOfSold": 10,
+    "tags": ["SEVENTEEN"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Asta",
+        "userComment": "This album will make you feel you are the magic emperor",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Stray Kids go live album",
+    "description": "Stray Kids album that was released on June 17, 2020.",
+    "category": "Albums",
+    "price": 1850,
+    "status": "available",
+    "image": "/img/Albums/Stray Kids go live album (1850 php).jpg",
+    "rating": 4,
+    "numberOfSold": 5,
+    "tags": ["Stray Kids"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Lumine",
+        "userComment": "This album reminds me of my brother.",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Tomorrow x Together the Chaos Chapter FREEZE package album",
+    "description": "The new ‘Chaos Chapter’ begins where dreams have been swept away by the towering presence of the real world. Worldly events like the COVID-19 pandemic are violent assailants that crash upon the boy’s once peaceful life. As his world crumbles away, the boy feels insignificant, empty, and frozen. It isn’t until ‘you’ appear before him that he begins to see more. With ‘you,’ he experiences love and believes, unequivocally, that ‘you’ are his real and only world.",
+    "category": "Albums",
+    "price": 4000,
+    "status": "available",
+    "image": "/img/Albums/Tomorrow x Together the Chaos Chapter FREEZE package (4000 php).png",
+    "rating": 4,
+    "numberOfSold": 20,
+    "tags": ["Tomorrow x Together"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Reaper",
+        "userComment": "The best txt album is finally here",
+        "createdAt": "2021-06-28 10:44:32",
+        "updatedAt": "2021-06-28 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice eyes wide open album",
+    "description": "Eyes Wide Open (stylized in sentence case) is the second Korean studio album (fourth overall) by South Korean girl group Twice. It was released on October 26, 2020, by JYP Entertainment and Republic Records.",
+    "category": "Albums",
+    "price": 1500,
+    "status": "available",
+    "image": "/img/Albums/Twice eyes wide open album (1500 php).jpg",
     "rating": 4,
     "numberOfSold": 30,
     "tags": ["TWICE"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
+        "userName": "Ray",
+        "userComment": "Good album",
         "createdAt": "2021-06-28 10:44:32",
         "updatedAt": "2021-06-28 10:44:32"
-      },
+      }
+    ]
+  },  
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Blackpink love sick hoodie version 2",
+    "description": "The second version of love sick hoodie.",
+    "category": "Apparels",
+    "price": 2700,
+    "status": "preorder",
+    "image": "/img/Apparel/Blackpink love sick hoodie version 2 (2700 php).png",
+    "rating": 4,
+    "numberOfSold": 33,
+    "tags": ["Blackpink"],
+    "comments": [
       {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
+        "commentUserId": 1,
+        "userName": "Miyuki",
+        "userComment": "Nice hoodie",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
       }
     ]
   },
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Medium poster",
-    "description": "A medium 18 x 24 poster of your favorite K-POP idol.",
-    "category": "Posters",
-    "price": 10,
-    "status": "outOfStock",
-    "image": "/img/img2.png",
-    "rating": 3,
-    "numberOfSold": 40,
+    "productName": "Blackpink rose crewneck 2",
+    "description": "Pink crewneck featuring gone rose graphics.",
+    "category": "Apparels",
+    "price": 2800,
+    "status": "available",
+    "image": "/img/Apparels/Blackpink rose crewneck 2 (2800 php).png",
+    "rating": 4,
+    "numberOfSold": 11,
+    "tags": ["Blackpink"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Waver",
+        "userComment": "Cute",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS love yourself hoodie",
+    "description": "Exclusive collection item for the Love Yourself era, 65% cotton 35% polyeste.",
+    "category": "Apparels",
+    "price": 3000,
+    "status": "available",
+    "image": "/img/Apparels/BTS love yourself hoodie (3000 php).jpg",
+    "rating": 5,
+    "numberOfSold": 25,
+    "tags": ["BTS"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Ren",
+        "userComment": "The best hoodie",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "EXO monster sweater",
+    "description": "EXO new blue sweater that is made of Cotton and Polyester.",
+    "category": "Apparels",
+    "price": 2300,
+    "status": "preorder",
+    "image": "/img/Apparels/EXO monster sweater (2300 php).jpg",
+    "rating": 4,
+    "numberOfSold": 22,
+    "tags": ["EXO"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Allen",
+        "userComment": "Bang!",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Red Velvet Finale Black Color Zip up hoodie",
+    "description": "Black color zip up hoodie with Red Velvet's R rhinestone logo. Enjoy the ReVe Festival with the special outlook for the festival!.",
+    "category": "Apparels",
+    "price": 3000,
+    "status": "available",
+    "image": "/img/Apparels/Red Velvet Finale Black Color Zip up hoodie (3000 php).jpg",
+    "rating": 5,
+    "numberOfSold": 42,
+    "tags": ["Red Velvet"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Cu chulainn",
+        "userComment": "Can you feel the sunshine",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Red velvet really bad boy white t-shirt",
+    "description": "Soft and Premium Kpop t-shirt features Red Velvet's Really Bad Boy graphic.",
+    "category": "Apparels",
+    "price": 1250,
+    "status": "available",
+    "image": "/img/Apparels/Red velvet really bad boy white t-shirt (1250 php).jpg",
+    "rating": 4,
+    "numberOfSold": 30,
+    "tags": ["Red Velvet"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Emma",
+        "userComment": "What a lovely T-shirt.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Seventeen hoshi same hoodie",
+    "description": "Premium SEVENTEEN KPOP Merchandise, Elegant Design & Impeccable Craftsmanship, Unisex, Comfortable & Perfect For Everyday Wear!, High Stitch Construction for Strength and Durability. Wash Friendly Cotton Blend Material, Unisex and Relaxed Fit.",
+    "category": "Apparels",
+    "price": 3900,
+    "status": "available",
+    "image": "/img/Apparels/Seventeen hoshi same hoodie (3900 php).jpg",
+    "rating": 5,
+    "numberOfSold": 17,
+    "tags": ["SEVENTEEN"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Lee sang",
+        "userComment": "What a hoodie, this is the best.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Tomorrow x Together zip up hoodie",
+    "description": "Premium TXT KPOP Merchandise, Elegant Design & Impeccable Craftsmanship.",
+    "category": "Apparels",
+    "price": 3000,
+    "status": "preorder",
+    "image": "/img/Apparels/Tomorrow x together zip up hoodie (3000 php).jpg",
+    "rating": 5,
+    "numberOfSold": 20,
+    "tags": ["Tomorrow x Together"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "lord el melloi II",
+        "userComment": "Good hoodie",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice floral hoodie",
+    "description": "Black hoodie with embroidered front graphic and screenprinted back graphic.",
+    "category": "Apparels",
+    "price": 3500,
+    "status": "available",
+    "image": "/img/Apparels/Twice floral hoodie (3500 php).png",
+    "rating": 4,
+    "numberOfSold": 37,
+    "tags": ["TWICE"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Flora",
+        "userComment": "The best hoodie for me.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice tie dye long sleeve t-shirt",
+    "description": "Custom dyed longsleeve t-shirt with puff print front and back graphics.",
+    "category": "Apparels",
+    "price": 2250,
+    "status": "available",
+    "image": "/img/Apparels/Twice tie dye long sleeve t-shirt (2250 php).png",
+    "rating": 5,
+    "numberOfSold": 26,
+    "tags": ["TWICE"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Rise",
+        "userComment": "Good colors",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Blackpink dolls",
+    "description": "New collection of dolls for Blackpink fans.",
+    "category": "Dolls",
+    "price": 3500,
+    "status": "available",
+    "image": "/img/Dolls/Blackpink dolls (3500 php).jpg",
+    "rating": 5,
+    "numberOfSold": 12,
+    "tags": ["Blackpink"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Seto",
+        "userComment": "Added to my collection",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS idol theme dolls set",
+    "description": "The first doll set of BTS with idol theme.",
+    "category": "Dolls",
+    "price": 7000,
+    "status": "available",
+    "image": "/img/Dolls/BTS idol theme dolls set (7000 php).png",
+    "rating": 5,
+    "numberOfSold": 8,
+    "tags": ["BTS"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Leanne",
+        "userComment": "So cute",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS sideshow dolls",
+    "description": "One of a kind new sideshow BTS dolls",
+    "category": "Dolls",
+    "price": 15000,
+    "status": "preorder",
+    "image": "/img/Dolls/BTS sideshow dolls (15000 php).jpg",
+    "rating": 4,
+    "numberOfSold": 5,
+    "tags": ["BTS"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Futaba",
+        "userComment": "Cannot wait to have this.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS tiny tan Mic drop 2nd wave dolls",
+    "description": "The Second wave of the doll set of BTS that have mic drop theme.",
+    "category": "Dolls",
+    "price": 7300,
+    "status": "available",
+    "image": "/img/Dolls/BTS tiny tan Mic drop 2nd wave dolls (7300 php).jpg",
+    "rating": 5,
+    "numberOfSold": 13,
+    "tags": ["BTS"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Lisa",
+        "userComment": "The best doll set for me.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "EXO exoplanet dolls",
+    "description": "New exo doll set with exoplanet theme.",
+    "category": "Dolls",
+    "price": 1200,
+    "status": "available",
+    "image": "/img/Dolls/EXO exoplanet dolls (1200 php).jpg",
+    "rating": 4,
+    "numberOfSold": 17,
+    "tags": ["EXO"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Treymi",
+        "userComment": "Another good doll set.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Stray Kids skzoo dolls",
+    "description": "Stray Kids doll set with skzoo theme set.",
+    "category": "Dolls",
+    "price": 1000,
+    "status": "available",
+    "image": "/img/Dolls/Stray Kids skzoo dolls(1000 php).jpg",
+    "rating": 4,
+    "numberOfSold": 7,
+    "tags": ["Stray Kids"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Exia",
+        "userComment": "Wow",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice knock knock dolls",
+    "description": "Twice first doll set with knock knock as a theme.",
+    "category": "Dolls",
+    "price": 1000,
+    "status": "available",
+    "image": "/img/Dolls/Twice knock knock dolls (1000 php).jpg",
+    "rating": 4,
+    "numberOfSold": 17,
+    "tags": ["TWICE"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Ash",
+        "userComment": "I like it.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice Signal dolls",
+    "description": "Twice 2nd doll set with Signal as a theme.",
+    "category": "Dolls",
+    "price": 1000,
+    "status": "available",
+    "image": "/img/Dolls/Twice Signal dolls (1000 php).jpg",
+    "rating": 5,
+    "numberOfSold": 20,
+    "tags": ["TWICE"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Zhong the dong",
+        "userComment": "Nice.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Blackpink image picket",
+    "description": "Blackpink image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 500,
+    "status": "available",
+    "image": "/img/Image Pickets/Blackpink image picket (500 php).png",
+    "rating": 5,
+    "numberOfSold": 55,
+    "tags": ["Blackpink"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Joe",
+        "userComment": "Good Quality",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS speak yourself image picket",
+    "description": "BTS speak yourself image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 2150,
+    "status": "available",
+    "image": "/img/Image Pickets/BTS speak yourself image picket (2150 php).jpg",
+    "rating": 5,
+    "numberOfSold": 33,
+    "tags": ["BTS"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Joe MAMA",
+        "userComment": "Nice!!",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "EXO image picket",
+    "description": "EXO image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 500,
+    "status": "available",
+    "image": "/img/Image Pickets/EXO image picket (500 php).jpg",
+    "rating": 5,
+    "numberOfSold": 28,
+    "tags": ["EXO"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Lia",
+        "userComment": "Excellent Quality",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Girls Generation Image picket",
+    "description": "Girls Generation Image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 500,
+    "status": "available",
+    "image": "/img/Image Pickets/Girls Generation Image picket (500 php).jpg",
+    "rating": 4,
+    "numberOfSold": 30,
+    "tags": ["Girls Generation"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Rex",
+        "userComment": "Wowie!",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "IU image picket",
+    "description": "IU image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 700,
+    "status": "available",
+    "image": "/img/Image Pickets/IU image picket (700 php).png",
+    "rating": 5,
+    "numberOfSold": 48,
     "tags": ["IU"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      },
-      {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
+        "userName": "Askechad",
+        "userComment": "This is good",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
       }
     ]
   },
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Large poster",
-    "description": "A large 24 x 36 poster of your favorite K-POP idol.",
-    "category": "Posters",
-    "price": 10,
-    "status": "outOfStock",
-    "image": "/img/img2.png",
-    "rating": 2,
-    "numberOfSold": 5,
+    "productName": "NCT japan tour image picket",
+    "description": "NCT japan tour image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 700,
+    "status": "available",
+    "image": "/img/Image Pickets/NCT japan tour image picket (700 php).jpg",
+    "rating": 5,
+    "numberOfSold": 36,
+    "tags": ["NCT"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Core",
+        "userComment": "Naisuuu",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Red Velvet japan tour image picket",
+    "description": "Red Velvet japan tour image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 1000,
+    "status": "available",
+    "image": "/img/Image Pickets/Red Velvet japan tour image picket (1000 php).jpg",
+    "rating": 4,
+    "numberOfSold": 20,
+    "tags": ["Red Velvet"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Genos",
+        "userComment": "I will buy this for my master Saitama",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Seventeen image picket ode to you",
+    "description": "Seventeen image picket ode to you for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 1100,
+    "status": "available",
+    "image": "/img/Image Pickets/Seventeen image picket ode to you (1100 php).jpg",
+    "rating": 5,
+    "numberOfSold": 55,
+    "tags": ["SEVENTEEN"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Kazuma",
+        "userComment": "Good Service.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Tomorrow x Together tae hyun image picket",
+    "description": "Tomorrow x Together tae hyun image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 800,
+    "status": "available",
+    "image": "/img/Image Pickets/Tomorrow x Together tae hyun image picket (800 php).jpg",
+    "rating": 5,
+    "numberOfSold": 45,
+    "tags": ["Tomorrow x Together"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Jean",
+        "userComment": "Good packaging will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice image picket",
+    "description": "Twice image picket for concerts and everyday use.",
+    "category": "Image Pickets",
+    "price": 930,
+    "status": "available",
+    "image": "/img/Image Pickets/Twice image picket (930 php).jpg",
+    "rating": 5,
+    "numberOfSold": 15,
+    "tags": ["TWICE"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Hikki",
+        "userComment": "Good packaging will order again(2).",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Blackpink key ring",
+    "description": "Blackpink key ring to attach to keys.",
+    "category": "Key rings",
+    "price": 100,
+    "status": "available",
+    "image": "/img/Key rings/Blackpink keyring (100 php).jpg",
+    "rating": 5,
+    "numberOfSold": 100,
+    "tags": ["Blackpink"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Connie",
+        "userComment": "The shop is responsive will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "BTS key ring",
+    "description": "BTS key rings to attach to keys.",
+    "category": "Key rings",
+    "price": 120,
+    "status": "available",
+    "image": "/img/Key rings/BTS keyrings (120 php).jpg",
+    "rating": 5,
+    "numberOfSold": 80,
+    "tags": ["BTS"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Kyaru",
+        "userComment": "Nya nya nya nya.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Enhypen key ring",
+    "description": "Enhypen key rings to attach to keys.",
+    "category": "Key rings",
+    "price": 100,
+    "status": "available",
+    "image": "/img/Key rings/Enhypen keyring (120 php).jpg",
+    "rating": 5,
+    "numberOfSold": 77,
+    "tags": ["ENHYPEN"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Blue",
+        "userComment": "Nice shop will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "EXO 5th anniversary key rings",
+    "description": "EXO 5th anniversary key rings to attach to keys.",
+    "category": "Key rings",
+    "price": 80,
+    "status": "available",
+    "image": "/img/Key rings/EXO 5th anniversary key rings (80 php).jpg",
+    "rating": 5,
+    "numberOfSold": 71,
+    "tags": ["EXO"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Yellow",
+        "userComment": "The shop is responsive will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Itzy light key ring",
+    "description": "Itzy light key ring.",
+    "category": "Key rings",
+    "price": 1200,
+    "status": "available",
+    "image": "/img/Key rings/Itzy light key ring (1200php).jpg",
+    "rating": 5,
+    "numberOfSold": 20,
     "tags": ["ITZY"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      },
-      {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
+        "userName": "Pecorine",
+        "userComment": "Nice.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
       }
     ]
   },
   {
     "createdAt": "2021-06-28 10:44:32",
     "updatedAt": "2021-06-28 10:44:32",
-    "productName": "Photobook",
-    "description": "A Photobook of your favorite K-POP idol.",
-    "category": "Photobooks",
-    "price": 10,
+    "productName": "IU key ring",
+    "description": "IU key ring to attach to keys.",
+    "category": "Key rings",
+    "price": 120,
     "status": "available",
-    "image": "/img/img2.png",
-    "rating": 1,
-    "numberOfSold": 35,
-    "tags": ["(G)I-DLE"],
+    "image": "/img/Key rings/IU key ring (120 php).jpg",
+    "rating": 5,
+    "numberOfSold": 68,
+    "tags": ["IU"],
     "comments": [
       {
         "commentUserId": 1,
-        "userName": "John",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
-      },
+        "userName": "Reinhard",
+        "userComment": "This shop has everything I want.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Red Velvet light key ring",
+    "description": "Red Velvet light key ring to attach to keys.",
+    "category": "Key rings",
+    "price": 1500,
+    "status": "available",
+    "image": "/img/Key rings/Red Velvet light key ring (1500 php).jpg",
+    "rating": 5,
+    "numberOfSold": 20,
+    "tags": ["Blackpink"],
+    "comments": [
       {
-        "commentUserId": 2,
-        "userName": "Rachel",
-        "userComment": "Test",
-        "createdAt": "2021-06-28 10:44:32",
-        "updatedAt": "2021-06-28 10:44:32"
+        "commentUserId": 1,
+        "userName": "Tensura",
+        "userComment": "The best key ring by far.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Seventeen key ring",
+    "description": "Seventeen key ring to attach to keys.",
+    "category": "Key rings",
+    "price": 140,
+    "status": "available",
+    "image": "/img/Key rings/Seventeen key ring (140 php).jpg",
+    "rating": 5,
+    "numberOfSold": 40,
+    "tags": ["SEVENTEEN"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Zeals",
+        "userComment": "Will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Tomorrow x Together key rings set",
+    "description": "Tomorrow x Together key rings set to attach to keys.",
+    "category": "Key rings",
+    "price": 800,
+    "status": "available",
+    "image": "/img/Key rings/Tomorrow x Together key rings set (800 php).jpg",
+    "rating": 5,
+    "numberOfSold": 32,
+    "tags": ["Tomorrow x Together"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Finne",
+        "userComment": "The shop is responsive will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
+      }
+    ]
+  },
+  {
+    "createdAt": "2021-06-28 10:44:32",
+    "updatedAt": "2021-06-28 10:44:32",
+    "productName": "Twice light key ring",
+    "description": "Twice light key ring to attach to keys.",
+    "category": "Key rings",
+    "price": 1100,
+    "status": "available",
+    "image": "/img/Key rings/Twice light key ring (1100 php).jpg",
+    "rating": 5,
+    "numberOfSold": 14,
+    "tags": ["Blackpink"],
+    "comments": [
+      {
+        "commentUserId": 1,
+        "userName": "Darkness",
+        "userComment": "Nice Kpop, shop will order again.",
+        "createdAt": "2021-06-26 10:44:32",
+        "updatedAt": "2021-06-26 10:44:32"
       }
     ]
   }
