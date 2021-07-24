@@ -18,6 +18,9 @@ public class ProfileController extends CommonController{
 
   @GetMapping("/profile")
   private String profilePage(Model model) {
+
+    getNumberOfProductsInCart(model);
+    
     getUserRole(model);
 
     getUserFirstAndLastName(model);

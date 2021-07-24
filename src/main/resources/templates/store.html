@@ -21,7 +21,7 @@
               </div>
               <!--
               <div class="col-8">
-                <input class="submit-style submit-style-small py-1 m-0" type="submit" value="APPLY FILTERS" />
+                <input class="submit-style submit-style-small py-1 m-0 mb-3 clear-filters" type="reset" value="CLEAR FILTERS" />
               </div>
               -->
             </div>
@@ -72,7 +72,7 @@
   
             <!--Recommendation-->
             <section>
-              <h4>RECOMMENDATION</h4>
+              <h4>SORT BY</h4>
               <div class="form-check">
                 <input
                   class="form-check-input" 
@@ -82,7 +82,7 @@
                   id="checkbox-bestSeller"
                   value="bestSeller"
                 />
-                <label class="form-check-label" for="checkbox-bestSeller">Best Seller</label>
+                <label class="form-check-label" for="checkbox-bestSeller">Top sales</label>
               </div>
               
             </section>
@@ -506,8 +506,8 @@
   
             <!--Apply Filters-->
             <section>
-              <input class="submit-style submit-style-small py-1 m-0 mb-3 clear-filters" type="reset" value="CLEAR FILTERS" />
-              <input class="submit-style submit-style-small py-1 m-0" type="submit" value="APPLY FILTERS" />
+              <input class="submit-style submit-style-small py-1 m-0 mb-2" type="submit" value="APPLY FILTERS" />
+              <input class="link-style link-style-input py-1 m-0 clear-filters w-100" type="reset" value="Clear filters" />
             </section>
           </form>
         </div>
@@ -546,7 +546,6 @@
                     <h4 class="product-name" th:text="${product.productName}"></h4>
                     <!-- <p class="product-category" th:text="${product.category}"></p> -->
                     <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
-                    <div th:text="${'Number of sold: ' + product.numberOfSold}"></div>
                     <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                       <form th:action="@{/rate}" method="POST">
                         <input type="hidden" name="rating" th:value="${i}" />
@@ -570,12 +569,14 @@
           <div class="d-flex justify-content-center">
             <!-- Back button -->
             <a th:href="@{|/store/${newPage - 2}|}" th:if="${showBack == true and uri == null}">
-              <button class="btn-back pagination-button" >
+              <input type="hidden" th:value="${newPage - 2}">
+              <button class="btn-back pagination-button pagination-button-arrow">
                 <i class="fas fa-chevron-left"></i>
               </button>
             </a>
             <a th:href="@{|/store/${newPage - 2}/${uri}|}" th:if="${showBack == true and uri != null}">
-              <button class="btn-back pagination-button" >
+              <input type="hidden" th:value="${newPage - 2}">
+              <button class="btn-back pagination-button pagination-button-arrow" >
                 <i class="fas fa-chevron-left"></i>
               </button>
             </a>
@@ -608,14 +609,16 @@
             -->
     
             <!-- Next button -->
-            <a th:href="@{|/store/${newPage}|}">
-              <button class="btn-next pagination-button" th:if="${showNext == true and uri == null}">
+            <a th:href="@{|/store/${newPage}|}" th:if="${showNext == true and uri == null}">
+              <input type="hidden" th:value="${newPage}">
+              <button class="btn-next pagination-button pagination-button-arrow">
                 <i class="fas fa-chevron-right"></i>
               </button>
             </a>
             
-            <a th:href="@{|/store/${newPage}/${uri}|}">
-              <button class="btn-next pagination-button" th:if="${showNext == true and uri != null}">
+            <a th:href="@{|/store/${newPage}/${uri}|}" th:if="${showNext == true and uri != null}">
+              <input type="hidden" th:value="${newPage}">
+              <button class="btn-next pagination-button pagination-button-arrow">
                 <i class="fas fa-chevron-right"></i>
                </button>
             </a>
@@ -624,7 +627,6 @@
           <!--
           <button th:if="${cart}">
             <a
-              th:href="@{/cart/home}"
               th:text="${'GO TO CART ('+ cart.getNumberOfProducts() + ')'}"
             ></a>
           </button>

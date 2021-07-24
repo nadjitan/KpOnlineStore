@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StoreController extends CommonController{
 
-  private int maxItems = 5;
+  private int maxItems = 8;
 
   @GetMapping("/store/{changePage}")
   public String openStore(
     @PathVariable(value ="changePage") Integer changePage,
     Model model) {
+
+      getNumberOfProductsInCart(model);
 
     getUserRole(model);
 

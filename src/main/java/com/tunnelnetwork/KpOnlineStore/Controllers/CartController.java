@@ -1,5 +1,9 @@
 package com.tunnelnetwork.KpOnlineStore.Controllers;
 
+import java.util.Optional;
+
+import com.tunnelnetwork.KpOnlineStore.Models.Cart;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,16 +14,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CartController extends CommonController{
 
   @GetMapping("/cart/home")
-  private String cartHomePage(Model model) {
-    getUserRole(model);
-
-    getUserFirstAndLastName(model);
-    
+  private String cartHomePage(Model model, @RequestParam("useVoucher") Optional<Integer> check) {
     if (!isThereLoggedInUser() || cartRepository.getCartOfUser() == null) {
       return "redirect:/login";
     }
 
-    model.addAttribute("cart", cartRepository.getCartOfUser());
+    getNumberOfProductsInCart(model);
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
+
+    Cart cart = cartRepository.getCartOfUser();
+
+    if (check.isPresent()) {
+      cart.setUseVoucher(1);
+
+      model.addAttribute("checkboxStatus", true);
+
+      cartRepository.saveAndFlush(cart);
+    }
+    else {
+      cart.setUseVoucher(0);
+    }
+
+
+    model.addAttribute("cart", cart);
 
     return "cart";
   }
@@ -35,7 +55,7 @@ public class CartController extends CommonController{
       cartRepository.addToCart(productRepository.getProduct(id), productQuantity);
     }
 
-    return "redirect:/store/1";
+    return "redirect:/cart/home";
   }
   @PostMapping("/removeProduct")
   private String removeProduct(@RequestParam("productId") long id){

@@ -34,6 +34,8 @@ public class ProductDetailsController extends CommonController{
       }
     }
 
+    getNumberOfProductsInCart(model);
+
     getUserRole(model);
 
     getUserFirstAndLastName(model);
@@ -71,6 +73,7 @@ public class ProductDetailsController extends CommonController{
 
       if (didUserBuyProduct(id)) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(authentication.getName()).get();;
 
         Product product = productRepository.getProduct(id);
         Comment newComment = new Comment();
@@ -79,7 +82,7 @@ public class ProductDetailsController extends CommonController{
         newComment.setCreatedAt(LocalDateTime.now());
         newComment.setUserComment(comment);
         newComment.setUpdatedAt(LocalDateTime.now());
-        newComment.setUserName(authentication.getName());
+        newComment.setUserName(user.getFirstName() + " " + user.getLastName());
 
         commentRepository.saveAndFlush(newComment);
 

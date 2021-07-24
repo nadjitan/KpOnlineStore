@@ -77,15 +77,8 @@
     }
   </style>
 
-  <body>
-    <div id="home">
-      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">Hello <span
-        th:text="${userFirstname + ' ' + userLastname}"
-      ></span> <button><a th:href="@{/profile}">PROFILE</a></button></p>
-      <form th:if="${userRole == 'USER' || userRole == 'ADMIN'}" th:action="@{/logout}" method="POST">
-        <button type="submit" class="submit">Logout</button>
-      </form>
-
+<body class="background-grey">
+  <div class="defaultMargin">
       <form th:action="@{/checkout}" method="post">
         <section class="form-field">
           <div>
@@ -121,7 +114,6 @@
           <div>
             <label for="phone-number">Phone Number</label>
             <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" placeholder="xxxxxxxxxxxx"/>
-            <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" />
           </div>
         </section>
         <section class="form-field form-cc">
@@ -166,7 +158,7 @@
 
         <div style="cursor: pointer;">
           <label for="checkbox-useCc">Cash on delivery</label>
-          <input type="checkbox" id="checkbox-useCc" name="useCc" value="useCc">
+          <input class="form-check-input" type="checkbox" id="checkbox-useCc" name="useCc" value="useCc">
         </div>
 
         <div id="summary">

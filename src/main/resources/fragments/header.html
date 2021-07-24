@@ -27,9 +27,11 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/store/1}">PRODUCTS</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/about-us}">ABOUT US</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/contact-us}">CONTACT US</a>
                     </li>
@@ -43,6 +45,11 @@
                     <li class="nav-item">
                         <a class="btn nav-link cart-Button" th:href="@{/cart/home}">
                             <i class="fas fa-shopping-cart pe-2"></i> CART
+                            <span
+                              th:if="${numberOfProductsInCart}"
+                              th:text="${' ('+ numberOfProductsInCart + ')'}"
+                            >
+                            </span>
                         </a>
                     </li>
                     <!--my account-->
