@@ -150,6 +150,8 @@
               <div class="col-11 p-0">
                 <div>
                   <span class="comment-customer-name" th:text="${comment.userName}"></span>
+                  <!-- <span class="comment-time" style="align-self: end; display: none;" th:text="${#temporals.format(comment.createdAt, 'dd MMMM yyyy HH:mm z')}"></span> -->
+                  <span class="comment-time" style="align-self: end; display: none;" th:text="${comment.createdAt}"></span>
                 </div>
                 <p class="comment-customer-comment m-0" th:text="${comment.userComment}"></p>
               </div>
