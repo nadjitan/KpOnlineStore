@@ -137,11 +137,10 @@
                     </tr>
                     <tr th:each="product : ${receipt.productList}">
                       <td>
-                        <!-- <img
+                        <img
                           th:src="${product.image}"
                           th:alt="${product.productName + '-img.png'}"
-                        /> -->
-                        <img th:alt="${product.productName + '-img.png'}" />
+                        />
                       </td>
                       <td th:text="${product.productName}"></td>
                       <td>
@@ -179,11 +178,10 @@
           </tr>
           <tr th:each="product : ${wishlist}">
             <td>
-              <!-- <img
+              <img
                 th:src="${product.image}"
                 th:alt="${product.productName + '-img.png'}"
-              /> -->
-              <img th:alt="${product.productName + '-img.png'}" />
+              />
             </td>
             <td th:text="${product.productName}"></td>
             <td>

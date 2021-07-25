@@ -45,13 +45,9 @@
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">
                   <div>
-                    <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+                    <img th:src="${product.image}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
                   </div>
                 </div>
-                <!-- <img
-                  th:src="${product.image}"
-                  th:alt="${product.productName + '-img.png'}"
-                /> -->
                 <div class="card-body card-product-body mr-auto">
                   <h4 class="product-name" th:text="${product.productName}"></h4>
                   <!-- <p class="product-category" th:text="${product.category}"></p> -->

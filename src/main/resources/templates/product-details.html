@@ -16,13 +16,8 @@
       <div class="col-9 p-0 mr-auto">
         <!--Product Detail-->
         <div class="product-details-item row mb-4 mx-0 p-4">
-          <!-- <img
-            th:src="${product.image}"
-            th:alt="${product.productName + '-img.png'}"
-          /> -->
           <div class="col-4 ps-0">
-            <!--<img th:alt="${product.productName + '-img.png'}" />-->
-            <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" style="width:100%;"/>
+            <img th:src="${product.image}" th:alt="${product.productName + '-img.png'}" style="width:100%;"/>
           </div>
           <div class="col-8">
             <h5 class="product-name" th:text="${product.productName}"></h5>
@@ -178,7 +173,7 @@
                 <div class="card card-product " style="width: 12rem;"> 
                   <div class="card-product-image-container d-flex align-items-center">
                     <div>
-                      <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+                      <img th:src="${product.image}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
                     </div>
                   </div>
                   <!-- <img
