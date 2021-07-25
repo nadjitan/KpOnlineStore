@@ -87,7 +87,16 @@
             <form th:action="@{/addProduct}" method="post" th:if="${product.status != 'outOfStock'}">
               <div class="mt-3 d-flex align-items-center">
                 <span class="product-description-text me-3">Quantity</span>
-                <input type="number" id="product-quantity" class="input-style w-auto m-0 me-auto" name="productQuantity" min="1" max="5" value="1" />
+                <input 
+                  type="number" 
+                  id="product-quantity" 
+                  class="input-style w-auto m-0 me-auto" 
+                  name="productQuantity" 
+                  min="1" 
+                  max="100" 
+                  value="1" 
+                  onKeyDown="return false" 
+                />
                 <button type="submit" class="add-to-cart btn submit-style m-0 px-4 w-auto" name="productId" th:value="${product.id}" >
                   <i class="fas fa-cart-plus me-3"></i>
                   ADD TO CART

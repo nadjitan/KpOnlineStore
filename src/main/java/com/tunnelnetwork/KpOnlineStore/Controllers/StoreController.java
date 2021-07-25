@@ -140,8 +140,8 @@ public class StoreController extends CommonController{
     @RequestParam("sticker") Optional<String> stickers,
     @RequestParam("keyRing") Optional<String> keyRings,
     @RequestParam("apparel") Optional<String> apparels,
-    @RequestParam("priceMin") Optional<Integer> priceMin,
-    @RequestParam("priceMax") Optional<Integer> priceMax,
+    @RequestParam("priceMin") Optional<Long> priceMin,
+    @RequestParam("priceMax") Optional<Long> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
 
     if (isThereLoggedInUser()) {
@@ -339,7 +339,7 @@ public class StoreController extends CommonController{
   private void getProductsByBestSeller(
     Model model, Optional<String> bestSeller,
     List<Product> newProductList, List<Product> filterList,
-    Optional<Integer> priceMin, Optional<Integer> priceMax,
+    Optional<Long> priceMin, Optional<Long> priceMax,
     Optional<Integer> rating) {
 
     if (bestSeller.isPresent()) {
@@ -359,7 +359,7 @@ public class StoreController extends CommonController{
   private void getProductsByPrice(
     Model model,
     List<Product> newProductList, Product productToAdd,
-    Optional<Integer> priceMin, Optional<Integer> priceMax,
+    Optional<Long> priceMin, Optional<Long> priceMax,
     Optional<Integer> rating) {
 
     if(!priceMin.isPresent() && !priceMax.isPresent()) {
