@@ -67,23 +67,23 @@ document.addEventListener("DOMContentLoaded", () => {
       $(prevRatingInput).prop("checked", false);
       $(prevRatingInput).removeAttr("checked");
       $(prevRatingInput).next().css("background-color", "transparent");
-    });
 
-    var pageNumber = 0;
-    $(".pagination-button").each(function (index) {
-      pageNumber = $(this).text();
+      var pageNumber = 0;
+      $(".pagination-button").each(function (index) {
+        pageNumber = $(this).text();
 
-      $(this)
-        .parent()
-        .prop("href", "/store/" + pageNumber);
-    });
+        $(this)
+          .parent()
+          .prop("href", "/store/" + pageNumber);
+      });
 
-    $(".pagination-button-arrow").each(function (index) {
-      pageNumber = $(this).prev().val();
+      $(".pagination-button-arrow").each(function (index) {
+        pageNumber = $(this).prev().val();
 
-      $(this)
-        .parent()
-        .prop("href", "/store/" + pageNumber);
+        $(this)
+          .parent()
+          .prop("href", "/store/" + pageNumber);
+      });
     });
   }
 

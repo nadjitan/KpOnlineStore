@@ -568,13 +568,7 @@
     
           <div class="d-flex justify-content-center">
             <!-- Back button -->
-            <a th:href="@{|/store/${newPage - 2}|}" th:if="${showBack == true and uri == null}">
-              <input type="hidden" th:value="${newPage - 2}">
-              <button class="btn-back pagination-button pagination-button-arrow">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-            </a>
-            <a th:href="@{|/store/${newPage - 2}/${uri}|}" th:if="${showBack == true and uri != null}">
+            <a th:href="@{|/store/${newPage - 2}/${uri}|}" th:if="${showBack == true}">
               <input type="hidden" th:value="${newPage - 2}">
               <button class="btn-back pagination-button pagination-button-arrow" >
                 <i class="fas fa-chevron-left"></i>
@@ -582,41 +576,12 @@
             </a>
             
             <!-- Number buttons -->
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1 && uri == null}" th:href="@{|/store/${i}|}">
+            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1}" th:href="@{|/store/${i}/${uri}|}">
               <button class="pagination-button" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
             </a>
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1 && uri != null}" th:href="@{|/store/${i}/${uri}|}">
-              <button class="pagination-button" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
-            </a>
-            
-            <!-- (original number buttons code)
-            <button
-              class="pagination-button"
-              th:each="i : ${#numbers.sequence(1, totalPages)}"
-              th:if="${newPage - 1 != i && totalPages > 1}"
-            >
-              <a
-                th:if="${uri == null}"
-                th:href="@{|/store/${i}|}"
-                th:text="${i}"
-              ></a>
-              <a
-                th:if="${uri}"
-                th:href="@{|/store/${i}/${uri}|}"
-                th:text="${i}"
-              ></a>
-            </button>
-            -->
     
             <!-- Next button -->
-            <a th:href="@{|/store/${newPage}|}" th:if="${showNext == true and uri == null}">
-              <input type="hidden" th:value="${newPage}">
-              <button class="btn-next pagination-button pagination-button-arrow">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </a>
-            
-            <a th:href="@{|/store/${newPage}/${uri}|}" th:if="${showNext == true and uri != null}">
+            <a th:href="@{|/store/${newPage}/${uri}|}" th:if="${showNext == true}">
               <input type="hidden" th:value="${newPage}">
               <button class="btn-next pagination-button pagination-button-arrow">
                 <i class="fas fa-chevron-right"></i>

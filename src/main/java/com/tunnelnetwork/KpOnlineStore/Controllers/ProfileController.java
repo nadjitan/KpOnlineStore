@@ -41,6 +41,7 @@ public class ProfileController extends CommonController{
 
   @PostMapping("/removeFromWishlist")
   public String postMethodName(@RequestParam("productId") long productId) {
+    
     if (!isThereLoggedInUser()) {
       return "redirect:/";
     }
