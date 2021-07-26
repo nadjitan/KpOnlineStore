@@ -179,7 +179,7 @@
             <div th:if="${productList.empty}">No products available</div>
             <div class="col-12 py-2 d-flex justify-content-center" th:each="product: ${productList}">
               <a th:href="@{|/product/${product.id}|}">
-                <div class="card card-product " style="width: 12rem;"> 
+                <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                   <div class="card-product-image-container d-flex align-items-center">
                     <div>
                       <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>

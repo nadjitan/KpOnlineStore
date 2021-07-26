@@ -2,170 +2,85 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
 
-  <style>
-    #orders-title {
-      place-self: start;
-    }
-
-    #orders-table {
-      height: 60vh;
-      width: 70%;
-      overflow-y: auto;
-    }
-
-    table {
-      z-index: 1;
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    td,
-    th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-
-    .product-bg {
-      z-index: 49;
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.308);
-      display: none;
-      place-items: center;
-      overflow: hidden;
-    }
-
-    .modal {
-      z-index: 50;
-      display: grid;
-      width: max-content;
-      place-items: center;
-      position: relative;
-      padding: 20px;
-    }
-
-    .product-bg > div {
-      display: grid;
-      background-color: white;
-      padding: 15px;
-      box-shadow: 0 1.9px 5.3px rgba(0, 0, 0, 0.044),
-        0 6.3px 17.9px rgba(0, 0, 0, 0.066), 0 28px 80px rgba(0, 0, 0, 0.11);
-    }
-
-    .product-tags {
-      display: inline;
-    }
-    .product-tags > div {
-      border-radius: 20px;
-      background-color: black;
-      font-size: 0.8rem;
-      display: grid;
-      justify-content: center;
-      align-content: center;
-      height: 30px;
-      width: max-content;
-      padding: 3px 15px;
-      color: white;
-    }
-
-    .exit-modal {
-      place-self: right;
-    }
-  </style>
-
-  <body>
-    <div id="home">
-      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
-        Hello
-        <span th:text="${userFirstname + ' ' + userLastname}"></span>
-        <button><a th:href="@{/profile}">PROFILE</a></button>
-      </p>
-      <form
-        th:if="${userRole == 'USER' || userRole == 'ADMIN'}"
-        th:action="@{/logout}"
-        method="POST"
-      >
-        <input type="submit" value="Logout" class="submit" />
-      </form>
-      <button>
-        <a th:href="@{/store/1}" style="margin-top: 20px">GO TO STORE</a>
-      </button>
-
-      <div id="orders-table">
-        <h2 id="orders-title">ORDER HISTORY</h2>
-        <div th:if="${receiptList.empty}">You have no orders</div>
-        <table>
-          <tr class="orders-header">
-            <th>REF NO.</th>
-            <th>DATE</th>
-            <th>PRICE</th>
-            <th>VOUCHER</th>
-            <th>STATUS</th>
-            <th>DETAILS</th>
-          </tr>
-          <tr class="orders-row" th:each="receipt : ${receiptList}">
-            <td><p th:text="${receipt.id}"></p></td>
-            <td>
-              <p
-                th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"
-              ></p>
-            </td>
-            <td><p th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></p></td>
-            <td>
-              <div th:each="voucher : ${receipt.voucherList}">
-                <p th:text="${voucher.voucherName}"></p>
-              </div>
-              <p th:if="${receipt.voucherList.empty}">No voucher used</p>
-            </td>
-            <td><p>pending</p></td>
-            <td>
-              <div class="product-details product-bg">
-                <div>
-                  <button type="reset" class="exit-modal">X</button>
-                  <table class="modal">
-                    <tr>
-                      <th>IMAGE</th>
-                      <th>NAME</th>
-                      <th>TAGS</th>
-                      <th>QUANTITY</th>
-                      <th>PRICE</th>
-                    </tr>
-                    <tr th:each="product : ${receipt.productList}">
-                      <td>
-                        <img
-                          th:src="${product.image}"
-                          th:alt="${product.productName + '.jpg'}"
-                        />
-                      </td>
-                      <td th:text="${product.productName}"></td>
-                      <td>
-                        <div class="product-tags">
-                          <div th:each="tag : ${product.tags}">
-                            <p th:text="${tag}"></p>
-                          </div>
-                        </div>
-                      </td>
-                      <td th:text="${product.quantity}"></td>
-                      <td th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
-                    </tr>
-                  </table>
+  <body class="background-grey">
+    <div class="allButFooter">
+      <div class="defaultMargin py-3">
+        <span class="directory-link">
+          <a class="directory-link" th:href="@{/}">Home</a>
+          <span class="mx-1">></span>
+          <a class="directory-link-active" th:href="@{/profile}">Profile</a>
+        </span>
+      </div>
+      <div class="defaultMargin container-profile mb-4 p-4">
+        <h1 id="orders-title">ORDER HISTORY</h1>
+        <span class="none-text" th:if="${receiptList.empty}">You haven't ordered yet.</span>
+        <table th:if="${!receiptList.empty}" class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-style-header">REF NO.</th>
+              <th scope="col" class="table-style-header">DATE</th>
+              <th scope="col" class="table-style-header">PRICE</th>
+              <th scope="col" class="table-style-header">VOUCHER</th>
+              <th scope="col" class="table-style-header">STATUS</th>
+              <th scope="col" class="table-style-header">DETAILS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="receipt : ${receiptList}">
+              <th scope="row" class="align-middle table-style-content"><span th:text="${receipt.id}"></span></th>
+              <td class="align-middle table-style-content"><span th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"></span></td>
+              <td class="align-middle table-style-content"><span th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span></td>
+              <td class="align-middle table-style-content">
+                <div th:each="voucher : ${receipt.voucherList}">
+                  <span th:text="${voucher.voucherName}"></span>
                 </div>
-              </div>
-              <button class="btn-product-details">
-                <img src="#" alt="eye-icon.png" />
-              </button>
-            </td>
-          </tr>
+                <span th:if="${receipt.voucherList.empty}">No voucher used.</span>
+              </td>
+              <td class="align-middle table-style-content"><span>pending</span></td>
+              <td class="align-middle table-style-content">
+                <div class="modal">
+                  <div class="product-details">
+                    <button type="reset" class="exit-modal">X</button>
+                    <table class="modal-table">
+                      <tr>
+                        <th>IMAGE</th>
+                        <th>NAME</th>
+                        <th>TAGS</th>
+                        <th>QUANTITY</th>
+                        <th>PRICE</th>
+                      </tr>
+                      <tr th:each="product : ${receipt.productList}">
+                        <td>
+                          <img
+                            class="card-product-image"
+                            th:src="${product.image}"
+                            th:alt="${product.productName + '.jpg'}"
+                          />
+                        </td>
+                        <td th:text="${product.productName}"></td>
+                        <td>
+                          <div class="product-tags">
+                            <div th:each="tag : ${product.tags}">
+                              <p th:text="${tag}"></p>
+                            </div>
+                          </div>
+                        </td>
+                        <td th:text="${product.quantity}"></td>
+                        <td th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <button class="btn submit-style btn-product-details w-auto px-3 m-0">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
-
-      <div class="" id="wishlist-table">
-        <h2 id="orders-title">WISHLIST</h2>
+      <div class="defaultMargin container-profile mb-5 p-4">
+        <h1 id="orders-title">WISHLIST</h1>
         <p th:if="${wishlist.isEmpty}">There are no items in your wishlist.</p>
         <table>
           <tr>
@@ -205,7 +120,7 @@
               </form>
             </td>
           </tr>
-        </table>
+        </table>  
       </div>
     </div>
 
