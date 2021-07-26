@@ -2,41 +2,44 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
   <body class="background-blue">
-    <div class="defaultMargin py-5 d-flex row justify-content-center align-items-center">
-      <div class="container" style="width: 755px">
-        <h2>LOG INTO YOUR SEOUL SOUL ACCOUNT</h1>
+    <div class="allButFooter d-flex align-items-center">
+      <div class="defaultMargin py-5 d-flex row justify-content-center">
+        <div class="container" style="width: 755px">
+          <h2>LOG INTO YOUR SEOUL SOUL ACCOUNT</h1>
+        </div>
+        <div class="container row p-4 mt-4" style="background-color:white; width: 755px">
+          <div class="col-6 p-0">
+            <form th:action="@{/login}" method="POST" id="login">
+              <p th:if="${param.error}" class="error">Invalid credentials</p>
+              <p th:if="${param.logout}" class="success">You have successfully logged out!</p>
+              <p th:if="${passwordStatus}" th:text="${passwordStatus}" class="success"></p>
+              <p th:if="${userCreated}" th:text="${userCreated}" class="success"></p>
+        
+              <div class="form-label-group">
+                <label class="label-style" for="username">Email</label>
+                <input class="input-style" type="text" placeholder="Please enter your email" name="username" id="username" />
+              </div>
+              <div class="form-label-group">
+                <label class="label-style" for="password">Password</label>
+                <input class="input-style" type="password" placeholder="Please enter your password" name="password" id="password"/>
+              </div>
+              
+              <input class="submit-style" type="submit" value="LOGIN" />
+  
+              <div class="text-center mt-2">
+                <a class="link-style" href="/sign-up">Don't have an account?</a>
+              </div>
+              <div class="text-center mb-2">
+                <a class="link-style" href="/forgot-password">Forgot password?</a>
+              </div>
+            </form>
+          </div>
+          <div class="col-6 p-0 d-flex justify-content-center align-items-center">
+            SEOUL SOUL
+          </div>
+        </div>
       </div>
-      <div class="container row p-4 mt-4" style="background-color:white; width: 755px">
-        <div class="col-6 p-0">
-          <form th:action="@{/login}" method="POST" id="login">
-            <p th:if="${param.error}" class="error">Invalid credentials</p>
-            <p th:if="${param.logout}" class="success">You have successfully logged out!</p>
-            <p th:if="${passwordStatus}" th:text="${passwordStatus}" class="success"></p>
-            <p th:if="${userCreated}" th:text="${userCreated}" class="success"></p>
-      
-            <div class="form-label-group">
-              <label class="label-style" for="username">Email</label>
-              <input class="input-style" type="text" placeholder="Please enter your email" name="username" id="username" />
-            </div>
-            <div class="form-label-group">
-              <label class="label-style" for="password">Password</label>
-              <input class="input-style" type="password" placeholder="Please enter your password" name="password" id="password"/>
-            </div>
-            
-            <input class="submit-style" type="submit" value="LOGIN" />
 
-            <div class="text-center mt-2">
-              <a class="link-style" href="/sign-up">Don't have an account?</a>
-            </div>
-            <div class="text-center mb-2">
-              <a class="link-style" href="/forgot-password">Forgot password?</a>
-            </div>
-          </form>
-        </div>
-        <div class="col-6 p-0 d-flex justify-content-center align-items-center">
-          SEOUL SOUL
-        </div>
-      </div>
     </div>
 
     <footer th:replace="../fragments/footer"></footer>

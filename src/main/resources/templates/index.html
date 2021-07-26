@@ -32,7 +32,21 @@
         <button><a th:href="@{/profile}">PROFILE</a></button>
       </p>
       -->
+      
       <div class="defaultMargin py-5 ">
+        <div id="voucher">
+          <div th:if="${cart.vouchers.empty}">You have no vouchers</div>
+          <div th:each="voucher : ${cart.vouchers}">
+            <div class="background-blue p-4">
+              <div class="product-tags d-flex">
+                <span class="me-1 tags px-2" th:text="${voucher.discount + '%'}">></span>
+              </div>
+              <h3 th:text="${voucher.voucherName}" style="text-transform: capitalize"></h3>
+              <p th:text="${voucher.description}"></p>
+              <p th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}" ></p>
+            </div>
+          </div>
+        </div>
         <div class="d-flex align-items-center py-3">
           <h1 class="mr-auto mb-0">BEST SELLERS</h1>
           <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}"><button class="seeMore">SEE MORE ></button></a>
@@ -45,17 +59,13 @@
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">
                   <div>
-                    <img th:src="@{'/img/placeholder_product.png'}" th:alt="${product.productName + '-img.png'}" class="card-product-image"/>
+                    <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
                   </div>
                 </div>
-                <!-- <img
-                  th:src="${product.image}"
-                  th:alt="${product.productName + '-img.png'}"
-                /> -->
                 <div class="card-body card-product-body mr-auto">
                   <h4 class="product-name" th:text="${product.productName}"></h4>
                   <!-- <p class="product-category" th:text="${product.category}"></p> -->
-                  <h3 class="product-price" th:text="${'₱ ' + product.price}"></h3>
+                  <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
                   <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i}" />
