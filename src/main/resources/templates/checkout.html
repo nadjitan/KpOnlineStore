@@ -175,8 +175,8 @@
           </div>
           <div>
             <div>TOTAL COST: </div>
-            <div th:if="${cart.useVoucher == 1}" th:text="${'₱ ' + cart.getDiscountedPrice()}"></div>
-            <div th:if="${cart.useVoucher == 0}" th:text="${'₱ ' + cart.getTotalOrderPrice()}"></div>
+            <div th:if="${cart.useVoucher == 1}" th:text="${'₱ ' + #numbers.formatDecimal(cart.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></div>
+            <div th:if="${cart.useVoucher == 0}" th:text="${'₱ ' + #numbers.formatDecimal(cart.getTotalOrderPrice(),1,'COMMA',2,'POINT')}"></div>
           </div>
         </div>
 

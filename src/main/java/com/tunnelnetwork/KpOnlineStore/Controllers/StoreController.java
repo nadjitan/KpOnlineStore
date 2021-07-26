@@ -18,14 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StoreController extends CommonController{
 
-  private int maxItems = 8;
+  private int maxItems = 16;
 
   @GetMapping("/store/{changePage}")
   public String openStore(
     @PathVariable(value ="changePage") Integer changePage,
     Model model) {
 
-      getNumberOfProductsInCart(model);
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
+    getNumberOfProductsInCart(model);
 
     getUserRole(model);
 
@@ -34,15 +38,12 @@ public class StoreController extends CommonController{
     List<Product> newProductList = new ArrayList<Product>();
     List<Product> oldProductList = productRepository.getAllProducts();
     
-    pagination(model, changePage, newProductList, oldProductList);
+    pagination(model, this.maxItems,  changePage, newProductList, oldProductList);
 
     model.addAttribute("products", newProductList);
 
-    if (isThereLoggedInUser()) {
-      createCartAndVoucher(model);
-    }
+    model.addAttribute("uri", "");
 
-    model.addAttribute("uri", null);
     return "store";
   }
 
@@ -51,16 +52,22 @@ public class StoreController extends CommonController{
     HttpServletRequest request, Model model, 
     @PathVariable(value ="changePage") Integer changePage,
     @RequestParam("storeSearch") Optional<String> storeSearch) {
+
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
+    getNumberOfProductsInCart(model);
+
+    getUserRole(model);
+
+    getUserFirstAndLastName(model);
     
     List<Product> newProductList = new ArrayList<Product>();
     List<Product> newDividedProductList = new ArrayList<Product>();
     List<Product> productListBasedOnName = productRepository.getProductsContainingInName(storeSearch.get());
     List<Product> productListBasedOnBand = productRepository.getProductsContainingInBand(storeSearch.get());
     List<Product> productListBasedOnCategory = productRepository.getProductsContainingInCategory(storeSearch.get());
-
-    getUserRole(model);
-
-    getUserFirstAndLastName(model);
     
     if (!storeSearch.isEmpty()) {
       if (productListBasedOnName != null) {
@@ -84,13 +91,11 @@ public class StoreController extends CommonController{
       }
     }
 
-    pagination(model, changePage, newDividedProductList, newProductList);
+    List<Product> removeDuplicatesProductList = new ArrayList<>(new LinkedHashSet<>(newProductList));
+
+    pagination(model, this.maxItems, changePage, newDividedProductList, removeDuplicatesProductList);
 
     model.addAttribute("products", newDividedProductList);
-
-    if (isThereLoggedInUser()) {
-      createCartAndVoucher(model);
-    }
     
     // uri to put in our page buttons
     model.addAttribute("uri", "storeSearch?" + request.getQueryString());
@@ -135,9 +140,15 @@ public class StoreController extends CommonController{
     @RequestParam("sticker") Optional<String> stickers,
     @RequestParam("keyRing") Optional<String> keyRings,
     @RequestParam("apparel") Optional<String> apparels,
-    @RequestParam("priceMin") Optional<Integer> priceMin,
-    @RequestParam("priceMax") Optional<Integer> priceMax,
+    @RequestParam("priceMin") Optional<Long> priceMin,
+    @RequestParam("priceMax") Optional<Long> priceMax,
     @RequestParam("rating") Optional<Integer> rating)  {
+
+    if (isThereLoggedInUser()) {
+      createCartAndVoucher(model);
+    }
+
+    getNumberOfProductsInCart(model);
 
     getUserRole(model);
 
@@ -315,13 +326,9 @@ public class StoreController extends CommonController{
     // }
 
     List<Product> newDividedProductList = new ArrayList<Product>();
-    pagination(model, changePage, newDividedProductList, removeDuplicatesProductList);
+    pagination(model, this.maxItems, changePage, newDividedProductList, removeDuplicatesProductList);
 
     model.addAttribute("products", newDividedProductList);
-    
-    if (isThereLoggedInUser()) {
-      createCartAndVoucher(model);
-    }
 
     // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());
@@ -332,7 +339,7 @@ public class StoreController extends CommonController{
   private void getProductsByBestSeller(
     Model model, Optional<String> bestSeller,
     List<Product> newProductList, List<Product> filterList,
-    Optional<Integer> priceMin, Optional<Integer> priceMax,
+    Optional<Long> priceMin, Optional<Long> priceMax,
     Optional<Integer> rating) {
 
     if (bestSeller.isPresent()) {
@@ -352,7 +359,7 @@ public class StoreController extends CommonController{
   private void getProductsByPrice(
     Model model,
     List<Product> newProductList, Product productToAdd,
-    Optional<Integer> priceMin, Optional<Integer> priceMax,
+    Optional<Long> priceMin, Optional<Long> priceMax,
     Optional<Integer> rating) {
 
     if(!priceMin.isPresent() && !priceMax.isPresent()) {
@@ -409,64 +416,5 @@ public class StoreController extends CommonController{
     else if (rating.isPresent() && productToAdd.getRating() >= rating.get()) {
       newProductList.add(productToAdd);
     }
-  }
-
-  /**
-   * Add pages to the store page
-   * 
-   * @param model - where to pass the attributes
-   * @param changePage - page to go to
-   * @param newProductList - list divided based on max products
-   * @param productsToTransfer - all products based on filters
-   */
-  private void pagination(
-    Model model, Integer changePage, 
-    List<Product> newProductList, List<Product> productsToTransfer) {
-
-    int endOfProducts = maxItems * changePage;
-
-    double totalPages = productsToTransfer.size() / maxItems;
-    if ((productsToTransfer.size() % maxItems) > 0 ) {
-      totalPages = totalPages + 1;
-    }
-    model.addAttribute("totalPages" , (int) totalPages);
-
-    // When store is at first page
-    if (changePage == 1) {
-      for (int i = 0; i < maxItems; i++) {
-        try {
-          newProductList.add(productsToTransfer.get(i));
-        } catch (Exception e) {
-          break;
-        }
-      }
-
-      // Avoid showing NEXT when no other pages
-      if (totalPages != 1 && newProductList.size() != 0) {
-        model.addAttribute("showNext", true);
-      }
-    }
-    // When it is not in first page
-    if (changePage > 1) {
-      for (int i = endOfProducts - maxItems; i < endOfProducts; i++) {
-        try {
-          newProductList.add(productsToTransfer.get(i));
-        } catch (Exception e) {
-          break;
-        }
-      }
-
-      if (newProductList.size() != 0) {
-        model.addAttribute("showBack", true);
-      }
-
-      // Avoid showing NEXT when at last page
-      if (changePage != totalPages && newProductList.size() != 0) {
-        model.addAttribute("showNext", true);
-      }
-    }
-   
-    // Get next page after running codes
-    model.addAttribute("newPage", changePage + 1);
   }
 }

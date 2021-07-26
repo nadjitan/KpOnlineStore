@@ -6,8 +6,6 @@ import com.tunnelnetwork.KpOnlineStore.Models.Product;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +38,6 @@ public class CrudController extends CommonController{
   @PostMapping("/crud/create")
   private String createProduct(
       @ModelAttribute("product") Product product, 
-      BindingResult result, 
-      ModelMap model,
       RedirectAttributes ra) {
 
     if (!isThereLoggedInUser() && hasRole("USER")) {
@@ -60,18 +56,12 @@ public class CrudController extends CommonController{
 
   @PostMapping("/crud/update")
   private String updateProduct(
-      @RequestParam("id") Integer id,
-      @ModelAttribute("product") Product product, 
-      BindingResult result, 
-      ModelMap model,
-      RedirectAttributes ra) {
+    @RequestParam("id") Integer id, @ModelAttribute("product") Product product,  
+    RedirectAttributes ra) {
 
     if (!isThereLoggedInUser() && hasRole("USER")) {
       return "redirect:/";
     }
-    // if (result.hasErrors()) {
-    //   return result.getAllErrors().toString();
-    // }
 
     product.setCreatedAt(productRepository.getProduct(id).getCreatedAt());
     product.setUpdatedAt(LocalDateTime.now());
@@ -85,9 +75,8 @@ public class CrudController extends CommonController{
 
   @PostMapping("/crud/delete")
   private String deleteProduct(
-      @ModelAttribute("product") Product product, 
-      BindingResult result, ModelMap model,
-      RedirectAttributes ra) {
+    @ModelAttribute("product") Product product, 
+    RedirectAttributes ra) {
 
     if (!isThereLoggedInUser() && hasRole("USER")) {
       return "redirect:/";

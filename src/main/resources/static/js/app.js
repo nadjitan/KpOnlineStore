@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $(
-      'input[id*="input-price-"], #postal-code, #ccn, #security-code, #phone-number'
+      '#postal-code, #ccn, #security-code, #phone-number'
     ).keypress(function (e) {
       const keyCode = e.which;
       /*
@@ -40,8 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  var prevRatingInput = null;
   if (document.location.pathname.indexOf("/store/") == 0) {
+    var prevRatingInput = null;
+
     $(".btn-rating").click(function () {
       const input = $(this).prev();
 
@@ -55,32 +56,68 @@ document.addEventListener("DOMContentLoaded", () => {
       prevRatingInput = input;
     });
 
+    $('input[id*="input-price-"]').keypress(function (e) {
+      const keyCode = e.which;
+      /*
+       8 - (backspace)
+       32 - (space)
+       48-57 - (0-9)Numbers
+     */
+
+      if ((keyCode != 8 || keyCode == 32) && (keyCode < 48 || keyCode > 57)) {
+        return false;
+      }
+
+      else if (this.value.length > 11) {
+        return false;
+      }
+    });
+
     $(".clear-filters").click(function () {
       const inputs = $(this).parent().parent();
 
-      inputs.find("input").prop("checked", false);
-      inputs.find("input").removeAttr("checked");
+      inputs.find("input[type=checkbox]").prop("checked", false);
+      inputs.find("input[type=checkbox]").removeAttr("checked");
 
-      inputs.find("#input-price-min").val("");
-      inputs.find("#input-price-max").val("");
+      inputs.find("input[type=number]").removeAttr("value");
 
       $(prevRatingInput).prop("checked", false);
       $(prevRatingInput).removeAttr("checked");
       $(prevRatingInput).next().css("background-color", "transparent");
 
       var pageNumber = 0;
-      $(".pagination-button").each(function(index) {
+      $(".pagination-button").each(function (index) {
         pageNumber = $(this).text();
 
-        $(this).parent().prop("href", "/store/" + pageNumber);
+        $(this)
+          .parent()
+          .prop("href", "/store/" + pageNumber);
       });
 
-      $(".pagination-button-arrow").each(function(index) {
+      $(".pagination-button-arrow").each(function (index) {
         pageNumber = $(this).prev().val();
 
-        $(this).parent().prop("href", "/store/" + pageNumber);
+        $(this)
+          .parent()
+          .prop("href", "/store/" + pageNumber);
       });
     });
+  }
+
+  if (document.location.pathname.indexOf("/product") == 0) {
+    
+    const statusText = $(".product-status").text();
+    $(".product-status").text(statusText.replace(/([A-Z])/g, " $1").trim());
+
+    console.log($(".comment-time").text());
+
+    $(".comment-time").each(function() {
+      const commentTime = new Date($(this).text());
+
+      $(this).text(moment(commentTime).fromNow());
+    });  
+
+    $(".comment-time").show();
   }
 
   if (document.location.pathname.indexOf("/crud") == 0) {
@@ -92,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         form.find(".exit-modal").css("margin-left", "auto");
       }
     );
-
+    
     $(".exit-modal-add-product").click(function () {
       const form = $(this).parent();
 
@@ -122,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (document.location.pathname.indexOf("/cart/home") == 0) {
-    $("#use-voucher").change(function() {
-      $('#form-voucher').submit();
-    })
+    $("#use-voucher").change(function () {
+      $("#form-voucher").submit();
+    });
   }
 });

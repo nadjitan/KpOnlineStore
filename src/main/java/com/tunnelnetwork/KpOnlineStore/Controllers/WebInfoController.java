@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebInfoController extends CommonController{
   
-  @GetMapping("/about-us")
-  private String goToAboutUs(Model model) {    
+  // @GetMapping("/about-us")
+  // private String goToAboutUs(Model model) {    
 
-    getNumberOfProductsInCart(model);
+  //   getNumberOfProductsInCart(model);
 
-    getUserRole(model);
+  //   getUserRole(model);
 
-    getUserFirstAndLastName(model);
+  //   getUserFirstAndLastName(model);
 
-    return "about-us";
-  }
+  //   return "about-us";
+  // }
   @GetMapping("/contact-us")
   private String goToContactUs(Model model) {    
 
