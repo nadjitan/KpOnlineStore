@@ -3,86 +3,97 @@
   <head th:replace="../fragments/header"></head>
 
   <body class="background-grey">
-    <div class="defaultMargin py-3">
-      <span class="directory-link">
-        <a class="directory-link" th:href="@{/}">Home</a>
-        <span class="mx-1">></span>
-        <a class="directory-link-active" th:href="@{/cart/home}">Cart</a>
-      </span>
-    </div>
-    <div class="defaultMargin row mb-5">
-      <!--Left-->
-      <div class="col-8 p-0 mr-auto">
-        <div class="container-cart p-4 mr-auto">
-          <h1 class="mb-4">CART</h1>
-          <div th:if="${cart.cartProducts.empty}">No items in your cart.</div>
-          <table th:if="${!cart.cartProducts.empty}" class="table">
-            <thead>
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-                <th scope="col">Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="product" th:each="product : ${cart.cartProducts}">
-                <th scope="row" class="align-middle">
-                  <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="cart-product-image"/>
-                </th>
-                <td th:text="${product.productName}" class="align-middle"></td>
-                <td th:text="${'x' + product.quantity}" class="align-middle"></td>
-                <td th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}" class="align-middle"></td>
-                <td class="align-middle">
-                  <form th:action="@{/removeProduct}" method="post">
-                    <button type="submit" class="btn submit-style w-auto px-3 m-0" name="productId" th:value="${product.id}">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="allButFooter">
+      <div class="defaultMargin py-3">
+        <span class="directory-link">
+          <a class="directory-link" th:href="@{/}">Home</a>
+          <span class="mx-1">></span>
+          <a class="directory-link-active" th:href="@{/cart/home}">Cart</a>
+        </span>
       </div>
-      <!--Right-->
-      <div class="col-4 ps-4 pe-0">
-        <div class="sidebar-big p-4 ml-auto">
-          <div id="voucher">
-            <div th:if="${cart.vouchers.empty}">You have no vouchers</div>
-            <div th:each="voucher : ${cart.vouchers}">
-              <h3 th:text="${voucher.voucherName}"></h3>
-              <p th:text="${voucher.description}"></p>
-              <p th:text="${voucher.discount + '%'}"></p>
-              <p
-                th:text="${'Expiry Date: ' + #temporals.format(voucher.expiryDate, 'yyyy-MM-dd')}"
-              ></p>
-
-              <form id="form-voucher" th:action="@{/cart/home}" method="GET">
-                <label for="use-voucher">Use Voucher</label>
-                <input
-                  class="form-check-input" 
-                  type="checkbox"
-                  name="useVoucher"
-                  id="use-voucher"
-                  th:checked="${checkboxStatus}"
-                  value="1"
-                />
-              </form>
-            </div>
+      <div class="defaultMargin row mb-5">
+        <!--Left-->
+        <div class="col-8 p-0 mr-auto">
+          <div class="container-cart p-4 mr-auto">
+            <h1 class="mb-4">CART</h1>
+            <div class="cart-product-info" th:if="${cart.cartProducts.empty}">No items in your cart.</div>
+            <table th:if="${!cart.cartProducts.empty}" class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="cart-product-header">IMAGE</th>
+                  <th scope="col" class="cart-product-header">NAME</th>
+                  <th scope="col" class="cart-product-header">QUANTITY</th>
+                  <th scope="col" class="cart-product-header">TOTAL</th>
+                  <th scope="col" class="cart-product-header">REMOVE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="product" th:each="product : ${cart.cartProducts}">
+                  <th scope="row" class="align-middle">
+                    <a th:href="@{|/product/${product.id}|}">
+                      <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="cart-product-image"/>
+                    </a>
+                  </th>
+                  <td class="align-middle cart-product-info"><a class="cart-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>
+                  <td class="cart-product-info align-middle" th:text="${'x' + product.quantity}"></td>
+                  <td class="cart-product-info align-middle" th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}"></td>
+                  <td class="align-middle cart-product-info">
+                    <form th:action="@{/removeProduct}" method="post">
+                      <button type="submit" class="btn submit-style w-auto px-3 m-0" name="productId" th:value="${product.id}">
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <hr>
-          <div th:if="${!cart.cartProducts.empty}" class="cart-total">
-            <p th:text="${'Quantity: ' + cart.getNumberOfProducts()}"></p>
-            <p 
-              th:if="${checkboxStatus == null}" 
-              th:text="${'Total: ₱ ' + #numbers.formatDecimal(cart.getTotalOrderPrice(),1,'COMMA',2,'POINT')}"></p>
-            <p
-              th:if="${checkboxStatus}"
-              th:text="${'Total: ₱ ' + #numbers.formatDecimal(cart.getDiscountedPrice(),1,'COMMA',2,'POINT')}"
-            ></p>
-
+        </div>
+        <!--Right-->
+        <div class="col-4 ps-4 pe-0">
+          <div class="sidebar-big p-4 ml-auto" th:if="${!cart.cartProducts.empty}">
+            <h1 class="mb-4">ORDER SUMMARY</h1>
+            <hr>
+            <!--Quantity-->
+            <div class="d-flex justify-content-between">
+              <span class="cart-summary">QUANTITY</span>
+              <span class="cart-summary" th:text="${cart.getNumberOfProducts()}"></span>
+            </div>
+            <hr>
+            <!--Voucher-->
+            <div id="voucher">
+              <span class="cart-summary">VOUCHER DISCOUNT</span>
+              <div class="cart-summary" th:if="${cart.vouchers.empty}">No vouchers available.</div>
+              <div th:each="voucher : ${cart.vouchers}">
+                <form class="form-check" id="form-voucher" th:action="@{/cart/home}" th:if="${!cart.cartProducts.empty}" method="GET">
+                  <input
+                    class="form-check-input" 
+                    type="checkbox"
+                    name="useVoucher"
+                    id="use-voucher"
+                    th:checked="${checkboxStatus}"
+                    value="1"
+                  />
+                  <label class="form-check-label" for="use-voucher">
+                    <span th:text="${voucher.discount + '% off ' + voucher.voucherName}"></span>
+                  </label>
+                </form>
+              </div>
+            </div>
+            <hr>
+            <!--Total Cost-->
+            <div class="cart-total d-flex justify-content-between mb-3">
+              <span class="cart-summary">TOTAL COST</span>
+              <span 
+                class="cart-summary-total"
+                th:if="${checkboxStatus == null}" 
+                th:text="${'₱' + #numbers.formatDecimal(cart.getTotalOrderPrice(),1,'COMMA',2,'POINT')}"></span>
+              <span
+                class="cart-summary-total"
+                th:if="${checkboxStatus}"
+                th:text="${'₱' + #numbers.formatDecimal(cart.getDiscountedPrice(),1,'COMMA',2,'POINT')}"
+              ></span>
+            </div>
             <form th:action="@{/checkout}" method="GET" id="proceed-form">
               <input
                 id="hidden-useVoucher"

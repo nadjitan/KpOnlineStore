@@ -2,191 +2,141 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
 
-  <style>
-
-    /* Eto power ng css Jeremy */
-    /*                 - Nadji */
-    /* wala akong nakikitang power dito nadj hahaha */
-    /*                                      -jeremy */
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    input[type=number]{
-      -moz-appearance: textfield;
-    }
-
-    input, label {
-      display:  block;
-    }
-
-    label {
-      user-select: none;
-    }
-
-    input, select {
-      border-radius: 20px;
-      width: 100%;
-    }
-
-    form {
-      display: grid;
-      place-items: center;
-      width: 60%;
-    }
-
-    section {
-      width: 100%;
-      margin: 0.6rem;
-      display: grid;
-      grid-gap: 1rem;
-      grid-template-columns: repeat(3, 0.5fr);
-    }
-
-    section:nth-of-type(1){
-      grid-template-columns: repeat(2, 0.5fr);
-    }
-    section:nth-of-type(2) > div{
-      grid-column: span 3;
-    }
-    section:nth-of-type(4) > div{
-      grid-column: span 3;
-    }
-    section:nth-of-type(5) [id*="expiration-date-"]{
-      width: 45%;
-    }
-
-    #summary {
-      display: grid;
-      place-items: center;
-      width: 30%;
-    }
-
-    #summary > div {
-      font-size: 0.84rem;
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-    }
-    #summary > div:nth-of-type(2) {
-      border-bottom: 1px solid black;
-      margin-bottom: 5px;
-    }
-  </style>
-
-<body class="background-grey">
-  <div class="defaultMargin">
-      <form th:action="@{/checkout}" method="post">
-        <section class="form-field">
-          <div>
-            <label for="first-name">First name</label>
-            <input type="text" id="first-name" name="firstName" th:value="${userFirstname}" />
+  <body class="background-grey">
+    <div class="allButFooter">
+      <div class="defaultMargin py-3">
+        <span class="directory-link">
+          <a class="directory-link" th:href="@{/}">Home</a>
+          <span class="mx-1">></span>
+          <a class="directory-link" th:href="@{/cart/home}">Cart</a>
+          <span class="mx-1">></span>
+          <span class="directory-link-active">Checkout</a>
+        </span>
+      </div>
+      <div class="defaultMargin row mb-5">
+        <!--Left-->
+        <div class="col-8 p-0 mr-auto">
+          <div class="container-cart p-4 mr-auto">
+            <h1 class="mb-4">CHECKOUT</h1>
+            <hr>
+            <form class="row g-3" th:action="@{/checkout}" method="post">
+              <div class="col-6 form-label-group">
+                <label class="label-style form-group-required" for="first-name">First name</label>
+                <input class="input-style mb-0" type="text" id="first-name" name="firstName" th:value="${userFirstname}" placeholder="first name" required/>
+              </div>
+              <div class="col-6 form-label-group">
+                <label class="label-style" for="last-name">Last name</label>
+                <input class="input-style mb-0" type="text" id="last-name" name="lastName" th:value="${userLastname}" placeholder="last name" required/>
+              </div>
+              <div class="col-12 form-label-group">
+                <label class="label-style" for="address">Address</label>
+                <input class="input-style mb-0" type="text" id="address" name="address" placeholder="block, street, village/subdivision" required/>
+              </div>
+              <div class="col-5 form-label-group">
+                <label class="label-style" for="region">Region</label>
+                <input class="input-style mb-0" type="text" id="region" name="region" placeholder="region" required/>
+              </div>
+              <div class="col-4 form-label-group">
+                <label class="label-style" for="city">City</label>
+                <input class="input-style mb-0" type="text" id="city" name="city" placeholder="city" required/>
+              </div>
+              <div class="col-3 form-label-group">
+                <label class="label-style" for="postal-code">Postal Code</label>
+                <input class="input-style mb-0" type="text" pattern="\d*" maxlength="4" id="postal-code" name="postalCode" placeholder="xxxx" required/>
+              </div>
+              <div class="col-12 form-label-group">
+                <label class="label-style" for="phone-number">Phone Number</label>
+                <input class="input-style mb-0" type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" placeholder="xxxxxxxxxxxx" required/>
+              </div>
+              <hr>
+              <div class="col-12 form-check mx-2 my-0">
+                <input
+                  class="form-check-input" 
+                  type="checkbox"
+                  name="useCc"
+                  id="checkbox-useCc"
+                  value="useCc"
+                />
+                <label class="form-check-label" for="checkbox-useCc">
+                  Cash on delivery?
+                </label>
+              </div>
+              <hr class="form-cc">
+              <div class="col-12 row form-label-group form-cc">
+                <div class="col-6 form-label-group">
+                  <label class="label-style" for="card-number">Card Number</label>
+                  <input class="input-style mb-0" id="ccn" type="text" name="ccn" placeholder="xxxx xxxx xxxx xxxx"/>
+                  <div id="ccn-type" class="ccn-style mx-1">Type:</div>
+                </div>
+                <div class="col-4 form-label-group">
+                  <label class="label-style" for="expiration-date-1">Expiration Date</label><br>
+                  <select class="input-style w-auto" id="expiration-date-1" name="expiration-date-1">
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                  <select class="input-style w-auto" id="expiration-date-2" name="expiration-date-2">
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                  </select>
+                </div>
+                <div class="col-2 form-label-group">
+                  <label class="label-style" for="security-code">Security Code</label>
+                  <input class="input-style mb-0" type="text" pattern="\d*" maxlength="3" id="security-code" name="securityCode" placeholder="xxx"/>
+                </div>
+              </div>
+              <hr>
+              <button type="submit" class="btn submit-style submit-style-small m-0">CONFIRM PURCHASE</button>
+            </form>
           </div>
-          <div>
-            <label for="last-name">Last name</label>
-            <input type="text" id="last-name" name="lastName" th:value="${userLastname}" />
-          </div>
-        </section>
-        <section class="form-field">
-          <div>
-            <label for="address">Address</label>
-            <input type="text" id="address" name="address" placeholder="block, street, village/subdivision"/>
-          </div>
-        </section>
-        <section class="form-field">
-          <div>
-            <label for="region">Region</label>
-            <input type="text" id="region" name="region" />
-          </div>
-          <div>
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" />
-          </div>
-          <div>
-            <label for="postal-code">Postal Code</label>
-            <input type="text" pattern="\d*" maxlength="4" id="postal-code" name="postalCode" placeholder="xxxx"/>
-          </div>
-        </section>
-        <section class="form-field">
-          <div>
-            <label for="phone-number">Phone Number</label>
-            <input type="text" pattern="\d*" maxlength="11" id="phone-number" name="phoneNumber" placeholder="xxxxxxxxxxxx"/>
-          </div>
-        </section>
-        <section class="form-field form-cc">
-          <div>
-            <label for="card-number">Card Number</label>
-            <input id="ccn" type="text" name="ccn" placeholder="xxxx xxxx xxxx xxxx"/>
-            <div id="ccn-type" style="font-size: 0.8rem; font-style: italic; text-transform:capitalize;">Type:</div>
-          </div>
-          <div>
-            <label for="expiration-date-1">Expiration Date</label>
-            <select id="expiration-date-1" name="expiration-date-1">
-              <option value="1">01</option>
-              <option value="2">02</option>
-              <option value="3">03</option>
-              <option value="4">04</option>
-              <option value="5">05</option>
-              <option value="6">06</option>
-              <option value="7">07</option>
-              <option value="8">08</option>
-              <option value="9">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-            </select>
-            <select id="expiration-date-2" name="expiration-date-2">
-              <option value="22">22</option>
-              <option value="23">23</option>
-              <option value="24">24</option>
-              <option value="25">25</option>
-              <option value="26">26</option>
-              <option value="27">27</option>
-              <option value="28">28</option>
-              <option value="29">29</option>
-              <option value="30">30</option>
-            </select>
-          </div>
-          <div>
-            <label for="security-code"></label>Security Code</label>
-            <input type="text" pattern="\d*" maxlength="3" id="security-code" name="securityCode" placeholder="xxx"/>
-          </div>
-        </section>
-
-        <div style="cursor: pointer;">
-          <label for="checkbox-useCc">Cash on delivery</label>
-          <input class="form-check-input" type="checkbox" id="checkbox-useCc" name="useCc" value="useCc">
         </div>
-
-        <div id="summary">
-          <h3>ORDER SUMMARY</h3>
-          <div>
-            <div>QUANTITY</div>
-            <div th:text="${cart.getNumberOfProducts()}"></div>
-          </div>
-          <div th:if="${cart.useVoucher == 1}">
-            <div>VOUCHER DISCOUNT</div>
-            <div th:each="voucher : ${cart.vouchers}">
-              <div th:text="${'-' + voucher.discount + '%'}"></div>
+        <!--Right-->
+        <div class="col-4 ps-4 pe-0">
+          <div class="sidebar-big p-4 ml-auto">
+            <h1 class="mb-4">ORDER SUMMARY</h1>
+            <hr>
+            <!--Quantity-->
+            <div class="d-flex justify-content-between">
+              <span class="cart-summary">QUANTITY</span>
+              <span class="cart-summary" th:text="${cart.getNumberOfProducts()}"></span>
+            </div>
+            <hr>
+            <!--Voucher-->
+            <div id="voucher" th:if="${cart.useVoucher == 1}">
+              <span class="cart-summary">VOUCHER DISCOUNT</span>
+              <div class="cart-summary" th:if="${cart.vouchers.empty}">(You have no vouchers)</div>
+              <div class="d-flex justify-content-between" th:each="voucher : ${cart.vouchers}">
+                <span class="cart-summary cart-summary-label" th:text="${voucher.voucherName}"></span>
+                <span class="cart-summary cart-summary-label" th:text="${'-' + voucher.discount + '%'}"></span>
+              </div>
+              <hr>
+            </div>
+            <div class="cart-total d-flex justify-content-between">
+              <span class="cart-summary">TOTAL COST</span>
+              <span class="cart-summary-total" th:if="${cart.useVoucher == 1}" th:text="${'₱ ' + #numbers.formatDecimal(cart.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span>
+              <span class="cart-summary-total" th:if="${cart.useVoucher == 0}" th:text="${'₱ ' + #numbers.formatDecimal(cart.getTotalOrderPrice(),1,'COMMA',2,'POINT')}"></span>
             </div>
           </div>
-          <div>
-            <div>TOTAL COST: </div>
-            <div th:if="${cart.useVoucher == 1}" th:text="${'₱ ' + #numbers.formatDecimal(cart.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></div>
-            <div th:if="${cart.useVoucher == 0}" th:text="${'₱ ' + #numbers.formatDecimal(cart.getTotalOrderPrice(),1,'COMMA',2,'POINT')}"></div>
-          </div>
         </div>
-
-        <button type="submit">CONFIRM PURCHASE</button>
-      </form>
-
-      <button><a th:href="@{/cart/home}">GO BACK</a></button>
+      </div>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
-    
   </body>
 </html>

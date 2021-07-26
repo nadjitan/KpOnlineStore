@@ -43,7 +43,7 @@
               <hr class="my-0 mx-2 vr-1">
               <!--Category-->
               <span class="mx-1 product-category product-subheader-text" th:text="${product.category}"></span>
-              <hr class="my-0 mx-2 vr-1">
+              <hr class="my-0 mx-2 vr-1" th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
               <!--Add to wishlist-->
               <form
                 class="mx-1"
@@ -155,7 +155,7 @@
                 <div>
                   <span class="comment-customer-name" th:text="${comment.userName}"></span>
                   <!-- <span class="comment-time" style="align-self: end; display: none;" th:text="${#temporals.format(comment.createdAt, 'dd MMMM yyyy HH:mm z')}"></span> -->
-                  <span class="comment-time" style="align-self: end; display: none;" th:text="${comment.createdAt}"></span>
+                  <span class="comment-time comment-customer-date ms-1" style="align-self: end; display: none;" th:text="${comment.createdAt}"></span>
                 </div>
                 <p class="comment-customer-comment m-0" th:text="${comment.userComment}"></p>
               </div>
