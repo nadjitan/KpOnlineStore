@@ -38,7 +38,10 @@ public class Product {
   private long id;
   
   private String productName;
+
+  @Lob
   private String description;
+
   private String category;
   private double price;
   private String status;

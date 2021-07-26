@@ -54,7 +54,7 @@
                     </li>
                     <!--my account-->
                     <!--not logged in-->
-                    <li class="nav-item text-uppercase" th:if="${userRole == false}">
+                    <li class="nav-item text-uppercase" th:if="${userRole == 'GUEST'}">
                         <a class="nav-link account-Button" th:href="@{/login}">
                             <i class="fas fa-user pe-2"></i> MY ACCOUNT
                         </a>

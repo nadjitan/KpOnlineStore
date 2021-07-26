@@ -25,6 +25,7 @@ public class ProductDetailsController extends CommonController{
 
   @GetMapping("/product/{id}")
   private String productPage(Model model, @PathVariable("id") long id) {
+    
     List<Product> newProductList = new ArrayList<Product>();
     for (String bandName : productRepository.getProduct(id).getTags()) {
       for (Product product : productRepository.getProductsByBand(bandName)) {
@@ -61,11 +62,13 @@ public class ProductDetailsController extends CommonController{
     model.addAttribute("product", productRepository.getProduct(id));
     model.addAttribute("productList", newProductList);
     model.addAttribute("didUserBuyProduct", didUserBuyProduct(id));
+
     return "product-details";
   }
 
   @PostMapping("/comment")
   private String makeComment(@RequestParam("userComment") String comment, @RequestParam("productId") long id) {
+
     if (!comment.isBlank()) {
       if (!isThereLoggedInUser()) {
         return "redirect:/";
@@ -97,6 +100,7 @@ public class ProductDetailsController extends CommonController{
 
   @PostMapping("/rate")
   private String rateProduct(@RequestParam("rating") Integer rating, @RequestParam("productId") Integer id) {
+
     if (!isThereLoggedInUser()) {
       return "redirect:/";
     }
@@ -114,6 +118,7 @@ public class ProductDetailsController extends CommonController{
 
   @PostMapping("/addToWishlist")
   private String addToWishlist(@RequestParam("productId") long productId) {
+
     if (!isThereLoggedInUser()) {
       return "redirect:/";
     }
@@ -137,6 +142,7 @@ public class ProductDetailsController extends CommonController{
   }
 
   private boolean didUserBuyProduct(long id) {
+
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     Iterable<Receipt> receiptOfUSer = receiptRepository.getReceiptsByName(authentication.getName());
@@ -160,6 +166,7 @@ public class ProductDetailsController extends CommonController{
   }
 
   private boolean isProductInWishlisht(long productId) {
+
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     User user = userService.getUserByEmail(authentication.getName()).get(); // Get name returns email

@@ -29,14 +29,10 @@ public class AuthController extends CommonController{
 		return new BCryptPasswordEncoder();
 	}
 
-  // private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
-
-  // Make sure /login & /sign-up are only accessed by users without accounts
   @GetMapping("/login")
   private String showLoginPage(Model model) {
-    getUserRole(model);
 
-    getUserFirstAndLastName(model);
+    getUserRole(model);
 
     if (!isThereLoggedInUser()) {
       return "login";
@@ -46,9 +42,8 @@ public class AuthController extends CommonController{
   }
   @GetMapping("/sign-up")
   public String showSignupPage(Model model) {
-    getUserRole(model);
 
-    getUserFirstAndLastName(model);
+    getUserRole(model);
 
     if (!isThereLoggedInUser()) {
       return "sign-up";
@@ -56,6 +51,47 @@ public class AuthController extends CommonController{
 
     return "redirect:/";
   }
+
+  @GetMapping("/sign-up/confirm")
+	private String confirmMail(@RequestParam("token") String token, Model model) {
+
+    getUserRole(model);
+
+		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
+
+		optionalConfirmationToken.ifPresent(userService::confirmUser);
+
+		return "/login";
+	}
+
+  @GetMapping("/forgot-password")
+  private String goToForgotPassword(Model model) {
+
+    getUserRole(model);
+
+    if (!isThereLoggedInUser()) {
+      return "forgot-password";
+    }
+
+    return "redirect:/";
+  }
+  
+  @GetMapping("/change-password/confirm")
+	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
+
+    getUserRole(model);
+    
+		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
+
+		if (optionalConfirmationToken.isPresent()) {
+      model.addAttribute("token", token);
+
+      return "change-password";
+    }
+    else {
+      return "redirect:/";
+    }
+	}
 
   @PostMapping("/sign-up")
   private String signup(RedirectAttributes ra, User user) {
@@ -80,55 +116,9 @@ public class AuthController extends CommonController{
     }
   }
 
-  @GetMapping("/sign-up/confirm")
-	private String confirmMail(@RequestParam("token") String token, Model model) {
-    getUserRole(model);
-
-    getUserFirstAndLastName(model);
-
-		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
-
-		optionalConfirmationToken.ifPresent(userService::confirmUser);
-
-		return "/login";
-	}
-
-  @GetMapping("/forgot-password")
-  private String goToForgotPassword(Model model) {
-    getUserRole(model);
-
-    getUserFirstAndLastName(model);
-
-    if (!isThereLoggedInUser()) {
-      return "forgot-password";
-    }
-
-    return "redirect:/";
-  }
-  @GetMapping("/change-password/confirm")
-	private String confirmResetPassword(@RequestParam("token") String token, Model model) {
-    getUserRole(model);
-
-    getUserFirstAndLastName(model);
-
-    getUserRole(model);
-
-    getUserFirstAndLastName(model);
-    
-		Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenRepository.findConfirmationTokenByToken(token);
-
-		if (optionalConfirmationToken.isPresent()) {
-      model.addAttribute("token", token);
-
-      return "change-password";
-    }
-    else {
-      return "redirect:/";
-    }
-	}
-
   @PostMapping("/forgot-password")
   private String forgotPassword(RedirectAttributes ra, @RequestParam("email") String email) {
+
     if (userService.doesUserExist(email)) {
       userService.sendResetPasswordMail(email);
 

@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tunnelnetwork.KpOnlineStore.Models.Comment;
 
+/**
+ * Make a comment object out of json data.
+ */
 public class CommentDeserializer extends JsonDeserializer<List<Comment>> {
   
   @Override
