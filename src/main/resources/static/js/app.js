@@ -146,13 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     
     $(".exit-modal-add-product").click(function () {
-      const form = $(this).parent();
+      const form = $(this).parent().parent().parent().parent();
 
       form.css("display", "none");
     });
 
     $(".exit-modal").click(function () {
-      const form = $(this).parent().parent();
+      const form = $(this).parent().parent().parent().parent();
 
       form.css("display", "none");
     });
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $(".exit-modal").click(function () {
-      const form = $(this).parent().parent();
+      const form = $(this).parent().parent().parent().parent();
 
       form.css("display", "none");
     });

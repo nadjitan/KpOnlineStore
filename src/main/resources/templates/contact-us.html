@@ -2,8 +2,30 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head th:replace="../fragments/header"></head>
   <body class="background-blue">
-    <div class="defaultMargin py-5">
-      CONTACT US
+    <div class="allButFooter d-flex align-items-center">
+      <div class="defaultMargin py-5 d-flex row justify-content-center">
+        <div class="container" style="width: 755px">
+          <h2>CONTACT US</h1>
+        </div>
+        <div class="container row p-4 mt-4" style="background-color:white; width: 755px">
+          <div class="col-6 p-0">
+              <div class="form-label-group">
+                <label class="label-style" for="username">Email</label>
+                <input class="input-style" type="text" placeholder="Please enter your email" name="username" id="username" />
+              </div>
+              <div class="form-label-group">
+                <label class="label-style">Message</label>
+                <textarea class="input-style contactUs-message" placeholder="Write us a message..."  rows="5" style="resize: none"></textarea>
+              </div>
+              
+              <a th:href="@{/contact-us}"><button class="submit-style" type="submit" value="LOGIN">SEND MESSAGE</button></a>
+            </form>
+          </div>
+          <div class="col-6 p-0 d-flex justify-content-center align-items-center">
+            <img class="brand-logo" th:src="@{'/img/logo.png'}" alt="SEOUL SOUL">
+          </div>
+        </div>
+      </div>
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
