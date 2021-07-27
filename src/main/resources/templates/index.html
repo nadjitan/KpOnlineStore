@@ -6,14 +6,20 @@
       <!--carousel-->
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
-            <img th:src="@{'/img/placeholder_carousel.png'}" class="d-block w-100" alt="carousel">
+          <div class="carousel-item active" data-bs-interval="3000">
+            <a th:href="@{/product/98}">
+              <img th:src="@{'/img/carousel_GirlsGeneration.png'}" class="d-block w-100" alt="carousel">
+            </a>
           </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <img th:src="@{'/img/placeholder_carousel.png'}" class="d-block w-100" alt="carousel">
+          <div class="carousel-item" data-bs-interval="3000">
+            <a th:href="@{/product/109}">
+              <img th:src="@{'/img/carousel_IU.png'}" class="d-block w-100" alt="carousel">
+            </a>
           </div>
-          <div class="carousel-item">
-            <img th:src="@{'/img/placeholder_carousel.png'}" class="d-block w-100" alt="carousel">
+          <div class="carousel-item" data-bs-interval="3000">
+            <a th:href="@{/product/2}">
+              <img th:src="@{'/img/carousel_BTS.png'}" class="d-block w-100" alt="carousel">
+            </a>
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -34,7 +40,6 @@
       -->
       
       <div class="defaultMargin py-5 ">
-        
         <div class="d-flex align-items-center py-3">
           <h1 class="mr-auto mb-0">HOTTEST SELLERS</h1>
           <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}"><button class="seeMore">SEE MORE ></button></a>
@@ -73,14 +78,15 @@
             </a>
           </div>
         </div>
+        <hr>
         <div class="d-flex align-items-center py-3">
-          <h1 class="mr-auto mb-0">NEWEST PRODUCTS</h1>
-          <!-- <a th:href="@{'/store/1'}"><button class="seeMore">SEE MORE ></button></a> -->
+          <h1 class="mr-auto mb-0">PREORDERS</h1>
+          <a th:href="@{'/store/1/addFilters?preorder=preorder'}"><button class="seeMore">SEE MORE ></button></a>
         </li>
         </div>
         <div class="row">
-          <div th:if="${sortedByCreatedAtProducts.empty}">No products available</div>
-          <div class="col-2 py-2" th:each="product: ${sortedByCreatedAtProducts}">
+          <div th:if="${preorderProducts.empty}">No products available</div>
+          <div class="col-2 py-2" th:each="product: ${preorderProducts}">
             <a th:href="@{|/product/${product.id}|}">
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">
@@ -111,14 +117,15 @@
             </a>
           </div>
         </div>
+        <hr>
         <div class="d-flex align-items-center py-3">
-          <h1 class="mr-auto mb-0">PREORDERS</h1>
-          <a th:href="@{'/store/1/addFilters?preorder=preorder'}"><button class="seeMore">SEE MORE ></button></a>
+          <h1 class="mr-auto mb-0">NEWEST PRODUCTS</h1>
+          <!-- <a th:href="@{'/store/1'}"><button class="seeMore">SEE MORE ></button></a> -->
         </li>
         </div>
         <div class="row">
-          <div th:if="${preorderProducts.empty}">No products available</div>
-          <div class="col-2 py-2" th:each="product: ${preorderProducts}">
+          <div th:if="${sortedByCreatedAtProducts.empty}">No products available</div>
+          <div class="col-2 py-2" th:each="product: ${sortedByCreatedAtProducts}">
             <a th:href="@{|/product/${product.id}|}">
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">

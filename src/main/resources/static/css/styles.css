@@ -586,3 +586,8 @@ hr {
 .accordion-button {
   font-size: 15px;
 }
+
+.brand-logo{
+  max-width: 250px;
+  max-height: 35px;
+}
