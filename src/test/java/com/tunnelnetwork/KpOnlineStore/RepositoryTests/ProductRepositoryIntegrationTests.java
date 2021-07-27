@@ -30,7 +30,7 @@ public class ProductRepositoryIntegrationTests {
   public void setup() {
 
     Product product = new Product();
-    product.setPrice(200);
+    product.setPrice((double) 200);
     product.setProductName("Cream");
 
     productId = testEntityManager.persistAndFlush(product).getId();

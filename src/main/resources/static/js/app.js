@@ -144,6 +144,29 @@ document.addEventListener("DOMContentLoaded", () => {
         form.find(".exit-modal").css("margin-left", "auto");
       }
     );
+
+    $('input[type=number]').keypress(function (e) {
+      const keyCode = e.which;
+      /*
+       8 - (backspace)
+       32 - (space)
+       48-57 - (0-9)Numbers
+     */
+
+      if ((keyCode != 8 || keyCode == 32) && (keyCode < 48 || keyCode > 57)) {
+        return false;
+      }
+
+      else if (this.value.length > 11) {
+        return false;
+      }
+    });
+
+    $(".edit-tags").each(function() {
+      const tags = $(this).nextAll().text();
+
+      $(this).val(tags);
+    });
     
     $(".exit-modal-add-product").click(function () {
       const form = $(this).parent().parent().parent().parent();

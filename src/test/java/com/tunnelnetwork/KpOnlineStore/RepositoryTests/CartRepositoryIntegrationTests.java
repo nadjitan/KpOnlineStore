@@ -52,7 +52,7 @@ public class CartRepositoryIntegrationTests {
     userList.add(user.getEmail());
 
     Product product = new Product();
-    product.setPrice(200);
+    product.setPrice((double) 200);
     product.setProductName("Cream");
 
     productList.add(product);
