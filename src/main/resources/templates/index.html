@@ -71,6 +71,82 @@
             </a>
           </div>
         </div>
+        <div class="d-flex align-items-center py-3">
+          <h1 class="mr-auto mb-0">NEWEST PRODUCTS</h1>
+          <!-- <a th:href="@{'/store/1'}"><button class="seeMore">SEE MORE ></button></a> -->
+        </li>
+        </div>
+        <div class="row">
+          <div th:if="${sortedByCreatedAtProducts.empty}">No products available</div>
+          <div class="col-2 py-2" th:each="product: ${sortedByCreatedAtProducts}">
+            <a th:href="@{|/product/${product.id}|}">
+              <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
+                <div class="card-product-image-container d-flex align-items-center">
+                  <div>
+                    <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
+                  </div>
+                </div>
+                <div class="card-body card-product-body mr-auto">
+                  <h4 class="product-name" th:text="${product.productName}"></h4>
+                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
+                  <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
+                  <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="fas fa-star star"></i>
+                    </form>
+                  </div>
+                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i + product.rating}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="far fa-star star"></i>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="d-flex align-items-center py-3">
+          <h1 class="mr-auto mb-0">PREORDERS</h1>
+          <a th:href="@{'/store/1/addFilters?preorder=preorder'}"><button class="seeMore">SEE MORE ></button></a>
+        </li>
+        </div>
+        <div class="row">
+          <div th:if="${preorderProducts.empty}">No products available</div>
+          <div class="col-2 py-2" th:each="product: ${preorderProducts}">
+            <a th:href="@{|/product/${product.id}|}">
+              <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
+                <div class="card-product-image-container d-flex align-items-center">
+                  <div>
+                    <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
+                  </div>
+                </div>
+                <div class="card-body card-product-body mr-auto">
+                  <h4 class="product-name" th:text="${product.productName}"></h4>
+                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
+                  <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
+                  <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="fas fa-star star"></i>
+                    </form>
+                  </div>
+                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+                    <form th:action="@{/rate}" method="POST">
+                      <input type="hidden" name="rating" th:value="${i + product.rating}" />
+                      <input type="hidden" name="productId" th:value="${product.id}" />
+                      <i class="far fa-star star"></i>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -58,8 +58,8 @@
     ]
   },
   {
-    "createdAt": "2021-06-28 10:44:32",
-    "updatedAt": "2021-06-28 10:44:32",
+    "createdAt": "2021-05-28 10:44:32",
+    "updatedAt": "2021-05-28 10:44:32",
     "productName": "Enhypen Border Carnival Album",
     "description": "Enhypen new album that was released on April 26, 2021.",
     "category": "Albums",
@@ -167,8 +167,8 @@
     ]
   },
   {
-    "createdAt": "2021-06-28 10:44:32",
-    "updatedAt": "2021-06-28 10:44:32",
+    "createdAt": "2021-04-28 10:44:32",
+    "updatedAt": "2021-04-28 10:44:32",
     "productName": "NCT loveholic album",
     "description": "NCT new album that was released on February 17, 2021.",
     "category": "Albums",
@@ -525,7 +525,7 @@
     "description": "The first doll set of BTS with idol theme.",
     "category": "Dolls",
     "price": 7000,
-    "status": "available",
+    "status": "preorder",
     "image": "/img/Dolls/BTS idol theme dolls set (7000 php).png",
     "rating": 5,
     "numberOfSold": 8,

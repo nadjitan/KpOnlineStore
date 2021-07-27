@@ -2,7 +2,9 @@ package com.tunnelnetwork.KpOnlineStore.DAO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Comparator;
 
 import com.tunnelnetwork.KpOnlineStore.Exceptions.ResourceNotFoundException;
 import com.tunnelnetwork.KpOnlineStore.Models.Product;
@@ -102,5 +104,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     }
     
     return bestSellers;
+  }
+
+  default List<Product> getProductsByCreatedAt() {
+    List<Product> newList = getAllProducts();
+
+    Collections.sort(newList, Comparator.comparing(Product::getCreatedAt));
+
+    return newList;
   }
 }
