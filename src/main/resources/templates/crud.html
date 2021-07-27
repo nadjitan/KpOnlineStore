@@ -193,7 +193,7 @@
                             />
                           </div>
                           <hr>
-                          <button class="btn-add btn submit-style submit-style-small m-0" type="submit">EDIT</button>
+                          <button class="btn-add btn submit-style submit-style-small m-0" type="submit">CONFIRM EDIT</button>
                         </form>
                       </div>
                     </div>
@@ -218,7 +218,7 @@
                           <h1 class="mb-2" th:text="${product.productName}"></h1>
                           <img class="w-100" th:src="${product.image}" th:alt="${product.productName + '.jpg'}"/>
                           <hr>
-                          <button type="submit" class="btn submit-style w-100 px-3 m-0" name="id" th:value="${product.id}">
+                          <button type="submit" class="btn submit-style submit-style-small w-100 px-3 m-0" name="id" th:value="${product.id}">
                             CONFIRM DELETE
                           </button>
                         </form>
