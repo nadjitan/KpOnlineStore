@@ -30,8 +30,15 @@ public class ProductRepositoryIntegrationTests {
   public void setup() {
 
     Product product = new Product();
-    product.setPrice((double) 200);
+    product.setCategory("Albums");
+    product.setDescription("Test description");
+    product.setImage("/img");
+    product.setNumberOfSold(100);
+    product.setPrice((double) 100);
     product.setProductName("Cream");
+    product.setRating(5);
+    product.setStatus("available");
+    product.setTags(new String[]{"tag1", "tag2"});
 
     productId = testEntityManager.persistAndFlush(product).getId();
   }
@@ -40,7 +47,7 @@ public class ProductRepositoryIntegrationTests {
   public void whenFindByProductNameIgnoreCase_thenProductShouldBeFound() {
 
     // Given
-    String productName = "cream";
+    String productName = "Cream";
 
     // When
     List<Product> productList = productRepository.findByProductNameContainingIgnoreCase(productName);
@@ -53,7 +60,7 @@ public class ProductRepositoryIntegrationTests {
   public void whenInvalidProductName_thenProductShouldNotBeFound() {
 
     // Given
-    String productName = "guitar";
+    String productName = "Guitar";
 
     // When
     List<Product> productList = productRepository.findByProductNameContainingIgnoreCase(productName);

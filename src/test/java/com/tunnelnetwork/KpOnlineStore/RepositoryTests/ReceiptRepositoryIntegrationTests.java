@@ -54,8 +54,15 @@ public class ReceiptRepositoryIntegrationTests {
     userList.add(user.getEmail());
 
     Product product = new Product();
-    product.setPrice((double) 200);
+    product.setCategory("Albums");
+    product.setDescription("Test description");
+    product.setImage("/img");
+    product.setNumberOfSold(100);
+    product.setPrice((double) 100);
     product.setProductName("Cream");
+    product.setRating(5);
+    product.setStatus("available");
+    product.setTags(new String[]{"tag1", "tag2"});
 
     productList.add(product);
 
