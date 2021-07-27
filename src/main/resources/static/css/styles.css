@@ -54,7 +54,7 @@ textarea:focus {
 }
 
 textarea:focus { 
-  border-color: black;
+  border-color: #CEC5C6;
 }
 
 input:-webkit-autofill,
@@ -328,10 +328,16 @@ input[id*="star-"] + label:hover {
 .container-cart,
 .container-profile,
 .container-checkout,
+.container-faq,
+.container-crud,
 .sidebar,
 .sidebar-big {
   background: white;
 }
+
+.container-faq {
+  width: 800px;
+} 
 
 .sidebar {
   width: 270px;
@@ -424,7 +430,8 @@ input[id*="star-"] + label:hover {
 }
 
 .product-subheader-text,
-.table-style-content {
+.table-style-content,
+.faq-paragraph {
   font-size: 14px;
   font-family: Poppins Light, sans-serif;
 }
@@ -468,14 +475,11 @@ input[id*="star-"] + label:hover {
   color: #CEC5C6;
 }
 
-.comment-customer-textarea {
+.comment-customer-textarea,
+.contactUs-message {
   border-radius: 0px;
   font-size: 14px;
   font-family: Poppins Regular, sans-serif;
-}
-
-.comment-customer-textarea:focus {
-  border: 1px solid #B85C5C !important;
 }
 
 .didUserBuyProduct {
@@ -568,4 +572,17 @@ hr {
   display: -webkit-box;
   -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #B85C5C;
+  background-color: #FAE1E1;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23B85C5C'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.accordion-button {
+  font-size: 15px;
 }
