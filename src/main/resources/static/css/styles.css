@@ -328,7 +328,6 @@ input[id*="star-"] + label:hover {
 .container-cart,
 .container-profile,
 .container-checkout,
-.product-details,
 .sidebar,
 .sidebar-big {
   background: white;
@@ -432,13 +431,19 @@ input[id*="star-"] + label:hover {
 
 .product-description-text,
 .comment-customer-comment,
-.cart-summary-label  {
+.cart-summary-label,
+.none-text {
   font-size: 13px;
   font-family: Poppins Light, sans-serif !important;
 }
 
+.voucher-text {
+  color: #4E7FA1;
+}
+
 .table-style-header,
-.cart-summary {
+.cart-summary,
+.voucher-text {
   font-size: 13px;
   font-family: Poppins Regular, sans-serif;
 }
@@ -485,7 +490,8 @@ hr {
   border: 1px solid #CEC5C6;
 }
 
-.cart-product-image {
+.cart-product-image,
+.modal-product-image {
   max-width: 75px;
   max-height: 75px;
 }
@@ -528,22 +534,17 @@ hr {
 }
 
 .modal {
-  z-index: 1200;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
   background-color: rgba(0, 0, 0, 0.308);
   display: none;
   place-items: center;
-  overflow: hidden;
 }
 
-.modal-table {
-  z-index: 1201;
-  display: grid;
-  width: max-content;
-  place-items: center;
-  position: relative;
-  padding: 20px;
+.modal-content {
+  border: 0px solid !important;
+  border-radius: 0px !important;
+}
+
+.modal-dialog {
+  max-width: 550px;
+  width: 100%;
 }

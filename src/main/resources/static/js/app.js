@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $(".exit-modal").click(function () {
-      const form = $(this).parent().parent();
+      const form = $(this).parent().parent().parent().parent();
 
       form.css("display", "none");
     });

@@ -35,8 +35,8 @@
                     </a>
                   </th>
                   <td class="align-middle table-style-content"><a class="cart-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>
-                  <td class="table-style-content align-middle" th:text="${'x' + product.quantity}"></td>
-                  <td class="table-style-content align-middle" th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}"></td>
+                  <td class="align-middle table-style-content" th:text="${'x' + product.quantity}"></td>
+                  <td class="align-middle table-style-content" th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}"></td>
                   <td class="align-middle table-style-content">
                     <form th:action="@{/removeProduct}" method="post">
                       <button type="submit" class="btn submit-style w-auto px-3 m-0" name="productId" th:value="${product.id}">

@@ -9,9 +9,9 @@
         <a class="directory-link-active" th:href="@{/store/1}">Products</a>
       </span>
     </div>
-    <div class="product-details defaultMargin pb-5 row">
+    <div class="defaultMargin pb-5 row">
       <!--FILTERS-->
-      <div class="col-3 p-0">
+      <div class="col-3 p-0 mr-auto">
         <div class="sidebar p-4 mr-auto">
           <form th:action="@{/store/1/addFilters}" method="GET">
             <!--Header-->
@@ -82,7 +82,7 @@
                   id="checkbox-bestSeller"
                   value="bestSeller"
                 />
-                <label class="form-check-label" for="checkbox-bestSeller">Top sales</label>
+                <label class="form-check-label" for="checkbox-bestSeller">Hottest sellers</label>
               </div>
               
             </section>

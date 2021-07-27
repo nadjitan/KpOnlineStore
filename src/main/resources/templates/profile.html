@@ -11,6 +11,7 @@
           <a class="directory-link-active" th:href="@{/profile}">Profile</a>
         </span>
       </div>
+      <!--Order History-->
       <div class="defaultMargin container-profile mb-4 p-4">
         <h1 id="orders-title">ORDER HISTORY</h1>
         <span class="none-text" th:if="${receiptList.empty}">You haven't ordered yet.</span>
@@ -19,7 +20,7 @@
             <tr>
               <th scope="col" class="table-style-header">REF NO.</th>
               <th scope="col" class="table-style-header">DATE</th>
-              <th scope="col" class="table-style-header">PRICE</th>
+              <th scope="col" class="table-style-header">TOTAL PRICE</th>
               <th scope="col" class="table-style-header">VOUCHER</th>
               <th scope="col" class="table-style-header">STATUS</th>
               <th scope="col" class="table-style-header">DETAILS</th>
@@ -39,36 +40,43 @@
               <td class="align-middle table-style-content"><span>pending</span></td>
               <td class="align-middle table-style-content">
                 <div class="modal">
-                  <div class="product-details">
-                    <button type="reset" class="exit-modal">X</button>
-                    <table class="modal-table">
-                      <tr>
-                        <th>IMAGE</th>
-                        <th>NAME</th>
-                        <th>TAGS</th>
-                        <th>QUANTITY</th>
-                        <th>PRICE</th>
-                      </tr>
-                      <tr th:each="product : ${receipt.productList}">
-                        <td>
-                          <img
-                            class="card-product-image"
-                            th:src="${product.image}"
-                            th:alt="${product.productName + '.jpg'}"
-                          />
-                        </td>
-                        <td th:text="${product.productName}"></td>
-                        <td>
-                          <div class="product-tags">
-                            <div th:each="tag : ${product.tags}">
-                              <p th:text="${tag}"></p>
-                            </div>
-                          </div>
-                        </td>
-                        <td th:text="${product.quantity}"></td>
-                        <td th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
-                      </tr>
-                    </table>
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="m-0">ORDER DETAILS</h5>
+                        <button type="reset" class="btn-close exit-modal"></button>
+                      </div>
+                      <div class="modal-body">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="table-style-header">IMAGE</th>
+                              <th scope="col" class="table-style-header">NAME</th>
+                              <th scope="col" class="table-style-header">QUANTITY</th>
+                              <th scope="col" class="table-style-header">PRICE</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr th:each="product : ${receipt.productList}">
+                              <th scope="row" class="align-middle">
+                                <a th:href="@{|/product/${product.id}|}">
+                                  <img class="modal-product-image" th:src="${product.image}" th:alt="${product.productName + '.jpg'}"/>
+                                </a>
+                              </th>
+                              <td class="align-middle table-style-content"><a class="cart-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>
+                              <td class="align-middle table-style-content" th:text="${product.quantity}"></td>
+                              <td class="align-middle table-style-content" th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}"></td>
+                            </tr>
+                            <tr>
+                              <th></th>
+                              <td></td>
+                              <td><span>Total:</span></td>
+                              <td class="align-middle table-style-content"><span th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button class="btn submit-style btn-product-details w-auto px-3 m-0">
@@ -79,18 +87,22 @@
           </tbody>
         </table>
       </div>
+      <!--Wishlist-->
       <div class="defaultMargin container-profile mb-5 p-4">
         <h1 id="orders-title">WISHLIST</h1>
-        <p th:if="${wishlist.isEmpty}">There are no items in your wishlist.</p>
-        <table>
-          <tr>
-            <th>IMAGE</th>
-            <th>NAME</th>
-            <th>TAGS</th>
-            <th>CATEGORY</th>
-            <th>STATUS</th>
-            <th>PRICE</th>
-          </tr>
+        <span class="none-text" th:if="${wishlist.isEmpty}">There are no items in your wishlist.</span>
+        <table th:if="${!wishlist.empty}" class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-style-header">IMAGE</th>
+              <th scope="col" class="table-style-header">NAME</th>
+              <th scope="col" class="table-style-header">TAGS</th>
+              <th scope="col" class="table-style-header">CATEGORY</th>
+              <th scope="col" class="table-style-header">STATUS</th>
+              <th scope="col" class="table-style-header">PRICE</th>
+              <th scope="col" class="table-style-header">REMOVE</th>
+            </tr>
+          </thead>
           <tr th:each="product : ${wishlist}">
             <td>
               <img
