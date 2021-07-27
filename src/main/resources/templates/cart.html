@@ -31,7 +31,7 @@
                 <tr class="product" th:each="product : ${cart.cartProducts}">
                   <th scope="row" class="align-middle">
                     <a th:href="@{|/product/${product.id}|}">
-                      <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="cart-product-image"/>
+                      <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="wishlist-product-image"/>
                     </a>
                   </th>
                   <td class="align-middle table-style-content"><a class="cart-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>

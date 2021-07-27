@@ -13,7 +13,7 @@
       </div>
       <!--Order History-->
       <div class="defaultMargin container-profile mb-4 p-4">
-        <h1 id="orders-title">ORDER HISTORY</h1>
+        <h1 class="mb-4">ORDER HISTORY</h1>
         <span class="none-text" th:if="${receiptList.empty}">You haven't ordered yet.</span>
         <table th:if="${!receiptList.empty}" class="table">
           <thead>
@@ -89,49 +89,40 @@
       </div>
       <!--Wishlist-->
       <div class="defaultMargin container-profile mb-5 p-4">
-        <h1 id="orders-title">WISHLIST</h1>
+        <h1 class="mb-4">WISHLIST</h1>
         <span class="none-text" th:if="${wishlist.isEmpty}">There are no items in your wishlist.</span>
         <table th:if="${!wishlist.empty}" class="table">
           <thead>
             <tr>
               <th scope="col" class="table-style-header">IMAGE</th>
               <th scope="col" class="table-style-header">NAME</th>
-              <th scope="col" class="table-style-header">TAGS</th>
               <th scope="col" class="table-style-header">CATEGORY</th>
               <th scope="col" class="table-style-header">STATUS</th>
               <th scope="col" class="table-style-header">PRICE</th>
               <th scope="col" class="table-style-header">REMOVE</th>
             </tr>
           </thead>
-          <tr th:each="product : ${wishlist}">
-            <td>
-              <img
-                th:src="${product.image}"
-                th:alt="${product.productName + '.jpg'}"
-              />
-            </td>
-            <td th:text="${product.productName}"></td>
-            <td>
-              <div class="product-tags">
-                <div th:each="tag : ${product.tags}">
-                  <p th:text="${tag}"></p>
-                </div>
-              </div>
-            </td>
-            <td th:text="${product.category}"></td>
-            <td th:text="${product.status}"></td>
-            <td th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
-            <td>
-              <button>
-                <a th:href="@{|/product/${product.id}|}">Go to product</a>
-              </button>
-              <form th:action="@{/removeFromWishlist}" method="post">
-                <button type="submit" th:value="${product.id}" name="productId">
-                  Remove
-                </button>
-              </form>
-            </td>
-          </tr>
+          <tbody>
+            <tr th:each="product : ${wishlist}">
+              <th scope="row" class="align-middle">
+                <a th:href="@{|/product/${product.id}|}">
+                  <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="cart-product-image"/>
+                </a>
+              </th>
+              <td class="align-middle table-style-content"><a class="wishlist-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>
+              <td class="align-middle table-style-content" th:text="${product.category}"></td>
+              <td class="align-middle table-style-content" th:text="${product.status}" style="text-transform: capitalize;"></td>
+              <td class="align-middle table-style-content" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
+              <td class="align-middle table-style-content">
+                <form th:action="@{/removeFromWishlist}" method="post">
+                  <button type="submit" class="btn submit-style w-auto px-3 m-0" name="productId" th:value="${product.id}">
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+          
         </table>  
       </div>
     </div>
