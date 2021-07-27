@@ -15,33 +15,57 @@
       <div class="d-flex align-items-center mb-4">
         <h1 class="m-0 mr-auto">PRODUCTS</h1>
         
-        <form th:action="@{/crud/create}" method="POST" class="modal-crud modal-crud-shadow add-product">
-          <button type="reset" class="exit-modal-add-product">X</button>
-          <label for="product-name">Product Name</label>
-          <input type="text" name="productName" id="product-name" />
-          <label for="description">Description</label>
-          <input type="text" name="description" id="description" />
-          <label for="category">Category</label>
-          <input type="text" name="category" id="category" />
-          <label for="price">Price</label>
-          <input type="text" name="price" id="price" />
-          <label for="status">Status</label>
-          <input type="text" name="status" id="status" />
-          <label for="image">Image</label>
-          <input type="text" name="image" id="image" />
-          <label for="tags">Tags</label>
-          <input type="text" name="tags" id="tags" />
-          <input type="hidden" name="rating" value="5" />
-          <button type="submit">SAVE</button>
-        </form>
+        <div class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="m-0">ADD PRODUCT</h5>
+                <button type="reset" class="btn-close exit-modal-add-product"></button>
+              </div>
+              <div class="modal-body p-4 pt-3">
+                <form th:action="@{/crud/create}" method="POST" class="add-product">
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="product-name">Product Name</label>
+                    <input class="input-style" type="text" name="productName" id="product-name" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="description">Description</label>
+                    <input class="input-style" type="text" name="description" id="description" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="category">Category</label>
+                    <input class="input-style" type="text" name="category" id="category" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="price">Price</label>
+                    <input class="input-style" type="text" name="price" id="price" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="status">Status</label>
+                    <input class="input-style" type="text" name="status" id="status" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="image">Image</label>
+                    <input class="input-style" type="text" name="image" id="image" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <label class="label-style" for="tags">Tags</label>
+                    <input class="input-style" type="text" name="tags" id="tags" />
+                  </div>
+                  <div class="form-label-group w-100">
+                    <input class="label-style" type="hidden" name="rating" value="5" />
+                  </div>
+                  <hr>
+                  <button class="btn-add btn submit-style submit-style-small m-0" type="submit">ADD</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
         <button class="btn-add btn submit-style submit-style-small m-0 w-auto">+ ADD PRODUCT</button>
       </div>
 
-      <div
-        class="crud-results"
-        th:if="${crudStatus}"
-        th:text="${crudStatus}"
-      ></div>
+      <div class="success mb-3" th:if="${crudStatus}" th:text="${crudStatus}"></div>
 
       <div id="products-table">
         <table class="table">
@@ -84,88 +108,123 @@
               ></td>
               <td>
                 <div class="modal">
-                  <form
-                    th:action="@{/crud/update}"
-                    method="POST"
-                    class="modal-crud"
-                    modelAttribute="product"
-                  >
-                    <button type="reset" class="exit-modal">X</button>
-                    <input type="hidden" name="id" th:value="${product.id}" />
-                    <input
-                      type="hidden"
-                      name="createdAt"
-                      th:value="${product.createdAt}"
-                    />
-                    <label for="product-name">Product Name</label>
-                    <input
-                      type="text"
-                      name="productName"
-                      id="product-name"
-                      th:value="${product.productName}"
-                    />
-                    <label for="description">Description</label>
-                    <input
-                      type="text"
-                      name="description"
-                      id="description"
-                      th:value="${product.description}"
-                    />
-                    <label for="category">Category</label>
-                    <input
-                      type="text"
-                      name="category"
-                      id="category"
-                      th:value="${product.category}"
-                    />
-                    <label for="price">Price</label>
-                    <input
-                      type="text"
-                      name="price"
-                      id="price"
-                      th:value="${product.price}"
-                    />
-                    <label for="status">Status</label>
-                    <input
-                      type="text"
-                      name="status"
-                      id="status"
-                      th:value="${product.status}"
-                    />
-                    <label for="image">Image</label>
-                    <input
-                      type="text"
-                      name="image"
-                      id="image"
-                      th:value="${product.image}"
-                    />
-                    <label for="tags">Tags</label>
-                    <input
-                      type="text"
-                      name="tags"
-                      id="tags"
-                      th:value="${product.tags}"
-                    />
-                    <button type="submit">UPDATE</button>
-                  </form>
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="m-0">EDIT PRODUCT</h5>
+                        <button type="reset" class="btn-close exit-modal"></button>
+                      </div>
+                      <div class="modal-body p-4 pt-3">
+                        <form th:action="@{/crud/update}" method="POST" modelAttribute="product">
+                          <div class="form-label-group w-100">
+                            <input type="hidden" name="id" th:value="${product.id}" />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <input type="hidden" name="createdAt" th:value="${product.createdAt}" />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="product-name">Product Name</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="productName"
+                              id="product-name"
+                              th:value="${product.productName}"
+                            />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="description">Description</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="description"
+                              id="description"
+                              th:value="${product.description}"
+                            />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="category">Category</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="category"
+                              id="category"
+                              th:value="${product.category}"
+                            />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="price">Price</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="price"
+                              id="price"
+                              th:value="${product.price}"
+                            />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="status">Status</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="status"
+                              id="status"
+                              th:value="${product.status}"
+                            />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="image">Image</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="image"
+                              id="image"
+                              th:value="${product.image}"
+                            />
+                          </div>
+                          <div class="form-label-group w-100">
+                            <label class="label-style" for="tags">Tags</label>
+                            <input
+                              class="input-style" 
+                              type="text"
+                              name="tags"
+                              id="tags"
+                              th:value="${product.tags}"
+                            />
+                          </div>
+                          <hr>
+                          <button class="btn-add btn submit-style submit-style-small m-0" type="submit">EDIT</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <button class="btn btn-edit submit-style w-100 px-3 m-0">
                   <i class="far fa-edit"></i>
                 </button>
-  
                 <div class="modal">
-                  <form
-                    th:action="@{/crud/delete}"
-                    method="post"
-                    class="modal-crud delete"
-                  >
-                    <button type="reset" class="exit-modal">X</button>
-                    <h3 th:text="${product.id}"></h3>
-                    <h2 th:text="${product.productName}"></h2>
-                    <button type="submit" name="id" th:value="${product.id}">
-                      DELETE
-                    </button>
-                  </form>
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="m-0">DELETE PRODUCT?</h5>
+                        <button type="reset" class="btn-close exit-modal"></button>
+                      </div>
+                      <div class="modal-body p-4 pt-3">
+                        <form
+                          th:action="@{/crud/delete}"
+                          method="post"
+                          class="delete"
+                        >
+                          <h1 class="mb-2" th:text="${product.productName}"></h1>
+                          <img class="w-100" th:src="${product.image}" th:alt="${product.productName + '.jpg'}"/>
+                          <hr>
+                          <button type="submit" class="btn submit-style w-100 px-3 m-0" name="id" th:value="${product.id}">
+                            CONFIRM DELETE
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <button class="btn btn-delete submit-style w-100 px-3 m-0 mt-1">
                   <i class="far fa-trash-alt"></i>

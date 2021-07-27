@@ -558,41 +558,8 @@ hr {
 }
 
 #products-table {
-  height: 70vh;
+  height: 60vh;
   overflow-y: scroll;
-}
-
-.modal-crud {
-  z-index: 1301;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background-color: white;
-}
-
-.modal-crud-shadow {
-  box-shadow: 0px 10px 25px rgba(235, 241, 253, 0.9);
-}
-
-.add-product {
-  display: none;
-  position: absolute;
-}
-
-.modal-crud label {
-  margin: 15px 0px 0px 0px;
-  place-self: start;
-}
-
-.modal-crud button[type="submit"] {
-  justify-self: center;
-}
-
-.crud-results {
-  background-color: greenyellow;
-  padding: 1.2rem;
-  border-radius: 20px;
-  text-align: center;
 }
 
 .crud-text {
