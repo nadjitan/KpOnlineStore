@@ -49,12 +49,14 @@ h6 {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none !important;
 }
 
-textarea:focus { 
-  border-color: #CEC5C6;
+textarea:focus,
+select:focus { 
+  border-color: #CEC5C6 !important;
 }
 
 input:-webkit-autofill,
@@ -67,13 +69,16 @@ input:-webkit-autofill:active {
 textarea:hover,
 input:hover,
 button:hover,
+select:hover,
 textarea:active,
 input:active,
 button:active,
+select:active,
 textarea:focus,
 input:focus,
 button:focus,
 label:focus,
+select:focus,
 .btn:active,
 .btn.active {
   outline: 0px !important;
@@ -590,4 +595,78 @@ hr {
 .brand-logo{
   max-width: 250px;
   max-height: 35px;
+}
+
+.expiration-dropdown {
+  display: flex;
+}
+
+.container-store-quality {
+  box-shadow: 0px 10px 25px rgba(235, 241, 253, 0.6);
+}
+
+.container-store-quality-img {
+  max-height: 60px;
+  min-width: 60px;
+  max-width: 60px;
+}
+
+.container-store-quality-header{
+  font-size: 15px;
+  font-family: Poppins Medium, sans-serif;
+  color: #B85C5C;
+  text-align: center;
+}
+
+.container-store-quality-text{
+  font-size: 13px;
+  font-family: Poppins Light, sans-serif;
+  text-align: center;
+}
+
+.container-store-quality-text{
+  font-size: 13px;
+  font-family: Poppins Light, sans-serif;
+  text-align: center;
+}
+
+.container-category-list {
+  background-color: #fae1e1;
+}
+
+.category-list-header {
+  font-size: 18px;
+  font-family: Poppins Medium, sans-serif;
+  color: #B85C5C;
+  text-align: center;
+}
+
+.category-button {
+  width: 170px;
+  height: 170px;
+  background-color: white;
+  border-radius: 0px;
+  border: 1px solid #fae1e1;
+  transition: 0.25s;
+}
+
+.category-button:hover {
+  background-color: #fae1e1;
+  border: 1px solid #B85C5C;
+}
+
+.category-button-img {
+  max-height: 53px;
+  min-width: 53px;
+  max-width: 53px;
+}
+
+.category-button-header {
+  font-size: 13px;
+  font-family: Poppins Medium, sans-serif;
+  color: #B85C5C;
+}
+
+.svg-darkbrown {
+  filter: invert(44%) sepia(13%) saturate(1895%) hue-rotate(314deg) brightness(91%) contrast(90%);
 }

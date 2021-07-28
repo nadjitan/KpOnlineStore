@@ -31,15 +31,120 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <!--
-      <p th:if="${userRole == 'USER' || userRole == 'ADMIN'}">
-        Hello
-        <span th:text="${userFirstname + ' ' + userLastname}"></span>
-        <button><a th:href="@{/profile}">PROFILE</a></button>
-      </p>
-      -->
       
-      <div class="defaultMargin py-5 ">
+      <!--Store Qualities-->
+      <div class="defaultMargin container-store-quality row mt-5 px-4 py-5">
+        <div class="col-4 row d-flex justify-content-center px-5">
+          <img th:src="@{'/img/icon-qualities-securepayment.svg'}" class="container-store-quality-img svg-darkbrown p-0">
+          <span class="container-store-quality-header">SECURE PAYMENT</span>
+          <span class="container-store-quality-text">
+            We do not store credit card details nor 
+            have access to your credit card information.
+          </span>
+        </div>
+        <div class="col-4 row d-flex justify-content-center px-5">
+          <img th:src="@{'/img/icon-qualities-qualityshipping.svg'}" class="container-store-quality-img svg-darkbrown p-0">
+          <span class="container-store-quality-header">QUALITY SHIPPING</span>
+          <span class="container-store-quality-text">
+            We ensure that our delivered
+            products are in pristine condition.
+          </span>
+        </div>
+        <div class="col-4 row d-flex justify-content-center px-5">
+          <img th:src="@{'/img/icon-qualities-fastdelivery.svg'}" class="container-store-quality-img svg-darkbrown p-0">
+          <span class="container-store-quality-header">FAST DELIVERY</span>
+          <span class="container-store-quality-text">
+            Your orders will be delivered
+            at your doorstep as soon as possible.
+          </span>
+        </div>
+      </div>
+
+      <!--Category List-->
+      <div class="container-category-list mt-5 p-4">
+        <div class="defaultMargin row mb-4">
+          <span class="category-list-header">CATEGORIES</span>
+        </div>
+        <div class="defaultMargin d-flex justify-content-center">
+          <a th:href="@{/store/1/addFilters?album=Albums}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-albums.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">ALBUMS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?apparel=Apparels}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-apparel.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">APPAREL</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?doll=Dolls}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-dolls.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">DOLLS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?imagePicket=Image+Pickets}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-imagepickets.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">IMAGE PICKETS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?keyRing=Key+Rings}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-keyrings.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">KEY RINGS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?lightStick=Light+Sticks}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-lightsticks.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">LIGHT STICKS</span>
+            </button>
+          </a>
+        </div>
+        <div class="defaultMargin d-flex justify-content-center">
+          <a th:href="@{/store/1/addFilters?package=Packages}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-packages.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">PACKAGES</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?phoneCase=Phone+Cases}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-phonecases.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">PHONE CASES</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?photobook=Photobooks}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-photobooks.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">PHOTOBOOKS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?photocard=Photocards}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-photocards.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">PHOTOCARDS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?poster=Posters}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-posters.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">POSTERS</span>
+            </button>
+          </a>
+          <a th:href="@{/store/1/addFilters?sticker=Stickers}">
+            <button class="category-button btn">
+              <img th:src="@{'/img/icon-category-stickers.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <span class="category-button-header">STICKERS</span>
+            </button>
+          </a>
+        </div>
+      </div>
+      
+      <!--Hottest Products, Preorders, Newest Products-->
+      <div class="defaultMargin my-5">
         <div class="d-flex align-items-center py-3">
           <h1 class="mr-auto mb-0">HOTTEST SELLERS</h1>
           <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}"><button class="seeMore">SEE MORE ></button></a>

@@ -48,7 +48,7 @@
                   </div>
                   <div class="form-label-group w-100">
                     <label class="label-style" for="category">Category</label>
-                    <select class="input-style" id="add-category" name="category">
+                    <select class="form-select input-style" id="add-category" name="category">
                       <option value="Albums">Albums</option>
                       <option value="Apparel">Apparel</option>
                       <option value="Dolls">Dolls</option>
@@ -69,7 +69,7 @@
                   </div>
                   <div class="form-label-group w-100">
                     <label class="label-style" for="status">Status</label>
-                    <select class="input-style" id="add-status" name="status">
+                    <select class="form-select input-style" id="add-status" name="status">
                       <option value="available">Available</option>
                       <option value="preorder">Preorder</option>
                       <option value="outOfStock">Out Of Stock</option>
@@ -172,7 +172,7 @@
                           </div>
                           <div class="form-label-group w-100">
                             <label class="label-style" for="category">Category</label>
-                            <select class="input-style" id="add-category" name="category">
+                            <select class="form-select input-style" id="add-category" name="category">
                               <option th:selected="${product.category == 'Albums'}" value="Albums">Albums</option>
                               <option th:selected="${product.category == 'Apparel'}" value="Apparel">Apparel</option>
                               <option th:selected="${product.category == 'Dolls'}" value="Dolls">Dolls</option>
@@ -199,7 +199,7 @@
                           </div>
                           <div class="form-label-group w-100">
                             <label class="label-style" for="status">Status</label>
-                            <select class="input-style edit-status" id="status" name="status">
+                            <select class="form-select input-style edit-status" id="status" name="status">
                               <option value="available" th:selected="${product.status == 'available'}">Available</option>
                               <option value="preorder" th:selected="${product.status == 'preorder'}">Preorder</option>
                               <option value="outOfStock" th:selected="${product.status == 'outOfStock'}">Out Of Stock</option>
