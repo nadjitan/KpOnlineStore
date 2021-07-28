@@ -43,13 +43,17 @@ public class CrudController extends CommonController{
     if (!isThereLoggedInUser() && hasRole("USER")) {
       return "redirect:/";
     }
-    
-    product.setCreatedAt(LocalDateTime.now());
-    product.setUpdatedAt(LocalDateTime.now());
-    
-    productRepository.saveAndFlush(product);
 
-    ra.addFlashAttribute("crudStatus", "Product \"" + product.getProductName() + "\" have been successfully created!");
+    try {
+      product.setCreatedAt(LocalDateTime.now());
+      product.setUpdatedAt(LocalDateTime.now());
+      
+      productRepository.saveAndFlush(product);
+
+      ra.addFlashAttribute("crudSuccess", "Product \"" + product.getProductName() + "\" have been successfully created!");  
+    } catch (Exception e) {
+      ra.addFlashAttribute("crudError", "Product not created. Please fill out the product details first."); 
+    }
      
     return "redirect:/crud";
   }
@@ -63,12 +67,19 @@ public class CrudController extends CommonController{
       return "redirect:/";
     }
 
-    product.setCreatedAt(productRepository.getProduct(id).getCreatedAt());
-    product.setUpdatedAt(LocalDateTime.now());
-    
-    productRepository.saveAndFlush(product);
+    try {
+      product.setRating(productRepository.getProduct(id).getRating());
+      product.setNumberOfSold(productRepository.getProduct(id).getNumberOfSold());
+      product.setComments(productRepository.getProduct(id).getComments());
+      product.setCreatedAt(productRepository.getProduct(id).getCreatedAt());
+      product.setUpdatedAt(LocalDateTime.now());
+      
+      productRepository.saveAndFlush(product);
 
-    ra.addFlashAttribute("crudStatus", "Product \"" + product.getProductName() + "\" was successfully updated!");
+      ra.addFlashAttribute("crudSuccess", "Product \"" + product.getProductName() + "\" was successfully updated!");
+    } catch (Exception e) {
+      ra.addFlashAttribute("crudError", "Product not updated. One field may be empty or a wrong type."); 
+    }
      
     return "redirect:/crud";
   }
@@ -82,9 +93,13 @@ public class CrudController extends CommonController{
       return "redirect:/";
     }
     
-    ra.addFlashAttribute("crudStatus", "Product is now deleted.");
+    try {
+      productRepository.delete(product);
 
-    productRepository.delete(product);
+      ra.addFlashAttribute("crudSuccess", "Product is now deleted.");
+    } catch (Exception e) {
+      ra.addFlashAttribute("crudError", "Error product not deleted."); 
+    }
 
     return "redirect:/crud";
   }

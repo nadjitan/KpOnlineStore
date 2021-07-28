@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -37,19 +39,31 @@ public class Product {
   @SequenceGenerator(name="product_generator", sequenceName = "product_seq")
   private long id;
   
+  @NotBlank
   private String productName;
 
   @Lob
+  @NotBlank
   private String description;
 
+  @NotBlank
   private String category;
-  private double price;
+
+  @NotNull
+  private Double price;
+
+  @NotBlank
   private String status;
+
+  @NotBlank
   private String image;
-  private Integer rating;
-  private Integer numberOfSold;
+
   private String[] tags;
 
+  private Integer rating;
+
+  private Integer numberOfSold;
+  
   @Lob
   private Integer quantity;
 
