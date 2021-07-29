@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
   <head th:replace="../fragments/header"></head>
 
   <body class="background-grey">
@@ -7,14 +8,19 @@
       <div class="defaultMargin py-3">
         <span class="directory-link">
           <a class="directory-link" th:href="@{/}">Home</a>
+
           <span class="mx-1">></span>
+
           <a class="directory-link-active" th:href="@{/profile}">Profile</a>
         </span>
       </div>
+
       <!--Order History-->
       <div class="defaultMargin container-profile mb-4 p-4">
         <h1 class="mb-4">ORDER HISTORY</h1>
+
         <span class="none-text" th:if="${receiptList.empty}">You haven't ordered yet.</span>
+
         <table th:if="${!receiptList.empty}" class="table">
           <thead>
             <tr>
@@ -26,18 +32,31 @@
               <th scope="col" class="table-style-header">DETAILS</th>
             </tr>
           </thead>
+
           <tbody>
             <tr th:each="receipt : ${receiptList}">
-              <th scope="row" class="align-middle table-style-content"><span th:text="${receipt.id}"></span></th>
-              <td class="align-middle table-style-content"><span th:text="${#temporals.format(receipt.createdAt, 'yyyy-MM-dd HH-MM')}"></span></td>
-              <td class="align-middle table-style-content"><span th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span></td>
+              <th scope="row" class="align-middle table-style-content">
+                <span th:text="${receipt.id}"></span>
+              </th>
+              
+              <td class="align-middle table-style-content">
+                <span th:text="${#temporals.format(receipt.createdAt, 'yyyy MMMM dd HH:mm')}"></span>
+              </td>
+              
+              <td class="align-middle table-style-content">
+                <span th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span>
+              </td>
+              
               <td class="align-middle table-style-content">
                 <div th:each="voucher : ${receipt.voucherList}">
                   <span th:text="${voucher.voucherName}"></span>
                 </div>
+
                 <span th:if="${receipt.voucherList.empty}">No voucher used.</span>
               </td>
+
               <td class="align-middle table-style-content"><span>pending</span></td>
+
               <td class="align-middle table-style-content">
                 <div class="modal">
                   <div class="modal-dialog">
@@ -46,6 +65,7 @@
                         <h1 class="m-0">ORDER DETAILS</h5>
                         <button type="reset" class="btn-close exit-modal"></button>
                       </div>
+
                       <div class="modal-body">
                         <table class="table">
                           <thead>
@@ -56,22 +76,44 @@
                               <th scope="col" class="table-style-header">PRICE</th>
                             </tr>
                           </thead>
+
                           <tbody>
                             <tr th:each="product : ${receipt.productList}">
                               <th scope="row" class="align-middle">
                                 <a th:href="@{|/product/${product.id}|}">
-                                  <img class="modal-product-image" th:src="${product.image}" th:alt="${product.productName + '.jpg'}"/>
+                                  <img 
+                                    class="modal-product-image" 
+                                    th:src="${product.image}" 
+                                    th:alt="${product.productName + '.jpg'}"/>
                                 </a>
                               </th>
-                              <td class="align-middle table-style-content"><a class="cart-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>
-                              <td class="align-middle table-style-content" th:text="${product.quantity}"></td>
-                              <td class="align-middle table-style-content" th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}"></td>
+
+                              <td class="align-middle table-style-content">
+                                <a 
+                                  class="cart-product-name" 
+                                  th:href="@{|/product/${product.id}|}" 
+                                  th:text="${product.productName}" >
+                                </a>
+                              </td>
+
+                              <td 
+                                class="align-middle table-style-content" 
+                                th:text="${product.quantity}">
+                              </td>
+
+                              <td 
+                                class="align-middle table-style-content" 
+                                th:text="${'₱ ' + #numbers.formatDecimal(product.price * product.quantity,1,'COMMA',2,'POINT')}">
+                              </td>
                             </tr>
+                            
                             <tr>
                               <th></th>
                               <td></td>
                               <td><span>Total:</span></td>
-                              <td class="align-middle table-style-content"><span th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span></td>
+                              <td class="align-middle table-style-content">
+                                <span th:text="${'₱ ' + #numbers.formatDecimal(receipt.getDiscountedPrice(),1,'COMMA',2,'POINT')}"></span>
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -87,10 +129,16 @@
           </tbody>
         </table>
       </div>
+
       <!--Wishlist-->
       <div class="defaultMargin container-profile mb-5 p-4">
         <h1 class="mb-4">WISHLIST</h1>
-        <span class="none-text" th:if="${wishlist.isEmpty}">There are no items in your wishlist.</span>
+
+        <span 
+          class="none-text" 
+          th:if="${wishlist.isEmpty}">There are no items in your wishlist.
+        </span>
+
         <table th:if="${!wishlist.empty}" class="table">
           <thead>
             <tr>
@@ -102,27 +150,52 @@
               <th scope="col" class="table-style-header">REMOVE</th>
             </tr>
           </thead>
+
           <tbody>
             <tr th:each="product : ${wishlist}">
               <th scope="row" class="align-middle">
                 <a th:href="@{|/product/${product.id}|}">
-                  <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="cart-product-image"/>
+                  <img 
+                    th:src="${product.image}" 
+                    th:alt="${product.productName + '.jpg'}" 
+                    class="cart-product-image"/>
                 </a>
               </th>
-              <td class="align-middle table-style-content"><a class="wishlist-product-name" th:href="@{|/product/${product.id}|}" th:text="${product.productName}" ></a></td>
-              <td class="align-middle table-style-content" th:text="${product.category}"></td>
-              <td class="align-middle table-style-content" th:text="${product.status}" style="text-transform: capitalize;"></td>
-              <td class="align-middle table-style-content" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
+
+              <td class="align-middle table-style-content">
+                <a 
+                  class="wishlist-product-name" 
+                  th:href="@{|/product/${product.id}|}" 
+                  th:text="${product.productName}" >
+                </a>
+              </td>
+              <td 
+                class="align-middle table-style-content" 
+                th:text="${product.category}">
+              </td>
+              <td 
+                class="align-middle table-style-content" 
+                th:text="${product.status}" 
+                style="text-transform: capitalize;">
+              </td>
+              <td 
+                class="align-middle table-style-content" 
+                th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">
+              </td>
+
               <td class="align-middle table-style-content">
                 <form th:action="@{/removeFromWishlist}" method="post">
-                  <button type="submit" class="btn submit-style w-auto px-3 m-0" name="productId" th:value="${product.id}">
+                  <button 
+                    type="submit" 
+                    class="btn submit-style w-auto px-3 m-0" 
+                    name="productId" 
+                    th:value="${product.id}">
                     <i class="far fa-trash-alt"></i>
                   </button>
                 </form>
               </td>
             </tr>
           </tbody>
-          
         </table>  
       </div>
     </div>

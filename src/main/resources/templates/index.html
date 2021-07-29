@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
   <head th:replace="../fragments/header"></head>
+  
   <body>
     <div id="home">
       <!--carousel-->
@@ -8,26 +10,49 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="3000">
             <a th:href="@{/product/98}">
-              <img th:src="@{'/img/carousel_GirlsGeneration.png'}" class="d-block w-100" alt="carousel">
+              <img 
+                th:src="@{'/img/carousel_GirlsGeneration.png'}" 
+                class="d-block w-100" 
+                alt="carousel">
             </a>
           </div>
+
           <div class="carousel-item" data-bs-interval="3000">
             <a th:href="@{/product/109}">
-              <img th:src="@{'/img/carousel_IU.png'}" class="d-block w-100" alt="carousel">
+              <img 
+                th:src="@{'/img/carousel_IU.png'}" 
+                class="d-block w-100" 
+                alt="carousel">
             </a>
           </div>
+
           <div class="carousel-item" data-bs-interval="3000">
             <a th:href="@{/product/2}">
-              <img th:src="@{'/img/carousel_BTS.png'}" class="d-block w-100" alt="carousel">
+              <img 
+                th:src="@{'/img/carousel_BTS.png'}" 
+                class="d-block w-100" 
+                alt="carousel">
             </a>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+
+        <button 
+          class="carousel-control-prev" 
+          type="button" 
+          data-bs-target="#carouselExampleInterval" 
+          data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        
+        <button 
+          class="carousel-control-next" 
+          type="button" 
+          data-bs-target="#carouselExampleInterval" 
+          data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+
           <span class="visually-hidden">Next</span>
         </button>
       </div>
@@ -35,24 +60,41 @@
       <!--Store Qualities-->
       <div class="defaultMargin container-store-quality row mt-5 px-4 py-5">
         <div class="col-4 row d-flex justify-content-center px-5">
-          <img th:src="@{'/img/icon-qualities-securepayment.svg'}" class="container-store-quality-img svg-darkbrown p-0">
+          <img 
+            th:src="@{'/img/icon-qualities-securepayment.svg'}" 
+            class="container-store-quality-img svg-darkbrown p-0"
+          >
+
           <span class="container-store-quality-header">SECURE PAYMENT</span>
+
           <span class="container-store-quality-text">
             We do not store credit card details nor 
             have access to your credit card information.
           </span>
         </div>
+
         <div class="col-4 row d-flex justify-content-center px-5">
-          <img th:src="@{'/img/icon-qualities-qualityshipping.svg'}" class="container-store-quality-img svg-darkbrown p-0">
+          <img 
+            th:src="@{'/img/icon-qualities-qualityshipping.svg'}" 
+            class="container-store-quality-img svg-darkbrown p-0"
+          >
+
           <span class="container-store-quality-header">QUALITY SHIPPING</span>
+
           <span class="container-store-quality-text">
             We ensure that our delivered
             products are in pristine condition.
           </span>
         </div>
+
         <div class="col-4 row d-flex justify-content-center px-5">
-          <img th:src="@{'/img/icon-qualities-fastdelivery.svg'}" class="container-store-quality-img svg-darkbrown p-0">
+          <img 
+            th:src="@{'/img/icon-qualities-fastdelivery.svg'}" 
+            class="container-store-quality-img svg-darkbrown p-0"
+          >
+
           <span class="container-store-quality-header">FAST DELIVERY</span>
+
           <span class="container-store-quality-text">
             Your orders will be delivered
             at your doorstep as soon as possible.
@@ -65,78 +107,138 @@
         <div class="defaultMargin row mb-4">
           <span class="category-list-header">CATEGORIES</span>
         </div>
+
         <div class="defaultMargin d-flex justify-content-center">
           <a th:href="@{/store/1/addFilters?album=Albums}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-albums.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-albums.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">ALBUMS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?apparel=Apparels}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-apparel.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-apparel.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">APPAREL</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?doll=Dolls}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-dolls.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-dolls.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">DOLLS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?imagePicket=Image+Pickets}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-imagepickets.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-imagepickets.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">IMAGE PICKETS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?keyRing=Key+Rings}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-keyrings.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+               th:src="@{'/img/icon-category-keyrings.svg'}" 
+               class="category-button-img svg-darkbrown p-0"
+              ><br>
+               
               <span class="category-button-header">KEY RINGS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?lightStick=Light+Sticks}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-lightsticks.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-lightsticks.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">LIGHT STICKS</span>
             </button>
           </a>
         </div>
+
         <div class="defaultMargin d-flex justify-content-center">
           <a th:href="@{/store/1/addFilters?package=Packages}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-packages.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-packages.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">PACKAGES</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?phoneCase=Phone+Cases}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-phonecases.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-phonecases.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">PHONE CASES</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?photobook=Photobooks}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-photobooks.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-photobooks.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+                
               <span class="category-button-header">PHOTOBOOKS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?photocard=Photocards}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-photocards.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-photocards.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">PHOTOCARDS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?poster=Posters}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-posters.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-posters.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">POSTERS</span>
             </button>
           </a>
+
           <a th:href="@{/store/1/addFilters?sticker=Stickers}">
             <button class="category-button btn">
-              <img th:src="@{'/img/icon-category-stickers.svg'}" class="category-button-img svg-darkbrown p-0"><br>
+              <img 
+                th:src="@{'/img/icon-category-stickers.svg'}" 
+                class="category-button-img svg-darkbrown p-0"
+              ><br>
+
               <span class="category-button-header">STICKERS</span>
             </button>
           </a>
@@ -147,23 +249,35 @@
       <div class="defaultMargin my-5">
         <div class="d-flex align-items-center py-3">
           <h1 class="mr-auto mb-0">HOTTEST SELLERS</h1>
-          <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}"><button class="seeMore">SEE MORE ></button></a>
-        </li>
+
+          <a th:href="@{'/store/1/addFilters?bestSeller=bestSeller'}">
+            <button class="seeMore">SEE MORE ></button>
+          </a>
         </div>
+
         <div class="row">
           <div th:if="${bestSellers.empty}">No products available</div>
+
           <div class="col-2 py-2" th:each="product: ${bestSellers}">
             <a th:href="@{|/product/${product.id}|}">
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">
                   <div>
-                    <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
+                    <img 
+                      th:src="${product.image}" 
+                      th:alt="${product.productName + '.jpg'}" 
+                      class="card-product-image"/>
                   </div>
                 </div>
+
                 <div class="card-body card-product-body mr-auto">
                   <h4 class="product-name" th:text="${product.productName}"></h4>
-                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
-                  <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
+
+                  <h3 
+                    class="product-price" 
+                    th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">
+                  </h3>
+
                   <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i}" />
@@ -171,7 +285,11 @@
                       <i class="fas fa-star star"></i>
                     </form>
                   </div>
-                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+
+                  <div 
+                    th:if="${product.rating < 5}" 
+                    th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" 
+                    class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i + product.rating}" />
                       <input type="hidden" name="productId" th:value="${product.id}" />
@@ -183,12 +301,16 @@
             </a>
           </div>
         </div>
+
         <hr>
+
         <div class="d-flex align-items-center py-3">
           <h1 class="mr-auto mb-0">PREORDERS</h1>
-          <a th:href="@{'/store/1/addFilters?preorder=preorder'}"><button class="seeMore">SEE MORE ></button></a>
-        </li>
+          <a th:href="@{'/store/1/addFilters?preorder=preorder'}">
+            <button class="seeMore">SEE MORE ></button>
+          </a>
         </div>
+
         <div class="row">
           <div th:if="${preorderProducts.empty}">No products available</div>
           <div class="col-2 py-2" th:each="product: ${preorderProducts}">
@@ -196,13 +318,21 @@
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">
                   <div>
-                    <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
+                    <img 
+                      th:src="${product.image}" 
+                      th:alt="${product.productName + '.jpg'}" 
+                      class="card-product-image"/>
                   </div>
                 </div>
+
                 <div class="card-body card-product-body mr-auto">
                   <h4 class="product-name" th:text="${product.productName}"></h4>
-                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
-                  <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
+
+                  <h3 
+                    class="product-price" 
+                    th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">
+                  </h3>
+
                   <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i}" />
@@ -210,7 +340,11 @@
                       <i class="fas fa-star star"></i>
                     </form>
                   </div>
-                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+
+                  <div 
+                    th:if="${product.rating < 5}" 
+                    th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" 
+                    class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i + product.rating}" />
                       <input type="hidden" name="productId" th:value="${product.id}" />
@@ -222,26 +356,36 @@
             </a>
           </div>
         </div>
+
         <hr>
+
         <div class="d-flex align-items-center py-3">
           <h1 class="mr-auto mb-0">NEWEST PRODUCTS</h1>
-          <!-- <a th:href="@{'/store/1'}"><button class="seeMore">SEE MORE ></button></a> -->
-        </li>
         </div>
+
         <div class="row">
           <div th:if="${sortedByCreatedAtProducts.empty}">No products available</div>
+
           <div class="col-2 py-2" th:each="product: ${sortedByCreatedAtProducts}">
             <a th:href="@{|/product/${product.id}|}">
               <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                 <div class="card-product-image-container d-flex align-items-center">
                   <div>
-                    <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
+                    <img 
+                      th:src="${product.image}" 
+                      th:alt="${product.productName + '.jpg'}" 
+                      class="card-product-image"/>
                   </div>
                 </div>
+
                 <div class="card-body card-product-body mr-auto">
                   <h4 class="product-name" th:text="${product.productName}"></h4>
-                  <!-- <p class="product-category" th:text="${product.category}"></p> -->
-                  <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
+
+                  <h3 
+                    class="product-price" 
+                    th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">
+                  </h3>
+
                   <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i}" />
@@ -249,7 +393,11 @@
                       <i class="fas fa-star star"></i>
                     </form>
                   </div>
-                  <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+
+                  <div 
+                    th:if="${product.rating < 5}" 
+                    th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" 
+                    class="container-star">
                     <form th:action="@{/rate}" method="POST">
                       <input type="hidden" name="rating" th:value="${i + product.rating}" />
                       <input type="hidden" name="productId" th:value="${product.id}" />

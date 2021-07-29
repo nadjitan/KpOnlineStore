@@ -330,6 +330,10 @@ public class StoreController extends CommonController{
 
     model.addAttribute("products", newDividedProductList);
 
+    if (rating.isPresent()) {
+      model.addAttribute("btnRating", rating.get());
+    }
+
     // uri to put in our page buttons
     model.addAttribute("uri", "addFilters?" + request.getQueryString());
 
@@ -410,7 +414,10 @@ public class StoreController extends CommonController{
     Optional<Integer> rating, 
     List<Product> newProductList, Product productToAdd) {
 
-    if (rating.isPresent() && rating.get() == 5 && productToAdd.getRating() == rating.get()) {
+    if (!rating.isPresent()) {
+      newProductList.add(productToAdd);
+    }
+    else if (rating.isPresent() && rating.get() == 5 && productToAdd.getRating() == rating.get()) {
       newProductList.add(productToAdd);
     }
     else if (rating.isPresent() && productToAdd.getRating() >= rating.get()) {

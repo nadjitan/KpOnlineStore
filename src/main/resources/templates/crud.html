@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
 <head th:replace="../fragments/header"></head>
 
 <style>
@@ -34,21 +35,41 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="m-0">ADD PRODUCT</h5>
+
                 <button type="reset" class="btn-close exit-modal-add-product"></button>
               </div>
+
               <div class="modal-body p-4 pt-3">
                 <form th:action="@{/crud/create}" method="POST" class="add-product">
                   <div class="form-label-group w-100">
                     <label class="label-style" for="product-name">Product Name</label>
-                    <input class="input-style" type="text" name="productName" id="add-product-name" />
+
+                    <input 
+                      class="input-style" 
+                      type="text" 
+                      name="productName" 
+                      id="add-product-name" 
+                    />
                   </div>
+
                   <div class="form-label-group w-100">
                     <label class="label-style" for="description">Description</label>
-                    <input class="input-style" type="text" name="description" id="add-description" />
+
+                    <input 
+                      class="input-style" 
+                      type="text" 
+                      name="description" 
+                      id="add-description" 
+                    />
                   </div>
+
                   <div class="form-label-group w-100">
                     <label class="label-style" for="category">Category</label>
-                    <select class="form-select input-style" id="add-category" name="category">
+
+                    <select 
+                      class="form-select input-style" 
+                      id="add-category" 
+                      name="category">
                       <option value="Albums">Albums</option>
                       <option value="Apparel">Apparel</option>
                       <option value="Dolls">Dolls</option>
@@ -63,36 +84,73 @@
                       <option value="Stickers">Stickers</option>
                     </select>
                   </div>
+
                   <div class="form-label-group w-100">
                     <label class="label-style" for="price">Price</label>
-                    <input class="input-style" type="number" name="price" id="add-price" />
+                    
+                    <input 
+                      class="input-style" 
+                      type="number" 
+                      name="price" 
+                      id="add-price" 
+                    />
                   </div>
+                  
                   <div class="form-label-group w-100">
                     <label class="label-style" for="status">Status</label>
+
                     <select class="form-select input-style" id="add-status" name="status">
                       <option value="available">Available</option>
                       <option value="preorder">Preorder</option>
                       <option value="outOfStock">Out Of Stock</option>
                     </select>
                   </div>
+
                   <div class="form-label-group w-100">
                     <label class="label-style" for="image">Image</label>
-                    <input class="input-style" type="text" name="image" id="add-image" placeholder="/img/Category/Filename" />
+
+                    <input 
+                      class="input-style" 
+                      type="text" 
+                      name="image" 
+                      id="add-image" 
+                      placeholder="/img/Category/Filename" 
+                    />
                   </div>
+
                   <div class="form-label-group w-100">
                     <label class="label-style" for="tags">Tags</label>
-                    <input class="input-style" type="text" name="tags" id="add-tags" placeholder="tag1, tag2"/>
+
+                    <input 
+                      class="input-style" 
+                      type="text" 
+                      name="tags" 
+                      id="add-tags" 
+                      placeholder="tag1, tag2"
+                    />
                   </div>
+
                   <div class="form-label-group w-100">
-                    <input class="label-style" type="hidden" name="rating" value="5" />
+                    <input 
+                      class="label-style" 
+                      type="hidden" 
+                      name="rating" 
+                      value="5" 
+                    />
                   </div>
+
                   <hr>
-                  <button class="btn-add btn submit-style submit-style-small m-0" type="submit">ADD</button>
+
+                  <button 
+                    class="btn-add btn submit-style submit-style-small m-0" 
+                    type="submit">ADD
+                  </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
+
         <button class="btn-add btn submit-style submit-style-small m-0 w-auto">+ ADD PRODUCT</button>
       </div>
 
@@ -116,43 +174,72 @@
               <th scope="col" class="table-style-header">CONTROLS</th>
             </tr>
           </thead>
+
           <tbody>
             <tr class="product" th:each="product : ${products}">
-              <th scope="row" class="align-middle table-style-content" th:text="${product.id}"></td>
+              <th 
+                scope="row" 
+                class="align-middle table-style-content" 
+                th:text="${product.id}">
+              </td>
+
               <td class="align-middle table-style-content">
                 <span class="crud-text" th:text="${product.productName}"></span>
               </td>
+
               <td class="align-middle table-style-content">
                 <span class= "crud-text" th:text="${product.description}"></span>
               </td>
+
               <td class="align-middle table-style-content" th:text="${product.category}"></td>
-              <td class="align-middle table-style-content" th:text="${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
+
+              <td 
+                class="align-middle table-style-content" 
+                th:text="${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">
+              </td>
+
               <td class="align-middle table-style-content" th:text="${product.status}"></td>
+
               <td class="align-middle table-style-content" th:text="${product.image}"></td>
+
               <td class="align-middle table-style-content">
                 <span th:each="tag : ${product.tags}" th:text="${tag} + ', '"></span>
               </td>
-              <td class="align-middle table-style-content"
-                th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH-MM')}"
-              ></td>
-              <td class="align-middle table-style-content"
-                th:text="${#temporals.format(product.updatedAt, 'yyyy-MM-dd HH-MM')}"
-              ></td>
+
+              <td 
+                class="align-middle table-style-content"
+                th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH-MM')}">
+              </td>
+
+              <td 
+                class="align-middle table-style-content"
+                th:text="${#temporals.format(product.updatedAt, 'yyyy-MM-dd HH-MM')}">
+              </td>
+
               <td>
                 <div class="modal">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h1 class="m-0">EDIT PRODUCT</h5>
+
                         <button type="reset" class="btn-close exit-modal"></button>
                       </div>
+
                       <div class="modal-body p-4 pt-3">
                         <form th:action="@{/crud/update}" method="POST" modelAttribute="product">
                           <div class="form-label-group w-100">
-                            <input type="number" style="display: none;" name="id" th:value="${product.id}" />
+                            <input 
+                              type="number" 
+                              style="display: none;" 
+                              name="id" 
+                              th:value="${product.id}" 
+                            />
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="product-name">Product Name</label>
+
                             <input
                               class="input-style edit-product-name" 
                               type="text"
@@ -160,8 +247,10 @@
                               th:value="${product.productName}"
                             />
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="description">Description</label>
+
                             <input
                               class="input-style edit-description" 
                               type="text"
@@ -170,6 +259,7 @@
                               th:value="${product.description}"
                             />
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="category">Category</label>
                             <select class="form-select input-style" id="add-category" name="category">
@@ -187,8 +277,10 @@
                               <option th:selected="${product.category == 'Stickers'}" value="Stickers">Stickers</option>
                             </select>
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="price">Price</label>
+
                             <input
                               class="input-style edit-price" 
                               type="number"
@@ -197,16 +289,31 @@
                               th:value="${product.price}"
                             />
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="status">Status</label>
+
                             <select class="form-select input-style edit-status" id="status" name="status">
-                              <option value="available" th:selected="${product.status == 'available'}">Available</option>
-                              <option value="preorder" th:selected="${product.status == 'preorder'}">Preorder</option>
-                              <option value="outOfStock" th:selected="${product.status == 'outOfStock'}">Out Of Stock</option>
+                              <option 
+                                value="available" 
+                                th:selected="${product.status == 'available'}">Available
+                              </option>
+
+                              <option 
+                                value="preorder" 
+                                th:selected="${product.status == 'preorder'}">Preorder
+                              </option>
+
+                              <option 
+                                value="outOfStock" 
+                                th:selected="${product.status == 'outOfStock'}">Out Of Stock
+                              </option>
                             </select>
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="image">Image</label>
+
                             <input
                               class="input-style edit-image" 
                               type="text"
@@ -215,8 +322,10 @@
                               th:value="${product.image}"
                             />
                           </div>
+
                           <div class="form-label-group w-100">
                             <label class="label-style" for="tags">Tags</label>
+
                             <input
                               class="input-style edit-tags" 
                               type="text"
@@ -224,6 +333,7 @@
                               id="tags"
                               placeholder="tag1, tag2"
                             />
+
                             <span 
                               class="hidden-tags" 
                               style="display: none;"
@@ -231,33 +341,52 @@
                               th:text="!${iterStat.last} ? ${a} + ', ' : ${a}">
                             </span>
                           </div>
+
                           <hr>
-                          <button class="btn-add btn submit-style submit-style-small m-0" type="submit">CONFIRM EDIT</button>
+
+                          <button 
+                            class="btn-add btn submit-style submit-style-small m-0" 
+                            type="submit">CONFIRM EDIT
+                          </button>
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <button class="btn btn-edit submit-style w-100 px-3 m-0">
                   <i class="far fa-edit"></i>
                 </button>
+
                 <div class="modal">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h1 class="m-0">DELETE PRODUCT?</h5>
+
                         <button type="reset" class="btn-close exit-modal"></button>
                       </div>
+
                       <div class="modal-body p-4 pt-3">
                         <form
                           th:action="@{/crud/delete}"
                           method="post"
-                          class="delete"
-                        >
+                          class="delete" >
                           <h1 class="mb-2" th:text="${product.productName}"></h1>
-                          <img class="w-100" th:src="${product.image}" th:alt="${product.productName + '.jpg'}"/>
+
+                          <img 
+                            class="w-100" 
+                            th:src="${product.image}" 
+                            th:alt="${product.productName + '.jpg'}"
+                          />
+
                           <hr>
-                          <button type="submit" class="btn submit-style submit-style-small w-100 px-3 m-0" name="id" th:value="${product.id}">
+
+                          <button 
+                            type="submit" 
+                            class="btn submit-style submit-style-small w-100 px-3 m-0" 
+                            name="id" 
+                            th:value="${product.id}">
                             CONFIRM DELETE
                           </button>
                         </form>
@@ -265,6 +394,7 @@
                     </div>
                   </div>
                 </div>
+
                 <button class="btn btn-delete submit-style w-100 px-3 m-0 mt-1">
                   <i class="far fa-trash-alt"></i>
                 </button>
@@ -274,7 +404,6 @@
           
         </table>
       </div>
-      <!-- <div th:if="${products.empty}">There are no products</div> -->
     </div>
 
     <div th:replace="../fragments/footer.html"></div>
