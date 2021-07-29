@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
   <head th:replace="../fragments/header"></head>
+
   <body class="background-grey">
     <div class="defaultMargin py-3">
       <span class="directory-link">
@@ -19,11 +21,6 @@
               <div class="col-4">
                 <h1 class="m-0">FILTERS</h1>
               </div>
-              <!--
-              <div class="col-8">
-                <input class="submit-style submit-style-small py-1 m-0 mb-3 clear-filters" type="reset" value="CLEAR FILTERS" />
-              </div>
-              -->
             </div>
             
             <hr>
@@ -448,7 +445,10 @@
               <h4>RATING</h4>
               <div>
                 <input type="checkbox" name="rating" id="star-five" value="5" />
-                <label for="star-five" class="btn-rating">
+                <label 
+                  for="star-five" 
+                  class="btn-rating" 
+                  th:classappend="${btnRating == 5} ? btn-rating-active">
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
@@ -458,7 +458,10 @@
               </div>
               <div>
                 <input type="checkbox" name="rating" id="star-four" value="4" />
-                <label for="star-four" class="btn-rating">
+                <label 
+                  for="star-four" 
+                  class="btn-rating" 
+                  th:classappend="${btnRating == 4} ? btn-rating-active">
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
@@ -469,7 +472,10 @@
               </div>
               <div>
                 <input type="checkbox" name="rating" id="star-three" value="3" />
-                <label for="star-three" class="btn-rating">
+                <label 
+                  for="star-three" 
+                  class="btn-rating" 
+                  th:classappend="${btnRating == 3} ? btn-rating-active">
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
@@ -480,7 +486,10 @@
               </div>
               <div>
                 <input type="checkbox" name="rating" id="star-two" value="2" />
-                <label for="star-two" class="btn-rating">
+                <label 
+                  for="star-two" 
+                  class="btn-rating" 
+                  th:classappend="${btnRating == 2} ? btn-rating-active">
                   <i class="fas fa-star star-filter"></i>
                   <i class="fas fa-star star-filter"></i>
                   <i class="far fa-star star-filter"></i>
@@ -491,7 +500,10 @@
               </div>
               <div>
                 <input type="checkbox" name="rating" id="star-one" value="1" />
-                <label for="star-one" class="btn-rating">
+                <label 
+                  for="star-one" 
+                  class="btn-rating" 
+                  th:classappend="${btnRating == 1} ? btn-rating-active">
                   <i class="fas fa-star star-filter"></i>
                   <i class="far fa-star star-filter"></i>
                   <i class="far fa-star star-filter"></i>
@@ -506,8 +518,15 @@
   
             <!--Apply Filters-->
             <section>
-              <input class="submit-style submit-style-small py-1 m-0 mb-2" type="submit" value="APPLY FILTERS" />
-              <input class="link-style link-style-input py-1 m-0 clear-filters w-100" type="reset" value="Clear filters" />
+              <input 
+                class="submit-style submit-style-small py-1 m-0 mb-2" 
+                type="submit" 
+                value="APPLY FILTERS" />
+
+              <input 
+                class="link-style link-style-input py-1 m-0 clear-filters w-100" 
+                type="reset" 
+                value="Clear filters" />
             </section>
           </form>
         </div>
@@ -516,17 +535,6 @@
       <!--PRODUCTS-->
       <div class="col-9 p-0">
         <div class="store-products p-4">
-          <!--
-          <form th:action="@{/store/1/storeSearch}" method="GET" id="store-search">
-            <input
-              type="text"
-              name="storeSearch"
-              id="input-search"
-              placeholder="Product name, Category, or Band"
-            />
-            <button type="submit">search</button>
-          </form>
-          -->
           <h1 class="mb-4">PRODUCTS</h1>
           <div class="row pb-4">
             <div th:if="${products.empty}">No products available</div>
@@ -535,13 +543,21 @@
                 <div class="card card-product d-flex align-items-center" style="width: 12rem;"> 
                   <div class="card-product-image-container d-flex align-items-center">
                     <div>
-                      <img th:src="${product.image}" th:alt="${product.productName + '.jpg'}" class="card-product-image"/>
+                      <img 
+                        th:src="${product.image}" 
+                        th:alt="${product.productName + '.jpg'}" 
+                        class="card-product-image"/>
                     </div>
                   </div>
+
                   <div class="card-body card-product-body mr-auto">
                     <h4 class="product-name" th:text="${product.productName}"></h4>
-                    <!-- <p class="product-category" th:text="${product.category}"></p> -->
-                    <h3 class="product-price" th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></h3>
+
+                    <h3 
+                      class="product-price" 
+                      th:text="${'₱ ' + #numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}">
+                    </h3>
+
                     <div th:each="i : ${#numbers.sequence(1, product.rating)}" class="container-star">
                       <form th:action="@{/rate}" method="POST">
                         <input type="hidden" name="rating" th:value="${i}" />
@@ -549,7 +565,11 @@
                         <i class="fas fa-star star"></i>
                       </form>
                     </div>
-                    <div th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" class="container-star">
+
+                    <div 
+                      th:if="${product.rating < 5}" 
+                      th:each="i : ${#numbers.sequence(1, 5 - product.rating)}" 
+                      class="container-star">
                       <form th:action="@{/rate}" method="POST">
                         <input type="hidden" name="rating" th:value="${i + product.rating}" />
                         <input type="hidden" name="productId" th:value="${product.id}" />
@@ -566,32 +586,37 @@
             <!-- Back button -->
             <a th:href="@{|/store/${newPage - 2}/${uri}|}" th:if="${showBack == true}">
               <input type="hidden" th:value="${newPage - 2}">
-              <button class="btn-back pagination-button pagination-button-arrow" >
+              <button 
+                class="btn-back pagination-button pagination-button-arrow" 
+                style="display: flex; width: fit-content; align-items: center; gap: 0.3rem;">
                 <i class="fas fa-chevron-left"></i>
+                PREV
               </button>
             </a>
             
             <!-- Number buttons -->
-            <a th:each="i : ${#numbers.sequence(1, totalPages)}" th:if="${totalPages > 1}" th:href="@{|/store/${i}/${uri}|}">
-              <button class="pagination-button" th:classappend="${newPage - 1 == i} ? pagination-button-active" th:text="${i}" ></button>
+            <a 
+              th:each="i : ${#numbers.sequence(1, totalPages)}" 
+              th:if="${totalPages > 1}" 
+              th:href="@{|/store/${i}/${uri}|}">
+              <button 
+                class="pagination-button" 
+                th:classappend="${newPage - 1 == i} ? pagination-button-active" 
+                th:text="${i}" >
+              </button>
             </a>
     
             <!-- Next button -->
             <a th:href="@{|/store/${newPage}/${uri}|}" th:if="${showNext == true}">
               <input type="hidden" th:value="${newPage}">
-              <button class="btn-next pagination-button pagination-button-arrow">
+              <button 
+                class="btn-next pagination-button pagination-button-arrow" 
+                style="display: flex; width: fit-content; align-items: center; gap: 0.3rem;">
+                NEXT 
                 <i class="fas fa-chevron-right"></i>
-               </button>
+              </button>
             </a>
           </div>
-    
-          <!--
-          <button th:if="${cart}">
-            <a
-              th:text="${'GO TO CART ('+ cart.getNumberOfProducts() + ')'}"
-            ></a>
-          </button>
-          -->
         </div>
       </div>
     </div>

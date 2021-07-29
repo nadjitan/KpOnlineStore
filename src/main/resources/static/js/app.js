@@ -46,12 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
     $(".btn-rating").click(function () {
       const input = $(this).prev();
 
-      if (prevRatingInput != null) {
+      if (prevRatingInput == null) {
+        $(".btn-rating-active").removeClass("btn-rating-active");
+      } else {
         $(prevRatingInput).prop("checked", false);
-        $(prevRatingInput).next().css("background-color", "transparent");
+        $(prevRatingInput).next().removeClass("btn-rating-active");
       }
 
-      $(this).css("background-color", "#FAE1E1");
+      $(this).addClass("btn-rating-active");
 
       prevRatingInput = input;
     });
@@ -81,9 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       inputs.find("input[type=number]").removeAttr("value");
 
-      $(prevRatingInput).prop("checked", false);
-      $(prevRatingInput).removeAttr("checked");
-      $(prevRatingInput).next().css("background-color", "transparent");
+      if (prevRatingInput == null) {
+        $(".btn-rating-active").removeClass("btn-rating-active");
+      } else {
+        $(prevRatingInput).prop("checked", false);
+        $(prevRatingInput).removeAttr("checked");
+        $(prevRatingInput).next().removeClass("btn-rating-active");
+      }
 
       var pageNumber = 0;
       $(".pagination-button").each(function (index) {
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (document.location.pathname.indexOf("/product") == 0) {
-    
+
     const statusText = $(".product-status").text();
     $(".product-status").text(statusText.replace(/([A-Z])/g, " $1").trim());
 
@@ -126,11 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    $(".comment-time").each(function() {
+    $(".comment-time").each(function () {
       const commentTime = new Date($(this).text());
 
       $(this).text(moment(commentTime).fromNow());
-    });  
+    });
 
     $(".comment-time").show();
   }
@@ -162,12 +168,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    $(".edit-tags").each(function() {
+    $(".edit-tags").each(function () {
       const tags = $(this).nextAll().text();
 
       $(this).val(tags);
     });
-    
+
     $(".exit-modal-add-product").click(function () {
       const form = $(this).parent().parent().parent().parent();
 

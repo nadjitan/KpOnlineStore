@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
   <head th:replace="../fragments/header"></head>
 
   <body class="background-grey">
@@ -7,23 +8,38 @@
       <div class="defaultMargin py-3">
         <span class="directory-link">
           <a class="directory-link" th:href="@{/}">Home</a>
+
           <span class="mx-1">></span>
+          
           <a class="directory-link-active" th:href="@{/faq}">FAQ</a>
         </span>
       </div>
+
       <div class="defaultMargin d-flex justify-content-center mb-4 ">
         <h5>FREQUENTLY ASKED QUESTIONS (FAQ)</h5>
       </div>
+
       <div class="defaultMargin d-flex justify-contenct-center mb-4">
         <div class="container container-faq p-4">
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseOne" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseOne">
                   What are the available payment methods?
                 </button>
               </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseOne" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingOne" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
                     We accept Cash on Delivery and Credit card payments.
@@ -31,34 +47,66 @@
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseTwo" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseTwo">
                   How do I cancel my order?
                 </button>
               </h2>
-              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseTwo" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingTwo" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    Kindly message us at the Contact Us page or email us at tunnelnetworkkpop@gmail.com to ask for a cancellation. We will cancel your order and get you a refund within six business days. 
+                    Kindly message us at the Contact Us page or email us at 
+                    tunnelnetworkkpop@gmail.com to ask for a cancellation. We 
+                    will cancel your order and get you a refund within six 
+                    business days. 
                   </p>
+
                   <p class="faq-paragraph">
-                    However, a cancellation request could be rejected under certain circumstances. If the package is already shipped out or the packing was already done, for example, the order cannot be canceled.
+                    However, a cancellation request could be rejected under 
+                    certain circumstances. If the package is already shipped 
+                    out or the packing was already done, for example, the order 
+                    cannot be canceled.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseThree" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseThree">
                   How much is the shipping cost?
                 </button>
               </h2>
-              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseThree" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingThree" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
                     Shipping costs will largely depend on your area and on how much the item/s weigh.
                   </p>
+
                   <p class="faq-paragraph">
                     Listed below are a few estimates:
                     <ul class="faq-paragraph">
@@ -71,13 +119,25 @@
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingFour">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseFour" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseFour">
                   Do you ship to my location?
                 </button>
               </h2>
-              <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseFour" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingFour" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
                     We can ship our products to you as long as you’re in the Philippines. 
@@ -85,13 +145,26 @@
                 </div>
               </div>
             </div>
+            
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingFive">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                  I want to use other shipping options like Grab or Lalamove for my order. Is that possible?
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseFive" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseFive">
+                  I want to use other shipping options like Grab or Lalamove 
+                  for my order. Is that possible?
                 </button>
               </h2>
-              <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseFive" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingFive" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
                     Yes, it is possible by contacting us after buying the product.
@@ -99,58 +172,111 @@
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingSix">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseSix" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseSix">
                   Will I be able to track my order?
                 </button>
               </h2>
-              <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseSix" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingSix" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    Yes, you will be able to track your order if you put the code that will be given to you in our site.
+                    Yes, you will be able to track your order if you put the 
+                    code that will be given to you in our site.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingSeven">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseSeven" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseSeven">
                   My order is not here yet, why is that?
                 </button>
               </h2>
-              <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseSeven" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingSeven" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    In most cases, it is due to bad climate or due to some delays in shipping from South Korea to the Philippines. 
+                    In most cases, it is due to bad climate or due to some 
+                    delays in shipping from South Korea to the Philippines. 
                   </p>
+
                   <p class="faq-paragraph">
                     We will always be transparent if such delays happen.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingEight">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseEight" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseEight">
                   Is my information safe?
                 </button>
               </h2>
-              <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseEight" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingEight" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    Your user information is safe and will not be used behind your back. We are transparent on our use of our customers’ data, and with your consent.
+                    Your user information is safe and will not be used behind 
+                    your back. We are transparent on our use of our customers’ 
+                    data, and with your consent.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingNine">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseNine" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseNine">
                   Where is this store based?
                 </button>
               </h2>
-              <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseNine" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingNine" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
                     Suite 7GHI, 20 Lansbergh Place 170 Tomas Morato. Ave. Quezon City.
@@ -158,104 +284,207 @@
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingTen">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseTen" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseTen">
                   How long will I wait to receive my order?
                 </button>
               </h2>
-              <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseTen" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingTen" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    For our customers within the NCR, expect it to arrive within 2-3 days. For our customers outside the NCR, expect it to arrive within 5-7 days.
+                    For our customers within the NCR, expect it to arrive within 
+                    2-3 days. For our customers outside the NCR, expect it to 
+                    arrive within 5-7 days.
                   </p>
+
                   <p class="faq-paragraph">
                     However, if the product is a pre-order, expect it to arrive within 3-4 weeks.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingEleven">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseEleven" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseEleven">
                   What are the most popular K-pop products on your site?
                 </button>
               </h2>
-              <div id="flush-collapseEleven" class="accordion-collapse collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseEleven" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingEleven" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    We’ll always feature our hottest sellers on the Home page for everyone to see.
+                    We’ll always feature our hottest sellers on the Home page 
+                    for everyone to see.
                   </p>
+
                   <p class="faq-paragraph">
-                    Alternatively, on the left side of the store’s Products page, lies a filter tab. Simply check the “Hottest Products” filter and hit on the “Apply Filters” button on the bottom part of the filters tab. Doing so will give you a list of the hottest products in the store.
+                    Alternatively, on the left side of the store’s Products 
+                    page, lies a filter tab. Simply check the “Hottest Products” 
+                    filter and hit on the “Apply Filters” button on the bottom 
+                    part of the filters tab. Doing so will give you a list of 
+                    the hottest products in the store.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingTwelve">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseTwelve" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseTwelve">
                   Is the album a first press? 
                 </button>
               </h2>
-              <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseTwelve" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingTwelve" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    If your order is pre-ordered, we can ensure it is first pressed. However, after the pre-order period, we cannot assure if the album is first pressed or not.
+                    If your order is pre-ordered, we can ensure it is first 
+                    pressed. However, after the pre-order period, we cannot 
+                    assure if the album is first pressed or not.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingThirteen">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThirteen" aria-expanded="false" aria-controls="flush-collapseThirteen">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseThirteen" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseThirteen">
                   Does the shop have a refund policy?
                 </button>
               </h2>
-              <div id="flush-collapseThirteen" class="accordion-collapse collapse" aria-labelledby="flush-headingThirteen" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseThirteen" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingThirteen" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    Yes. If you are not 100% satisfied with your purchase, you can return the product and get a full refund or exchange the product for another one, be it similar or not. message us at the Contact Us page or email us at tunnelnetworkkpop@gmail.com to notify us about your refund request.
+                    Yes. If you are not 100% satisfied with your purchase, you 
+                    can return the product and get a full refund or exchange 
+                    the product for another one, be it similar or not. message 
+                    us at the Contact Us page or email us at tunnelnetworkkpop@gmail.com
+                    to notify us about your refund request.
                   </p>
+
                   <p class="faq-paragraph">
-                    You can return a product for up to 30 days from the date you purchased it.
+                    You can return a product for up to 30 days from the date 
+                    you purchased it.
                   </p>
+
                   <p class="faq-paragraph">
-                    Any product you return must be in the same condition you received it and in the original packaging. Please keep the receipt.
+                    Any product you return must be in the same condition you 
+                    received it and in the original packaging. Please keep 
+                    the receipt.
                   </p>
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingFourteen">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFourteen" aria-expanded="false" aria-controls="flush-collapseFourteen">
-                  Are there any vouchers? If so, how can I apply it to my desired purchase?
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseFourteen" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseFourteen">
+                  Are there any vouchers? If so, how can I apply it to my 
+                  desired purchase?
                 </button>
               </h2>
-              <div id="flush-collapseFourteen" class="accordion-collapse collapse" aria-labelledby="flush-headingFourteen" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseFourteen" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingFourteen" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    Yes, our store offers discount vouchers from time to time — we typically release vouchers during holidays. These vouchers are a one-time use per purchase.
+                    Yes, our store offers discount vouchers from time to time — 
+                    we typically release vouchers during holidays. These vouchers 
+                    are a one-time use per purchase.
                   </p>
+
                   <p class="faq-paragraph">
-                    If you have at least one (1) item added to your cart, you can apply the voucher’s discount by heading to your Cart page and then checking on the vouchers you desire to use on the right side of the page. The discount amount will apply to the total price of all of the products in your cart.
+                    If you have at least one (1) item added to your cart, you 
+                    can apply the voucher’s discount by heading to your Cart 
+                    page and then checking on the vouchers you desire to use on 
+                    the right side of the page. The discount amount will apply 
+                    to the total price of all of the products in your cart.
                   </p>
+
                   <p class="faq-paragraph">
-                    A consistent way to receive a voucher is to earn enough points by purchasing from our shop — which you can use to claim a voucher. 
+                    A consistent way to receive a voucher is to earn enough 
+                    points by purchasing from our shop — which you can use to 
+                    claim a voucher. 
                   </p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingFifteen">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false" aria-controls="flush-collapseFifteen">
+                <button 
+                  class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#flush-collapseFifteen" 
+                  aria-expanded="false" 
+                  aria-controls="flush-collapseFifteen">
                   I would like to become a wholesaler/reseller. 
                 </button>
               </h2>
-              <div id="flush-collapseFifteen" class="accordion-collapse collapse" aria-labelledby="flush-headingFifteen" data-bs-parent="#accordionFlushExample">
+
+              <div 
+                id="flush-collapseFifteen" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="flush-headingFifteen" 
+                data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                   <p class="faq-paragraph">
-                    Kindly message us at the Contact Us page or email us at tunnelnetworkkpop@gmail.com for us to send you our details for this.
+                    Kindly message us at the Contact Us page or email us at 
+                    tunnelnetworkkpop@gmail.com for us to send you our details for this.
                   </p>
                 </div>
               </div>

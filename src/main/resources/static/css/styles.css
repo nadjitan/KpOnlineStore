@@ -357,6 +357,9 @@ input[id*="star-"] + label:hover {
   padding-right: 9px;
   border-radius: 25px;
 }
+.btn-rating-active {
+  background-color: #FAE1E1;
+}
 
 .star-filter {
   font-size: 13px;

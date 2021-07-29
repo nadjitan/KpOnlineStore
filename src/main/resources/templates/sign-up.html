@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
   <head th:replace="../fragments/header"></head>
+
   <body class="background-blue">
     <div class="allButFooter d-flex align-items-center">
       <div class="defaultMargin py-5 d-flex row justify-content-center">
         <div class="container" style="width: 755px">
           <h2>CREATE YOUR SEOUL SOUL ACCOUNT</h1>
         </div>
+
         <div class="container row p-4 mt-4" style="background-color:white; width: 755px">
           <div class="col-6 p-0">
             <form th:action="@{/sign-up}" method="POST" id="signup">
-              <p class="error" th:if="${userNotCreated}" th:text="${userNotCreated}"></p>
+              <p 
+                class="error" 
+                th:if="${userNotCreated}" 
+                th:text="${userNotCreated}">
+              </p>
         
               <div class="form-label-group">
                 <label class="label-style">First Name</label>
-                <input class="input-style" type="text" placeholder="Please enter your first name" id="name" name="firstName" />
+                <input 
+                  class="input-style" 
+                  type="text" 
+                  placeholder="Please enter your first name" 
+                  id="name" 
+                  name="firstName" 
+                />
               </div>
+
               <div class="form-label-group">
                 <label class="label-style">Last Name</label>
-                <input class="input-style" type="text" placeholder="Please enter your last name" id="surname" name="lastName" />
+                <input 
+                  class="input-style" 
+                  type="text" 
+                  placeholder="Please enter your last name" 
+                  id="surname" 
+                  name="lastName" 
+                />
               </div>
+
               <div class="form-label-group">
                 <label class="label-style">Email</label>
-                <input class="input-style" type="text" placeholder="Please enter your email" id="email" name="email" />
+                <input 
+                  class="input-style" 
+                  type="text" 
+                  placeholder="Please enter your email" 
+                  id="email" 
+                  name="email" 
+                />
               </div>
+
               <div class="form-label-group">
                 <label class="label-style">Password</label>
-                <input class="input-style" type="password" placeholder="Please enter your password" id="password" name="password" />
+                <input 
+                  class="input-style" 
+                  type="password" 
+                  placeholder="Please enter your password" 
+                  id="password" 
+                  name="password" 
+                />
               </div>
               
               <input class="submit-style" type="submit" value="SIGN UP" />
@@ -36,8 +70,9 @@
               </div>
             </form>
           </div>
+
           <div class="col-6 p-0 d-flex justify-content-center align-items-center">
-            <img class="brand-logo" th:src="@{'/img/logo.png'}" alt="SEOUL SOUL">
+            <img class="brand-logo" th:src="@{'/img/logo.png'}" alt="SEOUL SOUL.png">
           </div>
         </div>
       </div>
